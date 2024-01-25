@@ -60,30 +60,14 @@ Definition of Function:
 Set of all possible inputs in the function / relation
 ### Co-domain
 Set of all possible outputs in the function / relation
-- Range
-    
-
-- Set of all outputs in the function / relation
-    
-
+### Range
+Set of all outputs in the function / relation
 - Ex. A function’s co-domain could include 0 but if 0 is never an output to a specific function / relation, which would mean the range does not include 0 but the co-domain would include 0.
-    
-
-- Image 
-    
-
-- The image is the output for a specific input
-    
-
+### Image 
+The image is the output for a specific input
 - For a function, the image is a value, but for relations the image could be a set of values
-    
-
-- Pre-image
-    
-
-- The pre-image is a set of inputs that correspond to one output
-    
-
+### Pre-image
+The pre-image is a set of inputs that correspond to one output
 ## 7.1 & 7.2
 
 Ex: X x Y
