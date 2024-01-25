@@ -7,20 +7,11 @@
 	- Linear Combination Example
 		- v1, … , vm 𝜖 Rn a1, … , am 𝜖 R    
 		- a1vm, … , amvm 𝜖 Rn
-    
-
-- The span of a vector is the set of all Linear Combinations of vector written:
-    
-
-- <v1, … , vm> = {a1v1 + … + amvm | a1, … , am 𝜖 R}
-    
-
+	- The span of a vector is the set of all Linear Combinations of vector written:
+		- <v1, … , vm> = {a1v1 + … + amvm | a1, … , am 𝜖 R}
 - Type Checking! (Like CS cannot do certain operations for certain types)
-    
-
-- xy -> you can not multiply two vectors together
-    
-- x-1-> can not take the inverse of a vector
+	- xy -> you can not multiply two vectors together
+	- x-1-> can not take the inverse of a vector
     
 - a + x -> can not add a real number to a vector
     
