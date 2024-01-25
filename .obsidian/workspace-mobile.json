@@ -11,9 +11,11 @@
             "id": "49ddcc959c798fa6",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "markdown",
               "state": {
-                "file": "Google Drive/CWRU/In Progress/CSDS281 - Logic Design & Computer Orginization/ECSECSDS 281 Syllabus Spring 2024.pdf"
+                "file": "Google Drive/CWRU/In Progress/HUMN250 - Responsible AI & Data Citizenship/HUMN250 CE 1.md",
+                "mode": "source",
+                "source": false
               }
             }
           }
@@ -83,7 +85,7 @@
         "state": {
           "type": "backlink",
           "state": {
-            "file": "Google Drive/CWRU/In Progress/CSDS281 - Logic Design & Computer Orginization/ECSECSDS 281 Syllabus Spring 2024.pdf",
+            "file": "Google Drive/CWRU/In Progress/HUMN250 - Responsible AI & Data Citizenship/HUMN250 CE 1.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -100,7 +102,7 @@
         "state": {
           "type": "outgoing-link",
           "state": {
-            "file": "Google Drive/CWRU/In Progress/CSDS281 - Logic Design & Computer Orginization/ECSECSDS 281 Syllabus Spring 2024.pdf",
+            "file": "Google Drive/CWRU/In Progress/HUMN250 - Responsible AI & Data Citizenship/HUMN250 CE 1.md",
             "linksCollapsed": false,
             "unlinkedCollapsed": true
           }
@@ -112,7 +114,7 @@
         "state": {
           "type": "outline",
           "state": {
-            "file": "Google Drive/CWRU/In Progress/CSDS281 - Logic Design & Computer Orginization/ECSECSDS 281 Syllabus Spring 2024.pdf"
+            "file": "Google Drive/CWRU/In Progress/HUMN250 - Responsible AI & Data Citizenship/HUMN250 CE 1.md"
           }
         }
       }
@@ -131,6 +133,9 @@
   },
   "active": "49ddcc959c798fa6",
   "lastOpenFiles": [
+    "Excalidraw",
+    "/Excalidraw",
+    "Google Drive/CWRU/In Progress/CSDS281 - Logic Design & Computer Orginization/ECSECSDS 281 Syllabus Spring 2024.pdf",
     "test.md",
     "test2.md",
     "Google Drive/CWRU/desktop.ini",
@@ -141,8 +146,6 @@
     "Google Drive/CWRU/In Progress/HUMN250 - Responsible AI & Data Citizenship/desktop.ini",
     "Google Drive/CWRU/In Progress/CSDS312 - Intro to Data Science Systems/desktop.ini",
     "Google Drive/CWRU/In Progress/CSDS302 - Discrete Mathematics/desktop.ini",
-    "Google Drive/CWRU/In Progress/CSDS281 - Logic Design & Computer Orginization/desktop.ini",
-    "Google Drive/CWRU/In Progress/CSDS281 - Logic Design & Computer Orginization/ECSECSDS 281 Syllabus Spring 2024.pdf",
     "Google Drive/CWRU/In Progress/HUMN250 - Responsible AI & Data Citizenship/HUMN250 CE 1.md",
     "/Google Drive/CWRU/In Progress/HUMN250 - Responsible AI & Data Citizenship/HUMN250 CE 1.md"
   ]
