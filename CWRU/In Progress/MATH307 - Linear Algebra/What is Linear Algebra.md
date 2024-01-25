@@ -34,10 +34,6 @@ How do you tell if something is rat poison? Feed it to a rat.
 		- a11x1 + a12x2 + … a1nxn = 0
 		- a21x1 + a22x2 + … a2nxn = 0
 		- am1x1 + am2x2 + … amnxn = 0 (show box here for end of proof)
-	
-- Linear Algebra is concerned with linear systems and their solutions. Do solutions exist and is there uniqueness (only one solution)
-    
+### Linear Algebra Purpose
+Linear Algebra is concerned with linear systems and their solutions. Do solutions exist and is there uniqueness (only one solution)
 - am1x1 + am2x2 + … amnxn = ym -> Recipe for turning (x1, … , xn) into  (y1, … , yn)
-    
-
-**
