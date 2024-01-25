@@ -13,28 +13,18 @@
 - a1x1 + a2x2 + … anxn = b
 	- Linear Equation in n variables
 - m by n Linear System
-	- m is # of equations
-	- n re # of variables
+	- m represents # of equations
+	- n represents # of variables
+	- EX:
+		- a11x1 + a12x2 + … a1nxn = b1
+		- a21x1 + a22x2 + … a2nxn = b2 
+		- am1x1 + am2x2 + … amnxn = bm
+	- A solution of a Linear System is a choice for ALL of values for the variables that makes all the equations in the system true
+		- A solution can be found by any means necessary, if it works it works. :thumb up:
+		- Guess and check is a valid way of finding solution
     
 
-- a11x1 + a12x2 + … a1nxn = b1
-    
-- a21x1 + a22x2 + … a2nxn = b2 
-    
-- am1x1 + am2x2 + … amnxn = bm
-    
-
-- A solution of a Linear System is a choice for ALL of values for the variables that makes all the equations in the system true
-    
-
-- A solution can be found by any means necessary, if it works it works. :thumb up:
-    
-- Guess and check is a valid way of finding solution
-    
-
-- Rat Poison Principle
-    
-
+### Rat Poison Principle
 - How do you tell if something is rat poison? Feed it to a rat.
     
 
