@@ -1,3 +1,4 @@
+## 1.2 - Sets
 ### Sets
 Sets are just groupings of elements. Not determined by order or repeat values. Sets can contain other sets
 - EX:
@@ -38,14 +39,11 @@ One set X another set creates a coordinate system
 	- EX.
 		- A2 = {2,1}
 		- P(A2) = { {2}, {1}, {1,2}, phi (empty) } 
-- |A| = n
-- |P(A)| = 2^n 
-    
+	- |A| = n
+	- |P(A)| = 2^n 
+	- P(A) is made of n-bits, either set contains or does not contain each element in the set
 
-- P(A) is made of n-bits, either set contains or does not contain each element in the set
-    
-
-1.3 - Relations & Functions
+## 1.3 - Relations & Functions
 
 - Def A and B are sets A relation R from A to B is a subset of AxB
     
