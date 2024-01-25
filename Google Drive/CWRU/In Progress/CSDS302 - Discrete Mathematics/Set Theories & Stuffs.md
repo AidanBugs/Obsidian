@@ -1,5 +1,3 @@
-Set Theories & Stuffs
-
 - Sets are just groupings of elements. Not determined by order or repeat values. Sets can contain other sets
 - A1 = {1,2,3}
 - A2 = {2,2,2,1,3}
