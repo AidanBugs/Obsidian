@@ -23,27 +23,20 @@
 ### Fields
  A Field is a bunch of numbers that we can +, -, x, /, and things work basically like you would expect 
 - Def. A field is a set F together with two binary operations +, x, and two distinct elements 0, 1 𝜖 F such that:
-- 1) ∀ a, b 𝜖 F, a + b = b + a - > (+ is commutative)
-- 2) ∀ a, b, c 𝜖 F, (a + b) + c = a + (b +c) - > (+ is associative)
-- 3) ∀ a 𝜖 F, a + 0 = a - > (0 is an additive identity)
-- 4) ∀ a 𝜖 F ∃ b 𝜖 F such that a + b = 0 - > (additive inverse, b = -a)
-- 5) ∀ a, b 𝜖 F, a * b = b * a - >(* is commutative)
-- 6) Multiplication is associative
-- 7) 1 is a multiplicative identity ( 1 * a = a )
-- 8) ∀ a 𝜖 F & a != 0 ∃ c 𝜖 F such that a * c = 1 - > (multiplicative inverse, c = 1/a)
-- 9) ∀ a, b, c 𝜖 F, a(b + c) = ab + ac - > (distributive law)
-- Ex:
-    
-
-- R - > set of all real numbers
-    
-- Q = { rational numbers }
-    
-
-- Q is a subset of R
-    
-
-- C = {a + ib | a, b 𝜖 R} -> C is set of complex numbers
+	- 1) ∀ a, b 𝜖 F, a + b = b + a - > (+ is commutative)
+	- 2) ∀ a, b, c 𝜖 F, (a + b) + c = a + (b +c) - > (+ is associative)
+	- 3) ∀ a 𝜖 F, a + 0 = a - > (0 is an additive identity)
+	- 4) ∀ a 𝜖 F ∃ b 𝜖 F such that a + b = 0 - > (additive inverse, b = -a)
+	- 5) ∀ a, b 𝜖 F, a * b = b * a - >(* is commutative)
+	- 6) Multiplication is associative
+	- 7) 1 is a multiplicative identity ( 1 * a = a )
+	- 8) ∀ a 𝜖 F & a != 0 ∃ c 𝜖 F such that a * c = 1 - > (multiplicative inverse, c = 1/a)
+	- 9) ∀ a, b, c 𝜖 F, a(b + c) = ab + ac - > (distributive law)
+- Ex:   
+	- R - > set of all real numbers 
+	- Q = { rational numbers } 
+	- Q is a subset of R
+	- C = {a + ib | a, b 𝜖 R} -> C is set of complex numbers
     
 
 - Proved in 1.4 in textbook, Exercise 17?
