@@ -23,8 +23,9 @@ Property Base Form
 	- A2 = { x 𝜖 Z | 1 < x < 3 }
 	- A2. { 2 }
 One set X another set creates a coordinate system
-- A x B = { (a,b) | a 𝜖 A, b 𝜖 B }
-- | A x B | = m n |A| = m |B| = n 
+- Ex:
+	- A x B = { (a,b) | a 𝜖 A, b 𝜖 B }
+	- | A x B | = m n |A| = m |B| = n 
 
 Subsets
 
