@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "CWRU/In Progress/MATH307 - Linear Algebra/What is Linear Algebra.md",
+                "file": "CWRU/In Progress/MATH307 - Linear Algebra/Vectors.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
         "state": {
           "type": "backlink",
           "state": {
-            "file": "CWRU/In Progress/MATH307 - Linear Algebra/What is Linear Algebra.md",
+            "file": "CWRU/In Progress/MATH307 - Linear Algebra/Vectors.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
         "state": {
           "type": "outgoing-link",
           "state": {
-            "file": "CWRU/In Progress/MATH307 - Linear Algebra/What is Linear Algebra.md",
+            "file": "CWRU/In Progress/MATH307 - Linear Algebra/Vectors.md",
             "linksCollapsed": false,
             "unlinkedCollapsed": true
           }
@@ -114,7 +114,7 @@
         "state": {
           "type": "outline",
           "state": {
-            "file": "CWRU/In Progress/MATH307 - Linear Algebra/What is Linear Algebra.md"
+            "file": "CWRU/In Progress/MATH307 - Linear Algebra/Vectors.md"
           }
         }
       }
@@ -131,8 +131,9 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "49ddcc959c798fa6",
+  "active": "307ec2bdfbb04cd0",
   "lastOpenFiles": [
+    "CWRU/In Progress/MATH307 - Linear Algebra/What is Linear Algebra.md",
     "Example.md",
     "CWRU/In Progress/CSDS302 - Discrete Mathematics/Set Theories & Stuffs.md",
     "CWRU/In Progress/HUMN250 - Responsible AI & Data Citizenship/HUMN250 CE 1.md",
@@ -146,7 +147,6 @@
     "CWRU/In Progress/CSDS302 - Discrete Mathematics/desktop.ini",
     "CWRU/In Progress/CSDS281 - Logic Design & Computer Orginization/desktop.ini",
     "CWRU/In Progress/CSDS281 - Logic Design & Computer Orginization/ECSECSDS 281 Syllabus Spring 2024.pdf",
-    "CWRU/In Progress/MATH307 - Linear Algebra/What is Linear Algebra.md",
     "CWRU/In Progress/MATH307 - Linear Algebra/Vectors.md",
     "/CWRU/In Progress/CSDS302 - Discrete Mathematics/Set Theories & Stuffs.md",
     "/CWRU/In Progress/HUMN250 - Responsible AI & Data Citizenship/HUMN250 CE 1.md",
