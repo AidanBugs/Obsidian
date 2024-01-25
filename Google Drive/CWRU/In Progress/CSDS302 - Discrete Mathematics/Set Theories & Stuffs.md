@@ -1,3 +1,4 @@
+### Sets
 Sets are just groupings of elements. Not determined by order or repeat values. Sets can contain other sets
 - EX:
 	- A1 = {1,2,3}
@@ -17,11 +18,13 @@ Magnitude is how many unique elements there are. This notation is Cardinality!
 	- |R| = Infinity
 - |Z| = |Q| < |R|
 
-Property Base Form
+### Property Base Form
 - A = { Set | Condition(s) }  
 - Ex:
 	- A2 = { x 𝜖 Z | 1 < x < 3 }
 	- A2. { 2 }
+
+### Cartesian Products
 One set X another set creates a coordinate system
 - Ex:
 	- A x B = { (a,b) | a 𝜖 A, b 𝜖 B }
