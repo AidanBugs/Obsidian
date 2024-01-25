@@ -30,26 +30,16 @@ One set X another set creates a coordinate system
 	- A x B = { (a,b) | a 𝜖 A, b 𝜖 B }
 	- | A x B | = m n |A| = m |B| = n 
 
-Subsets
+### Subsets
 
 - A is a Subset of B (A<B) if every x 𝜖 A, x 𝜖 B
-    
-- Def a Power set of A
-    
-
-- P(A) = the set of all Subsets of A
-    
-- EX.
-    
-
-- A2 = {2,1}
-    
-- P(A2) = { {2}, {1}, {1,2}, phi (empty) } 
-    
-
+- What is a Power Set?
+	- P(A) = the set of all Subsets of A
+	- EX.
+		- A2 = {2,1}
+		- P(A2) = { {2}, {1}, {1,2}, phi (empty) } 
 - |A| = n
-    
-- |P(A)| = 2n 
+- |P(A)| = 2^n 
     
 
 - P(A) is made of n-bits, either set contains or does not contain each element in the set
