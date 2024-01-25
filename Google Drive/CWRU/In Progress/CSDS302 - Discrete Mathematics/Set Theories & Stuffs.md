@@ -1,18 +1,11 @@
-## Sets are just groupings of elements. Not determined by order or repeat values. Sets can contain other sets
+Sets are just groupings of elements. Not determined by order or repeat values. Sets can contain other sets
 - A1 = {1,2,3}
 - A2 = {2,2,2,1,3}
 - Then A1= A2
-- Magnitude is how many unique elements there are. This notation is Cardinality!
-    
-
+Magnitude is how many unique elements there are. This notation is Cardinality! 
 - |A2| = 3 bc 3 unique elements
-    
-
 - Z
-    
-
-- Set of all integers
-    
+	- Set of all integers
 - |Z| = infinity
     
 
