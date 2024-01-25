@@ -1,22 +1,17 @@
 Sets are just groupings of elements. Not determined by order or repeat values. Sets can contain other sets
-- A1 = {1,2,3}
-- A2 = {2,2,2,1,3}
-- Then A1= A2
+- EX:
+	- A1 = {1,2,3}
+	- A2 = {2,2,2,1,3}
+	- Then A1= A2
+		- A1 and A2 have the same unique elements so they represent the same 
 Magnitude is how many unique elements there are. This notation is Cardinality! 
 - |A2| = 3 bc 3 unique elements
 - Z
 	- Set of all integers
-- |Z| = infinity
-    
-
+	- |Z| = infinity
 - Q
-    
-
-- Set of rational numbers (fractions)
-    
-- |Q| = infinity
-    
-
+	- Set of rational numbers (fractions)
+	- |Q| = infinity
 - R
     
 
