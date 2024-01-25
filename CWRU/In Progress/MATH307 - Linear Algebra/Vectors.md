@@ -21,8 +21,7 @@
     
 
 ### Fields
-
-- A Field is a bunch of numbers that we can +, -, x, /, and things work basically like you would expect
+A Field is a bunch of numbers that we can +, -, x, /, and things work basically like you would expect
     
 - Def. A field is a set F together with two binary operations +, x, and two distinct elements 0, 1 𝜖 F such that:
     
