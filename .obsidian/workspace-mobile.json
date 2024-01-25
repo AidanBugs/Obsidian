@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Google Drive/CWRU/In Progress/HUMN250 - Responsible AI & Data Citizenship/HUMN250 CE 1.md",
+                "file": "Example.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
         "state": {
           "type": "backlink",
           "state": {
-            "file": "Google Drive/CWRU/In Progress/HUMN250 - Responsible AI & Data Citizenship/HUMN250 CE 1.md",
+            "file": "Example.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
         "state": {
           "type": "outgoing-link",
           "state": {
-            "file": "Google Drive/CWRU/In Progress/HUMN250 - Responsible AI & Data Citizenship/HUMN250 CE 1.md",
+            "file": "Example.md",
             "linksCollapsed": false,
             "unlinkedCollapsed": true
           }
@@ -114,7 +114,7 @@
         "state": {
           "type": "outline",
           "state": {
-            "file": "Google Drive/CWRU/In Progress/HUMN250 - Responsible AI & Data Citizenship/HUMN250 CE 1.md"
+            "file": "Example.md"
           }
         }
       }
@@ -131,8 +131,9 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "49ddcc959c798fa6",
+  "active": "307ec2bdfbb04cd0",
   "lastOpenFiles": [
+    "Google Drive/CWRU/In Progress/HUMN250 - Responsible AI & Data Citizenship/HUMN250 CE 1.md",
     "Excalidraw",
     "/Excalidraw",
     "Google Drive/CWRU/In Progress/CSDS281 - Logic Design & Computer Orginization/ECSECSDS 281 Syllabus Spring 2024.pdf",
@@ -145,8 +146,6 @@
     "Google Drive/CWRU/In Progress/MATH307 - Linear Algebra/desktop.ini",
     "Google Drive/CWRU/In Progress/HUMN250 - Responsible AI & Data Citizenship/desktop.ini",
     "Google Drive/CWRU/In Progress/CSDS312 - Intro to Data Science Systems/desktop.ini",
-    "Google Drive/CWRU/In Progress/CSDS302 - Discrete Mathematics/desktop.ini",
-    "Google Drive/CWRU/In Progress/HUMN250 - Responsible AI & Data Citizenship/HUMN250 CE 1.md",
     "/Google Drive/CWRU/In Progress/HUMN250 - Responsible AI & Data Citizenship/HUMN250 CE 1.md"
   ]
 }
