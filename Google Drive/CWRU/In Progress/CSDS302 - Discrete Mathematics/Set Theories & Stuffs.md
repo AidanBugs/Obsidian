@@ -70,32 +70,14 @@ The image is the output for a specific input
 The pre-image is a set of inputs that correspond to one output
 ## 7.1 & 7.2
 
-Ex: X x Y
-
-- 1 to 1 functions
-    
-
+### 1 to 1 functions
 - Must follow all function rules
-    
 - Each input has only 1 unique output, meaning each output is different than other outputs
-    
 - |X| <= |Y|
-    
 
-- Onto functions
-    
-
-- Every y Y has a pre-image
-    
+### Onto functions
+- Every y Y has a pre-image 
 - Range of F = |Y|
-    
 - |X| >= |Y|
-    
-
-- Bijective function, both 1 to 1 and onto 
-    
-
+-Bijective function, both 1 to 1 and onto 
 - |X| = |Y|
-    
-
--   
