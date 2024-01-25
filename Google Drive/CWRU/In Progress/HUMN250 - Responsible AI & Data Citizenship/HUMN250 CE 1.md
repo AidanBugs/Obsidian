@@ -1,11 +1,7 @@
 For some projects I use Google’s Teachable Machine.
-
 Yet it never quite works how I design it to be. 
-
 I thought this fun little project would be a breeze.
-
 Yet there is always a flaw even if it is small.
-
 No matter how hard I try I never seem to fix them all.
 My project was a machine that could recognize hand movement.
 But sometimes the machine couldn’t read my intent.
