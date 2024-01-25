@@ -12,11 +12,8 @@
 - Type Checking! (Like CS cannot do certain operations for certain types)
 	- xy -> you can not multiply two vectors together
 	- x-1-> can not take the inverse of a vector
-    
-- a + x -> can not add a real number to a vector
-    
-
-Vector form of a linear system
+	- a + x -> can not add a real number to a vector
+### Vector form of a linear system
 
 ![](https://lh7-us.googleusercontent.com/vzqI8oqh6u_W4edw_3T-CMkUZ02Vp_Wku72PufL5almLRkpEWMZFycI_TSGdCQJfeVlI1yQ042QPyEPKTcLWk0DpBVYqfOgHrkm7eBqGNAYimRUPEMtT0Yufu31sJnZoRXN1_DIcTm96eciOqiGKxQA)
 
