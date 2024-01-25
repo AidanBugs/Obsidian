@@ -79,5 +79,6 @@ The pre-image is a set of inputs that correspond to one output
 - Every y Y has a pre-image 
 - Range of F = |Y|
 - |X| >= |Y|
--Bijective function, both 1 to 1 and onto 
+### Bijective function
+both 1 to 1 and onto 
 - |X| = |Y|
