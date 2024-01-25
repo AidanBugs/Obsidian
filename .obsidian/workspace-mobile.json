@@ -1,0 +1,148 @@
+{
+  "main": {
+    "id": "aea53f80f6685ac6",
+    "type": "split",
+    "children": [
+      {
+        "id": "7aae18203d820298",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "49ddcc959c798fa6",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "test2.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "13fd97e4198ea62d",
+    "type": "mobile-drawer",
+    "children": [
+      {
+        "id": "307ec2bdfbb04cd0",
+        "type": "leaf",
+        "state": {
+          "type": "file-explorer",
+          "state": {
+            "sortOrder": "alphabetical"
+          }
+        }
+      },
+      {
+        "id": "dcd5f5d27a3e82d2",
+        "type": "leaf",
+        "state": {
+          "type": "search",
+          "state": {
+            "query": "",
+            "matchingCase": false,
+            "explainSearch": false,
+            "collapseAll": false,
+            "extraContext": false,
+            "sortOrder": "alphabetical"
+          }
+        }
+      },
+      {
+        "id": "45fbfa5c90b19a82",
+        "type": "leaf",
+        "state": {
+          "type": "tag",
+          "state": {
+            "sortOrder": "frequency",
+            "useHierarchy": true
+          }
+        }
+      },
+      {
+        "id": "83f762942d5e6448",
+        "type": "leaf",
+        "state": {
+          "type": "bookmarks",
+          "state": {}
+        }
+      }
+    ],
+    "currentTab": 0
+  },
+  "right": {
+    "id": "2b2f87461015fe1a",
+    "type": "mobile-drawer",
+    "children": [
+      {
+        "id": "923752a8122fa620",
+        "type": "leaf",
+        "state": {
+          "type": "backlink",
+          "state": {
+            "file": "test2.md",
+            "collapseAll": false,
+            "extraContext": false,
+            "sortOrder": "alphabetical",
+            "showSearch": false,
+            "searchQuery": "",
+            "backlinkCollapsed": false,
+            "unlinkedCollapsed": true
+          }
+        }
+      },
+      {
+        "id": "e68b70621f457b0b",
+        "type": "leaf",
+        "state": {
+          "type": "outgoing-link",
+          "state": {
+            "file": "test2.md",
+            "linksCollapsed": false,
+            "unlinkedCollapsed": true
+          }
+        }
+      },
+      {
+        "id": "28baf5423b64f9ad",
+        "type": "leaf",
+        "state": {
+          "type": "outline",
+          "state": {
+            "file": "test2.md"
+          }
+        }
+      }
+    ],
+    "currentTab": 0
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "307ec2bdfbb04cd0",
+  "lastOpenFiles": [
+    "Google Drive/CWRU/In Progress/HUMN250 - Responsible AI & Data Citizenship/HUMN250 CE 1.md",
+    "/Google Drive/CWRU/In Progress/HUMN250 - Responsible AI & Data Citizenship/HUMN250 CE 1.md",
+    "Google Drive/CWRU/In Progress/HUMN250 - Responsible AI & Data Citizenship",
+    "Google Drive/CWRU/In Progress",
+    "Google Drive/CWRU",
+    "Google Drive",
+    "/Google Drive/CWRU/In Progress/HUMN250 - Responsible AI & Data Citizenship",
+    "/Google Drive/CWRU/In Progress",
+    "/Google Drive/CWRU",
+    "/Google Drive",
+    "test.md"
+  ]
+}
