@@ -1,5 +1,3 @@
-**
-
 Set Theories & Stuffs
 
 - Sets are just groupings of elements. Not determined by order or repeat values. Sets can contain other sets
@@ -178,7 +176,3 @@ Ex: X x Y
     
 
 -   
-    
-
-  
-**
