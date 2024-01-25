@@ -3,9 +3,9 @@ Sets are just groupings of elements. Not determined by order or repeat values. S
 	- A1 = {1,2,3}
 	- A2 = {2,2,2,1,3}
 	- Then A1= A2
-		- A1 and A2 have the same unique elements so they represent the same 
+		- A1 and A2 have the same unique elements so they represent the same set
 Magnitude is how many unique elements there are. This notation is Cardinality! 
-- |A2| = 3 bc 3 unique elements
+- |A2| = 3 because 3 unique elements
 - Z
 	- Set of all integers
 	- |Z| = infinity
@@ -13,27 +13,15 @@ Magnitude is how many unique elements there are. This notation is Cardinality!
 	- Set of rational numbers (fractions)
 	- |Q| = infinity
 - R
-    
-
-- Set of real numbers (non imaginary)
-    
-- |R| = Infinity
-    
-
+	- Set of real numbers (non imaginary)
+	- |R| = Infinity
 - |Z| = |Q| < |R|
-    
 
 Property Base Form
-
-- A = { Set | Condition(s) }
-    
+- A = { Set | Condition(s) }  
 - Ex:
-    
-
-- A2 = { x 𝜖 Z | 1 < x < 3 }
-    
-- A2. { 2 }
-    
+	- A2 = { x 𝜖 Z | 1 < x < 3 }
+	- A2. { 2 }
 
 ---
 
