@@ -1,42 +1,20 @@
 ### Basics
 - y = mx + b
 	- y & x are variables (they can change)
-    
-- M & B are constants
-    
-- Points (x,y) satisfy this equation
-    
-- Does not work for ANY line (vertical lines)
-    
-
+	- m & b are constants
+	- Points (x,y) satisfy this equation
+	- Does not work for ANY line (vertical lines)
 - ax + by = c
-    
-
-- Same as above, works for any line 
-    
-- This is a Linear Equation in 2 variables
-    
-
+	- Same as above, works for any line 
+	- This is a Linear Equation in 2 variables
 - ax + by + cz = d
-    
-
-- Linear Equation in 3 variables
-    
-- This is a Plane in 3d space 
-    
-
+	- Linear Equation in 3 variables
+	- This is a Plane in 3d space 
 - a1x1 + a2x2 + … anxn = b
-    
-
-- Linear Equation in n variables
-    
-
+	- Linear Equation in n variables
 - m by n Linear System
-    
-
-- m is # of equations
-    
-- n is # of variables
+	- m is # of equations
+	- n re # of variables
     
 
 - a11x1 + a12x2 + … a1nxn = b1
