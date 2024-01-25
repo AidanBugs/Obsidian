@@ -45,22 +45,13 @@ One set X another set creates a coordinate system
 
 ## 1.3 - Relations & Functions
 
-- Def A and B are sets A relation R from A to B is a subset of AxB
-    
+### Relations
+Def A and B are sets A relation R from A to B is a subset of AxB
 - Ex
-    
-
-- A = {1,2}         B = {1,2,3}
-    
-- Define a relation R from A to B as(x,y) 𝜖 R of (x-y) / z 𝜖 R
-    
-
-- R = { (1,1), (2,2), (1,3) }
-    
-
-- Functions
-    
-
+	- A = {1,2}         B = {1,2,3}
+	- Define a relation R from A to B as(x,y) 𝜖 R of (x-y) / z 𝜖 R
+	- R = { (1,1), (2,2), (1,3) }
+### Functions
 - Function F from A to B is a special relation
     
 - 1) For every element x 𝜖 A there is always y 𝜖 B such that (x,y) 𝜖 R
@@ -104,7 +95,7 @@ One set X another set creates a coordinate system
 - The pre-image is a set of inputs that correspond to one output
     
 
-7.1 & 7.2
+## 7.1 & 7.2
 
 Ex: X x Y
 
