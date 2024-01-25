@@ -52,25 +52,14 @@ Def A and B are sets A relation R from A to B is a subset of AxB
 	- Define a relation R from A to B as(x,y) 𝜖 R of (x-y) / z 𝜖 R
 	- R = { (1,1), (2,2), (1,3) }
 ### Functions
+Definition of Function:
 - Function F from A to B is a special relation
-    
 - 1) For every element x 𝜖 A there is always y 𝜖 B such that (x,y) 𝜖 R
-    
 - 2) For every element x 𝜖 A, y 𝜖 B, z 𝜖 B. If (x,y) 𝜖 F and (x,z) 𝜖 F then y = z
-    
-
-- Domain
-    
-
-- Set of all possible inputs in the function / relation
-    
-
-- Co-domain
-    
-
-- Set of all possible outputs in the function / relation
-    
-
+### Domain
+Set of all possible inputs in the function / relation
+### Co-domain
+Set of all possible outputs in the function / relation
 - Range
     
 
