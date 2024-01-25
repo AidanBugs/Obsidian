@@ -25,29 +25,16 @@
     
 
 ### Rat Poison Principle
-- How do you tell if something is rat poison? Feed it to a rat.
-    
-
+How do you tell if something is rat poison? Feed it to a rat.
 - If it kills the rat its rat poison. In math things are defined by what they do.
-    
-
 - Examples
-    
-
-- Def. A Linear System is homogeneous if bi = 0 ∀i
-    
-- Thm. Every homogeneous Linear System has x1 = … = xn = 0 as a solution
-    
-- Pf If x1 = … = xn = 0 then
-    
-
-- a11x1 + a12x2 + … a1nxn = 0
-    
-- a21x1 + a22x2 + … a2nxn = 0
-    
-- am1x1 + am2x2 + … amnxn = 0 (show box here for end of proof)
-    
-
+	- Def. A Linear System is homogeneous if bi = 0 ∀i
+	- Thm. Every homogeneous Linear System has x1 = … = xn = 0 as a solution
+	- Pf If x1 = … = xn = 0 then
+		- a11x1 + a12x2 + … a1nxn = 0
+		- a21x1 + a22x2 + … a2nxn = 0
+		- am1x1 + am2x2 + … amnxn = 0 (show box here for end of proof)
+	
 - Linear Algebra is concerned with linear systems and their solutions. Do solutions exist and is there uniqueness (only one solution)
     
 - am1x1 + am2x2 + … amnxn = ym -> Recipe for turning (x1, … , xn) into  (y1, … , yn)
