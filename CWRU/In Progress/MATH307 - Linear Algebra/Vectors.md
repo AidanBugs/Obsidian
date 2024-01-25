@@ -1,26 +1,12 @@
-**
-
-Vectors
-
+### Vector Properties
 - Vector Addition
-    
-
-- Can add vectors together (duh)
-    
-- Tip to tail yada yada
-    
-
+	- Can add vectors together (duh)
+	- Tip to tail yada yada
 - Scalar Multiplication
-    
-
-- Multiply any vector by any real number and it will scale the vector
-    
-- Linear Combination Example
-    
-
-- $$$$v1, … , vm 𝜖 Rn a1, … , am 𝜖 R
-    
-- a1vm, … , amvm 𝜖 Rn
+	- Multiply any vector by any real number and it will scale the vector
+	- Linear Combination Example
+		- v1, … , vm 𝜖 Rn a1, … , am 𝜖 R    
+		- a1vm, … , amvm 𝜖 Rn
     
 
 - The span of a vector is the set of all Linear Combinations of vector written:
