@@ -65,4 +65,11 @@
 		- Pf (proof) suppose 0 and 0’ are both additive identities. We know 0 + 0’ = 0 and 0 + 0’ = 0’. Therefore 0 = 0’
 - GE (Gaussian Elimination) works just as well over any field
 ## Vector Spaces
-### Wha
+### What do we do with Vectors?
+Vector Addition & Multiplication
+- Ex:
+	- Consider solutions of the system:
+		- x + y - z = 0
+		- x - y - z = 0
+		- x + 0y - z = 0
+	- 
