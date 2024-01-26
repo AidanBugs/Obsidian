@@ -30,16 +30,9 @@
 	- 5) ∀ a, b 𝜖 F, a * b = b * a - >(* is commutative)
 	- 6) Multiplication is associative
 	- 7) 1 is a multiplicative identity ( 1 * a = a )
-<<<<<<< HEAD
-	    
 	- 8) ∀ a 𝜖 F & a != 0 ∃ c 𝜖 F such that a * c = 1 - > (multiplicative inverse, c = 1/a)
-	    
 	- 9) ∀ a, b, c 𝜖 F, a(b + c) = ab + ac - > (distributive law)
-    
-
 - Ex:
-    
-
 - R - > set of all real numbers
     
 - Q = { rational numbers }
