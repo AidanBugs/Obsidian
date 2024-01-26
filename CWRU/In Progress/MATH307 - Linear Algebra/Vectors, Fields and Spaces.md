@@ -74,4 +74,4 @@ Vector Addition & Multiplication
 		- x + 0y - z = 0
 	- Notice if we have 2 solutions then their sum is also a solution
 	- Similarly, scalar multiples of a solution is a solution
-	- 
+	- So U is a subset of R^3
