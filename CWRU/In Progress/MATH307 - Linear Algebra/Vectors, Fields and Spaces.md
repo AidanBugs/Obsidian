@@ -88,3 +88,8 @@ This proves other properties such as the following:
 - 0v = 0, a0 = 0
 - (-1)v = -v
 	- Pf. v + (-1)v = 1v + (-1)v = (1 + (-1))v = 0v = 0.
+Ex:
+$$
+F^n = {[x_1... x_n] | x_1...x_n :epsilon: F}
+<br>
+$$
