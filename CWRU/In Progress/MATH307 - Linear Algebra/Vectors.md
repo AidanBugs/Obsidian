@@ -21,11 +21,7 @@
     
 
 ### Fields
-<<<<<<< HEAD
-A Field is a bunch of numbers that we can +, -, x, /, and things work basically like you would expect
-=======
  A Field is a bunch of numbers that we can +, -, x, /, and things work basically like you would expect 
->>>>>>> origin/main
 - Def. A field is a set F together with two binary operations +, x, and two distinct elements 0, 1 𝜖 F such that:
 	- 1) ∀ a, b 𝜖 F, a + b = b + a - > (+ is commutative)
 	- 2) ∀ a, b, c 𝜖 F, (a + b) + c = a + (b +c) - > (+ is associative)
