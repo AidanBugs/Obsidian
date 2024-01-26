@@ -87,4 +87,4 @@ A vector space over F consists of a set V with an element 0 exists in V and oper
 This proves other properties such as the following:
 - 0v = 0, a0 = 0
 - (-1)v = -v
-	- Pf. v + (-1)v = 1v + -1
+	- Pf. v + (-1)v = 1v + (-1)v = (1 + (-1))v = 0v = 0.
