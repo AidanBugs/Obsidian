@@ -85,4 +85,5 @@ A vector space over F consists of a set V with an element 0 exists in V and oper
 - For every a,b in F and v in V, (a+b)v = av + bv
 - For every a in F and v,u in V, a(u+v) = au + av
 This proves other properties such as the following:
-- 0v = 0
+- 0v = 0, a0 = 0
+- (-1)v = -v
