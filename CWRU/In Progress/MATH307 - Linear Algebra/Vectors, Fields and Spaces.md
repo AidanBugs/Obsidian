@@ -102,4 +102,4 @@ Def: Let V be a vector space over F. A subset U in V is called a subspace if it 
 	- V is a subspace of V
 	- {0} is a subspace of V
 - Thm. U is a subspace of V iff
-	- U is closed under addition and m
+	- U is closed under addition and scalar multiplication
