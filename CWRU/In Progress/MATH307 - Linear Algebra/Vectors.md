@@ -37,29 +37,15 @@
 	- Q = { rational numbers }
 		- Q is a subset of R
 	- C = {a + ib | a, b 𝜖 R} -> C is set of complex numbers
-		- 8) ∀ a 𝜖 F & a != 0 ∃ c 𝜖 F such that a * c = 1 - > (multiplicative inverse, c = 1/a)
-		- 9) ∀ a, b, c 𝜖 F, a(b + c) = ab + ac - > (distributive law)
-- Ex:   
-	- R - > set of all real numbers 
-	- Q = { rational numbers } 
-	- Q is a subset of R
-	- C = {a + ib | a, b 𝜖 R} -> C is set of complex numbers
->>>>>>> origin/main
-    
-
-- Proved in 1.4 in textbook, Exercise 17?
-    
-
-- Q(i) = {a + ib | a, b 𝜖 Q}
-    
+    		- Proved in 1.4 in textbook, Exercise 17?
+	- Q(i) = {a + ib | a, b 𝜖 Q}
 - F2 = {0, 1}
     
 
-|   |   |   |
-|---|---|---|
-|+|0|1|
-|0|0|1|
-|1|1|0|
+| + | 0 | 1 |  |
+| ---- | ---- | ---- | ---- |
+| 0 | 0 | 1 |  |
+| 1 | 1 | 0 |  |
 
   
 
