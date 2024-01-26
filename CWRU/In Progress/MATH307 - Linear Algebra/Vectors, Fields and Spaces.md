@@ -72,4 +72,6 @@ Vector Addition & Multiplication
 		- x + y - z = 0
 		- x - y - z = 0
 		- x + 0y - z = 0
+	- Notice if we have 2 solutions then their sum is also a solution
+	- Similarly, scalar multiples of a solution is a solution
 	- 
