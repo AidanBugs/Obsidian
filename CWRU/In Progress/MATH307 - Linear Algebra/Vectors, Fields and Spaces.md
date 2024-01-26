@@ -99,3 +99,5 @@ $$
 x is a solution of the system
 Def: Let V be a vector space over F. A subset U in V is called a subspace if it is also a vector space over F with the same operations.
 - Ex.
+	- V is a subspace of V
+	- {0} is a subspace of V
