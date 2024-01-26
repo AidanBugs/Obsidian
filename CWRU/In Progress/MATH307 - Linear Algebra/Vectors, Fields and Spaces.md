@@ -97,4 +97,4 @@ $$
 U = { x:epsilon: F^n}
 $$
 x is a solution of the system
-Def: Let V 
+Def: Let V be a vector space over F. A subset U in V is called a subspace if it is also a vector space over F with the same operation
