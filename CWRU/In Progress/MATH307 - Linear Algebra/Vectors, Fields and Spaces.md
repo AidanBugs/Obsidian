@@ -82,3 +82,6 @@ A vector space over F consists of a set V with an element 0 exists in V and oper
 - + is commutative, associative, 0 is an additive identity and every v in V has an additive inverse
 - For every v in V, 1v = v
 - For ever a,b in F and v in V, (ab)v = a(bv)
+- For every a,b in F and v in V, (a+b)v = av + bv
+- For every a in F and v,u in V, a(u+v) = au + av
+This proves other prope
