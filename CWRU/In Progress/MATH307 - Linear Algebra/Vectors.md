@@ -40,7 +40,7 @@
     		- Proved in 1.4 in textbook, Exercise 17?
 	- Q(i) = {a + ib | a, b 𝜖 Q}
 	- F2 = {0, 1}
-    
+		- In F2, + is xor and * is and
 
 | + | 0 | 1 |
 | ---- | ---- | ---- |
@@ -52,13 +52,9 @@
 | 0 | 0 | 0 |
 | 1 | 0 | 1 |
 
-  
-
-		-In F2, + is xor and * is and
 - Non-examples (nonex):
     
-
-- Z - > set of integers
+	- Z - > set of integers
     
 
 - Can not satisfy the 8th property because ⅛ is not an integer
