@@ -74,10 +74,10 @@ Vector Addition & Multiplication
 		- x + 0y - z = 0
 	- Notice if we have 2 solutions then their sum is also a solution
 	- Similarly, scalar multiples of a solution is a solution
-	- $$U subset R^3$$The set of solutions of this homogenous linear system has properties that:
+	- $$U epsilon R^3$$The set of solutions of this homogenous linear system has properties that:
 		- The sum of 2 things in U is in U 
 		- any scalar multiple of a thing in U is in U
 ### Defining Vector Spaces
 A vector space over F consists of a set V with an element 0 exists in V and operations +, V x V -> V and scalar multiplication F x V -> V such that:
 - + is commutative, associative, 0 is an additive identity and every v in V has an additive inverse
-- *
+- $$
