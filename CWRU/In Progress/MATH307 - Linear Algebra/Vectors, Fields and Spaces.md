@@ -92,7 +92,8 @@ Ex:
 $$
 F^n = {[x_1... x_n] | x_1...x_n :epsilon: F}
 $$
-is a vector space 
+is a vector space over F
 $$
-
+U = { x:epsilon: F^n}
 $$
+x is a solution of the system
