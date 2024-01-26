@@ -101,3 +101,5 @@ Def: Let V be a vector space over F. A subset U in V is called a subspace if it 
 - Ex.
 	- V is a subspace of V
 	- {0} is a subspace of V
+- Thm. U is a subspace of V iff
+	- 
