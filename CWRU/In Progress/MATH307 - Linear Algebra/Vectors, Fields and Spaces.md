@@ -97,3 +97,4 @@ $$
 U = { x:epsilon: F^n}
 $$
 x is a solution of the system
+Def: Let V 
