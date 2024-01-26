@@ -91,5 +91,8 @@ This proves other properties such as the following:
 Ex:
 $$
 F^n = {[x_1... x_n] | x_1...x_n :epsilon: F}
-<br>
+$$
+is a vector space 
+$$
+
 $$
