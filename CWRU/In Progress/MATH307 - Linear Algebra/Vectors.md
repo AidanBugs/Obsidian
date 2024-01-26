@@ -21,7 +21,11 @@
     
 
 ### Fields
+<<<<<<< HEAD
 A Field is a bunch of numbers that we can +, -, x, /, and things work basically like you would expect
+=======
+ A Field is a bunch of numbers that we can +, -, x, /, and things work basically like you would expect 
+>>>>>>> origin/main
 - Def. A field is a set F together with two binary operations +, x, and two distinct elements 0, 1 𝜖 F such that:
 	- 1) ∀ a, b 𝜖 F, a + b = b + a - > (+ is commutative)
 	- 2) ∀ a, b, c 𝜖 F, (a + b) + c = a + (b +c) - > (+ is associative)
@@ -30,6 +34,7 @@ A Field is a bunch of numbers that we can +, -, x, /, and things work basically 
 	- 5) ∀ a, b 𝜖 F, a * b = b * a - >(* is commutative)
 	- 6) Multiplication is associative
 	- 7) 1 is a multiplicative identity ( 1 * a = a )
+<<<<<<< HEAD
 	    
 	- 8) ∀ a 𝜖 F & a != 0 ∃ c 𝜖 F such that a * c = 1 - > (multiplicative inverse, c = 1/a)
 	    
@@ -48,6 +53,15 @@ A Field is a bunch of numbers that we can +, -, x, /, and things work basically 
     
 
 - C = {a + ib | a, b 𝜖 R} -> C is set of complex numbers
+=======
+	- 8) ∀ a 𝜖 F & a != 0 ∃ c 𝜖 F such that a * c = 1 - > (multiplicative inverse, c = 1/a)
+	- 9) ∀ a, b, c 𝜖 F, a(b + c) = ab + ac - > (distributive law)
+- Ex:   
+	- R - > set of all real numbers 
+	- Q = { rational numbers } 
+	- Q is a subset of R
+	- C = {a + ib | a, b 𝜖 R} -> C is set of complex numbers
+>>>>>>> origin/main
     
 
 - Proved in 1.4 in textbook, Exercise 17?

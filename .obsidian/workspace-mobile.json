@@ -13,7 +13,11 @@
             "state": {
               "type": "markdown",
               "state": {
+<<<<<<< HEAD
                 "file": "CWRU/In Progress/MATH307 - Linear Algebra/What is Linear Algebra.md",
+=======
+                "file": "CWRU/In Progress/MATH307 - Linear Algebra/Vectors.md",
+>>>>>>> origin/main
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +89,11 @@
         "state": {
           "type": "backlink",
           "state": {
+<<<<<<< HEAD
             "file": "CWRU/In Progress/MATH307 - Linear Algebra/What is Linear Algebra.md",
+=======
+            "file": "CWRU/In Progress/MATH307 - Linear Algebra/Vectors.md",
+>>>>>>> origin/main
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -102,7 +110,11 @@
         "state": {
           "type": "outgoing-link",
           "state": {
+<<<<<<< HEAD
             "file": "CWRU/In Progress/MATH307 - Linear Algebra/What is Linear Algebra.md",
+=======
+            "file": "CWRU/In Progress/MATH307 - Linear Algebra/Vectors.md",
+>>>>>>> origin/main
             "linksCollapsed": false,
             "unlinkedCollapsed": true
           }
@@ -114,7 +126,11 @@
         "state": {
           "type": "outline",
           "state": {
+<<<<<<< HEAD
             "file": "CWRU/In Progress/MATH307 - Linear Algebra/What is Linear Algebra.md"
+=======
+            "file": "CWRU/In Progress/MATH307 - Linear Algebra/Vectors.md"
+>>>>>>> origin/main
           }
         }
       }
@@ -150,6 +166,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     "Example.md",
 >>>>>>> origin/main
@@ -199,6 +216,10 @@
     "Example.md",
 >>>>>>> origin/main
 =======
+    "Example.md",
+>>>>>>> origin/main
+=======
+    "CWRU/In Progress/MATH307 - Linear Algebra/What is Linear Algebra.md",
     "Example.md",
 >>>>>>> origin/main
     "CWRU/In Progress/CSDS302 - Discrete Mathematics/Set Theories & Stuffs.md",
@@ -213,7 +234,10 @@
     "CWRU/In Progress/CSDS302 - Discrete Mathematics/desktop.ini",
     "CWRU/In Progress/CSDS281 - Logic Design & Computer Orginization/desktop.ini",
     "CWRU/In Progress/CSDS281 - Logic Design & Computer Orginization/ECSECSDS 281 Syllabus Spring 2024.pdf",
+<<<<<<< HEAD
     "CWRU/In Progress/MATH307 - Linear Algebra/What is Linear Algebra.md",
+=======
+>>>>>>> origin/main
     "CWRU/In Progress/MATH307 - Linear Algebra/Vectors.md",
     "/CWRU/In Progress/CSDS302 - Discrete Mathematics/Set Theories & Stuffs.md",
     "/CWRU/In Progress/HUMN250 - Responsible AI & Data Citizenship/HUMN250 CE 1.md",
