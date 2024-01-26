@@ -53,33 +53,15 @@
 | 1 | 0 | 1 |
 
 - Non-examples (nonex):
-    
 	- Z - > set of integers
-    
-
-- Can not satisfy the 8th property because ⅛ is not an integer
-    
-
-- N - > set of natural numbers
-    
-
-- No negative numbers so does not satisfy 4th and 8th property
-    
-
+		- Can not satisfy the 8th property because ⅛ is not an integer
+	- N - > set of natural numbers
+		- No negative numbers so does not satisfy 4th and 8th property
 - Many other properties follow from the def.
-    
-
-- Ex.
-    
-
-- 0a = 0
-    
-- Pf 0a = (0 + 0)a = 0a + 0a, therefore 0a = 0a + 0a. Subtracting 0a from both sides will result in 0 = 0a
-    
-
-- Thm. The additive identity is unique.
-    
-
+	- Ex.
+		- 0a = 0
+			- Pf 0a = (0 + 0)a = 0a + 0a, therefore 0a = 0a + 0a. Subtracting 0a from both sides will result in 0 = 0a
+	- Thm. The additive identity is unique.
 - Pf (proof) suppose 0 and 0’ are both additive identities. We know 0 + 0’ = 0 and 0 + 0’ = 0’. Therefore 0 = 0’
     
 
