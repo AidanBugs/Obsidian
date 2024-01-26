@@ -79,4 +79,5 @@ Vector Addition & Multiplication
 		- any scalar multiple of a thing in U is in U
 ### Defining Vector Spaces
 A vector space over F consists of a set V with an element 0 exists in V and operations +, V x V -> V and scalar multiplication F x V -> V such that:
-- + is commutative & associative, 0
+- + is commutative, associative, 0 is an additive identity and every v in V has an additive inverse
+- *
