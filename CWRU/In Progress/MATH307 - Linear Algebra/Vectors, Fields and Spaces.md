@@ -64,3 +64,5 @@
 	- Thm. The additive identity is unique.
 		- Pf (proof) suppose 0 and 0’ are both additive identities. We know 0 + 0’ = 0 and 0 + 0’ = 0’. Therefore 0 = 0’
 - GE (Gaussian Elimination) works just as well over any field
+## Vector Spaces
+### Wha
