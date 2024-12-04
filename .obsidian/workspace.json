@@ -1,0 +1,175 @@
+{
+  "main": {
+    "id": "24ea8ee4c59abc62",
+    "type": "split",
+    "children": [
+      {
+        "id": "2015e7fe5253b79b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7588a097fa8fe73e",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "48011c07b8310907",
+    "type": "split",
+    "children": [
+      {
+        "id": "421b54dca560cc1e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3d13aa9bbbae3cf1",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "a1e659c281876d43",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "94b5b5512e7c0b34",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "0e7a0a9cae64058b",
+    "type": "split",
+    "children": [
+      {
+        "id": "094cf2ef7b7f8c92",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d67c473bed92f903",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "b153aebace109674",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "6a721ebe603d5b81",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "a1c2502fda69533d",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {},
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "7588a097fa8fe73e",
+  "lastOpenFiles": [
+    "Excalidraw/Drawing 2024-01-25 15.04.18.excalidraw.md",
+    "Excalidraw",
+    "CWRU/In Progress/RLGN392 - Mandel Fellowship/desktop.ini",
+    "CWRU/In Progress/PHIL306 - Mathematical Logic and Number Theory/desktop.ini",
+    "CWRU/In Progress/CSDS281 - Logic Design & Computer Orginization/ECSECSDS 281 Syllabus Spring 2024.pdf",
+    "CWRU/In Progress/MATH307 - Linear Algebra/What is Linear Algebra.md",
+    "CWRU/In Progress/CSDS281 - Logic Design & Computer Orginization/desktop.ini",
+    "CWRU/In Progress/MATH307 - Linear Algebra/desktop.ini",
+    "CWRU/In Progress/MATH307 - Linear Algebra/Vectors, Fields and Spaces.md",
+    "CWRU/In Progress/HUMN250 - Responsible AI & Data Citizenship/HUMN250 CE 1.md",
+    "CWRU/In Progress/HUMN250 - Responsible AI & Data Citizenship/desktop.ini",
+    "CWRU/In Progress/CSDS312 - Intro to Data Science Systems/desktop.ini",
+    "CWRU/In Progress/CSDS302 - Discrete Mathematics/Set Theories & Stuffs.md",
+    "CWRU/In Progress/CSDS302 - Discrete Mathematics/desktop.ini",
+    "CWRU/Completed/MATH227 - Calculus 3/desktop.ini"
+  ]
+}
