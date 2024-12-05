@@ -25,12 +25,13 @@
             "id": "82f80642079ae084",
             "type": "leaf",
             "state": {
-              "type": "excalidraw",
+              "type": "diff-view",
               "state": {
-                "file": "Excalidraw/Drawing 2024-12-04 00.02.18.excalidraw.md"
+                "file": ".obsidian/plugins/obsidian-style-settings/styles.css",
+                "staged": false
               },
-              "icon": "excalidraw-icon",
-              "title": "Drawing 2024-12-04 00.02.18.excalidraw"
+              "icon": "git-pull-request",
+              "title": "Diff View (styles.css)"
             }
           }
         ],
@@ -48,7 +49,7 @@
         "type": "tabs",
         "children": [
           {
-            "id": "3d13aa9bbbae3cf1",
+            "id": "c853d542fa55ad80",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -90,8 +91,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "0e7a0a9cae64058b",
@@ -187,15 +187,20 @@
   },
   "active": "82f80642079ae084",
   "lastOpenFiles": [
-    "Pasted Image 20241204095142_977.png",
-    "Pasted Image 20241204012510_849.png",
-    "Pasted Image 20241204012004_644.png",
-    "Pasted Image 20241204011729_054.png",
-    "Pasted Image 20241204001125_499.png",
-    "Pasted Image 20241204000434_552.png",
-    "vimgoofoff.md",
+    "CWRU/In Progress/CSDS344 - Computer Security/Final Review.md",
     "Excalidraw/Drawing 2024-12-04 00.02.18.excalidraw.md",
+    "CWRU/In Progress/CSDS310 - Algorithms/HW 5.md",
     "Excalidraw/Drawing 2024-01-25 15.04.18.excalidraw.md",
+    "Image Dump/Pasted Image 20241204000434_552.png",
+    "Image Dump",
+    "Image Dump/Pasted image 20241204145959.png",
+    "Image Dump/Pasted Image 20241204012510_849.png",
+    "Image Dump/Pasted Image 20241204095142_977.png",
+    "Image Dump/Pasted image 20241204145930.png",
+    "Image Dump/Pasted Image 20241204012004_644.png",
+    "Image Dump/Pasted Image 20241204011729_054.png",
+    "Image Dump/Pasted Image 20241204001125_499.png",
+    "vimgoofoff.md",
     "CWRU/In Progress/MATH224 - Differential Equations",
     "CWRU/In Progress/PHIL315 - Philosophy of Existentialism",
     "CWRU/In Progress/PHYS122 - Physics Electricity and Magnetism",
@@ -206,7 +211,6 @@
     "Excalidraw",
     "CWRU/Completed/RLGN392 - Mandel Fellowship/desktop.ini",
     "CWRU/Completed/PHIL306 - Mathematical Logic and Number Theory/desktop.ini",
-    "CWRU/Completed/CSDS281 - Logic Design & Computer Orginization/ECSECSDS 281 Syllabus Spring 2024.pdf",
     "CWRU/Completed/MATH307 - Linear Algebra/What is Linear Algebra.md",
     "CWRU/Completed/MATH307 - Linear Algebra/Vectors, Fields and Spaces.md",
     "CWRU/Completed/HUMN250 - Responsible AI & Data Citizenship/HUMN250 CE 1.md",
