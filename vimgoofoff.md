@@ -25,10 +25,9 @@ d -> delete mode?
 dd -> delete line
 dj -> delete line below
 dk -> delete line above
+dw -> delete word
 
 u -> undo
 ctrl + r -> redo
 
-
-
-
+/ -> search
