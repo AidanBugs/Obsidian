@@ -58,20 +58,32 @@
 	$\therefore F=(2.59\times10^6)(8.85\times10^{-12})(1012.17)^2=23.48N$
 # 4
 ## a
-
+	$I=\frac W{m^2}\rightarrow I=\frac LA$
+	$\therefore I=\frac L{4\pi R^2}$
 ## b
-
+	$F=\frac {IA}c$
+	$A=$ Cross Section Area
+	$A=\pi r^2$
+	$F=\frac {L\pi r^2}{4\pi R^2c}$
+	$\therefore F=\frac{Lr^2}{4R^2c}$
 ## c
-
+	$F=G\frac {m_1m_2}{R^2}-\frac{IA}c=0$
+	$G\frac {M\rho \frac43 \pi r^3}{R^2}=\frac {Lr^2}{4R^2c}$
+	$\therefore r=\frac {3L}{16cMG\rho \pi}$ meters
 ## d
-
+	$r=\frac{3L}{16cMG\rho \pi}\rightarrow r=\frac{(3)(4\times10^{26} W)}{(16\pi)(3\times10^8\frac ms)(2\times10^{30} kg)(6.67\times10^{-11}\frac{Nm^2}{kg^2})(2.5\times10^{3}\frac {kg}{m^3})}$
+	$\therefore r= 2.386\times10^-7\frac{Ws}{N}=2.386\times10^-7\frac{Nm}{s}\frac sN=2.386\times10^-7m$
 # 5
 ## a
 	$\oint \vec B \cdot d\vec s=\mu_0I_{enc} + \mu_0\varepsilon_0\frac{d\Phi_E}{dt}$
 	$\Phi_E=\oint\vec E\cdot d\vec a$
 	$\Phi_E=\vec E\oint d\vec a$
-	$\Phi_E=E_0\sin(\omega t)\hat i (2\pi R^2+2\pi Rh)$
-	$\frac{d\Phi_E}{dt}=E_0\cos(\omega t)(2\pi R^2+2\pi Rh)\hat i$
-	$\vec B\oint d\vec s=\mu_0(I_{enc}+\varepsilon_0E_0\cos(\omega t)(2\pi R^2+2\pi Rh)\hat i)$
-	$\vec B\oint d\vec s=\mu_0\varepsilon_0E_0\cos(\omega t)(2\pi R^2+2\pi Rh)\hat i$
+	$\Phi_E=E_0\sin(\omega t)\hat i (2\pi R^2)$
+	$\frac{d\Phi_E}{dt}=E_0\cos(\omega t)(2\pi R^2)\hat i$
+	$\vec B\oint d\vec s=\mu_0(I_{enc}+\varepsilon_0E_0\cos(\omega t)(2\pi R^2)\hat i)$
+	$\vec B\oint d\vec s=\mu_0\varepsilon_0E_0\cos(\omega t)(2\pi R^2)\hat i$
+	$\vec B 2\pi R=\mu_0\varepsilon_0E_0\cos(\omega t)(2\pi R^2)\hat i$
+	$\vec B = \mu_0\varepsilon_0E_0R\cos(\omega t)$ Counter Clockwise
 ## b
+	$\vec B 2\pi (2R)=\mu_0\varepsilon_0E_0\cos(\omega t)(2\pi (2R)^2)$
+	$\vec B = 2\mu_0\varepsilon_0E_0R\cos(\omega t)$ Counter Clockwise
