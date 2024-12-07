@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "f551bd598adff6fd",
+        "id": "fb63bb73be949faf",
         "type": "tabs",
         "children": [
           {
-            "id": "c2efa39d1a62279d",
+            "id": "a935d296c4cf6866",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "CWRU/In Progress/PHYS122 - Physics Electricity and Magnetism/Phys122 HW10.md",
+                "file": "vimgoofoff.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Phys122 HW10"
+              "title": "vimgoofoff"
             }
           }
         ]
@@ -171,15 +171,15 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "c2efa39d1a62279d",
+  "active": "a935d296c4cf6866",
   "lastOpenFiles": [
-    "vimgoofoff.md",
     "CWRU/In Progress/PHYS122 - Physics Electricity and Magnetism/Phys122 HW10.md",
+    "CWRU/In Progress/CSDS310 - Algorithms/HW 5.md",
+    "vimgoofoff.md",
     "Commands.md",
     "Excalidraw/Drawing 2024-12-04 00.02.18.excalidraw.md",
     "Image Dump/Pasted Image 20241205120313_717.png",
     "CWRU/In Progress/CSDS344 - Computer Security/Final Review.md",
-    "CWRU/In Progress/CSDS310 - Algorithms/HW 5.md",
     "Excalidraw/Drawing 2024-01-25 15.04.18.excalidraw.md",
     "Image Dump/Pasted Image 20241204000434_552.png",
     "Image Dump",

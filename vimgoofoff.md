@@ -4,12 +4,16 @@ h -> left
 j -> down
 k -> up
 l -> right
+gg -> start of page
+G -> end of page
 
-iIaA -> editing inline
+iIaAoO -> editing mode
 i -> insert mode left
 a -> insert mode right
 A -> insert mode end
 I -> insert mode start
+o -> insert mode newline below
+O -> insert mode newline above
 
 xr - making changes while in command mode
 x -> delete characters
@@ -31,3 +35,11 @@ u -> undo
 ctrl + r -> redo
 
 / -> search
+q -> record (idk what this does yet)
+
+v -> visual mode
+V -> block visual mode
+y -> copy highlighted
+yy -> copy line
+yw -> copy word
+p -> paste
