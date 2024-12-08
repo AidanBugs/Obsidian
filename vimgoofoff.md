@@ -6,6 +6,9 @@ k -> up
 l -> right
 gg -> start of page
 G -> end of page
+0 -> start of line
+$ -> end of line
+{} -> up and down paragraphs
 
 iIaAoO -> editing mode
 i -> insert mode left
@@ -38,7 +41,8 @@ ctrl + r -> redo
 q -> record (idk what this does yet)
 
 v -> visual mode
-V -> block visual mode
+V -> visual mode select line
+ctrl + v -> block visual mode, insert multiple cursors
 y -> copy highlighted
 yy -> copy line
 yw -> copy word
