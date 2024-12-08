@@ -24,7 +24,7 @@ def DominationFactor(Teams, Games):
 > SCC is runtime of $O(n+m)$, DFS is worst case $O(n+m)$ (assuming each node is its own SCC). So total runtime is $O(n+m)$
 # 2 - Proofs
 ## a
->False
+>True 
 ## b
 >True 
 # 3 - Wrestler Rivalries
