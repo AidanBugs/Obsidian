@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "fb63bb73be949faf",
+        "id": "36eca3ad578ff2a4",
         "type": "tabs",
         "children": [
           {
-            "id": "a935d296c4cf6866",
+            "id": "fd061cbb5b1f2664",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -174,17 +174,20 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "c853d542fa55ad80",
+  "active": "fd061cbb5b1f2664",
   "lastOpenFiles": [
-    "CWRU/In Progress/CSDS310 - Algorithms/HW 5.pdf",
+    "Shortcuts/Vim Motions.md",
+    "Shortcuts/Markdown Shortcuts.md",
+    "Shortcuts/Obsidian Shortcuts.md",
+    "Shortcuts",
+    "README.md",
     "CWRU/In Progress/PHYS122 - Physics Electricity and Magnetism/Phys122 HW10.pdf",
     "CWRU/In Progress/PHYS122 - Physics Electricity and Magnetism/Phys122 HW10.md",
     "CWRU/In Progress/CSDS310 - Algorithms/HW 5.md",
+    "CWRU/In Progress/CSDS310 - Algorithms/HW 5.pdf",
     "Excalidraw/Drawing 2024-01-25 15.04.18.excalidraw.md",
     "Excalidraw/Drawing 2024-12-04 00.02.18.excalidraw.md",
     "CWRU/In Progress/MATH224 - Differential Equations/Gorgus Help.md",
-    "vimgoofoff.md",
-    "Commands.md",
     "Image Dump/Pasted Image 20241205120313_717.png",
     "CWRU/In Progress/CSDS344 - Computer Security/Final Review.md",
     "Image Dump/Pasted Image 20241204000434_552.png",
@@ -202,8 +205,6 @@
     "CWRU/In Progress/CSDS344 - Computer Security",
     "CWRU/In Progress/CSDS133 - Introduction to Data Science",
     "CWRU/In Progress/CSDS310 - Algorithms",
-    "Excalidraw",
-    "CWRU/Completed/RLGN392 - Mandel Fellowship/desktop.ini",
     "CWRU/Completed/MATH307 - Linear Algebra/What is Linear Algebra.md",
     "CWRU/Completed/MATH307 - Linear Algebra/Vectors, Fields and Spaces.md",
     "CWRU/Completed/HUMN250 - Responsible AI & Data Citizenship/HUMN250 CE 1.md",

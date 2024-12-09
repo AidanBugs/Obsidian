@@ -21,7 +21,7 @@ def DominationFactor(Teams, Games):
 		for node in group do
 			groupings[node] = group
 			if mins > node.val then mins = node.val
-		maxs[group] = max
+		maxs[group] = mins
 	scc_edges = [None] * g
 	# Find edges for SCC
 	for edge in Games do
@@ -93,23 +93,25 @@ def modifiedDFS(edges, start, bests, max_group):
 ``` python
 def WrestlerRivalries(W, R):
 	n = len(W)
-	Queue = new Queue
-	Queue.insert((W[0],0))       # (Node, Heel (0)/ Baby Face (1))
 	Assignments = [None] * n
-	while Queue is not empty do
-		node, parity = Queue.pop()
-		for v in R[node] do
-			if Assignments[v] is None then
-				Queue.insert((v, (parity+1)%2))
-			else if Assignments[v] != (parity+1)%2 then
-				return False
-		Assignments[node] = parity
+	for i in n:
+		if Assignments[i] is None then
+		Queue = new Queue
+		Queue.insert((W[i],0))     # (Node, Heel (0)/ Baby Face (1))
+		while Queue is not empty do
+			node, parity = Queue.pop()
+			for v in R[node] do
+				if Assignments[v] is None then
+					Queue.insert((v, (parity+1)%2))
+				else if Assignments[v] != (parity+1)%2 then
+					return False
+			Assignments[node] = parity
 	return Assignments
 ```
 ## Proof
 >Create a graph $G=(W,R)$ where $W$ represents the different wrestlers and $R$ represents the rivalries between them. Let the edges be undirected and unweighted (weight = 1).
 >
->Given this setup, we know that BFS will correctly reach all other nodes, and be able to determine the distance from the start node. We assign nodes an even distance from our start Heel and nodes with an odd distance as Baby Face. However this is not enough to guarantee that no same types have rivalries because some wrestlers can have rivalries with other established type of wrestlers. To ensure this situation is handled correctly, instead of not inserting a node into the queue if it has been visited, check the parity of the node to determine if it will not result in a rivalry between two wrestlers of the same type. If it will then return false, otherwise keep going in the BFS. Inductively this works because the parities is an optimal way of assigning types to wrestlers.
+>Given this setup, we know that BFS for discontinuous graphs will correctly reach all other nodes, and be able to determine the distance from the start node. We assign nodes an even distance from our start Heel and nodes with an odd distance as Baby Face. However this is not enough to guarantee that no same types have rivalries because some wrestlers can have rivalries with other established type of wrestlers. To ensure this situation is handled correctly, instead of not inserting a node into the queue if it has been visited, check the parity of the node to determine if it will not result in a rivalry between two wrestlers of the same type. If it will then return false, otherwise keep going in the BFS. Inductively this works because the parities is an optimal way of assigning types to wrestlers.
 >
 >Each node that is reachable from an arbitrary source node will be placed in queue only once during the BFS because we only add nodes into the queue if they have not been visited and we only update the parity of a node once it has been visited. Therefore, once the parity of a node is calculated it does not change by the BFS and our algorithm returns false if we have parities that are not alternating.  
 ## Runtime
