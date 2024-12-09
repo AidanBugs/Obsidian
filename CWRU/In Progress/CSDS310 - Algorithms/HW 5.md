@@ -96,16 +96,17 @@ def WrestlerRivalries(W, R):
 	Assignments = [None] * n
 	for i in n:
 		if Assignments[i] is None then
-		Queue = new Queue
-		Queue.insert((W[i],0))     # (Node, Heel (0)/ Baby Face (1))
-		while Queue is not empty do
-			node, parity = Queue.pop()
-			for v in R[node] do
-				if Assignments[v] is None then
-					Queue.insert((v, (parity+1)%2))
-				else if Assignments[v] != (parity+1)%2 then
-					return False
-			Assignments[node] = parity
+			Queue = new Queue
+			Queue.insert((W[i],0))
+			# Queue format: (Node, Heel (0)/ Baby Face (1))
+			while Queue is not empty do
+				node, parity = Queue.pop()
+				for v in R[node] do
+					if Assignments[v] is None then
+						Queue.insert((v, (parity+1)%2))
+					else if Assignments[v] != (parity+1)%2 then
+						return False
+				Assignments[node] = parity
 	return Assignments
 ```
 ## Proof
