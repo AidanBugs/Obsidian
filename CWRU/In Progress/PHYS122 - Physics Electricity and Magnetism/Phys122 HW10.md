@@ -79,11 +79,11 @@
 >$\Phi_E=\oint\vec E\cdot d\vec a$
 >$\Phi_E=\vec E\oint d\vec a$
 >$\Phi_E=E_0\sin(\omega t)\hat i (2\pi R^2)$
->$\frac{d\Phi_E}{dt}=E_0\cos(\omega t)(2\pi R^2)\hat i$
->$\vec B\oint d\vec s=\mu_0(I_{enc}+\varepsilon_0E_0\cos(\omega t)(2\pi R^2)\hat i)$
->$\vec B\oint d\vec s=\mu_0\varepsilon_0E_0\cos(\omega t)(2\pi R^2)\hat i$
->$\vec B 2\pi R=\mu_0\varepsilon_0E_0\cos(\omega t)(2\pi R^2)\hat i$
->$\vec B = \mu_0\varepsilon_0E_0R\cos(\omega t)$ Counter Clockwise
+>$\frac{d\Phi_E}{dt}=\omega E_0\cos(\omega t)(2\pi R^2)\hat i$
+>$\vec B\oint d\vec s=\mu_0(I_{enc}+\varepsilon_{0}\omega E_0\cos(\omega t)(\pi R^2)\hat i)$
+>$\vec B\oint d\vec s=\mu_0\varepsilon_{0}\omega E_0\cos(\omega t)(\pi R^2)\hat i$
+>$\vec B 2\pi R=\mu_0\varepsilon_{0}\omega E_0\cos(\omega t)(\pi R^2)\hat i$
+>$\vec B = \frac {\mu_0\varepsilon_{0}\omega E_0R\cos(\omega t)}2$ Counter Clockwise
 ## b
->$\vec B 2\pi (2R)=\mu_0\varepsilon_0E_0\cos(\omega t)(2\pi (2R)^2)$
->$\vec B = 2\mu_0\varepsilon_0E_0R\cos(\omega t)$ Counter Clockwise
+>$\vec B 2\pi (2R)=\mu_0\varepsilon_{0}\omega E_0\cos(\omega t)(\pi (R)^2)$
+>$\vec B = \frac {\mu_0\varepsilon_{0}\omega E_0R\cos(\omega t)}{4}$ Counter Clockwise
