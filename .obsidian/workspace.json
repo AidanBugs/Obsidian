@@ -11,14 +11,13 @@
             "id": "fd061cbb5b1f2664",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "diff-view",
               "state": {
-                "file": "CWRU/In Progress/CSDS310 - Algorithms/HW 5.md",
-                "mode": "source",
-                "source": false
+                "file": "CWRU/In Progress/CSDS310 - Algorithms/HW 5.pdf",
+                "staged": true
               },
-              "icon": "lucide-file",
-              "title": "HW 5"
+              "icon": "git-pull-request",
+              "title": "Diff View (HW 5.pdf)"
             }
           }
         ]
@@ -93,7 +92,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "CWRU/In Progress/CSDS310 - Algorithms/HW 5.md",
+                "file": "CWRU/In Progress/PHYS122 - Physics Electricity and Magnetism/Phys122 HW10.pdf",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +102,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for HW 5"
+              "title": "Backlinks for Phys122 HW10"
             }
           },
           {
@@ -112,12 +111,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "CWRU/In Progress/CSDS310 - Algorithms/HW 5.md",
+                "file": "CWRU/In Progress/PHYS122 - Physics Electricity and Magnetism/Phys122 HW10.pdf",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from HW 5"
+              "title": "Outgoing links from Phys122 HW10"
             }
           },
           {
@@ -138,11 +137,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "CWRU/In Progress/PHYS122 - Physics Electricity and Magnetism/Phys122 HW10.pdf"
-              },
+              "state": {},
               "icon": "lucide-list",
-              "title": "Outline of Phys122 HW10"
+              "title": "Outline"
             }
           },
           {
@@ -154,6 +151,16 @@
               "icon": "git-pull-request",
               "title": "Source Control"
             }
+          },
+          {
+            "id": "cb418e59c0901bb5",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {},
+              "icon": "spreadsheet",
+              "title": "Advanced Tables"
+            }
           }
         ],
         "currentTab": 4
@@ -164,6 +171,7 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "obsidian-importer:Open Importer": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
       "canvas:Create new canvas": false,
@@ -171,19 +179,21 @@
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
       "obsidian-git:Open Git source control": false,
-      "obsidian-excalidraw-plugin:Create new drawing": false
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
+      "obsidian-excalidraw-plugin:Create new drawing": false,
+      "soundscapes:Soundscapes: My Music": false
     }
   },
   "active": "fd061cbb5b1f2664",
   "lastOpenFiles": [
-    "Shortcuts/Vim Motions.md",
     "Shortcuts/Markdown Shortcuts.md",
     "Shortcuts/Obsidian Shortcuts.md",
+    "Shortcuts/Vim Motions.md",
+    "CWRU/In Progress/PHYS122 - Physics Electricity and Magnetism/Phys122 HW10.pdf",
+    "CWRU/In Progress/CSDS310 - Algorithms/HW 5.md",
     "Shortcuts",
     "README.md",
-    "CWRU/In Progress/PHYS122 - Physics Electricity and Magnetism/Phys122 HW10.pdf",
     "CWRU/In Progress/PHYS122 - Physics Electricity and Magnetism/Phys122 HW10.md",
-    "CWRU/In Progress/CSDS310 - Algorithms/HW 5.md",
     "CWRU/In Progress/CSDS310 - Algorithms/HW 5.pdf",
     "Excalidraw/Drawing 2024-01-25 15.04.18.excalidraw.md",
     "Excalidraw/Drawing 2024-12-04 00.02.18.excalidraw.md",
