@@ -1,0 +1,48 @@
+{
+  "is_obsidian_vault": true,
+  "smart_blocks": {
+    "embed_blocks": true,
+    "min_chars": "300"
+  },
+  "smart_sources": {
+    "embed_model": {
+      "model_key": "TaylorAI/bge-micro-v2",
+      "legacy_transformers": true,
+      "transformers": {
+        "model_key": "TaylorAI/bge-micro-v2",
+        "legacy_transformers": true
+      },
+      "adapter": "transformers"
+    },
+    "min_chars": "300",
+    "smart_change": {
+      "active": true
+    }
+  },
+  "file_exclusions": "Untitled",
+  "folder_exclusions": "smart-chats",
+  "smart_view_filter": {
+    "render_markdown": true,
+    "show_full_path": false
+  },
+  "smart_directories": {},
+  "smart_threads": {
+    "chat_model": {
+      "adapter": "gemini",
+      "openai": {
+        "model_key": "gpt-4o"
+      },
+      "gemini": {
+        "model_key": ""
+      }
+    },
+    "embed_model": {
+      "model_key": "None"
+    },
+    "language": "en",
+    "review_context": false,
+    "lookup_limit": "10",
+    "send_tool_output_in_user_message": false
+  },
+  "excluded_headings": ""
+}
