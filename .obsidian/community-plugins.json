@@ -1,13 +1,12 @@
 [
   "obsidian-git",
   "obsidian-excalidraw-plugin",
-  "obsidian-style-settings",
   "obsidian-relative-line-numbers",
   "execute-code",
   "better-export-pdf",
   "obsidian-minimal-settings",
   "quick-latex",
-  "table-editor-obsidian",
-  "obsidian-importer",
-  "soundscapes"
+  "soundscapes",
+  "obsidian-tasks-plugin",
+  "calendar"
 ]

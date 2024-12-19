@@ -1,7 +1,7 @@
 {
   "vimMode": true,
   "showRibbon": true,
-  "showInlineTitle": false,
+  "showInlineTitle": true,
   "showLineNumber": true,
   "pdfExportSettings": {
     "pageSize": "Letter",

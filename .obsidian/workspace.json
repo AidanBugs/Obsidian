@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "16974de7f15b9418",
+        "id": "c832f8aa3faf1f36",
         "type": "tabs",
         "children": [
           {
-            "id": "34a566074f3e7137",
+            "id": "8732201f31c1f325",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "CWRU/In Progress/CSDS310 - Algorithms/Algo Study.md",
+                "file": "CWRU/Completed/CSDS310 - Algorithms/Algo Study.md",
                 "mode": "source",
                 "source": false
               },
@@ -77,8 +77,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "0e7a0a9cae64058b",
@@ -155,6 +154,16 @@
               "icon": "lucide-list",
               "title": "Outline of Essay 3"
             }
+          },
+          {
+            "id": "929270603ef20f05",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {},
+              "icon": "calendar-with-checkmark",
+              "title": "Calendar"
+            }
           }
         ],
         "currentTab": 3
@@ -175,24 +184,34 @@
       "obsidian-git:Open Git source control": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false,
       "soundscapes:Soundscapes: My Music": false,
-      "obsidian-excalidraw-plugin:Create new drawing": false
+      "obsidian-excalidraw-plugin:Create new drawing": false,
+      "templater-obsidian:Templater": false
     }
   },
-  "active": "34a566074f3e7137",
+  "active": "8732201f31c1f325",
   "lastOpenFiles": [
-    "Excalidraw/Drawing 2024-12-15 21.41.13.excalidraw.md",
-    "CWRU/In Progress/CSDS310 - Algorithms/Algo Study.md",
-    "Excalidraw/Drawing 2024-12-14 16.19.39.excalidraw.md",
-    "CWRU/In Progress/PHIL315 - Philosophy of Existentialism/Religion and nothingness -- Keiji Nishitani, Jan Van Bragt, Jan Van Bragt, Winston L_ -- Nanzan studies in religion and culture, 1982 -- University of -- 9780520043299 -- 19892c3178114f8af19e455ca092c313 -- Anna’s .pdf",
-    "CWRU/In Progress/CSDS310 - Algorithms/HW 5.md",
+    "CWRU/Completed/CSDS310 - Algorithms/HW 5.md",
+    "CWRU/Completed/AIQS100 - Japanese Fiction/Ikigai.md",
+    "CWRU/Completed/AIQS100 - Japanese Fiction/Untitled.md",
+    "Shortcuts/Templates/Default.md",
+    "Shortcuts/Vim Motions.md",
+    "CWRU/Completed/CSDS310 - Algorithms/HW 5.pdf",
+    "CWRU/Completed/AIQS100 - Japanese Fiction/Japanese Culture and Concepts.md",
+    "Shortcuts/Templates",
     "README.md",
-    "CWRU/In Progress/PHIL315 - Philosophy of Existentialism/The Japanese Mind_ Essentials of Japanese Philosophy and -- Charles A_ Moore -- 2022 -- University of Hawaii Press -- 9780824843052 -- 1539547b51a49601fa8ffe7acdebe6cc -- Anna’s Archive.pdf",
-    "CWRU/In Progress/PHIL315 - Philosophy of Existentialism/Essay 3.md",
-    "CWRU/In Progress/PHIL315 - Philosophy of Existentialism/Being and Nothingness -- Sartre, Jean-Paul -- 2007 -- fdccb8e14440edc0f182f1f6818f1202 -- Anna’s Archive.pdf",
-    "CWRU/In Progress/PHIL315 - Philosophy of Existentialism/America Day by Day -- Simone de Beauvoir; Carol (Translator) Cosman; Carol Cosman -- Paperback, 1999 -- University of California Press -- 9780520209794 -- 89222f7726cec6b26964300c3bae9217 -- Anna’s Archive.pdf",
-    "CWRU/In Progress/PHIL315 - Philosophy of Existentialism/Existentialism is a Humanism, Jean-Paul Sarte 1946.pdf",
-    "CWRU/In Progress/PHIL315 - Philosophy of Existentialism/The Japanese Mind -- Roger Davis; 池野修 -- 1st ed, Tokyo ; Rutland Vt, 2002 -- book -- 9780804832953 -- e501831ab4b1a0ffa850c5c8ad48346f -- Anna’s Archive.pdf",
-    "CWRU/In Progress/PHIL315 - Philosophy of Existentialism/The Second Sex -- Simone de Beauvoir; H_ M_ Parshley (trans_) -- 1956 -- Jonathan Cape -- 9780307277787 -- 87b98cdfddeb01c91adb19e5678df750 -- Anna’s Archive.pdf",
+    "CWRU/In Progress/Untitled.md",
+    "CWRU/In Progress/STAT312 - Statistics for Engineer",
+    "CWRU/In Progress/ENGR399 - Impact Engineering on Society",
+    "CWRU/In Progress/DSCI330 - Cognition and Computation",
+    "CWRU/In Progress/CSDS493 - Software Engineering",
+    "CWRU/In Progress/CSDS343 - Theoretical Computer Science",
+    "CWRU/Completed/CSDS310 - Algorithms/Algo Study.md",
+    "CWRU/In Progress/CSDS234 - Structured & Unstructured Data",
+    "Excalidraw/Drawing 2024-12-15 21.41.13.excalidraw.md",
+    "Excalidraw/Drawing 2024-12-14 16.19.39.excalidraw.md",
+    "CWRU/Completed/PHIL315 - Philosophy of Existentialism/Religion and nothingness -- Keiji Nishitani, Jan Van Bragt, Jan Van Bragt, Winston L_ -- Nanzan studies in religion and culture, 1982 -- University of -- 9780520043299 -- 19892c3178114f8af19e455ca092c313 -- Anna’s .pdf",
+    "CWRU/Completed/PHIL315 - Philosophy of Existentialism/The Japanese Mind_ Essentials of Japanese Philosophy and -- Charles A_ Moore -- 2022 -- University of Hawaii Press -- 9780824843052 -- 1539547b51a49601fa8ffe7acdebe6cc -- Anna’s Archive.pdf",
+    "CWRU/Completed/PHIL315 - Philosophy of Existentialism/Essay 3.md",
     "Excalidraw/Drawing 2024-12-04 00.02.18.excalidraw.md",
     "Excalidraw/Drawing 2024-01-25 15.04.18.excalidraw.md",
     "Image Dump/Pasted Image 20241204095142_977.png",
@@ -205,15 +224,11 @@
     "Image Dump/Pasted image 20241204145959.png",
     "Image Dump/Pasted Image 20241205120313_717.png",
     "Untitled.md",
-    "z2nd Brain",
     "Shortcuts/Markdown Shortcuts.md",
     "Shortcuts/Obsidian Shortcuts.md",
-    "Shortcuts/Vim Motions.md",
-    "CWRU/In Progress/PHYS122 - Physics Electricity and Magnetism/Phys122 HW10.pdf",
-    "Shortcuts",
-    "CWRU/In Progress/PHYS122 - Physics Electricity and Magnetism/Phys122 HW10.md",
-    "CWRU/In Progress/MATH224 - Differential Equations/Gorgus Help.md",
-    "CWRU/In Progress/CSDS344 - Computer Security/Final Review.md",
+    "CWRU/Completed/PHYS122 - Physics Electricity and Magnetism/Phys122 HW10.md",
+    "CWRU/Completed/MATH224 - Differential Equations/Gorgus Help.md",
+    "CWRU/Completed/CSDS344 - Computer Security/Final Review.md",
     "CWRU/Completed/MATH307 - Linear Algebra/What is Linear Algebra.md",
     "CWRU/Completed/MATH307 - Linear Algebra/Vectors, Fields and Spaces.md",
     "CWRU/Completed/HUMN250 - Responsible AI & Data Citizenship/HUMN250 CE 1.md",

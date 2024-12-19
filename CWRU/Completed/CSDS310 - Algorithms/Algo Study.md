@@ -1,3 +1,4 @@
+#CSDS310 #CSDS
 # Master Method
 $T(n)=aT(\frac nb)+\Theta(f(x))$
 We define $g(x)=n^{\log_ba}$
