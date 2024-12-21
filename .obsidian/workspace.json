@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "e299a8abb070c904",
+        "id": "d4fcb4a3e58e6875",
         "type": "tabs",
         "children": [
           {
-            "id": "0ca00de31bed8fc0",
+            "id": "152f2f0a7a1e8e41",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "1) CWRU/Completed/HUMN250 - Responsible AI & Data Citizenship/HUMN250 CE 1.md",
+                "file": "1) CWRU/Completed/CSDS132 - Intro to Java/Java.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "HUMN250 CE 1"
+              "title": "Java"
             }
           }
         ]
@@ -52,7 +52,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:#help",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -132,7 +132,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "1) CWRU/Completed/HUMN250 - Responsible AI & Data Citizenship/HUMN250 CE 1.md",
+                "file": "2) 2nd Brain/Shortcuts/Vim Motions.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -142,7 +142,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for HUMN250 CE 1"
+              "title": "Backlinks for Vim Motions"
             }
           },
           {
@@ -151,12 +151,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "1) CWRU/Completed/HUMN250 - Responsible AI & Data Citizenship/HUMN250 CE 1.md",
+                "file": "2) 2nd Brain/Shortcuts/Vim Motions.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from HUMN250 CE 1"
+              "title": "Outgoing links from Vim Motions"
             }
           },
           {
@@ -165,20 +165,20 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "1) CWRU/Completed/HUMN250 - Responsible AI & Data Citizenship/HUMN250 CE 1.md"
+                "file": "2) 2nd Brain/Shortcuts/Vim Motions.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of HUMN250 CE 1"
+              "title": "Outline of Vim Motions"
             }
           }
         ]
       },
       {
-        "id": "7252f77ecef3bf13",
+        "id": "f3261b60f2bf176b",
         "type": "tabs",
         "children": [
           {
-            "id": "da32f3f9391cebee",
+            "id": "5818c1c92fb03d96",
             "type": "leaf",
             "state": {
               "type": "graph",
@@ -207,45 +207,45 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "0ca00de31bed8fc0",
+  "active": "c853d542fa55ad80",
   "lastOpenFiles": [
-    "3) Meta/Templates/Default.md",
+    "1) CWRU/Completed/CHEM111 - Intro Chem/Intro Chem.md",
+    "1) CWRU/Completed/CSDS132 - Intro to Java/Java.md",
     "README.md",
-    "1) CWRU/Completed/Untitled.md",
-    "1) CWRU/Untitled.md",
-    "3) Meta/Templates/Untitled.md",
-    "2) 2nd Brain/CSDS.md",
-    "3) Meta",
-    "CWRU/Untitled.md",
-    "1) CWRU/Completed/AIQS100 - Japanese Fiction/Shudan Ishiki.md",
-    "CWRU/Completed/AIQS100 - Japanese Fiction/Untitled.md",
-    "1) CWRU/Completed/AIQS100 - Japanese Fiction/Ikigai.md",
-    "2) 2nd Brain/Shortcuts/Markdown Shortcuts.md",
-    "1) CWRU/Completed/MATH307 - Linear Algebra/What is Linear Algebra.md",
-    "1) CWRU/Completed/PHIL315 - Philosophy of Existentialism/Essay 3.md",
-    "1) CWRU/Completed/AIQS100 - Japanese Fiction/Japanese Culture and Concepts.md",
-    "1) CWRU/Completed/MATH224 - Differential Equations/Gorgus Help.md",
-    "1) CWRU/Completed/CSDS302 - Discrete Mathematics/Set Theories & Stuffs.md",
-    "1) CWRU/Completed/MATH307 - Linear Algebra/Vectors, Fields and Spaces.md",
-    "1) CWRU/Completed/CSDS310 - Algorithms/HW 5.md",
-    "1) CWRU/Completed/CSDS310 - Algorithms/Algo Study.md",
-    "1) CWRU/Completed/CSDS344 - Computer Security/Final Review.md",
-    "1) CWRU/Completed/CSDS310 - Algorithms/HW 5.pdf",
-    "excalibrain.md",
-    "Untitled.canvas",
+    "2) 2nd Brain/Shortcuts/Windows Shortcuts.md",
+    "3) Meta-Data/Templates/CSDS.md",
     "2) 2nd Brain/Shortcuts/Vim Motions.md",
-    "3) Meta/Templates",
-    "CWRU/In Progress/Untitled.md",
+    "2) 2nd Brain/Shortcuts/Obsidian Shortcuts.md",
+    "2) 2nd Brain/Shortcuts/Markdown Shortcuts.md",
+    "2) 2nd Brain/Culture & Psych/Japanese Culture and Concepts.md",
+    "2) 2nd Brain/Relations",
+    "2) 2nd Brain/Untitled.md",
+    "2) 2nd Brain/Phil & Brain/What is Existentialism.md",
+    "1) CWRU/Completed/PHIL315 - Philosophy of Existentialism/Existentialism.md",
+    "2) 2nd Brain/Phil & Brain",
+    "3) Meta/Untitled.md",
+    "2) 2nd Brain/Habits & Productivity",
+    "2) 2nd Brain/Culture & Psych",
+    "1) CWRU/In Progress/Assignments.md",
+    "1) CWRU/In Progress/STAT312 - Statistics for Engineer/Untitled.md",
+    "3) Meta-Data/Obsidian Config.md",
+    "3) Meta-Data/Todo.md",
+    "3) Meta-Data/Templates/Default.md",
+    "1) CWRU/In Progress/DSCI330 - Cognition and Computation/Untitle1d.md",
+    "1) CWRU/In Progress/ENGR399 - Impact Engineering on Society/Untitled.md",
+    "1) CWRU/In Progress/CSDS234 - Structured & Unstructured Data/Untitled.md",
+    "1) CWRU/In Progress/Untitled.md",
+    "3) Meta-Data/Templates/Humanities.md",
+    "3) Meta-Data/Templates/MATH.md",
+    "3) Meta-Data/Templates/PHIL.md",
+    "2) 2nd Brain/CSDS.md",
+    "3) Meta-Data",
+    "1) CWRU/Completed/CSDS310 - Algorithms/HW 5.pdf",
+    "Untitled.canvas",
+    "3) Meta-Data/Templates",
     "1) CWRU/In Progress/STAT312 - Statistics for Engineer",
     "1) CWRU/In Progress/ENGR399 - Impact Engineering on Society",
     "1) CWRU/In Progress/DSCI330 - Cognition and Computation",
-    "1) CWRU/In Progress/CSDS493 - Software Engineering",
-    "1) CWRU/In Progress/CSDS343 - Theoretical Computer Science",
-    "1) CWRU/In Progress/CSDS234 - Structured & Unstructured Data",
-    "3) Meta/Excalidraw/Drawing 2024-12-15 21.41.13.excalidraw.md",
-    "3) Meta/Excalidraw/Drawing 2024-12-14 16.19.39.excalidraw.md",
-    "CWRU/Completed/PHIL315 - Philosophy of Existentialism/Religion and nothingness -- Keiji Nishitani, Jan Van Bragt, Jan Van Bragt, Winston L_ -- Nanzan studies in religion and culture, 1982 -- University of -- 9780520043299 -- 19892c3178114f8af19e455ca092c313 -- Anna’s .pdf",
-    "Excalidraw/Drawing 2024-12-04 00.02.18.excalidraw.md",
     "Image Dump/Pasted Image 20241204095142_977.png",
     "Image Dump/Pasted image 20241204145930.png",
     "Image Dump/Pasted Image 20241204012510_849.png",

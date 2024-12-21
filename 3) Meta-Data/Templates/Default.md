@@ -3,6 +3,7 @@ date: <% tp.date.now("MM/DD/YY") %>
 tags:
   - "#Meta"
 links: 
-deadline:
+deadline: 
+status:
 ---
 # Header 1

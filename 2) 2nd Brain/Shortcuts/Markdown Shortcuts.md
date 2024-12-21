@@ -1,9 +1,13 @@
 ---
-date: 12-19-2024
+date: 12/21/24
 tags:
   - Tips
-links:
+  - 2nd-Brain
+links: 
+deadline: 
+status:
 ---
+# Header 1
 # # Header 1
 Use Hashtags for Headers
 #Tips 

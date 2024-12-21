@@ -25,6 +25,7 @@
     "excalidraw-open-md": "checkbox",
     "date": "text",
     "links": "multitext",
-    "deadline": "date"
+    "deadline": "date",
+    "status": "number"
   }
 }

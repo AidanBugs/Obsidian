@@ -1,3 +1,13 @@
+---
+date: 12/21/24
+tags:
+  - Tips
+  - 2nd-Brain
+links: 
+deadline: 
+status:
+---
+# Header 1
 # VIM Commands
 hjkl -> navigation
 h -> left
@@ -47,3 +57,5 @@ y -> copy highlighted
 yy -> copy line
 yw -> copy word
 p -> paste
+
+
