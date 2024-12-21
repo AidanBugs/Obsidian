@@ -26,6 +26,10 @@
     "date": "text",
     "links": "multitext",
     "deadline": "date",
-    "status": "number"
+    "status": "number",
+    "Water": "number",
+    "Workout": "number",
+    "Write": "number",
+    "Stretch": "number"
   }
 }

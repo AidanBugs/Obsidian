@@ -2,9 +2,8 @@
 date: 12/19/24
 tags:
   - "#Meta"
-  - "#TODO"
 links: 
-deadline: 
+deadline: 2024-12-20
 status: 1
 ---
 # Core Plugins / Themes
