@@ -3,9 +3,14 @@ date: "{{date}}"
 tags:
   - "#Daily"
 links: 
+TBX HRS: 
+CRI: 
+Study: 
 Workout: 
-Water: 
-Stretch: 
-Write:
+Meditation: 
+Social:
 ---
 # Notes
+- TBX
+# TODO
+- [ ] HI

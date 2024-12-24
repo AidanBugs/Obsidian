@@ -2,9 +2,10 @@
 date: 12/21/24
 tags:
   - CSDS
+  - "#TODO"
 links: 
 deadline: 
-status:
+status: 0.8
 ---
 # Basic Primitive Types
 Boolean

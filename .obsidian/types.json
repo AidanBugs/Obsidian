@@ -30,6 +30,14 @@
     "Water": "number",
     "Workout": "number",
     "Write": "number",
-    "Stretch": "number"
+    "Stretch": "number",
+    "Journal": "number",
+    "CRI": "number",
+    "Study/HW": "number",
+    "TBX HRS": "text",
+    "Meditation": "number",
+    "Friends & Fam": "number",
+    "Study": "number",
+    "Social": "number"
   }
 }
