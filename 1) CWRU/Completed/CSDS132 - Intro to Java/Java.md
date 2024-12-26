@@ -2,10 +2,11 @@
 date: 12/21/24
 tags:
   - CSDS
-  - "#TODO"
-links: 
+links:
+  - "[[Arrays]]"
+  - "[[Linked Lists]]"
 deadline: 
-status: 0.8
+status:
 ---
 # Basic Primitive Types
 Boolean
@@ -14,7 +15,7 @@ Float
 Char
 # Basic Objects
 Strings 
-Arrays
+[[Arrays]]
 # Operators
 +
 -
@@ -38,6 +39,6 @@ Methods
 # Recursion
 When a function calls itself, ex: recursive Fibonacci
 # Linked Lists
-insert a diagram
+[[Linked Lists]]
 # Parallelized Threading
 Basically allows you to run things in parallel,

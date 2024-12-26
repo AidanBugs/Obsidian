@@ -25,6 +25,9 @@ status: 1
 - excalidraw
 - execute code
 - git
+- graphviz
+	- make visualizations
+- heatmap calendar
 - iconize
 - minimal theme settings
 	- enable colored headers

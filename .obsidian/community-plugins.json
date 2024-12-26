@@ -13,5 +13,6 @@
   "settings-search",
   "templater-obsidian",
   "dataview",
-  "heatmap-calendar"
+  "heatmap-calendar",
+  "obsidian-graphviz"
 ]
