@@ -5,7 +5,6 @@ tags:
   - CSDS
   - "#Math"
 ---
-# Header 1
 ## 1.2 - Sets
 ### Sets
 Sets are just groupings of elements. Not determined by order or repeat values. Sets can contain other sets
