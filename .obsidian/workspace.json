@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "1) CWRU/Completed/PHIL306 - Mathematical Logic and Number Theory/Godel's Incompleteness Theorem.md",
+                "file": "1) CWRU/Completed/CSDS233 - Data Structures/Arrays.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Godel's Incompleteness Theorem"
+              "title": "Arrays"
             }
           }
         ]
@@ -207,10 +207,20 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "b4e2890d9603f78d",
+  "active": "c853d542fa55ad80",
   "lastOpenFiles": [
-    "1) CWRU/Completed/PHIL306 - Mathematical Logic and Number Theory/Model Theory.md",
+    "1) CWRU/Completed/CSDS310 - Algorithms/HW",
+    "1) CWRU/Completed/CSDS233 - Data Structures/Graphs.md",
+    "1) CWRU/Completed/CSDS233 - Data Structures/Heaps (PrioQueue).md",
+    "1) CWRU/Completed/CSDS233 - Data Structures/Stacks & Queues.md",
+    "1) CWRU/Completed/CSDS233 - Data Structures/Linked Lists.md",
+    "1) CWRU/Completed/CSDS310 - Algorithms/Graph Algorithms.md",
+    "1) CWRU/Completed/CSDS233 - Data Structures/Arrays.md",
+    "2) 2nd Brain/Daily/2024/12) Dec/12-28-2024 Saturday, December 28th, 2024.md",
+    "2) 2nd Brain/Daily/2024/12) Dec/12-27-2024 Friday, December 27th, 2024.md",
+    "2) 2nd Brain/Daily/2024/12) Dec/12-26-2024 Thursday, December 26th, 2024.md",
     "1) CWRU/Completed/PHIL306 - Mathematical Logic and Number Theory/Godel's Incompleteness Theorem.md",
+    "1) CWRU/Completed/PHIL306 - Mathematical Logic and Number Theory/Model Theory.md",
     "1) CWRU/Completed/CSDS310 - Algorithms/Sorting Algorithms.md",
     "1) CWRU/Completed/CSDS310 - Algorithms/Divide and Conquer.md",
     "1) CWRU/Completed/CSDS310 - Algorithms/Dynamic Programming.md",
@@ -218,12 +228,6 @@
     "1) CWRU/Completed/CSDS302 - Discrete Mathematics/Set Theories & Stuffs.md",
     "1) CWRU/Completed/CSDS281 - Logic Design & Computer Orginization/Logic Gates.md",
     "1) CWRU/Completed/CSDS281 - Logic Design & Computer Orginization/ECSECSDS 281 Syllabus Spring 2024.pdf",
-    "1) CWRU/Completed/CSDS233 - Data Structures/Linked Lists.md",
-    "1) CWRU/Completed/CSDS233 - Data Structures/Graphs.md",
-    "1) CWRU/Completed/CSDS233 - Data Structures/Heaps (PrioQueue).md",
-    "1) CWRU/Completed/CSDS233 - Data Structures/Arrays.md",
-    "1) CWRU/Completed/CSDS233 - Data Structures/Stacks & Queues.md",
-    "2) 2nd Brain/Daily/2024/12) Dec/12-26-2024 Thursday, December 26th, 2024.md",
     "2) 2nd Brain/Daily/2024/12) Dec/12-25-2024 Wednesday, December 25th, 2024.md",
     "1) CWRU/In Progress/Assignments.md",
     "3) Meta-Data/Templates/CSDS.md",
@@ -232,11 +236,7 @@
     "2) 2nd Brain/Daily/2024/12) Dec/12-24-2024 Tuesday, December 24th, 2024.md",
     "1) CWRU/Completed/CSDS132 - Intro to Java/Java.md",
     "1) CWRU/Completed/CSDS344 - Computer Security/Final Review.md",
-    "1) CWRU/Completed/CSDS310 - Algorithms/HW 5.md",
-    "1) CWRU/Completed/CHEM111 - Intro Chem/Intro Chem.md",
     "1) CWRU/Completed/CSDS233 - Data Structures",
-    "3) Meta-Data/Obsidian Config.md",
-    "2) 2nd Brain/Daily/2024/12) Dec/12-21-2024 Saturday, December 21st, 2024.md",
     "2) 2nd Brain/Daily/2024/12) Dec",
     "2) 2nd Brain/Daily/2024",
     "2) 2nd Brain/Daily/2024/12)Dec",
