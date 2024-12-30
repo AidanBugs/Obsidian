@@ -2,7 +2,8 @@
 date: 12/26/24
 tags:
   - Philosophy
-links: 
+links:
+  - "[[Proofs]]"
 deadline: 
 status:
 ---
@@ -21,4 +22,4 @@ A complete model of arithmetic can be created with the following axioms:
 7. $\forall x(x^0=s0)$
 8. $\forall x,y(x^{sy}=x*x^y)$
 
-We can derive more axioms from our original set of axioms. These are called derived axioms. Any list of axioms is a theory. A complete theory is $\forall p((p\lor \neg p)\in \Gamma)$ where $\Gamma$ is a theory and $p$ is any logical axiom. A consistent theory is $\forall p\in\Gamma,(\neg p \notin \Gamma)$. 
+We can derive more axioms from our original set of axioms. These are called derived axioms. We can derive axioms using using different [[Proofs]]. Any list of axioms is a theory. A complete theory is $\forall p((p\lor \neg p)\in \Gamma)$ where $\Gamma$ is a theory and $p$ is any logical axiom. A consistent theory is $\forall p\in\Gamma,(\neg p \notin \Gamma)$. 

@@ -2,6 +2,7 @@
 date: 12/26/24
 tags:
   - CSDS
+  - "#Math"
 links:
   - "[[Logic Gates]]"
 deadline: 
@@ -24,3 +25,5 @@ Proof by induction is proving for some statement $P(x), \forall n\geq n_0,P(n)$ 
 We do this by proving $P(n_0)$ is true, then assume $P(k)$ is true and prove the  $P(k+1)$ is also true. Proving $P(n_0)$ is known as the base case and assuming $P(k)$ and proving $P(k+1)$ is the inductive step.
 
 Similarly there is **Strong Induction** which has the same base case as Induction, but instead its inductive step is assuming $P(x)$ is true for $n_{0}\leq x \leq k$ then proving $P(k+1)$.
+# Proof by Contrapositive
+$p\rightarrow q =\neg q \rightarrow \neg p$
