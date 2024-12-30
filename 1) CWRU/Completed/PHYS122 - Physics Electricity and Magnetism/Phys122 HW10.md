@@ -1,3 +1,11 @@
+---
+date: 12/09/24
+tags:
+  - Sciences
+links: 
+deadline: 
+status:
+---
 # 2
 ## a
 >$u=\frac12\varepsilon_0E^2+\frac12\frac{B^2}{\mu_0}$

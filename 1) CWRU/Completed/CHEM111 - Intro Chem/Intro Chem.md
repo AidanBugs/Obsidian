@@ -1,7 +1,7 @@
 ---
 date: 12/21/24
 tags:
-  - "#Chemistry"
+  - "#Sciences"
 links: 
 deadline: 
 status:

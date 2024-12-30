@@ -1,6 +1,6 @@
 {
   "command_timeout": 5,
-  "templates_folder": "3) Meta-Data/Templates",
+  "templates_folder": "99) Meta-Data/Templates",
   "templates_pairs": [
     [
       "",
@@ -16,43 +16,43 @@
   "folder_templates": [
     {
       "folder": "/",
-      "template": "3) Meta-Data/Templates/Default.md"
+      "template": "99) Meta-Data/Templates/Default.md"
     },
     {
       "folder": "1) CWRU",
-      "template": "3) Meta-Data/Templates/Default.md"
+      "template": "99) Meta-Data/Templates/Default.md"
     },
     {
       "folder": "2) 2nd Brain",
-      "template": "3) Meta-Data/Templates/Default.md"
+      "template": "99) Meta-Data/Templates/Default.md"
     },
     {
-      "folder": "3) Meta",
-      "template": "3) Meta-Data/Templates/Default.md"
+      "folder": "99) Meta",
+      "template": "99) Meta-Data/Templates/Default.md"
     },
     {
       "folder": "1) CWRU/In Progress/CSDS343 - Theoretical Computer Science",
-      "template": "3) Meta-Data/Templates/CSDS.md"
+      "template": "99) Meta-Data/Templates/CSDS.md"
     },
     {
       "folder": "1) CWRU/In Progress/CSDS234 - Structured & Unstructured Data",
-      "template": "3) Meta-Data/Templates/CSDS.md"
+      "template": "99) Meta-Data/Templates/CSDS.md"
     },
     {
       "folder": "1) CWRU/In Progress/CSDS493 - Software Engineering",
-      "template": "3) Meta-Data/Templates/CSDS.md"
+      "template": "99) Meta-Data/Templates/CSDS.md"
     },
     {
       "folder": "1) CWRU/In Progress/DSCI330 - Cognition and Computation",
-      "template": "3) Meta-Data/Templates/Humanities.md"
+      "template": "99) Meta-Data/Templates/Humanities.md"
     },
     {
       "folder": "1) CWRU/In Progress/STAT312 - Statistics for Engineer",
-      "template": "3) Meta-Data/Templates/MATH.md"
+      "template": "99) Meta-Data/Templates/MATH.md"
     },
     {
       "folder": "1) CWRU/In Progress/ENGR399 - Impact Engineering on Society",
-      "template": "3) Meta-Data/Templates/Humanities.md"
+      "template": "99) Meta-Data/Templates/Humanities.md"
     }
   ],
   "enable_file_templates": false,
