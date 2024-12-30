@@ -1,6 +1,6 @@
 {
   "autorun": true,
   "folder": "2) 2nd Brain/Daily",
-  "template": "3) Meta-Data/Templates/Daily",
+  "template": "99) Meta-Data/Templates/Daily",
   "format": "YYYY/MM) MMM/MM-DD-YYYY dddd, MMMM Do, YYYY"
 }
