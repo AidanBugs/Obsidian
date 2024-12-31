@@ -2,6 +2,7 @@
 date: 12/21/24
 tags:
   - "#Meta"
+  - "#TODO"
 links: 
 deadline: 2025-01-01
 status: 1
@@ -100,4 +101,3 @@ table status, deadline
 from #TODO where status = 1
 sort deadline
 ```
-

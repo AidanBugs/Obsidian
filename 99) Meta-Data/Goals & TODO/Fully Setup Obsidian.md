@@ -4,11 +4,11 @@ tags:
   - "#Goal"
 links: 
 deadline: 2025-01-01
-status: 0.2
+status: 1
 ---
 # Checklist
-- [ ] At least 1 note per folder
-- [ ] Transfer gdocs to obsidian
+- [x] At least 1 note per folder
+- [x] Transfer gdocs to obsidian
 - [x] setup a journaling system
 - [x] setup dataview heatmap habit tracker
 - [x] setup dataview queries
