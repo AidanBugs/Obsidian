@@ -16,8 +16,9 @@ sort deadline
 
 # Habits 
 ```dataviewjs
-dv.span("**Workout**")
+dv.span("**Workout**").style.color = "#d27378"
 let calendarData = {
+	year: 2025,
 	intensityScaleStart: 0,
 	intensityScaleEnd: 1,
 	showCurrentDayBorder: false,
@@ -42,7 +43,7 @@ for(let page of dv.pages('"2) 2nd Brain/Daily"').where(p=>p.Workout)){
 }
 renderHeatmapCalendar(this.container, calendarData)
 calendarData.entries = []
-dv.span("**Water**")
+dv.span("**Water**").style.color = "#70b4c0"
 for(let page of dv.pages('"2) 2nd Brain/Daily"').where(p=>p.Water)){ 
 	let mydate = new Date(page.file.cday);
 	let beautifuldate = mydate.toISOString().split('T')[0]
@@ -55,7 +56,7 @@ for(let page of dv.pages('"2) 2nd Brain/Daily"').where(p=>p.Water)){
 }
 renderHeatmapCalendar(this.container, calendarData)
 calendarData.entries = []
-dv.span("**Stretching**")
+dv.span("**Stretching**").style.color = "#9168c4"
 for(let page of dv.pages('"2) 2nd Brain/Daily"').where(p=>p.Stretch)){ 
 	let mydate = new Date(page.file.cday);
 	let beautifuldate = mydate.toISOString().split('T')[0]
