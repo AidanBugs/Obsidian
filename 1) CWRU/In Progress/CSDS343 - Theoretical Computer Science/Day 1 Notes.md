@@ -45,6 +45,7 @@ $A_3$ runs on $x$:
 			- :(
 - rejects
 	- :(
+
 Show $A_3$ decides $L_{1}\cap L_2$ 
 If $x\in L_{1}\cap L_{2} , x\in L_{1}\land x\in L_{2}$ 
 	Since $x\in L_{1}, A_1$ will halt and accept
