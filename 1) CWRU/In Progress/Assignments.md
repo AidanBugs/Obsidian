@@ -5,7 +5,7 @@ tags:
 links: 
 deadline:
 ---
-# Not Started
+
 ```dataview
 table status, deadline
 from #HW where status = 0 or status = null
