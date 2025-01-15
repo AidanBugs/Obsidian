@@ -8,6 +8,7 @@ deadline:
 status:
 ---
 # What is a problem
+A <u>problem</u> is a language.
 A <u>language</u> is a set of strings.
 A <u>string</u> is a finite sequence of symbols of an <u>alphabet</u>.
 An <u>alphabet</u> is a finite set.
@@ -27,7 +28,6 @@ $\Sigma = \{0,1,2,...,9,'-',','\}$
 There exists an algorithm that takes a string $x$ as input and halts with either $x\in L$ or $x\notin L$
 ## Recognizable
 There exists an algorithm $A$ such that if $x\in L, A$ halts with "yes". If $x\notin L,A$ halts with "no" or runs forever.
-
 ## Problem:
 If $L_{1},L_{2}$ are both decidable languages, is $L_{1}\cap L_{2}$  is decidable?
 ### Proof
