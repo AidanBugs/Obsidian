@@ -13,12 +13,23 @@ An attribute could have different attribute values. Example: Height (attribute) 
 ## Types of Attributes
 ### Nominal (Categorical)
 Examples: eye color, zip code
+Properties: Distinctness
 ### Ordinal (Attribute can be ordered)
 Examples: Rankings, grades, height
+Properties: Distinctness, Order
 ### Interval (Distance is meaningful)
 Examples: Calendar dates
+Properties: Distinctness, Order, Addition
 ### Ratio: Absolute Zero - (Meaningful Fraction / Ratio)
 Examples: Temperature in kelvin, length, time, counts
+Properties: Distinctness, Order, Addition, Multiplication
+## Discrete vs Continuous Attributee
+### Discrete
+Finite or countably infinite set of values.
+Ex: Count, zip codes
+### Continuous
+Uncountable infinity set of values.
+Ex: Height, Weight
 # The 4 V's
 ## Variety
 Heterogeneous: structured, semi-structured, unstructured
