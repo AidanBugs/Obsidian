@@ -11,10 +11,21 @@ status:
 - Obsidian [[Obsidian Config]]
 - Steam
 - VSCode
+	- Python
+	- Codeium
+	- Java
+	- ___
 - f.lux
 - git
 - mouse software (currently lamzu)
 - rawaccel
+- GlazeWM
+	- Tiling manager
+	- changed close tab to 'alt+w'
+	- removed shortcut for 'alt+space'
+- PowerToys
+	- Remap 'Caps Lock'->'esc'
+	- Remap 'esc' -> 'Caps Lock'
 # Github
 Use my github to pull all important repositories
 - Obsidian Repository

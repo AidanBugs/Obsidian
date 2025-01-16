@@ -7,7 +7,6 @@ links:
 deadline: 
 status:
 ---
-# Header 1
 # # Header 1
 Use Hashtags for Headers
 #Tips 

@@ -3,7 +3,9 @@ date: 12/21/24
 tags:
   - Tips
   - 2nd-Brain
-links: 
+links:
+  - "[[Vim Motions]]"
+  - "[[Markdown Shortcuts]]"
 deadline: 
 status:
 ---

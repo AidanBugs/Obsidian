@@ -7,7 +7,6 @@ links:
 deadline: 
 status:
 ---
-# Header 1
 # VIM Commands
 hjkl -> navigation
 h -> left
