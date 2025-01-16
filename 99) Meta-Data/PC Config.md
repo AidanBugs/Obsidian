@@ -17,6 +17,9 @@ status:
 	- ___
 - f.lux
 - git
+    - For Git Bash Settings:
+        - Theme: nord
+        - Transparency: High
 - mouse software (currently lamzu)
 - rawaccel
 	- Current Setup:

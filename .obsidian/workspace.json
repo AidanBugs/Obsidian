@@ -8,13 +8,13 @@
         "type": "tabs",
         "children": [
           {
-            "id": "b00da186f963d7a0",
+            "id": "33525607c9a70164",
             "type": "leaf",
             "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "99)Meta-Data/Goals & TODO List.md",
+                "file": "99) Meta-Data/Goals & TODO List.md",
                 "mode": "source",
                 "source": false
               },
@@ -40,17 +40,17 @@
             }
           },
           {
-            "id": "dfedf48f044edad5",
+            "id": "187c432018bf4342",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2) 2nd-Brain/Daily/2025/01) Jan/ 16 Thursday, January 16th, 2025.md",
+                "file": "1) CWRU/In Progress/STAT312 - Statistics for Engineer/Basic Stats.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "16 Thursday, January 16th, 2025"
+              "title": "Basic Stats"
             }
           }
         ],
@@ -242,44 +242,44 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "dfedf48f044edad5",
+  "active": "187c432018bf4342",
   "lastOpenFiles": [
+    "2) 2nd Brain/Daily/2025/01) Jan/16 Thursday, January 16th, 2025.md",
+    "1) CWRU/Completed/CSDS302 - Discrete Mathematics/Set Theory.md",
+    "1) CWRU/In Progress/STAT312 - Statistics for Engineer/Basic Stats.md",
+    "99) Meta-Data/Goals & TODO List.md",
     "1) CWRU/In Progress/Assignments.md",
-    "1) CWRU/In Progress/CSDS234 - Structured & Unstructured Data/Basics Of Data.md",
     "2) 2nd-Brain/Daily/2025/01) Jan/ 16 Thursday, January 16th, 2025.md",
+    "2) 2nd-Brain/Shortcuts/Linux Terminal Shortcuts.md~",
+    "2) 2nd Brain/Shortcuts/Linux Terminal Shortcuts.md",
+    "2) 2nd Brain/Shortcuts/Windows Shortcuts.md",
+    "2) 2nd Brain/Shortcuts/Markdown Shortcuts.md",
+    "1) CWRU/In Progress/CSDS234 - Structured & Unstructured Data/Basics Of Data.md",
     "1)CWRU/In-Progress/CSDS234 - Structured & Unstructured Data/CSDS234 Day1.md",
     "1)CWRU/In-Progress/CSDS234 - Structured & Unstructured Data/test.md",
     "1)CWRU/In-Progress/CSDS234 - Structured & Unstructured Data/CSDS234 Day1.md~",
-    "2) 2nd-Brain/Daily/2025/01) Jan/ 15 Wednesday, January 15th, 2025.md",
+    "2) 2nd Brain/Daily/2025/01) Jan/ 15 Wednesday, January 15th, 2025.md",
     "99) Meta-Data/PC Config.md",
-    "99) Meta-Data/Goals & TODO List.md",
-    "2) 2nd-Brain/Shortcuts/GlazeWM Showrtcuts.md",
-    "2) 2nd-Brain/Shortcuts/Markdown Shortcuts.md",
-    "2) 2nd-Brain/Shortcuts/Obsidian Shortcuts.md",
-    "2) 2nd-Brain/Shortcuts/Vim Motions.md",
-    "2) 2nd-Brain/Shortcuts/Browser Shortcuts.md",
-    "2) 2nd-Brain/Shortcuts/Windows Shortcuts.md",
+    "2) 2nd Brain/Shortcuts/GlazeWM Showrtcuts.md",
+    "2) 2nd Brain/Shortcuts/Obsidian Shortcuts.md",
+    "2) 2nd Brain/Shortcuts/Vim Motions.md",
+    "2) 2nd Brain/Shortcuts/Browser Shortcuts.md",
     "1) CWRU/In Progress/CSDS343 - Theoretical Computer Science/Problems as Languages.md",
-    "2) 2nd-Brain/Daily/2025/01) Jan/ 14 Tuesday, January 14th, 2025.md",
-    "1) CWRU/Completed/CSDS302 - Discrete Mathematics/Set Theory.md",
+    "2) 2nd Brain/Daily/2025/01) Jan/ 14 Tuesday, January 14th, 2025.md",
     "1) CWRU/In Progress/STAT312 - Statistics for Engineer/STAT312 Day1.md",
     "1) CWRU/In Progress/CSDS343 - Theoretical Computer Science/Textbook.md",
     "99) Meta-Data/Goals & TODO/Resume.md",
     "99) Meta-Data/Reading Progress.md",
     "99) Meta-Data/Goals & TODO/NIXOS.md",
-    "2) 2nd-Brain/Daily/2025/01) Jan/ 13 Monday, January 13th, 2025.md",
-    "99) Meta-Data/Obsidian Config.md",
-    "2) 2nd-Brain/Daily/2025/01) Jan/ 12 Sunday, January 12th, 2025.md",
-    "1) CWRU/In Progress/DSCI330 - Cognition and Computation/Pre 1st Day Stuff.md",
+    "2) 2nd Brain/Daily/2025/01) Jan/ 13 Monday, January 13th, 2025.md",
     "99) Meta-Data/Habit Dump",
-    "2) 2nd-Brain/Daily/2025/01) Jan",
-    "2) 2nd-Brain/Daily/2025",
-    "2) 2nd-Brain/Reading",
+    "2) 2nd Brain/Daily/2025/01) Jan",
+    "2) 2nd Brain/Daily/2025",
+    "2) 2nd Brain/Reading",
     "1) CWRU/Completed/CSDS310 - Algorithms/HW",
     "1) CWRU/Completed/CSDS281 - Logic Design & Computer Orginization/ECSECSDS 281 Syllabus Spring 2024.pdf",
     "1) CWRU/Completed/CSDS233 - Data Structures",
-    "2) 2nd-Brain/Daily/2024/12) Dec",
-    "2) 2nd-Brain/Daily/2024",
+    "2) 2nd Brain/Daily/2024/12) Dec",
     "Untitled.canvas",
     "Image Dump/Pasted Image 20241204095142_977.png",
     "Image Dump/Pasted image 20241204145930.png",
