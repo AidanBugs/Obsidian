@@ -5,7 +5,7 @@ tags:
   - HW
 links: 
 deadline: 2025-01-22
-status:
+status: 1
 ---
 # 1
 Let $L_1$ and $L_2$ be decidable languages over the same alphabet $\Sigma$. Consider language $L=L_{1}\oplus L_{2}$ Prove that $L$ is decidable.
