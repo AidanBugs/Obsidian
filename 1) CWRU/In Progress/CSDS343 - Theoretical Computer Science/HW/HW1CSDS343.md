@@ -69,7 +69,7 @@ Let $L$ be a language over alphabet $\Sigma$. Prove that if both $L$ and $\bar L
 Let $L$ be the set of all strings over the alphabet $\Sigma =\{a,b,c,d\}$ defined as $L=\{a^{n}b^{m}c^{\max \{n-m,0\}}d^{\max \{m-n,0\}}\}$ for $n,m$ non-negative integers. For example, $aaabbc$ and $aabbbd$ are both strings of the language. (This is basically doing the subtraction $n-m$). Write a Turing machine that will accept all strings that are in $L$ and reject all other strings. Explicitly give your machine's alphabet, set of states, and transition function.
 > [!Ans]
 > ## Create a TM for $L$
-> $L=\{a^nb^mc^{\max\{n-m,0\}}d^{\max\{m-n,0\}}$
+> $L=\{a^nb^mc^{\max\{n-m,0\}}d^{\max\{m-n,0\}}\}$
 > $\Sigma=\{a,b,c,d\}$
 > $\Gamma=\{a,b,c,d,\_,a'',b'',a',b',c',d'\}$
 > $Q=\{q_{0},q_{reject},q_{accept},q_{1},q_{2},q_{3},q_{4},q_{5},q_{6},q_{7},q_{8},q_{9},q_{a},q_{b}\}$
