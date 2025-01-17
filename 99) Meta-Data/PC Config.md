@@ -20,6 +20,7 @@ status:
     - For Git Bash Settings:
         - Theme: nord
         - Transparency: High
+        - Cursor: Block
 - mouse software (currently lamzu)
 - rawaccel
 	- Current Setup:
@@ -37,7 +38,7 @@ status:
 # Github
 Use my github to pull all important repositories
 - Obsidian Repository
-# Browser
+# Browser (currently Arc)
 ## Tabs
 1. Calendar
 2. Messages
