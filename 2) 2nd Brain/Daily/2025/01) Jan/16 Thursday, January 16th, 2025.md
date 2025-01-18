@@ -11,7 +11,6 @@ Write:
 # Notes
 
 # Schedule
-
 | H   | Task |
 | --- | ---- |
 | 7   |      |

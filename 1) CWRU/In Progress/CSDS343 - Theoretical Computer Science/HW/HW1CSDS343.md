@@ -89,7 +89,7 @@ Let $L$ be the set of all strings over the alphabet $\Sigma =\{a,b,c,d\}$ define
 > ### $q_{1}$ -- Match b's (a vs b) (R)
 > $\delta (q_{1}, a)= (q_{1}, a, R)$ 
 > $\delta (q_{1}, b)= (q_{2}, b', R)$
-> $\delta (q_{1}, c)= (q_{4}, c', L)$ -- More a's than b's
+> $\delta (q_{1}, c)= (q_{5}, c', L)$ -- More a's than b's
 > $\delta (q_{1}, d)= (q_{reject}, \_, R)$
 > $\delta (q_{1}, \_)= (q_{reject}, \_, R)$
 > $\delta (q_{1}, a'')= (q_{reject}, \_, R)$ \* This should not happen
@@ -194,7 +194,7 @@ Let $L$ be the set of all strings over the alphabet $\Sigma =\{a,b,c,d\}$ define
 > $\delta (q_{9}, b')=(q_{reject}, \_, R)$ \* This should not happen
 > $\delta (q_{9}, c')=(q_{reject}, \_, R)$ \* This should not happen
 > $\delta (q_{9}, d')=(q_{reject}, \_, R)$ -- More d's than b's
-> ### $q_{d}$ -- Strike through d (b vs d) (R) \* Edge case for no a's
+> ### $q_{d}$ -- Strike through d (b vs d) (R) \* Edge case for no a's, Flips Parity
 > $\delta (q_{d}, a)=(q_{reject},\_,R)$ 
 > $\delta (q_{d}, b)=(q_{d},b,R)$
 > $\delta (q_{d}, c)=(q_{reject},\_,R)$ 

@@ -4,25 +4,18 @@ tags:
   - "#Daily"
 links: 
 Workout: 0.2
-Water: 
-Stretch: 
-Write:
+Water: 0.5
+Stretch: 0.4
+Write: 1
 ---
-# Notes
+# Reflection
+## What did I do today?
+- CSDS343 HW 1 
+- Mini workout & Stretch
+## What should I have done today?
+- Maybe worked on resume
+## What do I want to do more of tomorrow?
+- Workout longer
+- Resume + internships
+# Story (who, what, when, where)
 
-# Schedule
-
-| H   | Task |
-| --- | ---- |
-| 7   |      |
-| 8   |      |
-| 9   |      |
-| 10  |      |
-| 11  |      |
-| 12  |      |
-| 1   |      |
-| 2   |      |
-| 3   |      |
-| 4   |      |
-| 5   |      |
-| 6   |      |
