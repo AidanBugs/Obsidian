@@ -7,6 +7,10 @@ links:
 deadline: 2025-01-13
 status:
 ---
+# Useful Tools
+- [winutil](https://github.com/ChrisTitusTech/winutil)
+	- Debloat windows
+	- Select apps you wish to install
 # Installed Apps
 - Obsidian [[Obsidian Config]]
 - Steam
