@@ -16,7 +16,6 @@ sort deadline
 
 # Habits 
 ```dataviewjs
-dv.span("**Workout**").style.color = "#d27378"
 let calendarData = {
 	year: 2025,
 	intensityScaleStart: 0,
@@ -31,56 +30,54 @@ let calendarData = {
 		transparent: ["#e8d7ba"]
 	}
 } 
-for(let page of dv.pages('"2) 2nd Brain/Daily"').where(p=>p.Workout)){
-	let mydate = new Date(page.file.cday);
-	let beautifuldate = mydate.toISOString().split('T')[0]
-	calendarData.entries.push({
+let workoutEntries = []
+let waterEntries = []
+let stretchingEntries = []
+let journalEntries = []
+for(let page of dv.pages('"2) 2nd Brain/Daily"')){
+	let path = page.file.path.split("/");
+	let year = path[2]
+	let month = path[3].split(")")[0]
+	let day = path[4].split(" ")[0]
+	let beautifuldate = ""+year+"-"+month+"-"+day;
+	if (page.Workout != null && page.Workout != 0) {
+	workoutEntries.push({
 		date: beautifuldate,
 		intensity: page.Workout,
 		color: "orange"
-	})
-	let num = calendarData.entries.length;
-}
-renderHeatmapCalendar(this.container, calendarData)
-calendarData.entries = []
-dv.span("**Water**").style.color = "#70b4c0"
-for(let page of dv.pages('"2) 2nd Brain/Daily"').where(p=>p.Water)){ 
-	let mydate = new Date(page.file.cday);
-	let beautifuldate = mydate.toISOString().split('T')[0]
-	calendarData.entries.push({
+	})}
+	if (page.Water != null && page.Water != 0) {
+	waterEntries.push({
 		date: beautifuldate,
 		intensity: page.Water,
 		color: "blue"
-	})
-	let num = calendarData.entries.length;
-}
-renderHeatmapCalendar(this.container, calendarData)
-calendarData.entries = []
-dv.span("**Stretching**").style.color = "#9168c4"
-for(let page of dv.pages('"2) 2nd Brain/Daily"').where(p=>p.Stretch)){ 
-	let mydate = new Date(page.file.cday);
-	let beautifuldate = mydate.toISOString().split('T')[0]
-	calendarData.entries.push({
+	})}
+	if (page.Stretch != null  && page.Stretch != 0) {
+	stretchingEntries.push({
 		date: beautifuldate,
 		intensity: page.Stretch,
 		color: "purple"
-	})
-	let num = calendarData.entries.length;
-}
-renderHeatmapCalendar(this.container, calendarData)
-calendarData.entries = []
-dv.span("**Journal**")
-for(let page of dv.pages('"2) 2nd Brain/Daily"').where(p=>p.Write)){ 
-	let mydate = new Date(page.file.cday);
-	let beautifuldate = mydate.toISOString().split('T')[0]
-	calendarData.entries.push({
+	})}
+	if (page.Write != null  && page.Write != 0) {
+	journalEntries.push({
 		date: beautifuldate,
 		intensity: page.Write,
 		content: await dv.span(`[](<${page.file.name}>)`),
 		color: "transparent"
-	})
+	})}
 	let num = calendarData.entries.length;
 }
+calendarData.entries = workoutEntries
+dv.span("**Workout**").style.color = "#d27378"
+renderHeatmapCalendar(this.container, calendarData)
+calendarData.entries = waterEntries
+dv.span("**Water**").style.color = "#d27378"
+renderHeatmapCalendar(this.container, calendarData)
+calendarData.entries = stretchingEntries
+dv.span("**Stretching**").style.color = "#d27378"
+renderHeatmapCalendar(this.container, calendarData)
+calendarData.entries = journalEntries
+dv.span("**Journal**").style.color = "#d27378"
 renderHeatmapCalendar(this.container, calendarData)
 ```
 # TODO

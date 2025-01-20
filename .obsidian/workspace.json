@@ -40,7 +40,7 @@
             }
           },
           {
-            "id": "0ca559930f61d173",
+            "id": "c2a5b25608643bbc",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -52,9 +52,23 @@
               "icon": "lucide-file",
               "title": "20 Monday, January 20th, 2025"
             }
+          },
+          {
+            "id": "69e24cb793657b02",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "99) Meta-Data/Habit Dump.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Habit Dump"
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -242,44 +256,44 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "929270603ef20f05",
+  "active": "69e24cb793657b02",
   "lastOpenFiles": [
-    "2) 2nd Brain/Daily/2025/01) Jan/18 Saturday, January 18th, 2025.md",
-    "2) 2nd Brain/Daily/2025/01) Jan/20 Monday, January 20th, 2025.md",
-    "2) 2nd Brain/Phil & Brain/Negative Emotions.md",
-    "2) 2nd Brain/Phil & Brain/Negative Emotions.md~",
-    "99) Meta-Data/Goals & TODO List.md",
-    "99) Meta-Data/PC Config.md",
+    "2) 2nd Brain/Daily/2024/12) Dec/12 Thursday, December 12th, 2024.md",
     "99) Meta-Data/Habit Dump.md",
-    "99) Meta-Data/[.md",
-    "2) 2nd Brain/Reading/Journaling for Dummies.md",
-    "2) 2nd Brain/Reading/Deep Work.md",
-    "2) 2nd Brain/Daily/2025/01) Jan/17 Friday, January 17th, 2025.md",
-    "99) Meta-Data/Templates/Daily.md~",
+    "2) 2nd Brain/Daily/2024/12) Dec",
+    "2) 2nd Brain/Daily/2024",
+    "99) Meta-Data/Goals & TODO List.md",
+    "2) 2nd Brain/Daily/2025/01) Jan/20 Monday, January 20th, 2025.md",
+    "2) 2nd Brain/Daily/2025/01) Jan/19 Sunday, January 19th, 2025.md",
     "1) CWRU/In Progress/Assignments.md",
-    "2) 2nd Brain/Daily/2025/01) Jan/16 Thursday, January 16th, 2025.md",
-    "99) Meta-Data/Templates/Daily.md",
-    "1) CWRU/In Progress/CSDS343 - Theoretical Computer Science/HW/HW1CSDS343.md",
+    "2) 2nd Brain/Daily/2025/01) Jan/08 Wednesday, January 8th, 2025.md",
+    "2) 2nd Brain/Daily/2024/12) Dec/12-28-2024 Saturday, December 28th, 2024.md",
+    "2) 2nd Brain/Daily/2024/12) Dec/12-27-2024 Friday, December 27th, 2024.md",
+    "2) 2nd Brain/Daily/2024/12) Dec/12-26-2024 Thursday, December 26th, 2024.md",
+    "2) 2nd Brain/Daily/2024/12) Dec/12-25-2024 Wednesday, December 25th, 2024.md",
+    "2) 2nd Brain/Daily/2024/12) Dec/12-24-2024 Tuesday, December 24th, 2024.md",
+    "2) 2nd Brain/Daily/2024/12) Dec/12-23-2024 Monday, December 23rd, 2024.md",
+    "2) 2nd Brain/Daily/2024/12) Dec/12-22-2024 Sunday, December 22nd, 2024.md",
+    "2) 2nd Brain/Daily/2024/12) Dec/12-21-2024 Saturday, December 21st, 2024.md",
+    "2) 2nd Brain/Daily/2025/01) Jan/01 Wednesday, January 1st, 2025.md",
+    "2) 2nd Brain/Daily/2025/01) Jan/02 Thursday, January 2nd, 2025.md",
+    "2) 2nd Brain/Daily/2025/01) Jan/03 Friday, January 3rd, 2025.md",
+    "2) 2nd Brain/Daily/2025/01) Jan/01-03-2025 Friday, January 3rd, 2025.md",
+    "2) 2nd Brain/Daily/2025/01) Jan/04 Saturday, January 4th, 2025.md",
+    "2) 2nd Brain/Daily/2025/01) Jan/05 Sunday, January 5th, 2025.md",
+    "2) 2nd Brain/Daily/2025/01) Jan/06 Monday, January 6th, 2025.md",
+    "2) 2nd Brain/Daily/2025/01) Jan/07 Tuesday, January 7th, 2025.md",
+    "2) 2nd Brain/Daily/2025/01) Jan/09 Thursday, January 9th, 2025.md",
+    "2) 2nd Brain/Daily/2025/01) Jan/10 Friday, January 10th, 2025.md",
+    "2) 2nd Brain/Daily/2025/01) Jan/11 Saturday, January 11th, 2025.md",
+    "99) Meta-Data/Goals & TODO List.md~",
+    "2) 2nd Brain/Phil & Brain/Negative Emotions.md~",
+    "99) Meta-Data/Templates/Daily.md~",
     "1) CWRU/In Progress/CSDS343 - Theoretical Computer Science/HW/HW1CSDS343.pdf",
     "1) CWRU/In Progress/CSDS343 - Theoretical Computer Science/HW/HW1CSDS343.md~",
-    "1) CWRU/In Progress/CSDS343 - Theoretical Computer Science/Turing Machines.md",
-    "1) CWRU/In Progress/CSDS343 - Theoretical Computer Science/Problems as Languages.md",
     "1) CWRU/In Progress/CSDS343 - Theoretical Computer Science/Turing Machines.md~",
-    "1) CWRU/In Progress/ENGR399 - Impact Engineering on Society/Value Neutrality Thesis.md",
     "1) CWRU/In Progress/CSDS343 - Theoretical Computer Science/HW",
-    "1) CWRU/Completed/CSDS233 - Data Structures/Linked Lists.md",
-    "1) CWRU/In Progress/STAT312 - Statistics for Engineer/HW/HW1-STAT312.md",
     "1) CWRU/In Progress/STAT312 - Statistics for Engineer/HW/HW1-STAT312.md~",
-    "1) CWRU/In Progress/STAT312 - Statistics for Engineer/HW/HW1-STAT312.pdf",
-    "99) Meta-Data/Excalidraw/Drawing 2024-01-25 15.04.18.excalidraw.md",
-    "1) CWRU/Completed/CSDS310 - Algorithms/HW/HW 5.md",
-    "1) CWRU/In Progress/STAT312 - Statistics for Engineer/HW",
-    "2) 2nd-Brain/Daily/2025/01) Jan/16 Thursday, January 16th, 2025.md",
-    "2) 2nd-Brain/Daily/2025/01) Jan",
-    "1) CWRU/In Progress/STAT312 - Statistics for Engineer/Basic Stats.md",
-    "1) CWRU/In Progress/CSDS234 - Structured & Unstructured Data/Basics Of Data.md",
-    "1) CWRU/Completed/CSDS302 - Discrete Mathematics/Set Theory.md",
-    "2) 2nd-Brain/Daily/2025/01) Jan/ 16 Thursday, January 16th, 2025.md",
     "Untitled.canvas",
     "Image Dump/Pasted Image 20241204095142_977.png",
     "Image Dump/Pasted image 20241204145930.png",
