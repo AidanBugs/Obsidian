@@ -46,3 +46,20 @@ Dynamic, streams, growth of the web
 Trust in it's quality.
 - Real life data is typically dirty!
 
+# Formal Definitions
+We can write a schema as $R(A,B,C...)$ that is, a relation between attributes $A,B,C...$.
+
+An instance of a schema can be written as $r(R)\subset dom(A)\times dom(B)\times dom(C)...$.
+
+# Constraints
+## Domain
+Domain constraints is simply there can be no entries outside the list of possible elements.
+
+## Keys & Superkeys
+### Superkeys
+A set of attributes where no 2 entries share the same value for that attribute. For example: ID.
+
+### Keys
+A minimal superkey: a key is a superkey $K$ such that removal of **ANY** attribute from $K$ results in a set of attributes that is not a superkey.
+
+Note that key$\subset$superkey.
