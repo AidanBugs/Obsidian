@@ -14,9 +14,10 @@ Write: 1
 - Optimized some of the obsidian queries
 - Reviewd stats HW w/ carson
 - Resume
+- HW
 ## What should I have done today?
-- Theoretical HW
+- Maybe worked out more? TD was pgood academic & Workwise
 ## What do I want to do more of tomorrow?
-- Resume & HW
+- Keep up the good work
 # Story (who, what, when, where)
 
