@@ -5,7 +5,7 @@ tags:
   - HW
 links: 
 deadline: 2025-01-28
-status: 0
+status: 1
 ---
 # 2-14
 An order for an automobile can specify transmission (auto/standard), no air / air conditioning, and color (red/blue/black/white). Draw a tree diagram to represent the possible orders for this experiment:
@@ -50,11 +50,11 @@ Given 3 machine tools, 4 polishing tools, 3 painting tools, how many different r
 Plastic parts produced by an injection-molding operation are checked for conformance to specifications. Each tool contains 12 cavities in which parts are produced, and these parts fall into a conveyor when the press opens. An inspector chooses 3 parts from among the 12 at random. Two cavities are affected by a temperature malfunction that results in parts that do not conform to specifications. Assume order is not important.
 ## a
 How many samples contain exactly one non conforming part?
-> [!Ans] $2*C^{10}_{2}=2*10*9=180$ samples contain exactly one non conforming part.
+> [!Ans] $2*C^{10}_{2}=10*9=90$ samples contain exactly one non conforming part.
 
 ## b
 How many samples contain at least one non conforming part?
-> [!Ans] $180+10=190$ samples contain at least one non conforming part.
+> [!Ans] $90+10=100$ samples contain at least one non conforming part.
 
 # 2-50
 ## a) $A\cap B$

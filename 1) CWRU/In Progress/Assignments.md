@@ -5,7 +5,7 @@ tags:
 links: 
 deadline:
 ---
-
+# Not Started
 ```dataview
 table status, deadline
 from #HW where status = 0 or status = null
@@ -21,5 +21,5 @@ sort deadline
 ```dataview
 table status, deadline
 from #HW where status = 1
-sort deadline
+sort deadline desc
 ```

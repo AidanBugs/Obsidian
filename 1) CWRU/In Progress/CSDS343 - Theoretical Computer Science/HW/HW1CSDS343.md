@@ -5,7 +5,7 @@ tags:
   - HW
 links: 
 deadline: 2025-01-22
-status: 1
+status: 0.9
 ---
 # 1
 Let $L_1$ and $L_2$ be decidable languages over the same alphabet $\Sigma$. Consider language $L=L_{1}\oplus L_{2}$ Prove that $L$ is decidable.
@@ -72,11 +72,11 @@ Let $L$ be the set of all strings over the alphabet $\Sigma =\{a,b,c,d\}$ define
 > $L=\{a^nb^mc^{\max\{n-m,0\}}d^{\max\{m-n,0\}}\}$
 > $\Sigma=\{a,b,c,d\}$
 > $\Gamma=\{a,b,c,d,\_,a'',b'',a',b',c',d'\}$
-> $Q=\{q_{0},q_{reject},q_{accept},q_{1},q_{2},q_{3},q_{4},q_{5},q_{6},q_{7},q_{8},q_{9},q_{a},q_{b},q_{d}\}$
+> $Q=\{q_{0},q_{reject},q_{accept},q_{1},q_{2},q_{3},q_{4},q_{5},q_{6},q_{7},q_{8},q_{9},q_{a},q_{b},q_{c},q_{d}\}$
 > 
 > ### $q_{0}$ -- Start
 > $\delta (q_{0}, a)= (q_{1}, a'', R)$
-> $\delta (q_{0}, b)= (q_{7}, b'', R)$ -- more b's than a's 
+> $\delta (q_{0}, b)= (q_{d}, b'', R)$ -- more b's than a's 
 > $\delta (q_{0}, c)= (q_{reject}, \_, R)$
 > $\delta (q_{0}, d)= (q_{reject}, \_, R)$
 > $\delta (q_{0}, \_)= (q_{accept}, \_, R)$
@@ -165,9 +165,9 @@ Let $L$ be the set of all strings over the alphabet $\Sigma =\{a,b,c,d\}$ define
 > $\delta (q_{7}, d)=(q_{reject}, \_, R)$ \* This should not happen 
 > $\delta (q_{7}, \_)=(q_{reject}, \_, R)$ \* This should not happen
 > $\delta (q_{7}, a'')=(q_{reject}, \_, R)$ \* This should not happen
-> $\delta (q_{7}, b'')=(q_{9},a'',R)$ udahkjiaugfiakhdgvadhk ******
+> $\delta (q_{7}, b'')=(q_{9},a'',R)$ 
 > $\delta (q_{7}, a')=(q_{reject}, \_, R)$ \* This should not happen
-> $\delta (q_{7}, b')=(q_{9},a'',R)$
+> $\delta (q_{7}, b')=(q_{9},b',R)$
 > $\delta (q_{7}, c')=(q_{reject}, \_, R)$ \* This should not happen
 > $\delta (q_{7}, d')=(q_{7},d',L)$
 > ### $q_{8}$ -- Count d's (b vs d) (R)
@@ -185,7 +185,7 @@ Let $L$ be the set of all strings over the alphabet $\Sigma =\{a,b,c,d\}$ define
 > ### $q_{9}$ -- Strike through b (b vs d) (R)
 > $\delta (q_{9}, a)=(q_{reject}, \_, R)$ \* This should not happen 
 > $\delta (q_{9}, b)=(q_{8},b',R)$
-> $\delta (q_{9}, c)=(q_{reject}, \_, R)$ \* This should not happen 
+> $\delta (q_{9}, c)=(q_{reject}, \_, R)$
 > $\delta (q_{9}, d)=(q_{reject}, \_, R)$ \* This should not happen 
 > $\delta (q_{9}, \_)=(q_{reject}, \_, R)$ \* This should not happen
 > $\delta (q_{9}, a'')=(q_{reject}, \_, R)$ \* This should not happen
@@ -206,6 +206,18 @@ Let $L$ be the set of all strings over the alphabet $\Sigma =\{a,b,c,d\}$ define
 > $\delta (q_{d}, b')=(q_{reject},\_,R)$ \* This should not happen
 > $\delta (q_{d}, c')=(q_{reject},\_,R)$ \* This should not happen
 > $\delta (q_{d}, d')= (q_{reject},\_,R)$ \* This should not happen  
+> ### $q_{c}$ -- Strike through c (a vs c) (R) Flips Parity 
+> $\delta (q_{d}, a)=(q_{reject},\_,R)$ 
+> $\delta (q_{d}, b)=(q_{reject},\_,R)$
+> $\delta (q_{d}, c)=(q_{5}, c',R)$ \* Currently # a's = # c's
+> $\delta (q_{d}, d)=(q_{reject},\_,R)$
+> $\delta (q_{d}, \_)=(q_{a},\_,L)$ -- Check no more a's then c's
+> $\delta (q_{d}, a'')=(q_{reject},\_,R)$ \* This should not happen
+> $\delta (q_{d}, b'')=(q_{reject},\_,R)$ \* This should not happen
+> $\delta (q_{d}, a')=(q_{reject},\_,R)$ \* This should not happen
+> $\delta (q_{d}, b')=(q_{reject},\_,R)$ \* This should not happen
+> $\delta (q_{d}, c')=(q_{reject},\_,R)$ \* This should not happen
+> $\delta (q_{d}, d')= (q_{reject},\_,R)$ \* This should not happen  
 > ### $q_{a}$ -- Search no a's (a vs c) (L)
 > $\delta (q_{a}, a)= (q_{reject},\_,R)$ -- More a's than c's
 > $\delta (q_{a}, b)=(q_{reject}, \_, R)$ \* This should not happen
@@ -216,7 +228,7 @@ Let $L$ be the set of all strings over the alphabet $\Sigma =\{a,b,c,d\}$ define
 > $\delta (q_{a}, b'')=(q_{reject}, \_, R)$ \* This should not happen
 > $\delta (q_{a}, a')= (q_{a},a',L)$
 > $\delta (q_{a}, b')=(q_{a},b',L)$
-> $\delta (q_{a}, c')=(q_{reject}, \_, R)$ \* This should not happen 
+> $\delta (q_{a}, c')=(q_{a},c',L)$
 > $\delta (q_{a}, d')=  (q_{reject}, \_, R)$ \* This should not happen 
 > ### $q_{b}$ -- Search no b's (b vs d) (L)
 > $\delta (q_{b}, a)=(q_{reject}, \_, R)$ \* This should not happen 

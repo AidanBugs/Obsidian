@@ -55,4 +55,4 @@ Use my github to pull all important repositories
 ## Extentions
 - Ublock origin
 - Untrap For youtube
-- Sidebar
+- Sideberry (vertical tab manager)
