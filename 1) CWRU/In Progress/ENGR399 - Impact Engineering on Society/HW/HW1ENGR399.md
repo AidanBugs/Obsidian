@@ -12,13 +12,21 @@ Read Chapter 2, sections 1 & 5-7Links to an external site. of Aristotle’s famo
 
 ## A.
 (i) In section 1, Aristotle likens exhibiting virtuous traits to constructing buildings and playing musical instruments. What is the point of this analogy? Relatedly, how does exhibiting virtuous character traits differ from our ability to see or hear, according to Aristotle?
+
 > For our ability to see / hear, we are able to do these things before we have used them repeatedly, however virtuous traits develop through habitually using them. Essentially Aristotle says that we learn virtuous traits by doing them (like learning to build buildings and learning to play instruments).
+
 ## B.
 (i) In section 5, Aristotle talks about “three kinds” of “things” that are found in the human “soul” (which you can just interpret as our “minds” or our “psychological makeup”). What are these?
 
+> The 3 kinds of things found in the human soul are passions, faculties, and states of character.
+
 (ii) Re: the question above, why does Aristotle claim that virtues must be one of these things, but not the other two?
 
+> Aristotle claims virtues can not be a passion because we are not called good / bad based on our passions, but we are called good / bad based on our virtues. Similarly, faculties we have by nature, but we are not good / bad by nature, therefore our virtues are not faculties. As such, virtues must be a state of character because it cannot be the other 2.
+
 (iii) In section 6, what sort of state does Aristotle identify with virtue? That is to say, he argues that vice can take two extremes (when it comes to “passions” or “actions” that we might take in our lives), and that virtue has a particular relation to these two extremes, relative to each individual. What are the two extremes of vice, and how does virtue relate to them?
+
+> Aristotle identifies virtue as a state o
 
 ## C.
 (i) In section 7, Aristotle gives a number of examples of virtues and their corresponding vices. Describe two virtues and their corresponding vices in your own words (using contemporary language, rather than Aristotle’s rather idiosyncratic vocabulary of “empty vanity,” “ready-witted,” and so on).
