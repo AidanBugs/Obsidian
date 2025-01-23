@@ -1,13 +1,12 @@
 ---
 date: 01/14/25
 tags:
-  - "#TODO"
   - "#Goal"
 links: 
 deadline: 
-status: 0.2
+status: 1
 ---
 - [x] Header
-- [ ] Work Experience
-- [ ] Education
-- [ ] Other
+- [x] Work Experience
+- [x] Education
+- [x] Other
