@@ -51,10 +51,11 @@ All of this is to say that Aristotle reports that, in the language he’s using�
 Give one example of how thinking about virtues as the “golden mean” might influence your actions, goals, etc. as an engineer or scientist? You might mention that, for example, some people pursue science and engineering as a way to earn lots of money, thus enabling them to buy fancy cars, boost their social status, etc. What would Aristotle say about this? If being virtuous is an essential part of living the “Good Life” (as Aristotle believed), is the pursuit of wealth, status, power, etc. compatible with attaining the Good Life?
 
 > [!Ans]
-> The pursuit of wealth would not be part of living the good life according to Aristotle. This is because is we are thinking about being virtuous as a mean between excess and defect, then to be virtuous would be to pursue the mean of excessive wealth and defective wealth. Defective wealth could be living in poverty, or maybe living check to check. As such according to Aristotle we should aim
+> The pursuit of wealth would not be part of living the good life according to Aristotle. This is because is we are thinking about being virtuous as a mean between excess and defect, then to be virtuous would be to pursue the mean of excessive wealth and defective wealth. Defective wealth could be living in poverty, or maybe living check to check. As such according to Aristotle in order to live virtuously we should not pursue excess wealth as that would be a vice.
 ### (iii)
 Open-ended question: how convincing do you find Aristotle’s version of virtue ethics? Does it resonate with you? Do you think that being virtuous, through lots of everyday practice, by avoiding the extremes of excess and deficiency is the only way to attain the Good Life?
-
+> [!Ans]
+> I think some parts of Aristotle's virtue ethics are applicable while some are less so. For example, if one grew up in poverty, they might naturally gravitate toward wealth in an attempt to make themselves and their family experience the wealthy life. Aristotle would argue this would not lead to living the good life while for this family this might be all that they've ever wanted. I believe that strictly following this virtue ethics code could lead to a life of mediocraty as one would never live to their fullest potential. Take another example intelligence / wisdom. If you pursue excess wisdom / intelligence this is a vice, which is contradictory toward the life of a philosopher who wishes to learn more about the world. As such, I believe in order to live a good life it is almost a necessity to chase one excess vice. For philosophers like aristotle it might be intelligence, while for others it could be strength, wealth, etc. However, I do also believe in order to live the good life one must not be boastful or arrogant about their excess.
 
 
 # 2
@@ -63,8 +64,14 @@ From the open-access textbook "An Introduction to Utilitarianism": Read the chap
 ### (i)
 Why do the authors argue that utilitarianism has a good historical track record? Give a few examples. 
 
+> [!Ans]
+> One example the author gave was Jeremy Bentham, who advocated for the separation of church and state, abolotion of slavery, opposed capital punishment, legal regulations to protect criminals and non-human animals from cruelty, and decriminilization of homosexuality. This was all done by Jeremy Bentham, there are other examples the author gives about John Stuart Mill, who defended the provision of social welfare for the poor and promoted freedom of speech. 
+
 ### (ii)
 Does consequentialism take acts—such as breaking a promise—to be right or wrong in themselves (i.e., intrinsically right or wrong)? Deontologists would argue that some acts are intrinsically right or wrong. How does consequentialism differ from this?
+
+> [!Ans]
+> Consequentialists believe that breaking a promise is not wrong in itself because if breaking a promise results in the saving of a life then breaking a promise is good. However consequentialists agree that most of the time breaking a promise has bad consequences. Since deontologists argue that certain acts are intrinsically right or wrong, this contradicts consequentialism which determines if an individual act is right or wrong based on the results / consequences of that action. Essentially, given some act deontologists would say is intrinsically wrong a consequentialist would argue that if performing that act results in something that is really good would make that wrong act good. For example, a consequentialist could argue killing someone to save 10 lives would make killing someone worth it. Whereas a deontologist could argue that no matter how many lives one would save one should never kill someone as that is an intrinsically wrong action.
 
 Note: the authors write: “Much of consequentialism’s appeal may stem from the conviction that making the world a better place is simply more important than any of these competing moral goals.” This sounds very appealing at first glance—you might even think, “How could anyone disagree with this?” But recall from class our example of the doctor and her five sick patients: sometimes “making the world a better place” means violating common moral intuitions, such as that one should never murder—even if doing so would enable you to harvest a healthy patient’s organs to save five other people, which would result in more total good.
 
@@ -72,8 +79,14 @@ Note: the authors write: “Much of consequentialism’s appeal may stem from th
 ### (i)
 What is the main difference between act utilitarianism (a kind of “direct utilitarianism”) and rule utilitarianism (a kind of “indirect utilitarianism”)? Why do the authors believe that, despite its name, rule utilitarianism shouldn’t be classified as a type of utilitarianism?
 
+> [!Ans]
+> Act utilitarianism directly assesses the moral rightness of actions, whereas indirect / rule utilitarianism determines if an act is right or wrong based on a preditermined set of rules that would determine the best utilitarian consequences. Essentially, determining moral correctness based on the general results of an act rather than the individual results of an individual act. The authors believe that rule utilitarianism shouldn't be classified as a type of utilitarianism because it goes against the idea of consequentialism / utilitarianism which is attempting to reach the best outcome possible. Instead, rule consequentialism focuses on following a strict (but plausible) set of moral rules. 
+
 ### (ii)
 What does welfarism—which all utilitarians accept—take to be “intrinsically good” and “intrinsically bad”? Do you agree, or do you think that there may be other things in the world that are also intrinsically good or bad?
+
+> [!Ans]
+> Welfarism holds that positive well-being is the only intrinsiic good and negative well-being is the only intrinsic bad. While I agree those are intrinsically good and bad, I believe there are more things in the world that are intrinsically good and bad. For example, genocide I believe is intrinsically bad but welfarism seems to believe negative well-being is the only intrinsic bad. For example, in Marvel's Avengers infinity war, the antagonist (thanos) killed half of the population so that way the other half would live happily (no more fighting over food / resources). While welfarism might approve of this (if more than half the population survives) becauses majority of people would have good well-being which is intrinsicly good. 
 
 Note: How exactly does welfarism fit with utilitarianism? The idea is this: determining how one ought to act in any given situation is a two-step process, according to utilitarians. You can think of this as a kind of “algorithm.” Imagine that you’re in a situation where you have a couple of options: you could either take some action A or, alternatively, you could take some different action B. Which is the right action to take? Step one: evaluate the consequences of A and B. Would the consequences of A be better than the consequences of B? Would A result in more total wellbeing (i.e., welfare) than B? Or the other way around?
 
@@ -87,6 +100,9 @@ For a fun critique of hedonism—the view that we should understand “welfare�
 
 ### (iii)
 What is the difference between something being good for some person and something being good in a more general, abstract, impersonal sense?
+
+> [!Ans]
+> The example the authors give is punishing an evil person. While some may see their punishment as good (as it is a punishment for someone bad) but the punishment is good because it is bad for the evil person. Another way to think about this distinction is giving someone new glasses. Having better sight would certainly benefit one's well being, but new glasses would only really benefit people who need glasses. Thats the difference betweenn good for some person vs good in a more general sense. 
 
 Additional clarification: philosophers would call this second sense of something being good: “good simpliciter,” where “simpliciter” means something like “inherently” or “per se.” If something is “good simpliciter,” it just is good, independent of whether or how it might be good for particular people. This may seem hard to wrap your head around at first, but we use this sense of “good” all the time. For example, you might say to your friend, Alex, during a time of personal crisis that Alex is going through: “It is good that you exist in the world.” You might think that Alex’s existence is good for her, and maybe also good for you, since you’re friends. But your statement goes beyond this: it suggests that the world itself is a better place with Alex in it. In other words, apart from Alex’s existence being good for her and her friends, there’s a more general, abstract, or impersonal sense in which Alex’s existence is “good.” This is the idea of “good simpliciter,” and many philosophers believe that it’s important to distinguish it with another common use of the word “good,” as in: “It was good that I saw the doctor”—which is to say, it was good for me that I saw the doctor, because the doctor (let’s assume) cured an illness that I was dealing with.
 
