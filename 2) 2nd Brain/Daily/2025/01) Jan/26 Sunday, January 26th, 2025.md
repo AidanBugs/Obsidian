@@ -1,10 +1,10 @@
 ---
-date: "2025-01-26"
+date: 2025-01-26
 tags:
   - "#Daily"
 links: 
 Workout: 
-Water: 
+Water: 0.1
 Stretch: 
 Write:
 ---

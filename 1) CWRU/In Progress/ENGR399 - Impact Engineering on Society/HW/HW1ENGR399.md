@@ -125,10 +125,19 @@ But how do you feel about this? Does this example make you think that, in fact, 
 ### (i)
 Recap question: what are the four defining characteristics of utilitarianism?
 
+> [!Ans]
+> 1. Consequentialism
+> 2. Welfarism
+> 3. Impartiality
+> 4. Aggreggationism
+
 ### (ii)
 Open-ended question: what do you find compelling and/or problematic about utilitarianism? Do you think this is a better account of ethics than Aristotle’s virtue ethics?
 
 (For utilitarians, it’s not about developing a virtuous moral character, it’s about whether the consequences of your actions are overall good or bad. Hence, someone we might universally describe as a “bad person” might actually be “more ethical” than someone we’d intuitively describe as “very good,” if the bad person’s actions were to have better consequences. Imagine a billionaire who treats his employees terribly for four decades, but then gives away $100 million to charity, whereas the “good person” makes very little money and hence only donates $1,000 to charity. In this case, one might argue that the billionaire has maximized wellbeing more than the poor person, and hence are “more ethical.” Do you agree with this idea? Are the consequences of one’s actions really all that matter?)
+
+> [!Ans]
+> While utilitarianism is a fairly easy moral code to apply, there are a lot of flaws with it. Such as the issues mentioned above about saving your child vs someone else's or Thanos's genocide. Personally, I think Aristotle's virtue ethics are a lot easier to follow as a general guideline. This is because living in the average of 2 extremes lead to alot less questionable moral choices. This is because the consequences of actions in Aristotle's virtue ethics are a lot less important. Instead what matters is intentionality, which in my opinion, is more important for ethics than purely consequences. 
 
 Read the highlighted (in green and orange) sections of Immanuel Kant’s Groundwork of the Metaphysic of Morals Download sections of Immanuel Kant’s Groundwork of the Metaphysic of Morals.
 
@@ -139,6 +148,9 @@ Note: Kant starts off by arguing that the only thing in the universe that is goo
 ### (i)
 Kant makes a distinction between doing something out of a sense of (moral) duty—or, in his words, “from duty”—and doing something that merely conforms with duty but is driven by self-interested motives. In your own words, can you explain this distinction? It might help to work through a concrete example (but not the one that Kant uses, please!).
 
+> [!Ans]
+> Acting with a sense of moral duty simply means doing something with a sense of obligation or moral code (from duty). Whereas doing something that conforms with duty means that the action alligns with one should do out of moral duty, however the reason for their action is more selfish. For example, after bumping into someone one should apologize because it is the morally right thing to do and one should feel sorry for bumping into someone. However, an exmple of acting with conformity toward the duty would be apologizing because you don't want people to think bad of you for not apologizing. Same action, different reasons. This is the distinction Kant is trying to make.
+
 Note: This distinction is very important for Kant. It’s partly what makes his view different from utilitarianism: even if the consequences of some action are very good, if that action isn’t motivated by a genuine sense of duty, then it lacks “moral content” (in his words)—it’s not the sort of thing that one should be praised, in a moral sense, for having done. Imagine that I donate $10 million to a hospital that treats children with cancer. This might have very good consequences, as it might save the lives of many children. But now imagine that the only reason I did this was to become famous for helping children—that is, to boost my reputation as a great philanthropist. Even though the consequences were in fact good, Kant would say that this was not a morally praiseworthy act, because it was motivated by self-interest—i.e., by my will to benefit myself by boosting my reputation—rather than from a sense of duty to help others. This is why Kant writes: “Thus the moral worth of an action does not lie in the effect expected from it and so too does not lie in any principle of action that needs to borrow its motive from this expected effect.”
 
 Note also Kant’s use of the term “prudent” on page 15. Mentioning this because it might be useful: philosophers distinguish between two broad categories. The first is denoted by terms like “prudent,” “prudence,” and “prudential.” This concerns questions about what is best for you. Hence, in a prudential sense, it might not be good for you to lie because sometimes lies can backfire. The second category, which contrasts with the first, concerns what is “ethical” or “moral.” Ethics and morality—unlike prudence—is fundamentally about how one treats others, i.e., about what is right or wrong when the interests of others are taken into account. What is right or wrong in this sense may not be what’s best for you, personally—maybe it’s best for you to lie and cheat, but doing so would be morally wrong when one takes into account the interests of others—specifically, the interests that others have in not being lied to or cheated out of something!
@@ -146,6 +158,9 @@ Note also Kant’s use of the term “prudent” on page 15. Mentioning this bec
 ## B.
 ### (i)
 On pages 25-26, Kant distinguishes between “hypothetical” and “categorical” imperatives. In your own words, can you explain this distinction?
+
+> [!Ans]
+> Hypothetical imperative relies on some sort of goal for the action. Whereas categorical impertatives do not. For example, a hypothetical imperative is "If you want to do well in classes then you should study alot", suggesting one to study to achieve success. Whereas a categorical imperative is "Never tell lies", which doesn't depend on a concrete goal to explain.
 
 ### (ii)
 Toward the bottom of page 15, and onto page 16, Kant introduces his famous “categorical imperative” (though he doesn’t use that term just yet). His argument is that you and I—indeed, any rational being—can determine what is morally right or wrong through thought alone; that is, by using our reason or rationality to work through a kind of “algorithm.” Here is what you should do:
@@ -156,6 +171,12 @@ So, let’s take a closer look to see whether everyone lying to their friends fo
 
 The question for you is this: try your best to work through this same procedure with a different example—such as cheating on a test rather than lying to someone. What is the general maxim that you’d give for cheating on a test? Is there a contradiction when you universalize this maxim? (If you’re thinking that these two cases overlap, that’s because they do. So, use lying as a template for thinking about cheating.)
 
+> [!Ans]
+> First the maxim for cheating on a test would be "I will cheat on this test in order to get a better grade on this test." Then universalizing this maxim would be a world in which everyone cheats to get better grades. This leads to a contradiction because if everyone cheats, their grades would not matter as much because tests would not accurately show a person's skill / knowledge. Thus tests would not matter as much and cheating for a better grade on a test wouldn't matter because tests dont matter. Thus creating a contradicion.
+
 ## C.
 ### (i)
 Open-ended question: do you find Kant’s deontological ethics more compelling than virtue ethics or utilitarianism? Why or why not? What are the flaws and strengths of deontological ethics, and how do they compare with the flaws and strengths of virtue ethics and utilitarianism?
+
+> [!Ans]
+> Currently, I seem to most compelled by virtue ethics (though not entirely convinced) due to the general adaptability and sound moral reasoning. One of the bigger flaws with Kant's deontological ethics is the rigidity of thinking. Additionally, with Kant ethics, there is no way to know if a person's actions are good or bad because we do not know intentionality, a world filled with this skepticism seems quite bad to me. Utilitarianism differs here because it does not care about intentions, only outcome of event. So while ignoring intentionality of actions is a flaw of utilitarianism, it can be seen as a strength to not worry about such things. On the other hand Aristotle's virtue ethics more focuses on avoiding our vices (excess and defect) by pursuing their average. As such, it is alot less rigid than Kant's strict sense of duty and obligations one must follow.
