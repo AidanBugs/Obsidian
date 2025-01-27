@@ -109,10 +109,16 @@ Additional clarification: philosophers would call this second sense of something
 ### (iv)
 In your own words, what does “impartiality” and “aggregationism” mean? Define both.
 
+> [!Ans]
+> Impartiality is the view that everyone's well-being is equally important. Whereas aggregationism is the belief that the aggregate sum of all people involved represents the value of an outcome.
+
 ### (v)
 Consider this example: imagine that you’re standing in front of a burning building with two children trapped in it. One of these children is your own, and the other is a stranger’s child. Unfortunately, you can only save one child. If you are truly impartial, then it doesn’t matter—morally speaking—whether you save your child or the stranger’s child. You should just flip a coin and say, “If it lands on heads, I’ll save my child. If it lands on tails, I’ll save the other child!”
 
 But how do you feel about this? Does this example make you think that, in fact, ethics should actually be partial, as opposed to what utilitarians claim? Maybe you have “special obligations” to people around you—that is, obligations that you don’t have to strangers? Or maybe the utilitarians are right and, from an impartial point of view, it doesn’t matter which child you save, so long as you save one of them. What do you think?
+
+> [!Ans]
+> I agree that ethics are subjective and should be partial. I believe there is an arguement that its almost more unethical to save someone else's child over your own in that scenario. If one is truly impartial, any and all memories or effort gone into raising this child doesn't make any difference when it comes to picking whose life to save.
 
 ## C.
 
