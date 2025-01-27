@@ -1,19 +1,19 @@
 ---
-date: 2025-01-26
+date: "2025-01-27"
 tags:
   - "#Daily"
 links: 
 Workout: 
-Water: 1
+Water: 
 Stretch: 
 Write:
 ---
 # Reflection
 ## What did I do today?
-- Finished Hackathon
-	- Made a hangout planner app
+
 ## What should I have done today?
 
 ## What do I want to do more of tomorrow?
 
-# Story (who, what, when, where
+# Story (who, what, when, where)
+
