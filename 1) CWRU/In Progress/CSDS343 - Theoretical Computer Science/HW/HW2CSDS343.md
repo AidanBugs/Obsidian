@@ -5,7 +5,7 @@ tags:
   - "#HW"
 links: 
 deadline: 2025-01-27
-status: 0
+status: 0.4
 ---
 # 1
 > [!Question]
@@ -66,9 +66,22 @@ $M_{3}$ runs on string $x$:
             Run $M_{2}$ on string after \#
             If $M_{2}$ accepts:
                 Output "yes"
+            Else: 
+                Continue
+        Else:
+            Continue
         Clear after the \#
     Output "no"
-        
+> [!Proof]        
+> Show $M_{3}$ decidees the concatenation of $L_{1},L_{2}$
+> If $x\in$ concatenation of $L_{1},L{2}$, then $\exists i\in \mathbf Z$ where $0\leq i\leq length(x)$ such that $x_{1,i}\in L_{1} \land x_{i+1,length(x)} \in L_{2}$
+>
+> We know the above statement is true by the definition of the concatenation of $L_{1},L{2}$.
+> Note that given a substring $x_{j,k}$ if $j > k$ the string is invalid and thus blank. Also bounds are inclusive.
+>
+> $M_{3}$ iterates through all possible values of $i$ ($0,1,2,...,length(x)$)
+> On the 
+
 # 3
 > [!Question]
 > Let $L_{1},L_{2}$ be 2 languages over $\Sigma$. Prove that is $L_{1},L_{2}$ are both Turing recognizable then the concatenation of $L_{1},L_{2}$ is Turing recognizable.
