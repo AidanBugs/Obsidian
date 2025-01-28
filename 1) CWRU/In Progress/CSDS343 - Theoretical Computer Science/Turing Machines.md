@@ -32,7 +32,7 @@ Mathematically a turing maachine is a tuple $(\Sigma,\Gamma,Q,\delta)$
 - $\delta$: Transition Function
     - $\delta :\Gamma\times Q\rightarrow\Gamma\times Q\times \{L,R\}$
     - Read $\times$ state $\rightarrow$ write $\times$ new state $\times$ move L/R
-# Create a TM to decide the Language
+## Create a TM to decide the Language
 $L=\{a^xb^yc^{\max\{x,y\}}\}$
 EX: $aaabccc\in L$
 $\Sigma=\{a,b,c\}$
@@ -42,33 +42,33 @@ $Q=\{q_0,q_{accept},q_{reject},$
 1. Figure if more a's then b's
 2. If more a's see if same number of c's
 3. If more b's see if same number of c's
-## States
-### $q_0$ -- Start
+### States
+#### $q_0$ -- Start
 $\delta: Q\times\Gamma\rightarrow Q\times\Gamma\times\{L,R\}$
 $\delta (q_0, a)=(q_1,a'',R)$
 $\delta (q_0, b)=$ more b's than a's
 $\delta (q_0, c)=(q_{reject},\_,R$
 $\delta (q_0, \_)=(q_{accept},\_,R$
-### $q_1$ -- Count a's vs b's
+#### $q_1$ -- Count a's vs b's
 $\delta (q_1, a)=(q_1,a,R)$
 $\delta (q_1, b)=(q_2,b',L)$
 $\delta (q_1, c)=(q_4,c,L)$ more a's than b's
 $\delta (q_1, \_)= (q_{reject}, \_, R)$
 $\delta (q_1, a')= (q_{reject}, \_, R)$ \* this should not happen
 $\delta (q_1, b')= (q_1, b', R)$
-### $q_2$ -- Count b's vs a's
+#### $q_2$ -- Count b's vs a's
 $\delta (q_2, a)=(q_2,a,L)$
 $\delta (q_2, b)=(q_{reject},\_,L)$ \* this should not happen
 $\delta (q_2, c)=(q_{reject},\_,L)$ \* this should not happen
 $\delta (q_2, \_)=(q_{reject},\_,L)$ \* this should not happen
 $\delta (q_2, a')= (q_3, a', R)$ \* this should not happen
 $\delta (q_2, b')= (q_2, b', L)$
-### $q_3$ -- 
+#### $q_3$ -- 
 $\delta (q_3, a)=(q_1,a',R)$
 $\delta (q_3, b)=$ more b's than a'
 $\delta (q_3, c)=(q_{reject},\_,R$
 $\delta (q_3, \_)=(q_{reject},\_,R$
-### $q_4$ -- More a's than b's, clear marked a's
+#### $q_4$ -- More a's than b's, clear marked a's
 $\delta (q_4, a)=(q_4,a,L)$
 $\delta (q_4, b)=(q_{reject},\_,L)$ \* this should not happen
 $\delta (q_4, c)=(q_{reject},\_,L)$ \* this should not happen
@@ -76,7 +76,21 @@ $\delta (q_4, \_)=(q_{reject},\_,L)$ \* this should not happen
 $\delta (q_4, a')= (q_4, a, L)$ 
 $\delta (q_4, b')= (q_4, b', L)$
 $\delta (q_4, a'')= 
-### $q_5$ -- count a's vs c's
+#### $q_5$ -- count a's vs c's
+....
+# 2-way infinite Tape TM
+Instead of a tape with a definite start, everything left of "$0$" is blank and infinitely long.
+## Theorem
+If $L$ can be decided on a TM with a 2-way infinite tape, then there exists a 'normal' TM that can decide $L$.
+## Proof of equivalency to TM
+Given $L$ and $M_{1}$ with 2-way infinite tape, $L=L(M_{1})$. Create $M_{0}$, a normal TM with $L=L(M_{0})$. Show that we can simulate each step of $M_{1}$ with a step or steps of $M_{0}$ and $M_{0}$ accepts iff $M_{1}$ accepts.
 
+The general idea is shift everything in the input such that every even cell is to the right of "$0$" on our 2 way tape, and every odd is left of "$0$" on our 2 way tape.
 
+Alternatively, fold the 2 way tape in half, and now it is infinite only in one direction. We can use the same functions but now we have a top vs bottom state. Each symbol is now a tuple of the top symbol and the bottom symbol. 
+# K-tape TM
+Instead of a single tape, we have k-tapes, each with their own head.
+## Proof
+Same theorem / need to prove as 2 way tape.
 
+The general idea is to have each "tape" seperated by "#". We have separate signs to indicate start / end of our tape. Each section of our tape will have a "\*" to indicate the head of that section. Store everything in different states to determine the exact "state" of our tape heads. If there is ever a need to use a blank in the k-tape system, we add a new blank space to all of the ections in our single tape. Alternatively, copy tape to the right and add spaaces. 

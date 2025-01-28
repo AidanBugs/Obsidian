@@ -5,7 +5,7 @@ tags:
   - HW
 links: 
 deadline: 2025-01-26
-status: 0.4
+status: 1
 ---
 # 1
 Read Chapter 2, sections 1 & 5-7Links to an external site. of Aristotle’s famous treatise on ethics, Nicomachean Ethics.
