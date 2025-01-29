@@ -59,24 +59,24 @@ $M_{3}$ runs on string $x$:
     insert \# after $x$ on tape
     insert a \# after \#
     loop 1:
-    for each 0 between the \#'s copy a character at the front of $x$ to after the 2nd \#
-    Run $M_{1}$ on string after \#
-    If $M_{1}$ accepts:
-        Clear after the \#
-        Copy all unmarked characters of $x$ (copy suffix)
-        Run $M_{2}$ on string after \#
-        If $M_{2}$ accepts:
-            Output "yes"
-        Else: 
+        for each 0 between the \#'s copy a character at the front of $x$ to after the 2nd \#
+        Run $M_{1}$ on string after \#
+        If $M_{1}$ accepts:
+            Clear after the \#
+            Copy all unmarked characters of $x$ (copy suffix)
+            Run $M_{2}$ on string after \#
+            If $M_{2}$ accepts:
+                Output "yes"
+            Else: 
+                Continue
+        Else:
             Continue
-    Else:
-        Continue
-    Clear after the \#
-    If number of 0's greater than length of $x$
-        Output "no"
-    Else:
-        Add a new 0 between the \#'s
-        Go back to loop 1
+        Clear after the \#
+        If number of 0's greater than length of $x$
+            Output "no"
+        Else:
+            Add a new 0 between the \#'s
+            Go back to loop 1
 
 In general, the tape is structured as follows: $x \# \i \# $ copy, where $i$ is length of prefix
 
