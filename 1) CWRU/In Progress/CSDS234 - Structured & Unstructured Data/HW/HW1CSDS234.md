@@ -5,7 +5,7 @@ tags:
   - HW
 links: 
 deadline: 2025-01-30
-status: 0.1
+status: 0.3
 ---
 # 1 Data and Attributes Types
 Determine the type of the following attributes of real-world objects (Nominal, Ordinal,  
@@ -13,24 +13,38 @@ Interval, Ratio). Justify your answers with brief explanations
 ## 1. Flavors of Coca Cola (such as Classic, Cherry, Zero...)  
 > [!Ans]
 > Nominal, flavors are categorical and can not be ordered
+
 ## 2. Income of computer science students in US in 2024  
 > [!Ans]
- 
+> Ratio, income can be categorical, orderable, addable, and multiplication (meaningful 0)
+
 ## 3. Weights of lions in a zoo, in pounds  
+> [!Ans]
+> Ratio, weight can be categorical, orderable, addable, and multiplication (meaningful 0)
 
 ## 4. Rating of a hotel in {Excellent, Above Average, Average, Below Average, Poor}  
 > [!Ans]
 > Ordinal, ratings of a hotel are categorical, orderable, but can not be added
+
 ## 5. Blood Type of Human  
 > [!Ans]
 > Nominal, blood types are categorical and can not be ordered
+
 ## 6. GINI coefficient of Asian countries  
+> [!Ans]
+> Ratio, GINI coefficient has meaningful 0
 
 ## 7. Memory cost measured in MB of a computer program  
+> [!Ans]
+> Ratio, memory costs can be categorical, oderable, additive, and multiplication (meaningful 0).
 
 ## 8. Processing temperatures of alloys of Aluminum in Celsius  
+> [!Ans]
+> Interval, celsius can be categorical, oderable, additive but not multiplicative
 
 ## 9. The probability a person wins a lottery
+> [!Ans]
+> Ratio, probabilities are categorical, oderable, additive, and multiplicative (meaningful 0)
 
 # 2 Data Models and Types of Data
 We have seen several examples of different types of data. Based on your understanding, determine the proper types of the following dataset (structured, semi-structured, unstructured, ordered data, time-series data), for a given context of application scenario. Briefly justify your answer. A dataset can be assigned with multiple types, whenever applicable
@@ -93,4 +107,8 @@ The following facts have been validated.
 
 # 4 Data Constraints
 Given a referencing relation R1 with foreign key FK1, and a referenced relation R2 with primary key PK2 that FK1 refers to, and two states r(R1), and r(R2), describe an algorithm that checks if r(R1) and r(R2) violate the foreign key constraint. You may use pseudocode or simply describe it. It is also encouraged that you provide a time cost analysis for the algorithm you propose.
+
+
+
+
 

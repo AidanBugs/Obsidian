@@ -1,19 +1,18 @@
 ---
-date: 2025-01-27
+date: 2025-01-29
 tags:
   - "#Daily"
 links: 
-Workout: 1
-Water: 1
+Workout: 0.6
+Water: 0.3
 Stretch: 
-Write: 1
+Write:
 ---
 # Reflection
 ## What did I do today?
-- Worked out with boki
-- Hollow Knight
+- Workout w/ Boki
 ## What should I have done today?
-- Theoretical HW
+
 ## What do I want to do more of tomorrow?
 
 # Story (who, what, when, where)

@@ -6,7 +6,7 @@ links:
 Workout: 
 Water: 1
 Stretch: 
-Write:
+Write: 1
 ---
 # Reflection
 ## What did I do today?
