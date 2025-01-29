@@ -57,21 +57,27 @@ Create $M_{3}$
 $M_{3}$ runs on string $x$:
     let $n$ = length($x$)
     insert \# after $x$ on tape
-    for $i=0,1,2,...,n$
-        Copy first $i$ characters of $x$ and place after \#
-        Run $M_{1}$ on string after \#
-        If $M_{1}$ accepts:
-            Clear after the \#
-            Copy the last $n-i$ characters of $x$ and place after \#
-            Run $M_{2}$ on string after \#
-            If $M_{2}$ accepts:
-                Output "yes"
-            Else: 
-                Continue
-        Else:
-            Continue
+    insert a $0$
+    insert a \# after $0$
+    loop 1:
+    for each 0 between the \#'s copy a character at the front of $x$ to after the 2nd \#
+    Run $M_{1}$ on string after \#
+    If $M_{1}$ accepts:
         Clear after the \#
-    Output "no"
+        Copy the last $n-i$ characters of $x$ and place after \#
+        Run $M_{2}$ on string after \#
+        If $M_{2}$ accepts:
+            Output "yes"
+        Else: 
+            Continue
+    Else:
+        Continue
+    Clear after the \#
+    If number of 0's greater than length of $x$
+        Output "no"
+    Else:
+        Add a new 0 between the \#'s
+        Go back to loop 1
 > [!Proof]        
 > Show $M_{3}$ decides the concatenation of $L_{1},L_{2}$
 > If $x\in$ concatenation of $L_{1},L{2}$, then $\exists i\in \mathbf Z$ where $0\leq i\leq length(x)$ such that $x_{1,i}\in L_{1} \land x_{i+1,length(x)} \in L_{2}$

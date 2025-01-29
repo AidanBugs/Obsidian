@@ -94,3 +94,34 @@ Instead of a single tape, we have k-tapes, each with their own head.
 Same theorem / need to prove as 2 way tape.
 
 The general idea is to have each "tape" seperated by "#". We have separate signs to indicate start / end of our tape. Each section of our tape will have a "\*" to indicate the head of that section. Store everything in different states to determine the exact "state" of our tape heads. If there is ever a need to use a blank in the k-tape system, we add a new blank space to all of the ections in our single tape. Alternatively, copy tape to the right and add spaaces. 
+## Formal definition
+K-tapeTM $(\Sigma , \Gamma , Q, \delta)$
+$\delta: Q\times \Gamma ^{k} \rightarrow Q\times \Gamma ^{k} \times \{L,R,S\} ^{k}$
+
+Runtime is as follows $t_{m_{1}}(x)=O(t_{m_{k}}^2)$
+
+This runtime is because for each run in $t_{m_{k}}$ we need to scan the whole tape, the maximum length of the tape is the number of steps of $t_{m_{k}}$ (each step we move to the right).
+# A non-deterministic TM
+$N=(\Sigma , \Gamma , Q , \delta )$
+$\delta : Q\times \Gamma \rightarrow P(Q\times\Gamma\times\{ L,R \} )$
+Essentially, each step the TM is given a set of choices of what to do.
+
+If any choice leads to accept it will make that choice. (If multiple do it will choose one that works arbitrarily)
+
+If no choice leads to accept it chooses arbitrarily.
+## Theorem
+If a non-deterministic TM $N$ decides the language $L$ then there exists a normal TM that decides $L$
+## Proof
+3-tape machine
+
+Tape 1: input $x$
+Tape 2: simulate $N$
+Tape 3: list all choices we will make. Suppose of most $r$ choices at any step.
+
+Place in tape 3, 1,2,3,...,r
+
+M: write next sequence of numbers to tape 3 (initially 1)
+
+Copy input to tape 2
+
+Simulate N on type 2. At each step, we consult tape 3 to see which choice to make.
