@@ -77,6 +77,9 @@ $M_{3}$ runs on string $x$:
     Else:
         Add a new 0 between the \#'s
         Go back to loop 1
+
+In general, the tape is structured as follows: $x \# \i \# $ copy, where $i$ is length of prefix
+
 > [!Proof]        
 > Show $M_{3}$ decides the concatenation of $L_{1},L_{2}$
 > If $x\in$ concatenation of $L_{1},L{2}$, then $\exists i\in \mathbf Z$ where $0\leq i\leq length(x)$ such that $x_{1,i}\in L_{1} \land x_{i+1,length(x)} \in L_{2}$
@@ -130,6 +133,8 @@ Create $M_{3}$ (2 way infinite Tape)
                 Add a new $0$ in between the \#'s to the right of $x$
                 Go back to loop 2
     Go back to loop 1
+
+In general, the tape is structured as follows: $i\# x \# \j \# $ copy, where $i$ is the number of steps and $j$ is length of prefix
 
 > [!Proof]
 > If $x\in$ the concatenation of $L_{1},L_{2}$, then $\exists$ a prefix / suffix pair s.t. prefix $\in L_{1} \land$ suffix $\in L_{2}$
