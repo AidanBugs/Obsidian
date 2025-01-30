@@ -17,22 +17,23 @@ Create $M_{3}$
 $M_{3}$ runs on string $x$:
 - Duplicate $x$ after a \#
 - Run $M_{1}$ on $x$
-    - If $M_{1}$ accepts:
+	- If $M_{1}$ accepts:
 		- Clear everything after \#
-        - Duplicate $x$ after \#
-        - Run $M_{2} on $x$
-        - If $M_{2}$ accepts:
-            - Output "No"
-        - Else:
-	        - Output "Yes"
+		- Duplicate $x$ after \#
+		- Run $M_{2} on $x$
+		- If $M_{2}$ accepts:
+			- Output "No"
+		- Else:
+			- Output "Yes"
 	- Else:
-        - Clear everything after \#
-        - Duplicate $x$ after \#
-	    - Run $M_{2}$ on $x$
+		- Clear everything after \#
+		- Duplicate $x$ after \#
+		- Run $M_{2}$ on $x$
 	    - If $M_{2}$ accepts:
 	        - Output "Yes"
 	    - Else:
 	        - Output "No"
+
 > [!Proof]
 > Show $M_{3}$ decides $L_{1}\oplus L_{2}$
 > If $x\in (L_{1}\oplus L_{2}$ then $(x\in L_{1}\land x\notin L_{2})\lor (x\notin L_{1} \land x\in L_{2})$
@@ -55,30 +56,30 @@ Assume $L_{1},L_{2}$ are Turing decidable.
 $\exists M_{1},M_{2}$ that decide $L_{1},L_{2}$
 Create $M_{3}$
 $M_{3}$ runs on string $x$:
-    let $n$ = length($x$)
-    insert \# after $x$ on tape
-    insert a \# after \#
-    loop 1:
-        for each 0 between the \#'s copy a character at the front of $x$ to after the 2nd \#
-        Run $M_{1}$ on string after \#
-        If $M_{1}$ accepts:
-            Clear after the \#
-            Copy all unmarked characters of $x$ (copy suffix)
-            Run $M_{2}$ on string after \#
-            If $M_{2}$ accepts:
-                Output "yes"
-            Else: 
-                Continue
-        Else:
-            Continue
-        Clear after the \#
-        If number of 0's greater than length of $x$
-            Output "no"
-        Else:
-            Add a new 0 between the \#'s
-            Go back to loop 1
+- let $n$ = length($x$)
+- insert \# after $x$ on tape
+- insert a \# after \#
+- loop 1:
+	- for each 0 between the \#'s copy a character at the front of $x$ to after the 2nd \#
+    - Run $M_{1}$ on string after \#
+    - If $M_{1}$ accepts:
+        - Clear after the \#
+        - Copy all unmarked characters of $x$ (copy suffix)
+        - Run $M_{2}$ on string after \#
+        - If $M_{2}$ accepts:
+            - Output "yes"
+        - Else: 
+            - Continue
+    - Else:
+        - Continue
+    - Clear after the \#
+    - If number of 0's greater than length of $x$
+        - Output "no"
+    - Else:
+        - Add a new 0 between the \#'s
+        - Go back to loop 1
 
-In general, the tape is structured as follows: $x \# \i \# $ copy, where $i$ is length of prefix
+In general, the tape is structured as follows: $x \# i \#$copy, where $i$ is length of prefix
 
 > [!Proof]        
 > Show $M_{3}$ decides the concatenation of $L_{1},L_{2}$
@@ -107,34 +108,34 @@ In general, the tape is structured as follows: $x \# \i \# $ copy, where $i$ is 
 Assume $L_{1},L_{2}$ are Turing recognizable.
 $\exists M_{1},M_{2}$ that decide $L_{1},L_{2}$
 Create $M_{3}$ (2 way infinite Tape)
-    let $n$ = length($x$)
-    insert \# after $x$ on tape
-    insert \# after the \#
-    insert \# before $x$ on tape
-    loop 1:
-        insert one $0$ to the left of the leftmost \#
-        loop 2:
-            for each $0$ between the \#'s to the right of $x$, copy a character at the front of $x$ after the \# to the right of $x$
-            for each $0$ to the left of $x$ run a step of $M_{1}$ on the copied string
-            If $M_{1}$ accepts:
-                Clear after the \#
-                Copy all unmarked characters of $x$ (copy suffix)
-                Run $M_{2}$ on string after \# for $i$ steps
-                If $M_{2}$ accepts:
-                    Output "Yes"
-                Else:
-                    Continue
-            Else:
-                Continue
-            Clear after \#
-            If number of 0's greater than length of $x$
-                Continue
-            Else
-                Add a new $0$ in between the \#'s to the right of $x$
-                Go back to loop 2
-    Go back to loop 1
+- let $n$ = length($x$)
+- insert \# after $x$ on tape
+- insert \# after the \#
+- insert \# before $x$ on tape
+- loop 1:
+    - insert one $0$ to the left of the leftmost \#
+    - loop 2:
+        - for each $0$ between the \#'s to the right of $x$, copy a character at the front of $x$ to after the rightmost \# 
+        - for each $0$ to the left of $x$ run a step of $M_{1}$ on the copied string
+        - If $M_{1}$ accepts:
+            - Clear after the \#
+            - Copy all unmarked characters of $x$ (copy suffix)
+            - Run $M_{2}$ on string after \# for $i$ steps
+            - If $M_{2}$ accepts:
+                - Output "Yes"
+            - Else:
+                - Continue
+        - Else:
+            - Continue
+        - Clear after \#
+        - If number of 0's greater than length of $x$
+            - Continue
+        - Else
+            - Add a new $0$ in between the \#'s to the right of $x$
+            - Go back to loop 2
+- Go back to loop 1
 
-In general, the tape is structured as follows: $i\# x \# \j \# $ copy, where $i$ is the number of steps and $j$ is length of prefix
+In general, the tape is structured as follows: $i\# x \# j \#$copy, where $i$ is the number of steps and $j$ is length of prefix
 
 > [!Proof]
 > If $x\in$ the concatenation of $L_{1},L_{2}$, then $\exists$ a prefix / suffix pair s.t. prefix $\in L_{1} \land$ suffix $\in L_{2}$
