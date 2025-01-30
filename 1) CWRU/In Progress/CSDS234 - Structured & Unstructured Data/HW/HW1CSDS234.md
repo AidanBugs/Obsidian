@@ -5,7 +5,7 @@ tags:
   - HW
 links: 
 deadline: 2025-01-30
-status: 0.5
+status: 0.6
 ---
 # 1 Data and Attributes Types
 Determine the type of the following attributes of real-world objects (Nominal, Ordinal,  
@@ -101,36 +101,73 @@ The following facts have been validated.
 
 ## (10) Identify a primary key, and a candidate key for each relation.
 > [!Ans]
-> | Relation | PK                       | CK                    | 
-> | -------- | ------------------------ | --------------------- |
-> | Ship     | ship_number              |                       |
-> | Cruise   | cruise_number            |                       |
-> | Port     | port_name                | dock_number           |
-> | Visit    |                          |                       |
-> | Passenger| passenger_number         | SSN                   |
-> | Voyage   |                          |                       |
+> | Relation | PK                              | CK                                                   | 
+> | -------- | ------------------------------- | ---------------------------------------------------- |
+> | Ship     | ship_number                     | ship_name                                            |
+> | Cruise   | cruise_number                   | ship_number, start_date                              |
+> | Port     | port_name, country              | port_name, country                                   |
+> | Visit    | cruise_number, port_name, country, arrival_date        | cruise_number, port_name, country, departure_date                        |
+> | Passenger| passenger_number                | SSN                                                  |
+> | Voyage   | passenger_number, cruise_number | passenger_number, cruise_number, stateroom_number    |
 
 ## (10) Identify the foreign keys of each relation, given your choice of primary keys.
 > [!Ans]
-> | Relation | FK |
+> | Relation | FK's |
 > | -------- | -- |
 > | Ship     |  |
 > | Cruise   | ship_number |
 > | Port     | |
-> | Visit    | cruise_number |
+> | Visit    | cruise_number, (port_name, country) |
 > | Passenger| |
 > | Voyage   | passenger_number, cruise_number |
 
 ## (10) Identify the foreign keys that are also a part of the primary keys of the same schema they are defined on.
+> [!Ans]
+> | Relation | FK's in PK |
+> | -------- | -- |
+> | Ship     | |
+> | Cruise   | |
+> | Port     | |
+> | Visit    | cruise_number, (port_name, country) |
+> | Passenger| |
+> | Voyage   | passenger_number, cruise_number |
 
 ## (10) Happy Hour Lines wants to track which passengers visited which ports on which ships, and on which dates. In this case, which are the relations you will need? Design a schema as necessary to store this information.
+> [!Ans]
+> We will need the following relations:
+> - Voyage
+> - Cruise
+> - Visit
+> 
+> We will create the following schema
+> R(passenger_number, cruise_number, port_name, country, ship_number, arrival_date)
+
 
 ## (10) Give three examples of functional dependencies that may likely hold on the schema, and explain why you think they will hold.
+> [!Ans]
+> 
+> ship_number -> ship_name, ship_builder, gross weight
+> a ship number uniquely determine its name, builder, and weight. A ship number can not have more than one name / builder / weight.
+>
+> cruise_number -> start_date, end_date, director, ship_number
+> a cruise number can not have more than one start date / end date / director / ship number
+>
+> passenger_number -> passenger_name, SSN, Address, Phone
+> a passenger_number can not have more than one name / SSN / Address / Phone
 
 # 4 Data Constraints
 Given a referencing relation R1 with foreign key FK1, and a referenced relation R2 with primary key PK2 that FK1 refers to, and two states r(R1), and r(R2), describe an algorithm that checks if r(R1) and r(R2) violate the foreign key constraint. You may use pseudocode or simply describe it. It is also encouraged that you provide a time cost analysis for the algorithm you propose.
 
+Check if FK1 is part of the PK of R1.
+If FK1 $\in$ PK:
+- Look for Nulls
+- If there is a null: return "violates"
 
+for each fk $\in$ FK1:
+    if fk $\notin$ PK2:
+        return "violates"
 
+return "no foreign key violation"
 
-
+If key lookups are constant time, runtime is $O(n)$
+If key lookups are not constant time, runtime is $O(n^2)$
