@@ -5,7 +5,7 @@ tags:
   - HW
 links: 
 deadline: 2025-01-30
-status: 0.3
+status: 0.5
 ---
 # 1 Data and Attributes Types
 Determine the type of the following attributes of real-world objects (Nominal, Ordinal,  
@@ -49,20 +49,36 @@ Interval, Ratio). Justify your answers with brief explanations
 # 2 Data Models and Types of Data
 We have seen several examples of different types of data. Based on your understanding, determine the proper types of the following dataset (structured, semi-structured, unstructured, ordered data, time-series data), for a given context of application scenario. Briefly justify your answer. A dataset can be assigned with multiple types, whenever applicable
 ## i. Sensor data from a weather station that records windspeed, irradiance, and temperatures
+> [!Ans]
+> Ordered data, sensor data is data over time so Ordered data
 
 ## ii. Google map data, for searching a shortest path from location A to location B
+> [!Ans]
+> Semi-structured, map data is akin to graphs, which are semi-structured
 
 ## iii. A set of Tweets discussing “” with their posted time
+> [!Ans]
+>  Unstructured data, text data is considered unstructured.
 
 ## iv. A fraction of genome sequences
+> [!Ans]
+> Ordered data, genetic sequences are ordered data (given in slides)
 
 ## v. A sequence of images sampled from a movie when it is played
+> [!Ans]
+> Unstructured, image data is considered unstructured
 
 ## vi. A list of image features defined by attributes “{image name, pixel number, topic, color-depth, height, length}”
+> [!Ans]
+> Structured, this would create a data matrix which is considered structurerd data.
 
 ## vii. Webpages in HTML code
+> [!Ans]
+> Semi-structured, HTML code is considered semi-structured according to slides
 
 ## viii. Real-time Stock price feed
+> [!Ans]
+> Ordered data, stock prices are ordered over time (also shown in slides)
 
 # 3 Relational Data and Models
 Consider the following schema defined for Lake Erie Cruises. The schema keeps track of ships, cruises, ports and passengers. A cruise refers to the sailing of a ship on a specific date.
@@ -87,17 +103,23 @@ The following facts have been validated.
 > [!Ans]
 > | Relation | PK                       | CK                    | 
 > | -------- | ------------------------ | --------------------- |
-> | Ship     |                          |                       |
-> | Cruise   |                          |                       |
-> | Port     |                          |                       |
+> | Ship     | ship_number              |                       |
+> | Cruise   | cruise_number            |                       |
+> | Port     | port_name                | dock_number           |
 > | Visit    |                          |                       |
-> | Passenger|                          |                       |
+> | Passenger| passenger_number         | SSN                   |
 > | Voyage   |                          |                       |
 
-
-
-
 ## (10) Identify the foreign keys of each relation, given your choice of primary keys.
+> [!Ans]
+> | Relation | FK |
+> | -------- | -- |
+> | Ship     |  |
+> | Cruise   | ship_number |
+> | Port     | |
+> | Visit    | cruise_number |
+> | Passenger| |
+> | Voyage   | passenger_number, cruise_number |
 
 ## (10) Identify the foreign keys that are also a part of the primary keys of the same schema they are defined on.
 
