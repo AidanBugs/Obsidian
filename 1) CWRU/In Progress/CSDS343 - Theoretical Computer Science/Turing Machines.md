@@ -125,3 +125,8 @@ M: write next sequence of numbers to tape 3 (initially 1)
 Copy input to tape 2
 
 Simulate N on type 2. At each step, we consult tape 3 to see which choice to make.
+
+# Church-Turing Thesis
+Any language that isi decidable is also turing decidable on a reasonable model of computation
+
+$L=\{<m>|m$ is a turing machine $\}$
