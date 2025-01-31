@@ -5,7 +5,7 @@ tags:
   - HW
 links: 
 deadline: 2025-01-30
-status: 0.6
+status: 1
 ---
 # 1 Data and Attributes Types
 Determine the type of the following attributes of real-world objects (Nominal, Ordinal,  
