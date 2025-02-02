@@ -2,7 +2,8 @@
 date: 01/17/25
 tags:
   - CSDS
-links: 
+links:
+  - "[[Proofs]]"
 deadline: 
 status:
 ---
@@ -127,6 +128,70 @@ Copy input to tape 2
 Simulate N on type 2. At each step, we consult tape 3 to see which choice to make.
 
 # Church-Turing Thesis
-Any language that isi decidable is also turing decidable on a reasonable model of computation
+Any language that is decidable is also turing decidable on a reasonable model of computation
 
 $L=\{<m>|m$ is a turing machine $\}$
+
+$<m>$ is the representation of object $m$ using alphabet $\Sigma_{1}$
+
+$m=(\Sigma ,\Gamma , Q, \delta )$
+
+Each $\Sigma ,\Gamma , Q, \delta $ can be writteen on paper -> so can be written on a tape
+
+We need every $Q\times \Gamma$ pair to be a possible input on $\delta$
+
+Create $M_{L}$ to decide $L$
+
+- $M_{L}$ scans tape to verify $\Sigma ,\Gamma , Q, \delta$ exists
+- $\Sigma \subset \Gamma$ and if is defined on every $(q,x)$ pair $q\in Q, x\in \Gamma$. And each pair only appears once on left side
+
+$L$ is decidable!
+# Alternate Turing Machine $A_{TM}$
+$A_{TM}=\{<M,w>|M$ is a TM that accepts $w$ if $w$ is input to $M\}$
+
+Theorem: $A_{TM}$ is Turing-recognizable
+
+Proof:
+Create a "Universal Tturing Machine" $U$
+
+$U$ takes as input the description of a TM $M$ and a string $w$ and it runs $M$ on $w$
+
+$U$ will have 3 tapes
+Tape 1: $<M,w>$
+Tape 2: Simulate $M$ on $w$ (Basically this is $M$'s tape
+Tape 3: Store the current state of $M$ (or scratch work)
+
+$U$ on input $x$
+1. Verify $x$ is of form $<M,w>$ with $M$ a valid TM description & $w$ a string of $M$'s $\Sigma$
+2. Copies $w$ to tape 2 + place tape 2 head on left
+3. Write $q_{0}$ to tape 3
+
+At each step, $U$ looks at state on tape 3 + symbol head on tape 2. Searches $\delta$ on tape 1 to find the correct transition step.
+
+Once found, write the new state to tape 3 and change the symbol and move head for tape 2 accordingly.
+
+If tape 3 ever goes to $q_{accept}$ then $U$ accepts. 
+If tape 3 goes to $q_{reject}$ then $U$ rejects.
+Otherwise $U$ runs forever.
+
+Therefore $U$ will recognize $<M,w>$
+
+Theorem: $A_{TM}$ is not decidable
+
+Proof:
+Proof by contradiction. Assume $A_{TM}$ is decidable. Then $\exists M_{A_{TM}}$ that decides $A_{TM}$
+
+Create a TM $D$
+
+$D$ on input $x$ will either accept / reject.
+Within $D$ we place $M_{A_{TM}}$
+We $D$ runs $M_{A_{TM}}$ on $<x,x>$ and reverse output
+
+What does $D$ do when $x=D$?
+- Runs $M_{A_{TM}}$ on $<D,D>$
+- If $M_{A_{TM}}$ accepts $<D,D>$ then $D$ is supposed to accept itself
+    - However if $M_{A_{TM}}$ accepts then $D$ rejects
+    - This creates a contradiction bc $D$ cannot both accept and reject itself
+- Same logic as above if $M_{A_{TM}}$ rejects $<D,D>$
+
+Therefore $M_{A_{TM}}$ cannot exist by contradiction and $A_{TM}$ is not decidable.
