@@ -59,16 +59,30 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2) 2nd Brain/Daily/2025/02) Feb/02 Sunday, February 2nd, 2025.md",
+                "file": "2) 2nd Brain/Daily/2025/02) Feb/01 Saturday, February 1st, 2025.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "02 Sunday, February 2nd, 2025"
+              "title": "01 Saturday, February 1st, 2025"
+            }
+          },
+          {
+            "id": "2a392990533a2ebc",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "1) CWRU/In Progress/STAT312 - Statistics for Engineer/HW/HW2-STAT312.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "HW2-STAT312"
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -257,22 +271,26 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "13e1e6cc45f893ed",
+  "active": "2a392990533a2ebc",
   "lastOpenFiles": [
-    "2) 2nd Brain/Daily/2025/01) Jan/31 Friday, January 31st, 2025.md",
+    "1) CWRU/In Progress/STAT312 - Statistics for Engineer/HW/HW2-STAT312.md~",
+    "1) CWRU/In Progress/STAT312 - Statistics for Engineer/HW/HW1-STAT312.md",
+    "2) 2nd Brain/Daily/2025/02) Feb/03 Monday, February 3rd, 2025.md",
+    "1) CWRU/In Progress/ENGR399 - Impact Engineering on Society/HW/HW2ENGR399.md",
+    "1) CWRU/In Progress/ENGR399 - Impact Engineering on Society/HW/HW2ENGR399.md~",
+    "1) CWRU/In Progress/Assignments.md",
+    "99) Meta-Data/Goals & TODO List.md",
+    "2) 2nd Brain/Daily/2025/02) Feb/01 Saturday, February 1st, 2025.md",
     "2) 2nd Brain/Daily/2025/02) Feb/02 Sunday, February 2nd, 2025.md",
+    "2) 2nd Brain/Daily/2025/01) Jan/31 Friday, January 31st, 2025.md",
     "2) 2nd Brain/Daily/2025/02) Feb",
     "1) CWRU/In Progress/CSDS343 - Theoretical Computer Science/Turing Machines.md~",
-    "1) CWRU/In Progress/Assignments.md",
     "1) CWRU/In Progress/CSDS343 - Theoretical Computer Science/HW/HW2CSDS343.md",
     "2) 2nd Brain/Daily/2025/01) Jan/30 Thursday, January 30th, 2025.md",
     "1) CWRU/In Progress/CSDS234 - Structured & Unstructured Data/HW/HW1CSDS234.md",
     "1) CWRU/Completed/CSDS302 - Discrete Mathematics/Proofs.md",
     "1) CWRU/In Progress/CSDS343 - Theoretical Computer Science/Turing Machines.md",
     "1) CWRU/In Progress/CSDS234 - Structured & Unstructured Data/HW/HW1CSDS234.pdf",
-    "1) CWRU/In Progress/ENGR399 - Impact Engineering on Society/HW/HW2ENGR399.md",
-    "1) CWRU/In Progress/ENGR399 - Impact Engineering on Society/HW/HW2ENGR399.md~",
-    "1) CWRU/In Progress/STAT312 - Statistics for Engineer/HW/HW2-STAT312.md~",
     "1) CWRU/In Progress/STAT312 - Statistics for Engineer/HW/HW2-STAT312.md",
     "1) CWRU/In Progress/CSDS234 - Structured & Unstructured Data/HW/HW1CSDS234.md~",
     "1) CWRU/In Progress/ENGR399 - Impact Engineering on Society/HW/HW1ENGR399.md",
@@ -290,11 +308,6 @@
     "1) CWRU/In Progress/DSCI330 - Cognition and Computation/Frames.md~",
     "1) CWRU/In Progress/DSCI330 - Cognition and Computation/Frames.md",
     "1) CWRU/In Progress/CSDS343 - Theoretical Computer Science/HW/HW1CSDS343.md~",
-    "2) 2nd Brain/Daily/2025/01) Jan/24 Friday, January 24th, 2025.md",
-    "99) Meta-Data/Goals & TODO List.md",
-    "Excalidraw/Drawing 2025-01-25 08.52.44.excalidraw.md",
-    "2) 2nd Brain/Daily/2025/01) Jan/23 Thursday, January 23rd, 2025.md",
-    "1) CWRU/In Progress/DSCI330 - Cognition and Computation/Pre 1st Day Stuff.md",
     "Untitled.canvas",
     "Image Dump/Pasted Image 20241204095142_977.png",
     "Image Dump/Pasted image 20241204145930.png",

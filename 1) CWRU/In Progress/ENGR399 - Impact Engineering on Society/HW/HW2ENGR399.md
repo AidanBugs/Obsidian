@@ -5,7 +5,7 @@ tags:
   - HW
 links: 
 deadline: 2025-02-02
-status:
+status: 1
 ---
 # 1
 1. Why did Firestone believe they would be unaffected by the fighting in Liberia? (0 - 5 min)
