@@ -30,23 +30,23 @@ The workers were asking for refuge away from the battle. Firestone's answer was 
 
 6. What did the Firestone management do on June 14, 1990? What were some things that happened with the workers on the farm after this? (25 - 35 min)
 
-\*
+Firestone Management evacuated Liberia and flew back to the US. The Liberian workers were not evacuated and left on the farm. Many of these workers were killed based on which tribe they were from. 
 
 7. Where was the attorney for Firestone from? What did he say was the "real dilemma, with a lot of soul searching and tough tough decision making"? (35 - 45 min)
 
 They hired a liberian attorney based in the US. There was tremendous worry for the safety of the thousands of liberians they had employed which was the real dilemma he mentioned.
 
-8. Who was Amos Sawyer? What did Charles Taylor claim his position was? What was the Firestone attorney’s view on their legitimacy of Sawyer's and Taylor's positions?\* What did Sawyer and Taylor say in regard to American intervention? (35 - 45 min)
+8. Who was Amos Sawyer? What did Charles Taylor claim his position was? What was the Firestone attorney’s view on their legitimacy of Sawyer's and Taylor's positions? What did Sawyer and Taylor say in regard to American intervention? (35 - 45 min)
 
-Amos Sawyer was the interim president. The attorney viewed that Sawyer's and Taylor's positions had no legitimacy. Taylor called himself president and his wife the first lady. 
+Amos Sawyer was the interim president. Taylor called himself president and his wife the first lady. The attorney viewed that Sawyer's and Taylor's positions had no legitimacy. Sawyer believed that America had left them and there would be no intervention.
 
 9. Who were Taylor’s shock troops? (35 - 45 min)
 
 Taylor recruited many children as soldiers. Taylor's special unit was called the small boys unit which were comprised of many young orphans.
 
-10. Who were the Khran and what was happening with them? \* Do you think this should have impacted Firestone’s decision making? (45 - 55 min)
+10. Who were the Khran and what was happening with them? Do you think this should have impacted Firestone’s decision making? (45 - 55 min)
 
-Khran was Doe's tribe and they were attempting to flee the coutry. There were reports that the Khran tribe were at risk of genocide. 
+Khran was Doe's tribe and they were attempting to flee the coutry. There were reports that the Khran tribe were at risk of genocide. Taylor's forces were commiting ethnic cleansing by targeting the Khran tribe. This should have impacted Firestone's decision making because it highlights the extreme dangers the liberians are facing.
 
 11. What was the key demand made by Taylor to Firestone? (45 - 55 min)
 
@@ -54,23 +54,23 @@ Taylor wanted Firestone to recognize his forces as a defacto government and if F
 
 12. The Firestone lawyer argued that Firestone did the right thing in dealing with Taylor, by saying "“The easy answer for Firestone would have been, in my opinion, to say ‘We’re out of here....'". This could be considered a virtue ethics argument. What are the virtues that he says Firestone is displaying? (55 - 65 min)
 
-\* this was at around 55 but i did not get it
+They felt a sense of responsibility to Liberia and the workers they have worked with for years and so they decided to stay. As such, they are displaying a sense of commitment as well as responsibility.
 
 13. Firestone signed a memorandum of understanding with Taylor. What did Firestone receive in this agreement? What did Taylor receive? (55 - 65 min)
 
-Taylor made Firestone pay them taxes. 
+Firestone recieved permission to continue operation and that Taylor would not harm the managers. Taylor made Firestone pay them taxes, Taylor made them use a specific port which Taylor controlled. 
 
 14. One of the people interviewed said “they gave us a hard time because we ran away. That’s the term that they used”.  In this statement, who is "they", who is it that "ran away", and what is meant by "gave us a hard time"?
 
-
+The Liberians who worked at the Firestone plants gave the upper management a hard time because they ran away from the civil war without much regard for the locals. "They" refers to the local liberians who worked for Firestone, while the people that "ran away" were the Firestone managers. The "hard time" was because the workers were quite wary of the managers and if a conversation about the war ever occured the Liberians would look at them distastefully and say that they ran away.
 
 15. In October 1992, Firestone management left Liberia, not to return for several years. What event precipitated this? (65 - 75 min)
 
-
+Taylor made an all out assualt on Monrovia, that part of Liberia which was not under Taylor's control. This was particularly dangerous because Taylor now had much more money (from Firestone taxes and other resources) which he used to buy alot of weapons.
 
 16. In his trial, what did Charles Taylor say about the specific role that Firestone played in his rise to power. (75 min - 83 min)
 
-
+Taylor claimed capturing Firestone gave them the needed financial assistance for the revolution. Stating that once they captured the Firestone plants they told them they could not continue until they agreed to their demands (taxes -> funding). 
 
 # 2 How does Firestone describe its economic impact, educational and medical impacts, and the benefits to workers in Liberia? Do you think the relationship between Firestone and Liberia is mutually beneficial and ethically commendable, or do you think Firestone is unfairly profiting at the expense of Liberia?
 
