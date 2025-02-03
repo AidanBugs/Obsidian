@@ -195,3 +195,8 @@ What does $D$ do when $x=D$?
 - Same logic as above if $M_{A_{TM}}$ rejects $<D,D>$
 
 Therefore $M_{A_{TM}}$ cannot exist by contradiction and $A_{TM}$ is not decidable.
+
+## Other things with $A_{TM}$
+Since $A_{TM}$ is recognizable (not decidable), $A'_{TM}$ is not decidable or recognizable.
+
+We can also use $M_{A_{TM}}$ as an impossible TM so we can make different $M_{A_{TM}}$'s with different submachines and if those machines prove $M_{A_{TM}}$ exists then those submachines cannot exist.

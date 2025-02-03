@@ -5,7 +5,7 @@ tags:
   - "#HW"
 links: 
 deadline: 2025-02-04
-status:
+status: 0.9
 ---
 # 1
 ## A $P(A)$
@@ -99,5 +99,5 @@ status:
 
 ### 4
 > [!Ans]
-> $P(X\leq 1\lor X=2)=P(1\cup 2)=P(1)+P(2)-(P(1)* P(2))=\frac{4}{7}+\frac{2}{7}-\frac{8}{49}=\frac{34}{49}$
+> $P(X\leq 1\lor X=2)=P(1\cup 2)=P(1)+P(2)=\frac{4}{7}+\frac{2}{7}=\frac{6}{7}$
 

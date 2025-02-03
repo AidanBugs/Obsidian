@@ -3,9 +3,9 @@ date: "2025-02-03"
 tags:
   - "#Daily"
 links: 
-Workout: 
-Water: 
-Stretch: 
+Workout: 0.5
+Water: 0.4
+Stretch: 0.1
 Write:
 ---
 # Reflection
