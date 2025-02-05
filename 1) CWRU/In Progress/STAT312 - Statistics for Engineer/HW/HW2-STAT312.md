@@ -5,7 +5,7 @@ tags:
   - "#HW"
 links: 
 deadline: 2025-02-04
-status: 0.9
+status: 1
 ---
 # 1
 ## A $P(A)$

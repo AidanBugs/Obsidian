@@ -5,12 +5,18 @@ tags:
   - HW
 links: 
 deadline: 2025-02-05
-status: 0.1
+status: 0.6
 ---
 # 1 Multi-core TM
 Let's try to relate out multi-core turing machine to a k-tape turing machine. Our k-tape turing maachine has a theorem which any language $L$ can be decided on a k-tape turing machine can also be decided on a normal turing machine.
 
 Unlike the multi-core turing machine, our k-tape turing machine only processes one state at a time as opposed to one state for each head. 
+
+We can fix this issue by adding a new tape which will be a string of each state the tapes are in. That is the ith character will be the state for the ith tape. As such, we create states $q_{1}read,q_{2}read,...,q_{k}read$ to read each of these states. Each of these read states move our machine to the corresponding $q_{i}s$ where $i$ is the tape to be affected and $s$ is the state for that tape. Given a $q_{i}s$ we apply the corresponding transition to our $i$th tape. On our state tape, we change the current symbol to match the state that our $i$th tape should be in now, and move to the state tape head to the right and go into the $q_{i+1}read$ state to read the state of the next tape. When $i=k$ we apply the correct transition to the k-tape then move our state head back to the start, checking if any state is $q_{accept}$, if any are we move our machine to $q_{accept}$.
+
+Essentially, for each tape we assign it a state on our state tape and read off the tape moving left to right and applying the transitions accordingly.
+
+This in all is $O(kn)$ where $n$ is the number of steps the multi-core TM would take and $k$ is the number of tapes we have. 
 
 # 2 Broken TM (left move will move head to start)
 

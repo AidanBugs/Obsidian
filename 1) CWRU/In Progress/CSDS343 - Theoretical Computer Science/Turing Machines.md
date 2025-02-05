@@ -200,3 +200,73 @@ Therefore $M_{A_{TM}}$ cannot exist by contradiction and $A_{TM}$ is not decidab
 Since $A_{TM}$ is recognizable (not decidable), $A'_{TM}$ is not decidable or recognizable.
 
 We can also use $M_{A_{TM}}$ as an impossible TM so we can make different $M_{A_{TM}}$'s with different submachines and if those machines prove $M_{A_{TM}}$ exists then those submachines cannot exist.
+
+# Other Models of TM's
+## A TM can comute a function
+- The TM has input
+- It has a halt state, and when it halts the tape contains string at the head position is the output
+
+Theorem:
+A TM can compute a function $f$ iff there exists a TM that can decide the language $\{<x,f(x)> | x\in\Sigma\}$
+
+## A TM can enumerate a language. It produces all strings of the language
+- Starts with an empty tape
+- It has a special "read" state, When it enters this state the tape contains just the strings of the language with a separator symbol.
+
+Theorem:
+A language $L$ can be enumerated in lexicalgraphical order (smallest to largest, alphabetical order of strings of the same size) iff $L$ is decidable.
+
+Proof
+->
+Assume $L$ can be enumerated in lexiicalgraphical order.
+Create $M$ to decide $L$
+
+$M$ has 2 tapes
+Tape 1: input
+Tape 2: enumerates $L$
+
+When the enumerator enumerates the next string then we compare with the input
+If they match: Accept
+If string enumerated is longer: Reject
+Else: Enumerate next
+
+<-
+Assume $L$ is decidable. Build a TM $E$ that enumerates $L$
+Tape 1: The enumeration tape
+Tape 2: Enumerate $\Sigma$ (in lexicalgraphical order)
+Tape 3: Simulate $M$
+
+Each time tape 2 makes a new string, we put it on tape 3 and simulate $M$
+If $M$ accepts: write string to tape 1
+Continue on tape 2 for next string
+
+Theorem:
+A language can be enumerated (not ordered) iff $L$ is recognizable
+
+Proof
+-->
+Assume $L$ is enumerable create a TM $M$ to recognize $L$
+
+Tape 1: input
+Tape 2: enumerator
+
+If tape 2 produces the input: accept
+Else: continue
+
+<--
+Assume $L$ is recognizable. Create a TM $E$ to enumerate $L$
+Tape 1: the enumrator tape
+Tape 2: Enumerate $\Sigma$ (lexicalgraphical order)
+Tape 3: Simulate $M$ (The recognizer for $L$)
+Tape 4: $k$
+
+"Dove Tailing"
+1. Enumerate next string of $\Sigma$ on tape 2
+2. Increase $k$ by $1$
+3. For each string on tape 2 simulate that string on tape 3 for $k$ steps
+4. If any simulation of $M$ accepts, check tape 1 to see if that string is already on the tape, if not add it
+
+Suppose $x\in L$ then $\exists k'$ where $M$ accepts $x$. Eventually both $x$ will appear on tape 2 and $k'$ will produce on tape 4. Once both happen $x$ will be added to tape 1.
+
+# $ANY+\{<M>|L(M)\neq\phi$
+
