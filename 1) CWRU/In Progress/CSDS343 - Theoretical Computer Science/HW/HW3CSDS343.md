@@ -5,7 +5,7 @@ tags:
   - HW
 links: 
 deadline: 2025-02-05
-status: 0.6
+status: 1
 ---
 # 1 Multi-core TM
 Let's try to relate out multi-core turing machine to a k-tape turing machine. Our k-tape turing maachine has a theorem which any language $L$ can be decided on a k-tape turing machine can also be decided on a normal turing machine.
@@ -18,10 +18,38 @@ Essentially, for each tape we assign it a state on our state tape and read off t
 
 This in all is $O(kn)$ where $n$ is the number of steps the multi-core TM would take and $k$ is the number of tapes we have. 
 
+Thus, we know that a regular TM can model a multi-core TM because a regular TM can do anything a k-tape turing machine can do and we just proved a k-tape turing machine can do anything a multi-core TM can do.
+
 # 2 Broken TM (left move will move head to start)
+Theorem: A broken tape machine can model a normal tape machine.
+
+Sub-theorem: A broken tape machine can model a 2-tape broken machine.
+
+Sub-proof:
+First we will prove that a single broken tape TM can model a dual tape broken TM. 
+
+First we place a # at the end of our tape. Our single broken tape is modeled $T_{1}\#T_{2}$ where $T_{1},T_{2}$ represents the contents of tape 1 and 2 respectively. Additionally, we are able to mark where the head is on each tape in order to keep track of the head of each tape. Additionally with the head marker we can mark the state to remember which state to run. A right move for each tape is trivial, as is a left move with tape 1. A left move on tape 2 is unmark the current character, reset to the left, ignore everything until we find the \#, then we mark the next character as tape 2 head and mark the corresponding tape. 
+
+Now what if we wish to use the blanks to the right of either tape? This is trivial for tape 2 (keep moving right). For tape 1 however, we enter a copy state where we copy our tape 2 to after a new \#. That is our tape now reads $T_{1}\#T_{2}\#T_{2}$. We can then replace everything from our first \# to the second \# as blanks to allow our tape 1 to use blanks. 
+
+Thus our machine works to read tape 1, follow any subprocesses needed (left move, extend blanks etc) and apply the correct state for tape 1. Then we follow the same process for tape 2, complete subprocesses and apply the correct state transformation.
+
+As such, we are able to run 2 broken tapes on a single broken tape machine.
+
+Sub-theorem: A 2-tape broken machine can model a regular TM.
+
+Sub-proof:
+For our 2-boken tape machine, we will have tape 1 be the input while tape 2 will be used to store our count. Every time we move one to the right on our input tape, we would incriment our count by one (adding a 0 to the end of tape 2). Once we go left on our tape (and go back to start) we remove the first 0 on our tape 2 (replace with a \#). Then for each 0 on tape 2 we move one space to the right on tape 1 and stop once we reach a blank on tape 2. Since we have one less 0 then right moves we stop one space to the left of where we were on tape 1. This process will simulate one left move. Thus we would continue our correct state and run whichever state we need to.
+
+More formally for each state that moves left $qL_{i}$, we create a substate $qL_{iR}$ which counts the 0s to return back to its original state. Specifically, our $qL_{iR}$ will ignore all \# and move the head on tape 1 to the right when there are 0's on tape 2, once we reach a blank we run $qL_{i}$ for tape one and adjust accordingly. Everytime we need to move left we reset both heads to the left, count the 0's on tape 2 (after removing the first 0) and for each 0 on tape 2 we move the head on tape 1 once to the right.
+
+Thus since we can move left normally (while preserving state) we are able to mimic a normal turing machine on our 2 tape turing machine.
+
+Proof:
+Since we have proved both of our sub-theorems, we know that a broken turing machine will still work as a normal turing machine because we proved a broken turing machine can mimic a 2 broken tape TM which we proved is able to mimic a regular TM.
 
 # 3 Prove the following language is recognizable and not decidable: $H_{TM}=\{<M,w>|M$ halts on inut $w\}$
-## Recognizablity
+## Recognizability
 ### Theorem
 $H_{TM}$ is Turing-recognizable.
 ### Proof:

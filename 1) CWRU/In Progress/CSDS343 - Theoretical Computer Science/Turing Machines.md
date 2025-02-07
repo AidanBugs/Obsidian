@@ -268,5 +268,24 @@ Tape 4: $k$
 
 Suppose $x\in L$ then $\exists k'$ where $M$ accepts $x$. Eventually both $x$ will appear on tape 2 and $k'$ will produce on tape 4. Once both happen $x$ will be added to tape 1.
 
-# $ANY+\{<M>|L(M)\neq\phi$
+# Hi $ANY=\{<M>|L(M)\neq\phi\}$
+We have proved $ANY$ is not decidable (using $M_{A_{TM}}$)
+
+Prove $ANY$ is recognizable
+Create a machine $M_{ANY}$ that recognizes $ANY$
+
+Tape 1: input $<M>$
+Tape 2: Enumerate $\Sigma$
+Tape 3: $k$
+Tape 4: simulate $M$ on an input
+
+At each step produce the next string of $\Sigma$
+Increase $k$ by 1
+Simulate each enumerated string on tape 2 with $M$ on tape 4
+If any simulation accepts, then $M_{ANY}$ accepts.
+
+With this we an prove $NONE=\{<M>|L(M)=\phi\}$ is not recognizable.
+Compliment of $ANY=\{x|x!=TM\}\cup\{<M>|L(M)=\phi\}$
+We know that $\{x|x!=TM\}$ is decidable so $NONE$ is not recognizable.
+
 
