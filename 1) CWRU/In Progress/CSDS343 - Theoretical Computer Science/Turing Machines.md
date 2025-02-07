@@ -268,7 +268,7 @@ Tape 4: $k$
 
 Suppose $x\in L$ then $\exists k'$ where $M$ accepts $x$. Eventually both $x$ will appear on tape 2 and $k'$ will produce on tape 4. Once both happen $x$ will be added to tape 1.
 
-# Hi $ANY=\{<M>|L(M)\neq\phi\}$
+# $ANY=\{<M>|L(M)\neq\phi\}$
 We have proved $ANY$ is not decidable (using $M_{A_{TM}}$)
 
 Prove $ANY$ is recognizable
@@ -288,4 +288,36 @@ With this we an prove $NONE=\{<M>|L(M)=\phi\}$ is not recognizable.
 Compliment of $ANY=\{x|x!=TM\}\cup\{<M>|L(M)=\phi\}$
 We know that $\{x|x!=TM\}$ is decidable so $NONE$ is not recognizable.
 
+# Mappings
+Def $A\leq_{m} B$, language $A$ is many-to-one reducible to language $B$ if there exists a computible function $f:A\rightarrow B$ such that $x\in A$ iff $f(x)\in B$
 
+Theorem: 
+If $A\leq_{m} B$ and
+- $B$ is decidable then $A$ is decidable
+- $B$ is recognizable the $A$ is recognizable
+- $A$ is not decidable then $B$ is not decidable
+
+Proof:
+Suppose $B$ is decidable
+Then we have $M_{B}$ that decides $B$
+Create $M_{A}$
+on input $x$, create $f(x)$ and pass $f(x)$ to $M_{B}$.
+Accept / reject accordingly.
+
+Same arguements for recognizability.
+
+Thus we can use these arguements to prove Machines recognizable or not decidable etc.
+## EX
+$ALL=\{<M>|L(M)=\Sigma\}$
+Prove $A_{TM}\leq_{m}ALL$
+Create $f$
+$f$ if $x$ is not a TM description $f(x)$ is not a TM.
+$x=<M,w>\rightarrow f(x)= <m'>$
+$m'$ on input $y$
+Simulate $M$ on $w$, accept / reject accordingly.
+
+If $x\in A_{TM}$ show $M\$ accepts all, and reject if reject.
+Trivial :)
+
+# Identifying Loops
+Given a finite tape, we know it loops if we reach a point with the same tape, same head position, same state.
