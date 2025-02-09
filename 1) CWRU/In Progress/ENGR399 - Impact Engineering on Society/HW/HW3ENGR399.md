@@ -10,7 +10,7 @@ status: 0
 # 1
 ## (1) What does Bostrom mean by an “intelligence explosion”? Why does he believe that the upsides of superintelligence could be very good for humanity?
 
-
+When Bostrom says intelligence explosion he means there will be a rapid development in AI research. This is because he believes that eventually AI research will be conducted by AI which will eventually be able to conduct research faster and faster as they essentially improve themselves. Bostrom argues that superintelligence will help develop better tools to deal with poverty, clean energy, medicine, etc. 
 
 # 2
 ## (1) What are the three categories that superintelligent agents could fall into, according to Bostrom? List them and provide a short description of each.
