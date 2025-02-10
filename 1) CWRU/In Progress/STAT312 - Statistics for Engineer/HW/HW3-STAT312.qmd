@@ -1,0 +1,59 @@
+---
+date: 02/09/25
+tags:
+  - "#Math"
+  - "#HW"
+links: 
+deadline: 2025-02-11
+status: 0
+---
+# 1
+$P(X)=\frac{8}{7}\frac{1}{2}^{X}$
+
+cdf$=F(a)=\int_{1}^{a}f(x)dx=\frac{8}{7}(\frac{1}{2\ln(2)}-\frac{1}{2^{a}\ln(2)})$
+
+## A
+
+## B
+
+## C
+
+## D
+
+# 2
+## A
+
+## B
+
+# 3
+## A
+
+## B
+
+## C
+
+## D
+```{r}
+print("A")
+
+print("B")
+
+print("C")
+```
+## E
+
+# 4
+## A
+
+## B
+
+## C
+
+## D
+
+## E
+```{r}
+print("A")
+
+print("B")
+```
