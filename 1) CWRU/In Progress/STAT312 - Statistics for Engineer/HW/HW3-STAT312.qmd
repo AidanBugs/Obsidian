@@ -7,53 +7,103 @@ links:
 deadline: 2025-02-11
 status: 0
 ---
-# 1
+# 1 
 $P(X)=\frac{8}{7}\frac{1}{2}^{X}$
 
-cdf$=F(a)=\int_{1}^{a}f(x)dx=\frac{8}{7}(\frac{1}{2\ln(2)}-\frac{1}{2^{a}\ln(2)})$
+cdf $=F(a)=\sum\limits_{n=1}^{a}f(n)=\sum\limits_{n=1}^{a}\frac{8}{7}\frac{1}{2}^n$
 
-## A
+$$
+F(x) =
+\begin{cases}
+0 & \text{for} \quad x < 1 \\
+\frac{4}{7} & \text{for} \quad x = 1 \\
+\frac{6}{7} & \text{for} \quad x = 2 \\
+1 & \text{for} \quad x = 3 \\
+\end{cases}
+$$
 
-## B
+## A $P(X<1.5)$
 
-## C
+$P(X<1.5)=F(1)=\frac{4}{7}$
 
-## D
+## B $P(X\leq 3)$
+
+$P(X\leq 3)=F(3)=1$
+
+## C $P(X > 2)$
+
+$P(X>2)=F(3)-F(2)=\frac{1}{7}$ 
+
+## D $P(1<X\leq 2)$
+
+$P(1<X\leq 2)=F(2)-F(1)=\frac{2}{7}$
 
 # 2
 ## A
+ 
+$$
+f(X) =
+\begin{cases}
+0.06 & \text{for} \quad x=350 \\
+0.1 & \text{for} \quad x= 450\\
+0.37 &\text{for} \quad x= 550 \\
+0.47 &\text{for} \quad x= 650
+\end{cases}
+$$
 
 ## B
+
+$\mu = E(X) = \sum\limits_{x}xf(x)=0.06*350+0.1*450+0.37*550+0.47*650=575$
+$\sigma = \sqrt{VAR(X)}=\sqrt{E(X^2)-\mu^2}=$
+$\sqrt{0.06*350^2+0.1*450^2+0.36*550^2+0.47*650^2-575^2}=\sqrt{7475}=86.458$
 
 # 3
-## A
+## A Exactly 5 right
 
-## B
+$P(X=5)=C^{25}_{5}(0.25)^5(0.75)^{20}=\frac{25*24*23*22*21}{5*4*3*2}0.25^{5}0.75^{20}=0.16453$
 
-## C
+## B More than 2
+
+$P(2<X)=1-P(X\leq 2)=0.96789$
+
+## C Fewer than 3
+
+$P(X<3)=P(X\leq 3)-P(X=3)=0.0321$
 
 ## D
 ```{r}
-print("A")
-
-print("B")
-
-print("C")
+A <- dbinom(5,25,0.25)
+print(paste("A:", A))
+print(paste("B:", (1-pbinom(2,25,0.25))))
+print(paste("C", (pbinom(3,25,0.25)-dbinom(3,25,0.25))))
 ```
 ## E
 
+$\mu=np=6.25$
+
+$\sigma = np(1-p)=4.6875$
+
 # 4
+$12$ per hour $=0.2$ per minute, so $\lambda = 0.2,T=$ minutes
+
 ## A
+5 minutes, so $\lambda T= 1$
+$P(X=0)=\frac{e^{-0.2(5)}(0.2*5)^{0}}{1}=\frac{1}{e}=0.36788$
 
 ## B
 
+$P(X\geq 3)=1-P(X\leq 3)+P(X=3)=0.0803$
+
 ## C
+10 mintes, so $\lambda T=2$
+$P(X=0)=\frac{e^{-2}(0.2*5)^0}{1}=\frac{1}{e^2}=0.135335$
 
 ## D
 
+$P(X=0)=0.001=\frac{e^{-0.2*T}(0.2T)^0}{1}\rightarrow 0.001=e^{-0.2T}\rightarrow 1000=e^{0.2T}=0.2T=\ln(1000)\rightarrow T=5\ln(1000)$
+
 ## E
 ```{r}
-print("A")
-
-print("B")
+print(paste("A:", dpois(0,0.2*5)))
+print(paste("B:",1-ppois(3,1)+dpois(3,1)))
 ```

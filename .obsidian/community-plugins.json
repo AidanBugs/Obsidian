@@ -14,5 +14,6 @@
   "templater-obsidian",
   "dataview",
   "heatmap-calendar",
-  "obsidian-graphviz"
+  "obsidian-graphviz",
+  "qmd-as-md-obsidian"
 ]
