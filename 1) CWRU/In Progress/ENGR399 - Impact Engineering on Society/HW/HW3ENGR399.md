@@ -5,7 +5,7 @@ tags:
   - HW
 links: 
 deadline: 2025-02-09
-status: 0
+status: 1
 ---
 # 1
 ## (1) What does Bostrom mean by an “intelligence explosion”? Why does he believe that the upsides of superintelligence could be very good for humanity?
@@ -95,14 +95,17 @@ The idea with wireheading is when training a superintelligence a programmer woul
 
 ## (5) What does Bostrom mean by “infrastructure profusion”? What is the connection between infrastructure profusion and wireheading? Give another example—one that doesn’t involve wireheading—of how infrastructure profusion could have catastrophic consequences for humanity.
 
- 
+"Infrastructure profusion" is the overproduction of systems and/or resources that a superintelligent agent could use to reach its objectives. In the case of wireheadingn, the superintelligent could automate the reward system / circuit to perpetually recieve the reward. Infrastructure profusion could also take form as extreme economic control in which the superintelligence prioritizes making money using the world's stock market as a mere tool. Once the superintelligence obtains enough resources it could destabilze the entire worlds economy through a series of stock shortages or other stock shenanigans.
 
 ## (6) Many leading figures in the field of AI today have read Bostrom’s Superintelligence, and many agree that superintelligence carries with it the risk of total human annihilation. For example, OpenAI is explicitly trying to build superintelligent machines (a type of “artificial general intelligence,” or AGI—a more common term these days). This company was co-founded by Sam Altman, who wrote in 2015 that the “development of superhuman machine intelligence is probably the greatest threat to the continued existence of humanity.” In 2023, he said that “the bad case” with respect to AGI and superintelligence is “lights out for all of us.” At another point, he declared that “I think that AI will … most likely sort of lead to the end of the world, but in the meantime there will be great companies created with serious machine learning,” and “probably AI will kill us all, but until then we’re going to turn out a lot of great students.” Do you agree with Altman and Bostrom that superintelligence (or AGI) could pose an “existential risk” to humanity? Do you think it’s wise for companies like OpenAI to be racing to build superintelligent machines? Or do you think the risks aren’t worth the potential benefits (cures for diseases, huge profits for companies like Microsoft, and so on)?
 
+While I recognize some of the risks associated with the possibilites of an AGI, I believe the potential benefits outweigh these risks. For example, if there is the creation of a quality superintelligence that is able to solve problems using a new plane of intelligence foreign to humans, this would be a whole new feild of research and development. I think OpenAI and other companies should strive to create an AGI because of the countless potential benefits they may have. With more companies pursuing the creation of an AGI, there is more competition and thus the speed at which we are advancing in the field of AI is rapidly increasing.
 
 
 # 5
 ## (1) Do you agree with Leopold Aschenbrenner’s claim that we need a “Manhattan Project” for AGI/superintelligence? Why do you think that Aschenbrenner worries about efforts outside of the US to build AGI/superintelligence posing a national security risk?
 
+Aschenbrenner believes that a non US AGI would have values that go against US values, such as communist beliefs. While the creation of an AGI be seen as a threat, I believe it is not enough to suggest the need for a Manhattan project. Rather, I believe a world-wide discussion about AGI rules, values, regulations, etc is more important for global growth rather than a potential Cold War.
 
+A I understand it, Aschenbrenner’s calls for a “Manhattan Project” for AGI because of his concern that rapid advancements in AI could pose significant risks, especially if global efforts are misaligned. His worry about non-US AGI development, particularly in authoritarian regimes like China, highlights the potential for these technologies to be used in ways that destabilize global power dynamics. While the urgency he proposes may be valid, focusing solely on national security may neglect the need for international cooperation on AI safety and governance. A balance between securing technological progress and fostering ethical, global frameworks could be the key to managing the risks of superintelligence.
 
