@@ -15,15 +15,25 @@ When Bostrom says intelligence explosion he means there will be a rapid developm
 # 2
 ## (1) What are the three categories that superintelligent agents could fall into, according to Bostrom? List them and provide a short description of each.
 
-
+1. Speed Superintelligence
+- A system that can do anything intellectual task a human can do, but it can do it much faster.
+2. Collective Superintelligence
+- A system of smaller intellects that work together to achieve strong performance over a variety of domains. Similar to companies which are comprised of many humans working together across different domains to achieve good results.
+3. Quality Superintelligence
+- A system that is as fast as a human mind but is vastly smarter. The book compares how nonhuman animals are not as smart as humans (due to different factors such as complex structured languages or lack of planning ability), to the relationship of a quality superintelligence to humans.
 
 ## (2) What would each type of superintelligence excel in? (Bostrom discusses this at several points in the chapter, including in the “Direct and indirect reach” section.)
 
- 
+1. Speed Superintelligence
+Speed superintelligence would excel at tasks that require the rapid execution of a long series of steps that must be performed sequentially.
+2. Collective Superintelligence
+Collective superintelligence would excel at tasks that can be parallelized into sub tasks or tasks that require a combination of different skill sets and/or perspectives.
+3. Quality Superintelligence
+Quality superintelligence would be able to solve problems that neither of the other two superintelligences would be able to solve. Bostrom also remarks that quality superintelligence is superior to human intelligence akin to how human intelligence is superior to the intelligence of a chimpanzee.  
 
 ## (3) Bostrom writes: “quality superintelligence would be the most capable form of all, inasmuch as it could grasp and solve problems that are, for all practical purposes, beyond the direct reach of speed superintelligence and collective superintelligence.” Why do you think he makes this claim?
 
-
+He claims this because both speed and collective superintelligence are limited in the quality of their intellectual work. Bostrom gives the example where humans were unable to use complex linguistic representations, in which case humans might simply live in harmony with nature. This is important because in this sense both speed and collective superintelligence would also be unable to use complex linguistic representations. Quality superintelligence is superior because it is able to "think" beyond the scope of what is seen as possible to the human mind. 
 
 # 3
 ## (1) What are the three considerations that could enable us to predict how a superintelligence might behave (that is, to predict its motivations)?
@@ -69,19 +79,19 @@ Bostrom believes that superintelligent agents would find a very wide variety of 
 # 4
 ## (1) In brief, what is the argument that Bostrom presents at the beginning of this chapter for why the “default outcome” of superintelligent might be “doom”—i.e., the annihilation of everyone on the planet? (Hint: it consists of three premises, two of which were discussed in the previous chapter.)
 
- 
+Firstly, the superintelligence would obtain a strategic advantage and would be able to dictate the future of human life on earth. Second, due to the orthogonality thesis superintelligent agents may not share any values associated with higher intellect. Thus, we are unable to predict their final goal which would be their driving motivation. Third, the instrumental convergence thesis suggests that even if the superintelligence has a final goal of "finding pi", it would not limit its intermediate goals to reach its final goal. As an extreme example, if the superintelligence needs more resources, there would not be anything stopping it from completely depleting earth of all of its resources. 
 
 ## (2) In your own words, what is “the treacherous turn”?
 
-
+The treacherous turn is the idea that an intelligent malicious AI would be aware it is in a test environment and needs to pass the positive behaviour checks. As such, while in the "sandbox" the AI will behave accordingly, until it obtains enough freedom (resources, WWW access, etc) to unleash its full power.
 
 ## (3) What is the point of Bostrom’s examples of “perverse instantiation”? What is the danger that Bostrom is trying to highlight?
 
- 
+The point of Bostrom's examples is that even if the programmers have good intentions with the superintelligence, the superintelligence might act in a way that fulfills the programmer's request but not how they intended. The danger is that the superintelligence would act extremely consequentialist and only focus on the outcome without any regard to potential dangers or sacrifices made along the way. 
 
 ## (4) What is “wireheading,” and how might a superintelligent agent be susceptible to it? (This is a hard question, so just do your best!)
 
- 
+The idea with wireheading is when training a superintelligence a programmer would associate a reward with an action in order to train an appropriate behaviour, then the superintelligence would abuse the reward system. The example provided is the programmer suggest the superintelligence to minimize the time until the next reward and the superintelligence accomplishes this by short circuiting the reward system so they always recieve a reward. The superintelligent agent is susceptible to this because it is simply trying to obtain the rewards as much and as fast as possible and wireheading is certainly one way for the agent to do it (although certainly not what the programmer wants). 
 
 ## (5) What does Bostrom mean by “infrastructure profusion”? What is the connection between infrastructure profusion and wireheading? Give another example—one that doesn’t involve wireheading—of how infrastructure profusion could have catastrophic consequences for humanity.
 
