@@ -1,0 +1,9 @@
+# HW4
+## 1
+
+## 2
+
+## 3
+### A Prove $A_{TM}\leq_{M}L_{add}$
+
+### B Prove $\bar{A_{TM}}\leq_{M}L_{add}$

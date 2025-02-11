@@ -6,6 +6,9 @@ tags:
 links: 
 deadline: 2025-02-11
 status: 0
+format:
+  pdf:
+    highlight-style: github
 ---
 # 1 
 $P(X)=\frac{8}{7}\frac{1}{2}^{X}$
@@ -46,16 +49,17 @@ f(X) =
 \begin{cases}
 0.06 & \text{for} \quad x=350 \\
 0.1 & \text{for} \quad x= 450\\
-0.37 &\text{for} \quad x= 550 \\
-0.47 &\text{for} \quad x= 650
+0.47 &\text{for} \quad x= 550 \\
+0.37 &\text{for} \quad x= 650
 \end{cases}
 $$
 
 ## B
 
-$\mu = E(X) = \sum\limits_{x}xf(x)=0.06*350+0.1*450+0.37*550+0.47*650=575$
+$\mu = E(X) = \sum\limits_{x}xf(x)=0.06*350+0.1*450+0.47*550+0.37*650=565$
+
 $\sigma = \sqrt{VAR(X)}=\sqrt{E(X^2)-\mu^2}=$
-$\sqrt{0.06*350^2+0.1*450^2+0.36*550^2+0.47*650^2-575^2}=\sqrt{7475}=86.458$
+$\sqrt{0.06*350^2+0.1*450^2+0.47*550^2+0.37*650^2-565^2}=\sqrt{6875}=82.9156$
 
 # 3
 ## A Exactly 5 right
@@ -88,6 +92,7 @@ $12$ per hour $=0.2$ per minute, so $\lambda = 0.2,T=$ minutes
 
 ## A
 5 minutes, so $\lambda T= 1$
+
 $P(X=0)=\frac{e^{-0.2(5)}(0.2*5)^{0}}{1}=\frac{1}{e}=0.36788$
 
 ## B
@@ -96,6 +101,7 @@ $P(X\geq 3)=1-P(X\leq 3)+P(X=3)=0.0803$
 
 ## C
 10 mintes, so $\lambda T=2$
+
 $P(X=0)=\frac{e^{-2}(0.2*5)^0}{1}=\frac{1}{e^2}=0.135335$
 
 ## D

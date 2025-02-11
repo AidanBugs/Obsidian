@@ -4,7 +4,7 @@ tags:
   - "#Daily"
 links: 
 Workout: 1
-Water: 0.4
+Water: 0.7
 Stretch: 0.2
 Write:
 ---
