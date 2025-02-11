@@ -316,7 +316,7 @@ $x=<M,w>\rightarrow f(x)= <m'>$
 $m'$ on input $y$
 Simulate $M$ on $w$, accept / reject accordingly.
 
-If $x\in A_{TM}$ show $M\$ accepts all, and reject if reject.
+If $x\in A_{TM}$ show $M'$ accepts all, and reject if reject.
 Trivial :)
 
 # Identifying Loops

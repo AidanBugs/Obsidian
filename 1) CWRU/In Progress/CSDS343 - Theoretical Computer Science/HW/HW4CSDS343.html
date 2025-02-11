@@ -79,6 +79,27 @@ window.Quarto = {
 <h1>HW4</h1>
 <section id="section" class="level2">
 <h2 class="anchored" data-anchor-id="section">1</h2>
+<p>In order to prove this, we must prove there exists a function <span class="math inline">\(f\)</span> such that <span class="math inline">\(x\in A_{TM}\leftrightarrow f(x)\in L_{343}\)</span></p>
+<p>Remember <span class="math inline">\(x=&lt;M,w&gt;\)</span> and <span class="math inline">\(f(x)=&lt;M'&gt;\)</span></p>
+<p><span class="math inline">\(M'\)</span> on input <span class="math inline">\(y\)</span>:</p>
+<ul>
+<li>Run <span class="math inline">\(M\)</span> on <span class="math inline">\(w\)</span></li>
+<li>If <span class="math inline">\(M\)</span> accepts:
+<ul>
+<li>Check if <span class="math inline">\(y\)</span> is equal to “CSDS 343 is fun”</li>
+<li>If yes -&gt; Accept</li>
+<li>Else
+<ul>
+<li>Check if <span class="math inline">\(y\)</span> is equal to “MATH 343 is fun”</li>
+<li>If yes -&gt; Accept</li>
+<li>Else -&gt; Reject</li>
+</ul></li>
+</ul></li>
+<li>If <span class="math inline">\(M\)</span> rejects:
+<ul>
+<li><span class="math inline">\(M'\)</span> rejects</li>
+</ul></li>
+</ul>
 </section>
 <section id="section-1" class="level2">
 <h2 class="anchored" data-anchor-id="section-1">2</h2>
@@ -87,9 +108,37 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="section-2">3</h2>
 <section id="a-prove-a_tmleq_ml_add" class="level3">
 <h3 class="anchored" data-anchor-id="a-prove-a_tmleq_ml_add">A Prove <span class="math inline">\(A_{TM}\leq_{M}L_{add}\)</span></h3>
+<p>In order to prove this, we must prove there exists a function <span class="math inline">\(f\)</span> such that <span class="math inline">\(x\in A_{TM}\leftrightarrow f(x)\in L_{add}\)</span></p>
+<p>Remember <span class="math inline">\(x=&lt;M,w&gt;\)</span> and <span class="math inline">\(f(x)=&lt;M'&gt;\)</span></p>
+<p><span class="math inline">\(M'\)</span> on input <span class="math inline">\(y\)</span>:</p>
+<ul>
+<li>Run <span class="math inline">\(M\)</span> on <span class="math inline">\(w\)</span></li>
+<li>If <span class="math inline">\(M\)</span> accepts:
+<ul>
+<li>Run</li>
+</ul></li>
+<li>If <span class="math inline">\(M\)</span> rejects:
+<ul>
+<li><span class="math inline">\(M'\)</span> rejects</li>
+</ul></li>
+</ul>
 </section>
 <section id="b-prove-bara_tmleq_ml_add" class="level3">
 <h3 class="anchored" data-anchor-id="b-prove-bara_tmleq_ml_add">B Prove <span class="math inline">\(\bar{A_{TM}}\leq_{M}L_{add}\)</span></h3>
+<p>In order to prove this, we must prove there exists a function <span class="math inline">\(f\)</span> such that <span class="math inline">\(x\in \bar{A_{TM}}\leftrightarrow f(x)\in L_{add}\)</span></p>
+<p>Remember <span class="math inline">\(x=&lt;M,w&gt;\)</span> and <span class="math inline">\(f(x)=&lt;M'&gt;\)</span></p>
+<p><span class="math inline">\(M'\)</span> on input <span class="math inline">\(y\)</span>:</p>
+<ul>
+<li>Run <span class="math inline">\(M\)</span> on <span class="math inline">\(w\)</span></li>
+<li>If <span class="math inline">\(M\)</span> accepts:
+<ul>
+<li>Run</li>
+</ul></li>
+<li>If <span class="math inline">\(M\)</span> rejects:
+<ul>
+<li><span class="math inline">\(M'\)</span> rejects</li>
+</ul></li>
+</ul>
 </section>
 </section>
 </section>

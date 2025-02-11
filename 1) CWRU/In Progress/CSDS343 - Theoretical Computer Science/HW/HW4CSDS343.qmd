@@ -1,9 +1,47 @@
 # HW4
 ## 1
+In order to prove this, we must prove there exists a function $f$ such that $x\in A_{TM}\leftrightarrow f(x)\in L_{343}$
+
+Remember $x=<M,w>$ and $f(x)=<M'>$
+
+$M'$ on input $y$:
+
+- Run $M$ on $w$
+- If $M$ accepts:
+    - Check if $y$ is equal to "CSDS 343 is fun"
+    - If yes -> Accept
+    - Else
+        - Check if $y$ is equal to "MATH 343 is fun"
+        - If yes -> Accept
+        - Else -> Reject
+- If $M$ rejects:
+    - $M'$ rejects
 
 ## 2
 
 ## 3
 ### A Prove $A_{TM}\leq_{M}L_{add}$
+In order to prove this, we must prove there exists a function $f$ such that $x\in A_{TM}\leftrightarrow f(x)\in L_{add}$
+
+Remember $x=<M,w>$ and $f(x)=<M'>$
+
+$M'$ on input $y$:
+
+- Run $M$ on $w$
+- If $M$ accepts:
+    - Run
+- If $M$ rejects:
+    - $M'$ rejects
 
 ### B Prove $\bar{A_{TM}}\leq_{M}L_{add}$
+In order to prove this, we must prove there exists a function $f$ such that $x\in \bar{A_{TM}}\leftrightarrow f(x)\in L_{add}$
+
+Remember $x=<M,w>$ and $f(x)=<M'>$
+
+$M'$ on input $y$:
+
+- Run $M$ on $w$
+- If $M$ accepts:
+    - Run
+- If $M$ rejects:
+    - $M'$ rejects
