@@ -20,8 +20,14 @@ $M'$ on input $y$:
 - If $M$ rejects:
     - $M'$ rejects
 
-## 2
+If $x\in A_{TM}$ show $f(x)\in L_{343}$
 
+If $x\notin A_{TM}$ Show $f(x)\notin L_{343}$
+
+## 2
+Create M which flips Mdiff
+Create M' which rejects itself otherwise run M
+Prove :)
 
 
 ## 3
@@ -34,7 +40,7 @@ $M'$ on input $y$:
 
 - Run $M$ on $w$
 - If $M$ accepts:
-    - Run
+    - Run a M in Ladd
 - If $M$ rejects:
     - $M'$ rejects
 
@@ -46,7 +52,7 @@ Remember $x=<M,w>$ and $f(x)=<M'>$
 $M'$ on input $y$:
 
 - Run $M$ on $w$
-- If $M$ accepts:
-    - Run $M_{add}$ on $y$   // $M_{add}\in L_{add}$
 - If $M$ rejects:
+    - Run $M_{add}$ on $y$   // $M_{add}\in L_{add}$
+- If $M$ accepts:
     - $M'$ rejects
