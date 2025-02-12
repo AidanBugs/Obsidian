@@ -3,7 +3,7 @@ format: pdf
 ---
 # HW4
 ## 1
-In order to prove this, we must prove there exists a function $f$ such that $x\in A_{TM}\leftrightarrow f(x)\in L_{343}$
+In order to prove this, we can prove there exists a function $f$ such that $x\in A_{TM}\leftrightarrow f(x)\in L_{343}$
 
 Remember $x=<M,w>$ and $f(x)=<M'>$
 
@@ -22,12 +22,43 @@ $M'$ on input $y$:
 
 If $x\in A_{TM}$ show $f(x)\in L_{343}$
 
+- If $f(x)\in L_{343}$ then $M'$ must accept $y$ if it is "CSDS 343 is fun" or "MATH 343 is fun", otherwise reject.
+- In the case $y$ is "CSDS 343 is fun" or $MATH 343 is fun"
+    - $M'$ runs $M$ on $w$ which accepts because $x\in A_{TM}$. Next $M'$ checks if $y$ is "CSDS 343 is fun" if it is $M'$ accepts. Then checks if $y$ is "MATH 343 is fun" if it is $M'$ accepts. Thus $M'$ accepts when it should when $x\in A_{TM}$
+- In the case $y$ is not $CSDS 343 is fun" or "MATH 343 is fun"
+    - $M'$ runs $M$ on $w$ which accepts because $x\in A_{TM}$. Next $M'$ checks if $y$ is "CSDS 343 is fun", then checks if $y$ is "MATH 343 is fun". Since $y$ is neither "CSDS 343 is fun" or "MATH 343 is fun" $M'$ will reject. Thus $M'$ rejects when it should when $x\in A_{TM}$
+
 If $x\notin A_{TM}$ Show $f(x)\notin L_{343}$
 
+- Since $x\notin A_{TM}$, $M'$ will run $M$ on $w$ which rejects so $M'$ will reject. Thus, even if $y=$ "CSDS 343 is fun" $M'$ will reject so $<M'>\notin L_{343}$
+
+Thus because $\exists f$ s.t. $x\in A_{TM}\leftrightarrow f(x)\in L_{343}$ then $A_{TM}\leq_{m} L_343$. Thus since we know $A_{TM}$ is reducible to $L_{343}$ and $A_{TM}$ is unddecidable, then $L_{343}$ is undecidable.
+
 ## 2
-Create M which flips Mdiff
-Create M' which rejects itself otherwise run M
-Prove :)
+Proof by contradiction. So assume $DIFF\_ BY\_ 1$ is decidable. Then $\exists M_{DIFF}$ which decides $DIFF\_ BY\_ 1$
+
+Create a TM $M$ which takes a TM $<m>$ as input
+
+$M$ on input $<m>$
+
+- Run $M_{DIFF}$ on $<M,m>$
+- If $M_{DIFF}$ accepts, $M$ rejects
+- If $M_{DIFF}$ rejects, $M$ accepts
+
+Create a TM $M'$ which takes $y$ as input
+
+$M'$ on input $y$
+
+- If $y=M'$ reject
+- Else run $M$ on $y$
+    - If $M$ accepts, $M'$ accepts
+    - If $M$ rejects, $M'$ rejects
+
+Now suppose we run $M$ on $M'$, which will then run $M_{DIFF}$ on $<M,M'>$
+
+If $M_{DIFF}$ accepts $<M,M'>$, then $M$ will reject on $M'$. However this creates a contradiction because $M_{DIFF}$ says $<M,M'>$ are different by 1, however $M$ and $M'$ both accept / reject on the same input (they are not different by 1) because $M'$ runs $M$ and rejects on input $M'$. Thus they are not different by 1 and $M_{DIFF}$ should reject.
+
+If $M_{DIFF}$ rejects $<M,M'>$, then $M$ will accept on $M'$. However this creates a contradiction because $M_{DIFF}$ says $<M,M'>$ are not different by 1, however $M$ and $M'$ both accept / reject on the same input except for input $M'$ where $M'$ rejects and $M$ accepts. Thus they are different by one and $M_{DIFF}$ should accept.
 
 
 ## 3
