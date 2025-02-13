@@ -5,9 +5,10 @@ tags:
 links:
   - "[[Turing Machines]]"
 deadline: 
+format: pdf
 status:
 ---
-# Finite State Automata
+# Deterministic Finite State Automata
 Finite State Automata: TM without a tape
 
 A deterministic finite state automate DFSA is $(\Sigma , Q, \delta , F)$
@@ -48,11 +49,13 @@ Regular langauges are closed under compliment, union, conccatenation, "star" ope
 ### Proof later
 
 # Regular Expressions
-- $\phi$ is a regular expression
+- $\epsilon$ is a regular expression
 - $a, a\in\Sigma$ is a regular expression
 - $x\cup y$ where $x+y$ are regular expression
 - $x \times y$ where x, y are regular expressions (concatenation)
 - $x*$ (star operator is repeat 0 or more times) also reg ex
+
+Note $\epsilon$ means move without reading the characters
 
 ## Ex:
 A reg ex for binary numbers devisable by by 8 (no leading 0's)
@@ -61,13 +64,40 @@ $R=0+1(0+1)*000$
 A language is regular iff it can be described by a regular expression
 
 ## Proof
-Later :)
+Given a REG EX, build a FSA
+
+- $\epsilon:\delta(q_{0},\epsilon)=$ accept
+- $a:\delta(q_{0},a)=$ accept
+- $x\cup y$ assume you have a machine that accepts $x$ and $y$, run in parallel and accept if one of them accepts
+- $xy$ assume you have a machine that accepts $x$ and $y$, run sequentially and accept if both of them accepts
+- $x*$ assume you have a machine that accepts $x$, we $\epsilon$ transition to accept or into our machine. If machine accepts we $\epsilon$ to accept. From accept we can $\epsilon$ to $q_{0}$
+
+Given a FSA, build a REGEX
+
+Repeateedly replace single states with "guarenteed" transitions.
+
+Instead of using single characters for each transition we create REG EX for each transition.
+
 
 # Non Deterministic Finite State Automata
 NFSA is $(\Sigma, Q,\delta, F)$
+
 $\delta : Q\times\Sigma\rightarrow P(Q)$
 
-If there is a choice that will lead to the machine accepting the input the NFSA will make that choice otherwise it chooses at random.
-## Ex
-Divisible by 8 binary
 
+If there is a choice that will lead to the machine accepting the input the NFSA will make that choice otherwise it chooses at random.
+
+## Theorem
+Given a NFSA $N$ then there exists a determinstic FSA $M$ that accepts the same language
+
+## Proof
+$N=(\Sigma_{N},Q_{N},\delta_{N},F_{N})$
+
+For $M$:
+
+- $\Sigma_{M}=\Sigma_{N}$
+- $q_{0M}=\{q_{0N}\}$
+- $Q_{M}=P(Q_{N})$
+- $\delta_{M}(q_{A},\sigma)=q_{B}$
+  - $q_{B}=\{q_{yN}|\delta_{N}(q_{x},x)=q_{yN}\quad \text{for} \quad q_{x}\in A\}$
+- $F_{M} =\{q_{A}|\exists q_{x}\in F_{N},q_{x}\in A\}$

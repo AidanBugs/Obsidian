@@ -3,36 +3,27 @@ format: pdf
 ---
 # HW4
 ## 1
-In order to prove this, we can prove there exists a function $f$ such that $x\in A_{TM}\leftrightarrow f(x)\in L_{343}$
+Proof by contradiction. Assume $L_{343}$ is decidable. Then $\exists M_{343}$ which decides $L_{343}$.
 
-Remember $x=<M,w>$ and $f(x)=<M'>$
+Create a machine $M$ which takes a string $y$ as input
 
-$M'$ on input $y$:
+$M$ on input $y$
 
-- Run $M$ on $w$
-- If $M$ accepts:
-    - Check if $y$ is equal to "CSDS 343 is fun"
-    - If yes -> Accept
-    - Else
-        - Check if $y$ is equal to "MATH 343 is fun"
-        - If yes -> Accept
-        - Else -> Reject
-- If $M$ rejects:
-    - $M'$ rejects
+- Check if $y$ is "CSDS 343 is fun" or "MATH 343 is fun"
+- If $y$ is neither string we reject
+- Run $M_{343}$ on $M$
+- If $M_{343}$ accepts, $M$ rejects
+- If $M_{343}$ rejects, $M$ accepts
 
-If $x\in A_{TM}$ show $f(x)\in L_{343}$
+Proof
 
-- If $f(x)\in L_{343}$ then $M'$ must accept $y$ if it is "CSDS 343 is fun" or "MATH 343 is fun", otherwise reject.
-- In the case $y$ is "CSDS 343 is fun" or $MATH 343 is fun"
-    - $M'$ runs $M$ on $w$ which accepts because $x\in A_{TM}$. Next $M'$ checks if $y$ is "CSDS 343 is fun" if it is $M'$ accepts. Then checks if $y$ is "MATH 343 is fun" if it is $M'$ accepts. Thus $M'$ accepts when it should when $x\in A_{TM}$
-- In the case $y$ is not $CSDS 343 is fun" or "MATH 343 is fun"
-    - $M'$ runs $M$ on $w$ which accepts because $x\in A_{TM}$. Next $M'$ checks if $y$ is "CSDS 343 is fun", then checks if $y$ is "MATH 343 is fun". Since $y$ is neither "CSDS 343 is fun" or "MATH 343 is fun" $M'$ will reject. Thus $M'$ rejects when it should when $x\in A_{TM}$
+Now suppose we run $M$ on input "CSDS 343 is fun" or "MATH 343 is fun"
 
-If $x\notin A_{TM}$ Show $f(x)\notin L_{343}$
+If $M_{343}$ accepts $M$ then $M$ must accept "CSDS 343 is fun". However, $M$ does the opposite of $M_{343}$ thus $M$ would reject "CSDS 343 is fun". This creates a contradiction.
 
-- Since $x\notin A_{TM}$, $M'$ will run $M$ on $w$ which rejects so $M'$ will reject. Thus, even if $y=$ "CSDS 343 is fun" $M'$ will reject so $<M'>\notin L_{343}$
+If $M_{343}$ rejects $M$ then $M$ must reject "CSDS 343 is fun". However, $M$ does the opposite of $M_{343}$ thus $M$ would accept "CSDS 343 is fun". This creates a contradiction.
 
-Thus because $\exists f$ s.t. $x\in A_{TM}\leftrightarrow f(x)\in L_{343}$ then $A_{TM}\leq_{m} L_343$. Thus since we know $A_{TM}$ is reducible to $L_{343}$ and $A_{TM}$ is unddecidable, then $L_{343}$ is undecidable.
+Thus we have a contradiction and we know $M$ is a makeable machine as long as $M_{343}$ is decidable. Therefore $M_{343}$ is undecidable.
 
 ## 2
 Proof by contradiction. So assume $DIFF\_ BY\_ 1$ is decidable. Then $\exists M_{DIFF}$ which decides $DIFF\_ BY\_ 1$
@@ -47,12 +38,14 @@ $M$ on input $<m>$
 
 Create a TM $M'$ which takes $y$ as input
 
-$M'$ on input $y$
+$M'$ on input string $y$
 
 - If $y=M'$ reject
 - Else run $M$ on $y$
     - If $M$ accepts, $M'$ accepts
     - If $M$ rejects, $M'$ rejects
+
+Proof
 
 Now suppose we run $M$ on $M'$, which will then run $M_{DIFF}$ on $<M,M'>$
 
@@ -60,6 +53,7 @@ If $M_{DIFF}$ accepts $<M,M'>$, then $M$ will reject on $M'$. However this creat
 
 If $M_{DIFF}$ rejects $<M,M'>$, then $M$ will accept on $M'$. However this creates a contradiction because $M_{DIFF}$ says $<M,M'>$ are not different by 1, however $M$ and $M'$ both accept / reject on the same input except for input $M'$ where $M'$ rejects and $M$ accepts. Thus they are different by one and $M_{DIFF}$ should accept.
 
+Thus we have a contradiction and we know both $M$ and $M'$ are makeable machines as long as $M_{DIFF}$ is decidable. Therefore $M_{DIFF}$ is undecidable.
 
 ## 3
 ### A Prove $A_{TM}\leq_{M}L_{add}$
@@ -71,19 +65,84 @@ $M'$ on input $y$:
 
 - Run $M$ on $w$
 - If $M$ accepts:
-    - Run a M in Ladd
+    - Run $M_{add}$ on $y$   // $<M_{add}>\in L_{add}$ we made in class
+    - If $M_{add}$ accepts: $M'$ accepts
+    - If $M_{add}$ rejects: $M'$ rejects
 - If $M$ rejects:
     - $M'$ rejects
 
-### B Prove $\bar{A_{TM}}\leq_{M}L_{add}$
+Proof
+
+If $x\in A_{TM}$ show $f(x)\in L_{add}$
+
+- If $x\in A_{TM}$ then $M$ accepts $w$
+    - Since $M$ accepts $w$, $M'$ will run $M_{add}$ on $y$ and accept / reject accordingly. So $M'$ is the same as $M_{add}$ when $M$ accepts $w$. Since $<M_{add}>\in L_{add}$ and $M'$ mimics $M_{add}$ when $M$ accepts $w$, $<M'>\in L_{add}$.
+
+If $x\notin A_{TM}$ show $f(x)\notin L_{add}$
+    
+- If $x\notin A_{TM}$, $M$ will either reject on input $w$ or run forever on input $w$.
+- Suppose $M$ rejects $w$
+    - Since $M$ rejects $w$, $M'$ will always reject. Thus $M'$ will reject valid strings of $L(M_{add})$ so $<M'>\notin L_{add}$.
+- Suppose $M$ runs forever on $w$
+    - Since $M$ runs forever on $w$, $M'$ will always run forever. Thus $M'$ will run forever on valid string of $L(M_{add})$ so $<M'>\notin L_{add}$.
+
+If $f(x)\in L_{add}$ show $x\in A_{TM}$
+
+- If $f(x)\in L_{add}$ then $L(M')=a^{n}b^{m}c^{n+m},n,m\geq 0$. In order for $L(M')$ to equal $a^{n}b^{m}c^{n+m},n,m\geq 0$, then $M'$ must always run $M_{add}$. $M'$ only runs $M_{add}$ when $M$ accepts $w$. If $M$ accepts $w$ then $<M,w>=x\in A_{TM}$
+
+If $f(x)\notin L_{add}$ show $x\notin A_{TM}$
+
+- If $f(x)\notin L_{add}$ then $M'$ either runs forever on $y$ or rejects $y$ when $y\in L(M_{add})$
+- Suppose $M'$ rejects a valid $y$
+    - If $M'$ rejected a valid $y$ then it must be because $M$ rejected $w$ because if $M$ accepted $w$, $M'$ would run $M_{add}$ which would accept $y$ so $M'$ would accept on $y$. Thus if $M'$ rejects a valid $y$ it is because $M$ rejected $w$. If $M$ rejects $w$ then $<M,w>=x\notin A_{TM}$
+- Suppose $M'$ ran forever on a valid $y$
+    - If $M'$ ran forever on a valid $y$ then it must be because $M$ ran forever on $w$ because if $M$ had accepted $w$ then $M'$ would run $M_{add}$ which would recognize $y$ and accept. Thus if $M'$ ran forever on a valid $y$ it is because $M$ ran forever on $w$. If $M$ ran forever on $w$ then $<M,w>=x\notin A_{TM}$
+
+Thus we have proved $x\in A_{TM}\leftrightarrow f(x)\in L_{add}$ therefore $A_{TM}\leq _{m} L_{add}$
+
+### B Prove $\bar{A_{TM}}\leq_{M}L_{add}$ 
 In order to prove this, we must prove there exists a function $f$ such that $x\in \bar{A_{TM}}\leftrightarrow f(x)\in L_{add}$
 
 Remember $x=<M,w>$ and $f(x)=<M'>$
 
+$f$ on input $x$:
+
+If $x$ is not of the form $<M,w>$ then $f(x)=M_{add}$
+
+Else create $M'$ which takes a string $y$
+
 $M'$ on input $y$:
 
-- Run $M$ on $w$
-- If $M$ rejects:
-    - Run $M_{add}$ on $y$   // $M_{add}\in L_{add}$
-- If $M$ accepts:
-    - $M'$ rejects
+- Run $M$ on $w$ for $|y|$ steps
+- If $M$ does not accept with $|y|$ steps:
+    - Run $M_{add}$ on $y$ for count steps  // $<M_{add}>\in L_{add}$ we made in class
+    - If $M_{add}$ accepts: $M'$ accepts
+    - If $M_{add}$ rejects: $M'$ rejects
+- Else:
+    - Reject
+
+Proof
+
+If $x\in \bar{A_{TM}}$ show $f(x)\in L_{add}$
+
+- If $x\in \bar{A_{TM}}$ then $M$ rejects $w$
+    - Since $x\in \bar{A_{TM}}$ then $M$ will not accept $w$ in finite steps (will either reject or run forever, either will result in $M$ not accepting in finite steps). Thus we run a machine $<M_{add}>\in L_{add}$ and $M'$ will accept / reject. Thus when $x\in \bar{A_{TM}}, L(M')=L(M_{add})$ so $<M'>=f(x)\in L_{add}$.
+    - Alternatively, $x\in \bar{A_{TM}}$ if $x$ is not of the form $<M,w>$ in which case 
+
+If $x\notin \bar{A_{TM}}$ show $f(x)\notin L_{add}$
+    
+- If $x\notin A_{TM}$, $M$ will accept $w$ in finite steps $s$. $\forall y$ where $|y|>s$, $M'$ will detect these strings and reject. This means $M'$ will reject infinitely many valid strings $y$ where $|y|>s$ so $M'\notin L_{add}$.
+
+If $f(x)\in L_{add}$ show $x\in A_{TM}$
+
+- If $f(x)\in L_{add}$ then $L(M')=a^{n}b^{m}c^{n+m},n,m\geq 0$. In order for $L(M')$ to equal $a^{n}b^{m}c^{n+m},n,m\geq 0$, then $M'$ must always run $M_{add}$. $M'$ only runs $M_{add}$ when $M$ accepts $w$. If $M$ accepts $w$ then $<M,w>=x\in A_{TM}$
+
+If $f(x)\notin L_{add}$ show $x\notin A_{TM}$
+
+- If $f(x)\notin L_{add}$ then $M'$ either runs forever on $y$ or rejects $y$ when $y\in L(M_{add})$
+- Suppose $M'$ rejects a valid $y$
+    - If $M'$ rejected a valid $y$ then it must be because $M$ rejected $w$ because if $M$ accepted $w$, $M'$ would run $M_{add}$ which would accept $y$ so $M'$ would accept on $y$. Thus if $M'$ rejects a valid $y$ it is because $M$ rejected $w$. If $M$ rejects $w$ then $<M,w>=x\notin A_{TM}$
+- Suppose $M'$ ran forever on a valid $y$
+    - If $M'$ ran forever on a valid $y$ then it must be because $M$ ran forever on $w$ because if $M$ had accepted $w$ then $M'$ would run $M_{add}$ which would recognize $y$ and accept. Thus if $M'$ ran forever on a valid $y$ it is because $M$ ran forever on $w$. If $M$ ran forever on $w$ then $<M,w>=x\notin A_{TM}$
+
+Thus we have proved $x\in A_{TM}\leftrightarrow f(x)\in L_{add}$ therefore $A_{TM}\leq _{m} L_{add}$
