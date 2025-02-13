@@ -61,6 +61,12 @@ In order to prove this, we must prove there exists a function $f$ such that $x\i
 
 Remember $x=<M,w>$ and $f(x)=<M'>$
 
+$f$ on input $x$:
+
+If $x$ is not of the form $<M,w>$ then $f(x)$ is not of the form $<M>$
+
+Else create $M'$ which takes a string $y$
+
 $M'$ on input $y$:
 
 - Run $M$ on $w$
@@ -127,22 +133,20 @@ If $x\in \bar{A_{TM}}$ show $f(x)\in L_{add}$
 
 - If $x\in \bar{A_{TM}}$ then $M$ rejects $w$
     - Since $x\in \bar{A_{TM}}$ then $M$ will not accept $w$ in finite steps (will either reject or run forever, either will result in $M$ not accepting in finite steps). Thus we run a machine $<M_{add}>\in L_{add}$ and $M'$ will accept / reject. Thus when $x\in \bar{A_{TM}}, L(M')=L(M_{add})$ so $<M'>=f(x)\in L_{add}$.
-    - Alternatively, $x\in \bar{A_{TM}}$ if $x$ is not of the form $<M,w>$ in which case 
+    - Alternatively, $x\in \bar{A_{TM}}$ if $x$ is not of the form $<M,w>$ in which case $f(x)=M_{add}\in L_{add}$
 
 If $x\notin \bar{A_{TM}}$ show $f(x)\notin L_{add}$
     
 - If $x\notin A_{TM}$, $M$ will accept $w$ in finite steps $s$. $\forall y$ where $|y|>s$, $M'$ will detect these strings and reject. This means $M'$ will reject infinitely many valid strings $y$ where $|y|>s$ so $M'\notin L_{add}$.
 
-If $f(x)\in L_{add}$ show $x\in A_{TM}$
+If $f(x)\in L_{add}$ show $x\in \bar{A_{TM}}$
 
-- If $f(x)\in L_{add}$ then $L(M')=a^{n}b^{m}c^{n+m},n,m\geq 0$. In order for $L(M')$ to equal $a^{n}b^{m}c^{n+m},n,m\geq 0$, then $M'$ must always run $M_{add}$. $M'$ only runs $M_{add}$ when $M$ accepts $w$. If $M$ accepts $w$ then $<M,w>=x\in A_{TM}$
+- If $f(x)\in L_{add}$ then $L(M')=a^{n}b^{m}c^{n+m},n,m\geq 0$. In order for $L(M')$ to equal $a^{n}b^{m}c^{n+m},n,m\geq 0$, then $M'$ must always run $M_{add}$. $M'$ only runs $M_{add}$ when $M$ never accepts $w$ in finite steps. If $M$ never accepts $w$ in finite steps then $<M,w>=x\notin \bar{A_{TM}}$
 
-If $f(x)\notin L_{add}$ show $x\notin A_{TM}$
+If $f(x)\notin L_{add}$ show $x\notin \bar{A_{TM}}$
 
-- If $f(x)\notin L_{add}$ then $M'$ either runs forever on $y$ or rejects $y$ when $y\in L(M_{add})$
+- If $f(x)\notin L_{add}$ then $M'$ rejects $y$ when $y\in L(M_{add})$
 - Suppose $M'$ rejects a valid $y$
-    - If $M'$ rejected a valid $y$ then it must be because $M$ rejected $w$ because if $M$ accepted $w$, $M'$ would run $M_{add}$ which would accept $y$ so $M'$ would accept on $y$. Thus if $M'$ rejects a valid $y$ it is because $M$ rejected $w$. If $M$ rejects $w$ then $<M,w>=x\notin A_{TM}$
-- Suppose $M'$ ran forever on a valid $y$
-    - If $M'$ ran forever on a valid $y$ then it must be because $M$ ran forever on $w$ because if $M$ had accepted $w$ then $M'$ would run $M_{add}$ which would recognize $y$ and accept. Thus if $M'$ ran forever on a valid $y$ it is because $M$ ran forever on $w$. If $M$ ran forever on $w$ then $<M,w>=x\notin A_{TM}$
+    - If $M'$ rejected a valid $y$ then it must be because $M$ accepted $w$ in steps less than $|y|$ because if $M$ did not accept $w$, $M'$ would run $M_{add}$ which would accept $y$ so $M'$ would accept on $y$. Thus if $M'$ rejects a valid $y$ it is because $M$ accepted $w$. If $M$ accepts $w$ then $<M,w>=x\notin \bar{A_{TM}}$
 
-Thus we have proved $x\in A_{TM}\leftrightarrow f(x)\in L_{add}$ therefore $A_{TM}\leq _{m} L_{add}$
+Thus we have proved $x\in \bar{A_{TM}}\leftrightarrow f(x)\in L_{add}$ therefore $\bar{A_{TM}}\leq _{m} L_{add}$
