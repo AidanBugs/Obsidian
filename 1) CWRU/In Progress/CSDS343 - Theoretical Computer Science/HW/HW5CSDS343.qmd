@@ -1,0 +1,32 @@
+---
+format: html
+---
+# CSDS 343 HW5
+## 1
+### a
+Construct a FSA equivalent to the REG EX
+
+$1[((01)^*+1+01)^*+1]^*0$
+
+### b
+Construct a REG EX equivalent to the FSA
+```{mermaid}
+stateDiagram
+    q0-->q1:0
+    q0-->q0:1
+    q1-->q0:0
+    q1-->q2:1
+    q2-->q0:0
+    q2-->q1:1
+```
+
+
+## 2
+
+## 3
+
+## 4
+
+### a
+
+### b
