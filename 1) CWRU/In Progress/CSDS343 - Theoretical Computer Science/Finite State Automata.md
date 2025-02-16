@@ -101,3 +101,31 @@ For $M$:
 - $\delta_{M}(q_{A},\sigma)=q_{B}$
   - $q_{B}=\{q_{yN}|\delta_{N}(q_{x},x)=q_{yN}\quad \text{for} \quad q_{x}\in A\}$
 - $F_{M} =\{q_{A}|\exists q_{x}\in F_{N},q_{x}\in A\}$
+
+# Regular Languages
+All finite langauges are regular because we can create a FSA that has all strings hardocded in.
+
+If $s\in L, |s|>|Q|$ then some state will be repeated.
+
+## The Pumping Lemma
+If $L$ is a regular language, then there exists a positive integer $p$ such that for all strings in $L$ with $|s|>p$ then $s$ can be divided into $s=xyz$ such that:
+
+- $|xy|\leq p$
+- $|y| >0$
+
+Then $xy^kz\in L$ for all $k\in\mathbb{N}$
+
+In other words, we know the string length is larger than the number of states so we have a looping state. So the prefix ($x$) + loop ($y$) must be less than or equal to number of states ($z\geq0$). Additionally the looping portion must be non empty ($y>0$).
+
+## EX
+Show $L=\{a^nb^mc^{n+m}\}$ is not regular by contradicting the pumping lemma
+
+## Proof
+Assume $L$ is regular, there exists a $p$.
+
+Let $s=a^pbc^{p+1}=xyz$
+
+$xy$ is all $a$'s
+
+What is the string $xy^2z$? -> $a^{p+|y|}bc^{p+1}$ 
+If $xy^2z\in L$ then $p+|y|+1=p+1\rightarrow |y|=0$ contradiction!
