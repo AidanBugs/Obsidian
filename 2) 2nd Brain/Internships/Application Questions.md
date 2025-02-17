@@ -6,7 +6,7 @@ I have worked as a Taekwondo instructor for over a year, where I have taught a v
 
 ### The NSLC is a bustling and fast-paced environment. How do you adapt to new and potentially stressful situations? Please provide an example of a high-pressure scenario you've encountered in the past and how you managed it.
 
-
+I adapt in potentially stressful situations by quickly analyzing my options and trying to make the most rational option mitigating all potential damages. During my time working as a Taekwondo instructor, there was one time where a kid peed himself right as class was ending. I quickly had my coworker finish up the last part of class as I pulled the kid aside to the side exit, sneaking around to the bathroom, to avoid them embarrassingly walking infront of their fellow students and the parents. Once they were in the bathroom, my coworker had just finished up class so students were coming back to the lobby. As those students left the Taekwondo room, I asked my coworker to grab the mop from the backroom and clean up any spots, to ensure the following class was all safe and ready to go. While they cleaned the floor, I ran over to the front desk to call up the kids parents to see if they were on the way and if they could bring a change of clothes. This shows how I managed these stressful situations by making quick rational decisions to mitigate any potential embarrassements while utilizing the help of collegues to make sure the situation was handled correctly and responsibly. 
 
 ### This position involves balancing multiple roles. Can you share an experience where you had to balance being authoritative and supportive, ensuring students' safety while also creating a positive and fun atmosphere?
 
