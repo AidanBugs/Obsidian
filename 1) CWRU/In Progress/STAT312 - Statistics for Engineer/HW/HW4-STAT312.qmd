@@ -13,7 +13,7 @@ Find the following probabilities:
 #### 1
 $P(X>1)$
 
-> $P(X<1)=1$
+> $P(X>1)=1$ because f(x) is domain is $[4,\infty)$ so $X>1$ is guaranteed
 
 #### 2
 $P(2<X<5)$
@@ -64,6 +64,8 @@ plt.show()
 
 ```
 
+d
+
 ### D
 
 Find the mean of $X$
@@ -77,7 +79,7 @@ F(x) =
 \begin{cases}
 0 & \text{for} \quad x < 0 \\
 \frac{1}{6}x^2+\frac{1}{6}x & \text{for} \quad 0\leq x < 2 \\
-1 & \text{for} \quad 2\geq x \\
+1 & \text{for} \quad 2\leq x \\
 \end{cases}
 $$
 
