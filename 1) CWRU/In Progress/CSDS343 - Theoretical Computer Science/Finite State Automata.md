@@ -16,6 +16,7 @@ $\delta : Q\times\Sigma\rightarrow Q$
 $F\subset Q$ are the accept states
 
 The DFSA accepts if when it finishes reading the input, it is an accepting is state. Otherwise reject.
+
 ## Ex
 $L=$ binary numbers that are divisible by $8$, noo leading zeros
 $\Sigma = \{0,1\}$
