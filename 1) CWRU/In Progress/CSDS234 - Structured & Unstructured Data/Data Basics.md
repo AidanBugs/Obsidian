@@ -63,3 +63,10 @@ A set of attributes where no 2 entries share the same value for that attribute. 
 A minimal superkey: a key is a superkey $K$ such that removal of **ANY** attribute from $K$ results in a set of attributes that is not a superkey.
 
 Note that key$\subset$superkey.
+
+# Primary Keys and Foreign Keys
+## Primary Keys
+Primary keys are keys that determine the attributes within a given relation. Example, we could have an employee relation with a primary key of employee id.
+
+## Foreign Keys
+Foreign keys are keys that reference the primary keys of a different relation. Example, we could have a project relation which references employee ids as foreign keys.
