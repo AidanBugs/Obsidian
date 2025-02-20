@@ -5,7 +5,7 @@ tags:
 links: 
 Workout: 1
 Water: 0.7
-Stretch: 
+Stretch: 0.2
 Write: 1
 ---
 # Reflection
