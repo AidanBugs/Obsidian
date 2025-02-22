@@ -41,12 +41,14 @@
             "id": "01604d7cba4b6b76",
             "type": "leaf",
             "state": {
-              "type": "excalidraw",
+              "type": "markdown",
               "state": {
-                "file": "Excalidraw/Drawing 2025-02-20 17.54.49.excalidraw.md"
+                "file": "2) 2nd Brain/Daily/2025/02) Feb/20 Thursday, February 20th, 2025.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "excalidraw-icon",
-              "title": "Drawing 2025-02-20 17.54.49.excalidraw"
+              "icon": "lucide-file",
+              "title": "20 Thursday, February 20th, 2025"
             }
           }
         ],
@@ -242,9 +244,9 @@
   },
   "active": "01604d7cba4b6b76",
   "lastOpenFiles": [
+    "Excalidraw/Drawing 2025-02-20 17.54.49.excalidraw.md",
     "2) 2nd Brain/Daily/2025/02) Feb/20 Thursday, February 20th, 2025.md",
     "2) 2nd Brain/Daily/2025/02) Feb/19 Wednesday, February 19th, 2025.md",
-    "Excalidraw/Drawing 2025-02-20 17.54.49.excalidraw.md",
     "99) Meta-Data/Goals & TODO List.md",
     "1) CWRU/In Progress/Assignments.md",
     "1) CWRU/In Progress/STAT312 - Statistics for Engineer/HW/HW3-STAT312.md",
