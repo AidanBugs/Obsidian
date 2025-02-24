@@ -1,0 +1,63 @@
+---
+format: pdf
+---
+
+# HW5 STAT 312
+
+## 1
+The fill volume of an automated filling machine used for filling cans of carbonated beverage is normally
+distributed with a mean of 12.4 fluid ounces and a standard deviation of 0.1 fluid ounce. ($N(12.4, 0.1^2)$)
+
+### A
+What is the probability that a fill volume is less than 12 fluid ounces?
+
+> $z=\frac{x-\mu}{\sigma}=\frac{12-12.4}{0.1}=-4$
+>
+
+### B
+If all cans less than 12.1 or more than 12.6 ounces are scrapped, what proportion of cans is scrapped?
+
+### C
+Determine specifications that are symmetric about the mean that include 99% of all cans.
+
+### D
+Use R to find solutions for parts (a) and (c). Attach the R codes and output.
+
+## 2
+The diameter of the dot produced by a printer is normally distributed with a mean diameter of 0.002
+inch and a standard deviation of 0.0004 inch.
+### (a)
+What is the probability that the diameter of a dot exceeds 0.0026?
+
+### (b)
+What is the probability that a diameter is between 0.0014 and 0.0026?
+
+### (c)
+What standard deviation of diameters is needed so that the probability in part (b) is 0.995?
+
+## 3
+Suppose that X has a lognormal distribution with parameters θ = 5 and ω2 = 9.
+
+### (a)
+Use Table III to find P( X < 13,300).
+
+### (b)
+Use Table III to find the value of x such that P( X ≤ x) = 0.95.
+
+### (c)
+Find the mean and variance of X.
+
+### (d)
+Use R to find solutions for parts (a) and (b). Attach the R codes and output. Please note that your answers in this part may not be exactly the same as your answers in parts a and b when using table III.
+
+## 4
+Suppose that X has a lognormal distribution and that the mean and variance of X are 100 and 85,000, respectively.
+### (a)
+Determine the parameters θ and ω2 of the lognormal distribution. You can use the method that we discussed in class or the hint below to solve the problem.
+
+Hint: define x= exp( θ ) and y= exp( ω2 ) and write two equations in terms of x and y.
+
+
+### (b)
+Use R to find P( X ≤ 5). Attach the R code and output.
+
