@@ -26,7 +26,7 @@ If all cans less than 12.1 or more than 12.6 ounces are scrapped, what proportio
 >
 > $P(Z\geq 2)=0.0.02275$
 >
-> The percent of cans that are scrapped is $0.00135 + 0.02275 = 0.0241=2.41%$
+> The percent of cans that are scrapped is $0.00135 + 0.02275 = 0.0241=2.41$%
 >
 
 ### C
@@ -64,35 +64,91 @@ inch and a standard deviation of 0.0004 inch.
 ### (a)
 What is the probability that the diameter of a dot exceeds 0.0026?
 
+> $z=\frac{x-\mu}{\sigma}=\frac{0.0026-0.002}{0.0004}=1.5$
+> 
+> $P(Z> 1.5)=1-P(Z\leq 1.5)=1-0.93319=0.06681$
+
 ### (b)
 What is the probability that a diameter is between 0.0014 and 0.0026?
+
+> $z=\frac{x-\mu}{\sigma}=\frac{0.0026-0.002}{0.0004}=1.5$
+> 
+> $z=\frac{x-\mu}{\sigma}=\frac{0.0014-0.002}{0.0004}=-1.5$
+> 
+> $P(-1.5\leq Z\leq 1.5)=P(Z\leq 1.5)-P(Z\leq -1.5)=0.93319-0.06681=0.86638$
 
 ### (c)
 What standard deviation of diameters is needed so that the probability in part (b) is 0.995?
 
+> $0.995=P(-z\leq Z\leq z)=P(Z\leq z)-P(Z\leq -z)$ so $0.9975=P(Z\leq z)$ and $0.0025=P(Z\leq -z)$
+> 
+> Using the Ztable, we find that $z=\pm 2.81$
+>
+> We can then use this to find the range by solving $z=\frac{x-\mu}{\sigma}$ for $\sigma$.
+>
+> $\pm 2.81=\frac{\pm 0.0006}{\sigma}\rightarrow \sigma=\frac{0.0006}{2.81}=0.0002135231$
+
+
 ## 3
-Suppose that X has a lognormal distribution with parameters θ = 5 and ω2 = 9.
+Suppose that X has a lognormal distribution with parameters $θ = 5$ and $ω^2 = 9$.
 
 ### (a)
 Use Table III to find P( X < 13,300).
 
+> $P(X<13,300)=P(\ln(X)<\ln(13,300))=P(\ln(X)<9.4955)$
+>
+> $z=\frac{\ln(13,300)-5}{3}=1.4985$
+>
+> Using the z-table with $z=1.4985$ we find that $P(\ln(X)<1.4985)=0.933193$.
+
 ### (b)
 Use Table III to find the value of x such that P( X ≤ x) = 0.95.
+
+> The corresponding z-score for a probability of 0.95 is $z=1.65$.
+>
+> Thus we need to solve $z=\frac{\ln(x)-5}{3}$ for $x$.
+>
+> $z=\frac{\ln(x)-5}{3}=1.65\rightarrow \ln(x)=5+3\times 1.65=20952.22$
 
 ### (c)
 Find the mean and variance of X.
 
+> $\mu=E(X)=e^{\theta+\omega^2/2}=13359.7268$
+>
+> $\sigma^2=V(X)=e^{2\theta+\omega^2}(e^{\omega^2}-1)=1.446\times 10^{12}$
+
 ### (d)
 Use R to find solutions for parts (a) and (b). Attach the R codes and output. Please note that your answers in this part may not be exactly the same as your answers in parts a and b when using table III.
 
+```{r}
+
+print(paste("3A: ", plnorm(13300,5,3)))
+
+print(paste("3B: ", qlnorm(0.95,5,3)))
+
+```
+
 ## 4
 Suppose that X has a lognormal distribution and that the mean and variance of X are 100 and 85,000, respectively.
+
 ### (a)
-Determine the parameters θ and ω2 of the lognormal distribution. You can use the method that we discussed in class or the hint below to solve the problem.
+Determine the parameters $θ$ and $ω^2$ of the lognormal distribution. You can use the method that we discussed in class or the hint below to solve the problem.
 
-Hint: define x= exp( θ ) and y= exp( ω2 ) and write two equations in terms of x and y.
+Hint: define $x= exp( θ )$ and $y= exp( ω^2 )$ and write two equations in terms of x and y.
 
+> $\theta=x\sqrt y=100$, $\omega^2=x^2y(y-1)=85000$
+>
+> $x\sqrt y=100\rightarrow x^2y=10000\rightarrow x^2y(y-1)=10000(y-1)=85000\rightarrow 10000y=95000\rightarrow y=9.5$
+>
+> $x\sqrt{9.5}=100\rightarrow x=32.444$
+>
+> Thus $θ=3.47952$ and $ω^2=2.25129$.
 
 ### (b)
-Use R to find P( X ≤ 5). Attach the R code and output.
+Use R to find P$(X\leq 5)$. Attach the R code and output.
 
+```{r}
+
+print(paste("4B: ", plnorm(5,3.47952,2.25129)))
+
+```
