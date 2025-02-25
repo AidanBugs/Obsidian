@@ -58,7 +58,24 @@ Prove the reverse of a regular langauge is also a regular langauge, ($A, A^R$)
 ## 3
 Prove $B=\{w\in \Sigma^*_3| \text{the bottom row of {w} is the sum of the top 2 rows}\}$ is a regular language. Hint prove $B^R$ is regular.
 
+> We can show this language is regular by proving its reverse is regular. A language can be proven regular if it can be decided by a FSA.
 
+```{mermaid}
+stateDiagram
+    qinitial-->q0:epsilon
+
+    q0-->q0:[0,0,0],[0,1,1],[1,0,1]
+    q0-->qaccept:epsilon
+    q0-->q1:[1,1,0]
+
+    q1-->qaccept:epsilon
+    q1-->q0:[0,0,1]
+    q1-->q1:[0,1,0],[1,0,0],[1,1,1]
+```
+
+> How this FSA works is we alternate between q0 (no carry) and q1 (carry over) if there is a 1 to carry over from the previous string. Then we only accept if there are no more columns to read. Note that any columns not mentioned at a particular state lead to a reject.This FSA will recognize any string in $B^R$.
+>
+> Thus sinse $B^R$ is a regular language we know that $B$ is a regular language by question 2.
 
 ## 4
 Prove the following languages are not regular languages:

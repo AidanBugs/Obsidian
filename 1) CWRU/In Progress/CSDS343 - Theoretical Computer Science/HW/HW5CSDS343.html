@@ -152,6 +152,34 @@ window.Quarto = {
 <section id="section-2" class="level2">
 <h2 class="anchored" data-anchor-id="section-2">3</h2>
 <p>Prove <span class="math inline">\(B=\{w\in \Sigma^*_3| \text{the bottom row of {w} is the sum of the top 2 rows}\}\)</span> is a regular language. Hint prove <span class="math inline">\(B^R\)</span> is regular.</p>
+<blockquote class="blockquote">
+<p>We can show this language is regular by proving its reverse is regular. A language can be proven regular if it can be decided by a FSA.</p>
+</blockquote>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">stateDiagram
+    qinitial--&gt;q0:epsilon
+
+    q0--&gt;q0:[0,0,0],[0,1,1],[1,0,1]
+    q0--&gt;qaccept:epsilon
+    q0--&gt;q1:[1,1,0]
+
+    q1--&gt;qaccept:epsilon
+    q1--&gt;q0:[0,0,1]
+    q1--&gt;q1:[0,1,0],[1,0,0],[1,1,1]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>How this FSA works is we alternate between q0 (no carry) and q1 (carry over) if there is a 1 to carry over from the previous string. Then we only accept if there are no more columns to read. Note that any columns not mentioned at a particular state lead to a reject.This FSA will recognize any string in <span class="math inline">\(B^R\)</span>.</p>
+<p>Thus sinse <span class="math inline">\(B^R\)</span> is a regular language we know that <span class="math inline">\(B\)</span> is a regular language by question 2.</p>
+</blockquote>
 </section>
 <section id="section-3" class="level2">
 <h2 class="anchored" data-anchor-id="section-3">4</h2>
