@@ -32,14 +32,64 @@ stateDiagram
 ```
 
 > Regex Equivalent:
-> $(1+0(0+10))^*01(11)^*$
+> $[1+0(0+10)]^*01(11)^*$
 
 ## 2
+Prove the reverse of a regular langauge is also a regular langauge, ($A, A^R$)
+
+> There are 2 ways to prove this true (please grade using the 2nd method):
+>
+> If $A$ is a regular language then there exists a FSA $F$ that can decide $A$. $A^R$ would then be decided by the transpose of $F$, that is $F^T$ can decide $A^R$. This is done by having the $q_0$ of $F$ be the accept state of $F^T$ and the various accept states of $F$ are the initial states of $F^T$. However we cannot have multiple initial states of $F^T$, so to circumvent this we create a $q_0$ that $\epsilon$ transitions to each of the accept states of $F$.
+>
+> Alternatively, if $A$ is a regular language then there exists a regular expression for $A$. $A^R$ would then be decided by the reverse of the regular expression. We can prove this by showing the reverses of each regular expression rule:
+> 
+> 1. $\epsilon \rightarrow^R \epsilon$ holds true
+> 
+> 2. $a \rightarrow^R a$, where $a \in \Sigma$, holds true
+> 
+> 3. $(x \cup y) \rightarrow^R (x^R \cup y^R)$, where $x$ and $y$ are regular expressions, holds true
+>
+> 4. $(xy) \rightarrow^R (y^Rx^R)$, where $x$ and $y$ are regular expressions, holds true
+>
+> 5. $x^* \rightarrow^R x^*$, where $x$ is a regular expression, holds true
+>
+> Thus since we have created a reverse function $\rightarrow^R$ we can show that $A^R$ is a regular language by reversing the regular expression for $A$ and using the reverse regex for strings in $A^R$.
 
 ## 3
+Prove $B=\{w\in \Sigma^*_3| \text{the bottom row of {w} is the sum of the top 2 rows}\}$ is a regular language. Hint prove $B^R$ is regular.
+
+
 
 ## 4
+Prove the following languages are not regular languages:
 
 ### a
+Palindromes over the alphabet $\Sigma = \{a,b,c\}$
+
+> We can show this by proof by contradiction of the pumping lemma.
+>
+> Suppose palindromes are regular then $\exists p$ s.t. all strings $s$ in $L$ with  $|s|>p$ can be divded into $s=xyz$ such that $|xy|\leq p$ and $|y|>0$
+>
+> Given the string $a^pba^p$ is a valid palindrome, we can divide it into string $xy=a^p$ because $|xy|=|a^p|<p$ and $|y|=0$.
+>
+> The pumping lemma suggests $xy^kz$ is a palindrome for all $k\in \mathbb{N}$ 
+>
+> But what about $xy^2z$? In order for $xy^2z=a^{p+|y|}ba^p$ to be a palindrome $p+|y|=p$ so $|y|=0$ which is a contradiction because $|y|>0$.
+>
+> Therefore palindromes are not regular.
+
 
 ### b
+The language $L=\{abbaaabbbb...a^{k-2}b^{k-1}a^{k}|k\geq 3 \}$
+
+> We can show this by proof by contradiction of the pumping lemma.
+>
+> Suppose this language is regular. The the reverse of this langauge ($L^R$) is also regular. If $L^R$ is regular then $\exists p$ s.t. all strings $s$ in $L$ with  $|s|>p$ can be divded into $s=xyz$ such that $|xy|\leq p$ and $|y|>0$
+>
+> Given the string $a^pb^{p-1}a^{p-2}...\in L^R$, we can divide it into string $xy=a^p$ because $|xy|=|a^p|<p$ and $|y|=0$.
+>
+> The pumping lemma suggests $xy^kz\in L^R$ for all $k\in \mathbb{N}$ 
+>
+> But what about $xy^2z$? In order for $xy^0z=a^{p-|y|}b^{p-1}a^{p-2}$ to be in $L$ $p-|y|=p$ so $|y|=0$ which is a contradiction because $|y|>0$.
+>
+> Therefore $L$ is not regular because its reverse is not regular

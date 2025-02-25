@@ -128,23 +128,57 @@ window.Quarto = {
 </div>
 </div>
 <blockquote class="blockquote">
-<p>Regex Equivalent: <span class="math inline">\((1+0(0+10))^*01(11)^*\)</span></p>
+<p>Regex Equivalent: <span class="math inline">\([1+0(0+10)]^*01(11)^*\)</span></p>
 </blockquote>
 </section>
 </section>
 <section id="section-1" class="level2">
 <h2 class="anchored" data-anchor-id="section-1">2</h2>
+<p>Prove the reverse of a regular langauge is also a regular langauge, (<span class="math inline">\(A, A^R\)</span>)</p>
+<blockquote class="blockquote">
+<p>There are 2 ways to prove this true (please grade using the 2nd method):</p>
+<p>If <span class="math inline">\(A\)</span> is a regular language then there exists a FSA <span class="math inline">\(F\)</span> that can decide <span class="math inline">\(A\)</span>. <span class="math inline">\(A^R\)</span> would then be decided by the transpose of <span class="math inline">\(F\)</span>, that is <span class="math inline">\(F^T\)</span> can decide <span class="math inline">\(A^R\)</span>. This is done by having the <span class="math inline">\(q_0\)</span> of <span class="math inline">\(F\)</span> be the accept state of <span class="math inline">\(F^T\)</span> and the various accept states of <span class="math inline">\(F\)</span> are the initial states of <span class="math inline">\(F^T\)</span>. However we cannot have multiple initial states of <span class="math inline">\(F^T\)</span>, so to circumvent this we create a <span class="math inline">\(q_0\)</span> that <span class="math inline">\(\epsilon\)</span> transitions to each of the accept states of <span class="math inline">\(F\)</span>.</p>
+<p>Alternatively, if <span class="math inline">\(A\)</span> is a regular language then there exists a regular expression for <span class="math inline">\(A\)</span>. <span class="math inline">\(A^R\)</span> would then be decided by the reverse of the regular expression. We can prove this by showing the reverses of each regular expression rule:</p>
+<ol type="1">
+<li><p><span class="math inline">\(\epsilon \rightarrow^R \epsilon\)</span> holds true</p></li>
+<li><p><span class="math inline">\(a \rightarrow^R a\)</span>, where <span class="math inline">\(a \in \Sigma\)</span>, holds true</p></li>
+<li><p><span class="math inline">\((x \cup y) \rightarrow^R (x^R \cup y^R)\)</span>, where <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are regular expressions, holds true</p></li>
+<li><p><span class="math inline">\((xy) \rightarrow^R (y^Rx^R)\)</span>, where <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are regular expressions, holds true</p></li>
+<li><p><span class="math inline">\(x^* \rightarrow^R x^*\)</span>, where <span class="math inline">\(x\)</span> is a regular expression, holds true</p></li>
+</ol>
+<p>Thus since we have created a reverse function <span class="math inline">\(\rightarrow^R\)</span> we can show that <span class="math inline">\(A^R\)</span> is a regular language by reversing the regular expression for <span class="math inline">\(A\)</span> and using the reverse regex for strings in <span class="math inline">\(A^R\)</span>.</p>
+</blockquote>
 </section>
 <section id="section-2" class="level2">
 <h2 class="anchored" data-anchor-id="section-2">3</h2>
+<p>Prove <span class="math inline">\(B=\{w\in \Sigma^*_3| \text{the bottom row of {w} is the sum of the top 2 rows}\}\)</span> is a regular language. Hint prove <span class="math inline">\(B^R\)</span> is regular.</p>
 </section>
 <section id="section-3" class="level2">
 <h2 class="anchored" data-anchor-id="section-3">4</h2>
+<p>Prove the following languages are not regular languages:</p>
 <section id="a-1" class="level3">
 <h3 class="anchored" data-anchor-id="a-1">a</h3>
+<p>Palindromes over the alphabet <span class="math inline">\(\Sigma = \{a,b,c\}\)</span></p>
+<blockquote class="blockquote">
+<p>We can show this by proof by contradiction of the pumping lemma.</p>
+<p>Suppose palindromes are regular then <span class="math inline">\(\exists p\)</span> s.t. all strings <span class="math inline">\(s\)</span> in <span class="math inline">\(L\)</span> with <span class="math inline">\(|s|&gt;p\)</span> can be divded into <span class="math inline">\(s=xyz\)</span> such that <span class="math inline">\(|xy|\leq p\)</span> and <span class="math inline">\(|y|&gt;0\)</span></p>
+<p>Given the string <span class="math inline">\(a^pba^p\)</span> is a valid palindrome, we can divide it into string <span class="math inline">\(xy=a^p\)</span> because <span class="math inline">\(|xy|=|a^p|&lt;p\)</span> and <span class="math inline">\(|y|=0\)</span>.</p>
+<p>The pumping lemma suggests <span class="math inline">\(xy^kz\)</span> is a palindrome for all <span class="math inline">\(k\in \mathbb{N}\)</span></p>
+<p>But what about <span class="math inline">\(xy^2z\)</span>? In order for <span class="math inline">\(xy^2z=a^{p+|y|}ba^p\)</span> to be a palindrome <span class="math inline">\(p+|y|=p\)</span> so <span class="math inline">\(|y|=0\)</span> which is a contradiction because <span class="math inline">\(|y|&gt;0\)</span>.</p>
+<p>Therefore palindromes are not regular.</p>
+</blockquote>
 </section>
 <section id="b-1" class="level3">
 <h3 class="anchored" data-anchor-id="b-1">b</h3>
+<p>The language <span class="math inline">\(L=\{abbaaabbbb...a^{k-2}b^{k-1}a^{k}|k\geq 3 \}\)</span></p>
+<blockquote class="blockquote">
+<p>We can show this by proof by contradiction of the pumping lemma.</p>
+<p>Suppose this language is regular. The the reverse of this langauge (<span class="math inline">\(L^R\)</span>) is also regular. If <span class="math inline">\(L^R\)</span> is regular then <span class="math inline">\(\exists p\)</span> s.t. all strings <span class="math inline">\(s\)</span> in <span class="math inline">\(L\)</span> with <span class="math inline">\(|s|&gt;p\)</span> can be divded into <span class="math inline">\(s=xyz\)</span> such that <span class="math inline">\(|xy|\leq p\)</span> and <span class="math inline">\(|y|&gt;0\)</span></p>
+<p>Given the string <span class="math inline">\(a^pb^{p-1}a^{p-2}...\in L^R\)</span>, we can divide it into string <span class="math inline">\(xy=a^p\)</span> because <span class="math inline">\(|xy|=|a^p|&lt;p\)</span> and <span class="math inline">\(|y|=0\)</span>.</p>
+<p>The pumping lemma suggests <span class="math inline">\(xy^kz\in L^R\)</span> for all <span class="math inline">\(k\in \mathbb{N}\)</span></p>
+<p>But what about <span class="math inline">\(xy^2z\)</span>? In order for <span class="math inline">\(xy^0z=a^{p-|y|}b^{p-1}a^{p-2}\)</span> to be in <span class="math inline">\(L\)</span> <span class="math inline">\(p-|y|=p\)</span> so <span class="math inline">\(|y|=0\)</span> which is a contradiction because <span class="math inline">\(|y|&gt;0\)</span>.</p>
+<p>Therefore <span class="math inline">\(L\)</span> is not regular because its reverse is not regular</p>
+</blockquote>
 </section>
 </section>
 </section>

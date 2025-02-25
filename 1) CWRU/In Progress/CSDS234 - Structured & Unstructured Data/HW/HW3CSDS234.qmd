@@ -1,0 +1,125 @@
+---
+format: pdf
+---
+
+# HW3CSDS234
+## 1
+$r(A,B,C)$ with 40K tuples and $s(C,D)$ with 60K tuples. Memory contains one block for each relation to compute join operations.
+
+Estimate (1) the largest output size and (2) the worst case I/O cost in terms of the total number of data blocks to be transferred for the following queries and settings:
+
+### $r\bowtie_{r.C = s.C} s$, Nested Loop Join, the memory contains the entire smaller relation (the one that takes a smaller number of data blocks to hold) of r and s;
+
+> 
+
+### $r\bowtie_{r.A=S.C} s$ , Block-Nested Loop Join, memory is small and contains one block from each table of r and s.
+
+> 
+
+### Hash join $r\bowtie_{r.A =S.C} s$, with a hash function mod h for r and s.
+
+> 
+
+### $r\bowtie_{r.C = s.C} s$, Index Nested Loop Join (using a B+ tree primary index with degree d and height h1 defined on S.C, and S.C is a key attribute of relation S);
+
+> 
+
+### $r\bowtie_{r.C = s.C} s$, Index Nested Loop Join (using a secondary B+ tree index with degree d and height h2 defined on r.C)
+
+> 
+
+## 2
+Consider the following XML document describing library entries
+
+```
+<lib>
+    <book id=2020-XML>
+        <title> Smart XML Search</title>
+        <editor> X. Blank </editor>
+        <publisher>Springer</publisher>
+    </book>
+    <journal id= FDS23 pub_year = “2022”>
+        <title>Frontier of Data Science</title>
+        <volume>25<number>1</volume></number>
+    </journal>
+    <misc id= “tr22-10” id= “TR22-10-22”>
+        <author>Dr. Who</author>
+        <title>An unpublished theory of time travel </title>
+        <year>2022</year> <pages>0<page>
+    </misc>
+</lib>
+```
+
+### Check if the XML document is well structured, if not, correct the document.
+
+
+```
+<lib>
+    <book id=2020-XML>
+        <title> Smart XML Search</title>
+        <editor> X. Blank </editor>
+        <publisher>Springer</publisher>
+    </book>
+    <journal id= FDS23 pub_year = “2022”>
+        <title>Frontier of Data Science</title>
+        <volume>25</volume>
+        <number>1</number>
+    </journal>
+    <misc id= “tr22-10” id= “TR22-10-22”> TWO ID FIX LATERRRRRRRRR
+        <author>Dr. Who</author>
+        <title>An unpublished theory of time travel </title>
+        <year>2022</year>
+        <pages>0<page>
+    </misc>
+</lib>
+```
+
+### Draw a tree representation of the well formed XML document.
+
+### Write a DTD so the well-formed version of the example in (1) is also a valid XML document given the DTD, along with the following additional constraints:
+
+#### a. Lib entries must have book, journal, and misc. elements occurred in an order, i.e., journal occurred after book, and misc. after journal;
+
+>
+
+#### b. Lib must have at least one book and at least one journal, but misc is optional;
+
+>
+
+#### c. title is mandatory in the book element
+
+>
+
+#### d. there can be at most one title, editor, publisher, volume, and year for a journal;
+
+>
+
+#### e. a library entry (as either a book or a journal element) may have more than one authors
+
+>
+
+
+### 4 A web “attacker” may modify the DTD on a server to make a case that there exists no XML that is valid for the revised DTD (a case of DTD that is known to be “not satisfiable”), blocking the processing of XML documents. Give an example of such a DTD by revising the one in (3), and briefly explain why it is not satisfiable.
+
+## 3
+Consider the XML code in Question 2 as a fragment of a large XML document and its DTD in Question 2. Write XPath to retrieve the following information.
+
+### List the titles of all the books edited by “X.Blank” with publisher “Springer”;
+
+>
+
+### Find the first two journal elements as children of the Lib element;
+
+>
+
+### Find all the journals with editor “Y.Wu” that is published later than 2020;
+
+>
+
+### Select all the editors and publishers of the books written by “M.Stonebreaker.“
+
+>
+
+### List the titles of misc. entries written by “Dr. Who,” which were published after 2020.
+
+>
