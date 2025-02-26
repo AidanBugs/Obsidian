@@ -87,7 +87,7 @@ window.Quarto = {
 <p>Construct a FSA equivalent to the REG EX</p>
 <p><span class="math inline">\(1[((01)^*+1+01)^*+1]^*0\)</span></p>
 <blockquote class="blockquote">
-<p>The above REG EX is equivalent to this regex: <span class="math inline">\(1(01+1)*0\)</span> Below is the FSA equivalent to the REG EX</p>
+<p>The above REG EX is equivalent to this regex: <span class="math inline">\(1(01+1)^*0\)</span> Below is the FSA equivalent to the REG EX</p>
 </blockquote>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
@@ -98,6 +98,7 @@ window.Quarto = {
     q0--&gt;q1:1
     q1--&gt;q2:0
     q2--&gt;q1:1
+    q1--&gt;q1:1
     q1--&gt;qaccept:0
 </pre>
 </div>

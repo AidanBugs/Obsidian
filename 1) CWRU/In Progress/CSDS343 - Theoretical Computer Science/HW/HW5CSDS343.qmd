@@ -8,7 +8,7 @@ Construct a FSA equivalent to the REG EX
 
 $1[((01)^*+1+01)^*+1]^*0$
 
-> The above REG EX is equivalent to this regex: $1(01+1)*0$
+> The above REG EX is equivalent to this regex: $1(01+1)^*0$
 > Below is the FSA equivalent to the REG EX
 
 ```{mermaid}
@@ -16,6 +16,7 @@ stateDiagram
     q0-->q1:1
     q1-->q2:0
     q2-->q1:1
+    q1-->q1:1
     q1-->qaccept:0
 ```
 
