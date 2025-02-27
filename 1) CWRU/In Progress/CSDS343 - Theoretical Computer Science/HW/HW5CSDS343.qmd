@@ -33,7 +33,7 @@ stateDiagram
 ```
 
 > Regex Equivalent:
-> $[1+0(0+10)]^*01(11)^*$
+> $[1+0(11)^*(0+10)]^*01(11)^*$
 
 ## 2
 Prove the reverse of a regular langauge is also a regular langauge, ($A, A^R$)
