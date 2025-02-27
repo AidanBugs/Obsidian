@@ -55,21 +55,21 @@ Consider the following XML document describing library entries
 
 ```
 <lib>
-    <book id=2020-XML>
+    <book id="2020-XML">
         <title> Smart XML Search</title>
         <editor> X. Blank </editor>
         <publisher>Springer</publisher>
     </book>
-    <journal id= FDS23 pub_year = “2022”>
+    <journal id="FDS23" pub_year = "2022">
         <title>Frontier of Data Science</title>
         <volume>25</volume>
         <number>1</number>
     </journal>
-    <misc id= “tr22-10” id= “TR22-10-22”> TWO ID FIX LATERRRRRRRRR
+    <misc id= "TR22-10-22">
         <author>Dr. Who</author>
         <title>An unpublished theory of time travel </title>
         <year>2022</year>
-        <pages>0<page>
+        <pages>0</pages>
     </misc>
 </lib>
 ```
