@@ -31,15 +31,32 @@ $L_1 = \{w\bar w| w\in \{0,1\}\}$ where $\bar w$ is the bit compliment of $w$
 >
 > Suppose $L_1$ is context free, then $\exists$ a $p$ s.t. all strings $s$ in $L_1$ with $|s|>p$ can be divded into $s=uvxyz$ such that $|vxy|\leq p$ and $|vy|>0$
 >
-> Given the string $0^p1^2p0^p$ and that $|vxy|\leq p$, there are 5 cases of $vxy$
+> Given the string $0^p1^{p}0^p1^p0^p1^p$ and that $|vxy|\leq p$, there are 5 cases of $vxy$
 >
-> 1. $vxy=0^*$ first set of 0's
-> 2. $vxy=0^*1^*$
-> 3. $vxy=1^*$
-> 4. $vxy=1^*0^*$
-> 5. $vxy=0^*$ second set of 0's
+> 1. $vxy=0^*$ first
+> 2. $vxy=0^*1^*$ first
+> 3. $vxy=1^*$ first
+> 4. $vxy=1^*0^*$ first
+> 1. $vxy=0^*$ second
+> 2. $vxy=0^*1^*$ second
+> 3. $vxy=1^*$ second
+> 4. $vxy=1^*0^*$ second
+> 1. $vxy=0^*$ third
+> 2. $vxy=0^*1^*$ third
+> 3. $vxy=1^*$ third
+> 
+> For all cases suppose the string $uv^0xy^0z$. This string should be in $L_1$ according to the pumping lemma but we can prove this is not true for all cases.
 >
-> In case 1, suppose the string $uv^0xy^0z$, then we have less $0$'s on the left side so our midpoint shifts to the right. 
+> In case 1, our string is now of the form $0^{p-|vy|}1^p0^p1^p0^p1^p$. This shifts the midpoint to the right by $|vy|/2$. Thus if we split the string in half we get $w=0^{p-|vy|}1^p0^p1^{|vy|/2}$ and the second half as $1^{p-|vy|/2}0^p1^p$. Since the second half is not the compliment of $w$ this string is not in $L_1$.
+>
+> Case 5 and 9 follow similar logic, with case 9 shifting the midpoint left.
+>
+> In case 3, our string is now of the form $0^{p}1^{p-|vy|}0^p1^p0^p1^p$. This shifts the midpoint to the right by $|vy|/2$. Thus if we split the string in half we get $w=0^{p}1^{p-|vy|}0^p1^{|vy|/2}$ and the second half as $1^{p-|vy|/2}0^p1^p$. Since the second half is not the compliment of $w$ this string is not in $L_1$.
+>
+> Case 7 and 11 follow similar logic, with case 11 shifting the midpoint left.
+>
+> 
+
 
 ### B
 $L_2 = \{a^mb^nc^{m\times n}| m,n\in \mathbf {Z}_{\geq 0}\}$
