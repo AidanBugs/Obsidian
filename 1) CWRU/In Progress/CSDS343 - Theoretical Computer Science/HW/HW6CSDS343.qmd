@@ -43,14 +43,16 @@ Assume you have the pushdown automata for each language, give the pushdown autom
 
 ```{mermaid}
 stateDiagram
-    [*] --> A: epsilon, epsilon -> epsilon
-    A --> B: epsilon, epsilon -> epsilon
+    [*] --> A: epsilon, epsilon -> $
+    A --> Clear: epsilon, epsilon -> epsilon
+    Clear --> Clear: epsilon gamma_a --> epsilon
+    Clear --> B: epsilon, $ -> epsilon
     B --> Accept: epsilon, epsilon -> epsilon
 ```
 
 > $A$ is the machine for $L_1$, $B$ is the machine for $L_2$
 >
-> We map the accept state of the first automata to the initial state of the second automata.
+> We map the accept state of the first automata to a clear state, which clears the stack, then move to the initial state of the second automata.
 >
 > That is, we only move to the other machine if the first machine accepts. We only transition to the accept state if both machines accept. This machine only accepts if we end at the accept state and there is nothing left on the string.
 
