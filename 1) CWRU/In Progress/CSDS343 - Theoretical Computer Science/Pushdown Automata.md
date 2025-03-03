@@ -19,7 +19,7 @@ If $L$ is context free, $\exists p$ such that for all $s\in L, |s|>p$,
 
 - $s=uvxyz$
 - $|vxy|\leq p$
-- $|vy|>0
+- $|vy|>0$
 
 $uv^kxy^kz\in L\forall k=0,1,2..$
 

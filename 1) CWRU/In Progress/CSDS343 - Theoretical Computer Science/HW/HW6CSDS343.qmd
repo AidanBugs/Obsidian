@@ -1,5 +1,5 @@
 ---
-format: pdf
+format: html
 ---
 
 # HW6CSDS343
@@ -9,8 +9,24 @@ Prove the following language is context free $E=\{a^ib^j| i\neq j\}$
 ### A
 Give a pushdown automaton that decides $E$
 
+```{mermaid}
+stateDiagram
+    [*] --> A: epsilon, epsilon -> $
+    A --> B: epsilon, epsilon -> epsilon
+    A --> A: a, epsilon -> a
+    B --> Accept: epsilon,  a -> epsilon
+    B --> B: b, a -> epsilon
+    B --> B*: b, $ -> b
+    B* --> B*: b, epsilon -> b
+    B* --> Accept: epsilon, b -> epsilon
+```
+
 ### B
-Give a context free grammar for $E$
+Give a context free grammar for $E$ 
+
+> $S \rightarrow aSb$
+> $S \rightarrow a$
+> $S \rightarrow b$
 
 ## 2
 Prove the concatenation ($xy|x\in L_1 \land y\in L_2$) of two context free languages $L_1$ and $L_2$ is context free
@@ -18,8 +34,12 @@ Prove the concatenation ($xy|x\in L_1 \land y\in L_2$) of two context free langu
 ### A
 Assume you have the context free grammar for each language, give the context free grammar for the concatenation (create the CFG directly)
 
+> $S \rightarrow XY$ where X is the context free grammar for $L_1$ and Y is the context free grammar for $L_2$
+
 ### B
 Assume you have the pushdown automata for each language, give the pushdown automata for the concatenation (create the PDA directly)
+
+
 
 ## 3
 Prove that each of the following languages are not context free
@@ -55,8 +75,13 @@ $L_1 = \{w\bar w| w\in \{0,1\}\}$ where $\bar w$ is the bit compliment of $w$
 >
 > Case 7 and 11 follow similar logic, with case 11 shifting the midpoint left.
 >
-> 
-
+> Cases 2 and 4 follow similar logic, that is decreasing the number of elements on the left by $|vy|$ and then shifting the midpoint to the right and creating strings $0101$ and $101$ with some number of $1$'s and $0$'s (less than or equal to $p$). Since the second half is not the compliment of $w$ this string is not in $L_1$.
+>
+> Similar logic for cases 8 and 10 except these cases decrease the number of elements on the right, shifting the midpoint left and creating strings $010$ and  $0101$ (with some number of $1$'s and $0$'s less than or equal to $p$) which are not compliments of eachother.
+>
+> Case 6 is at the midpoint, thus if it takes away more $0$'s than $1$'s the midpoint will shift to the right and follow similar logic as cases above. If it takes away more $1$'s than $0$'s the midpoint will shift to the left and follow similar logic as cases above. However if it takes away the same number of $0$'s and $1$'s the midpoint will not shift and we will split the string into halves $w=0^{p}1^p0^{p-|vy|/2}$ and $1^{p-|vy|/2}0^p1^p$. Since the second half is not the compliment of $w$ this string is not in $L_1$.
+>
+> We have shown for all cases that $uv^0xy^0z$ is not in $L_1$, thus $L_1$ is not context free as it contradicts the pumping lemma
 
 ### B
 $L_2 = \{a^mb^nc^{m\times n}| m,n\in \mathbf {Z}_{\geq 0}\}$
