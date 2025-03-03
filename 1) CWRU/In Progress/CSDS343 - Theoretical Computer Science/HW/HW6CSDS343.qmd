@@ -25,7 +25,9 @@ stateDiagram
 Give a context free grammar for $E$ 
 
 > $S \rightarrow aSb$
+>
 > $S \rightarrow a$
+>
 > $S \rightarrow b$
 
 ## 2
@@ -34,12 +36,23 @@ Prove the concatenation ($xy|x\in L_1 \land y\in L_2$) of two context free langu
 ### A
 Assume you have the context free grammar for each language, give the context free grammar for the concatenation (create the CFG directly)
 
-> $S \rightarrow XY$ where X is the context free grammar for $L_1$ and Y is the context free grammar for $L_2$
+> $S \rightarrow XY$ where $X$ is the context free grammar for $L_1$ and $Y$ is the context free grammar for $L_2$
 
 ### B
 Assume you have the pushdown automata for each language, give the pushdown automata for the concatenation (create the PDA directly)
 
+```{mermaid}
+stateDiagram
+    [*] --> A: epsilon, epsilon -> epsilon
+    A --> B: epsilon, epsilon -> epsilon
+    B --> Accept: epsilon, epsilon -> epsilon
+```
 
+> $A$ is the machine for $L_1$, $B$ is the machine for $L_2$
+>
+> We map the accept state of the first automata to the initial state of the second automata.
+>
+> That is, we only move to the other machine if the first machine accepts. We only transition to the accept state if both machines accept. This machine only accepts if we end at the accept state and there is nothing left on the string.
 
 ## 3
 Prove that each of the following languages are not context free
