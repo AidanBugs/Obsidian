@@ -11,14 +11,14 @@ Give a pushdown automaton that decides $E$
 
 ```{mermaid}
 stateDiagram
-    [*] --> A: epsilon, epsilon -> $
-    A --> B: epsilon, epsilon -> epsilon
-    A --> A: a, epsilon -> a
-    B --> Accept: epsilon,  a -> epsilon
-    B --> B: b, a -> epsilon
-    B --> B*: b, $ -> b
-    B* --> B*: b, epsilon -> b
-    B* --> Accept: epsilon, b -> epsilon
+    [*] --> A: $$\epsilon, \epsilon \rightarrow \$$$
+    A --> B: $$\epsilon, \epsilon \rightarrow \epsilon$$
+    A --> A: $$a, \epsilon \rightarrow a$$
+    B --> Accept: $$\epsilon,  a \rightarrow \epsilon$$
+    B --> B: $$b, a \rightarrow \epsilon$$
+    B --> B*: $$b, \$\rightarrow b$$
+    B* --> B*: $$b, \epsilon \rightarrow b$$
+    B* --> Accept: $$\epsilon, b \rightarrow \epsilon$$
 ```
 
 ### B
@@ -43,11 +43,11 @@ Assume you have the pushdown automata for each language, give the pushdown autom
 
 ```{mermaid}
 stateDiagram
-    [*] --> A: epsilon, epsilon -> $
-    A --> Clear: epsilon, epsilon -> epsilon
-    Clear --> Clear: epsilon gamma_a --> epsilon
-    Clear --> B: epsilon, $ -> epsilon
-    B --> Accept: epsilon, epsilon -> epsilon
+    [*] --> A: $$\epsilon, \epsilon \rightarrow \$$$
+    A --> Clear: $$\epsilon, \epsilon \rightarrow \epsilon$$
+    Clear --> Clear: $$\epsilon, \Gamma_A \rightarrow \epsilon$$
+    Clear --> B: $$\epsilon, \$ \rightarrow \epsilon$$
+    B --> Accept: $$\epsilon, \epsilon \rightarrow \epsilon$$
 ```
 
 > $A$ is the machine for $L_1$, $B$ is the machine for $L_2$
