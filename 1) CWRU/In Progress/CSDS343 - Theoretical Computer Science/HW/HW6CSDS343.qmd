@@ -26,9 +26,17 @@ Give a context free grammar for $E$
 
 > $S \rightarrow aSb$
 >
-> $S \rightarrow a$
+> $S \rightarrow A$
 >
-> $S \rightarrow b$
+> $S \rightarrow B$
+>
+> $A \rightarrow aA$
+>
+> $A \rightarrow a$
+>
+> $B \rightarrow bB$
+>
+> $B \rightarrow b$
 
 ## 2
 Prove the concatenation ($xy|x\in L_1 \land y\in L_2$) of two context free languages $L_1$ and $L_2$ is context free
