@@ -20,6 +20,29 @@ stateDiagram
     B* --> B*: $$b, \epsilon \rightarrow b$$
     B* --> Accept: $$\epsilon, b \rightarrow \epsilon$$
 ```
+> Proof
+>
+> If $s\in L$ then there are either more $a$'s than $b$'s or vice versa.
+>
+> Case 1: $s\in L$ where $i>j$
+>
+> PDA will add all a's to the stack, then pop a's for each b. Since the number of b's is less than the number of a's we will run out of b's and there will still be a's on the stack. Since there are a's on the stack then we can move to the accept state and accept.
+>
+> Case 2: $s\in L$ where $j>i$
+>
+> PDA will add all a's to the stack then pop a's for each b. Since there are more b's than a's the PDA will pop all the a's then start adding b's only once the stack is empty. Once we reach the end of the string we will have b's on the stack and move to the accept state and accept.
+>
+> If $s\notin L$ then either $i=j$ or string is not of form $a^ib^j$
+>
+> Case 3: $s$ not of form $a^ib^j$
+>
+> If at any point the string does not follow the form $a^ib^j$ then our machine will reject because any transition not labeled is a reject.
+>
+> Case 4: $i=j$
+>
+> PDA will add all a's to the stack, then pop a's for each b. Since the number of b's is equal to the number of a's we will clear the stack until it is just the dollar sign. From there, there is no transition that will lead to the accept state with just the $ so our machine will reject. 
+>
+> Therefore since we have created a nondeterministic PDA that decides $L$ then $L$ must be context free.
 
 ### B
 Give a context free grammar for $E$ 
@@ -37,6 +60,12 @@ Give a context free grammar for $E$
 > $B \rightarrow bB$
 >
 > $B \rightarrow b$
+>
+> Proof
+>
+> Our CFG creates strings of the form $a^ib^j$ because there are no points where an $a$ can be placed to the right of a $b$ nor places to place a $b$ to the left of an $a$. Initially our CFG creates strings with equal $a$'s and $b$'s, but then transitions into $A$ or $B$ which add one ore more $a/b$'s respectively. Thus our CFG creates strings with unequal amounts of $a$'s and $b$'s with the format  $a^ib^j$.
+>
+> Thus $L$ is a contex free language because we created a CFG for $L$.
 
 ## 2
 Prove the concatenation ($xy|x\in L_1 \land y\in L_2$) of two context free languages $L_1$ and $L_2$ is context free
@@ -45,6 +74,14 @@ Prove the concatenation ($xy|x\in L_1 \land y\in L_2$) of two context free langu
 Assume you have the context free grammar for each language, give the context free grammar for the concatenation (create the CFG directly)
 
 > $S \rightarrow XY$ where $X$ is the context free grammar for $L_1$ and $Y$ is the context free grammar for $L_2$
+>
+> Proof by contradiction
+> 
+> Suppose string $s\rightarrow S$ is not in $L$, by the definition of $S$, $s$ must be split such that the first half of the string is in $L_1$ and the 2nd half is in $L_2$. By definition of $L$ then $s$ is a concatenation of $L_1$ and $L_2$ thus $s\in L$ which is a contradiction.
+>
+> If a string $s$ does not follow the rules of $S$ then it cannot be a concatenation of 2 strings in $L_1$ and $L_2$ otherwise it would follow the rules of $S$
+>
+> Therefore $s$ is in $L$ if it follows the grammar rule $S$ given above. As such, since there is a grammar rule for $L$ then $L$ is a context free grammar. 
 
 ### B
 Assume you have the pushdown automata for each language, give the pushdown automata for the concatenation (create the PDA directly)
@@ -63,6 +100,14 @@ stateDiagram
 > We map the accept state of the first automata to a clear state, which clears the stack, then move to the initial state of the second automata.
 >
 > That is, we only move to the other machine if the first machine accepts. We only transition to the accept state if both machines accept. This machine only accepts if we end at the accept state and there is nothing left on the string.
+>
+> Proof
+>
+> If our PDA accepts the string, then there exists a midpoint such that the first half is accepted by $A$ and the second half is accepted by $B$. This would indicate that the string is comprised of $xy$ where $x\in L_1, y\in L_2$ which would mean our string is in $L$. 
+>
+> If our PDA rejects the string, then there is no such midpoint (since this is a nondeterministic machine). This would mean our string is not in $L$ as there is no midpoint.
+>
+> Therefore $L$ is a context free grammar because there exists a PDA that decides $L$.
 
 ## 3
 Prove that each of the following languages are not context free
