@@ -88,3 +88,5 @@ If $A\leq_pB$ and $B\in P$ then $A\in P$ (bc we can use $B$ to solve $A$). Simil
 $HAMILTONIAN CYCLE \leq_p TRAVELING SALESMAN$
 
 Given $G$ on instance of Ham cycle problem. Create a network of cities + costs and a budget $K$. Make each vertex a city. set $K=n$ and if there is an edge between 2 verticies make the cost between them $1$ else $2$.
+
+Proof left as exercise for the reader (trivial).
