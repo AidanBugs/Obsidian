@@ -72,6 +72,19 @@ A verifier is a deterministic TM that takes 2 inputs, $x\in L$ iff there exists 
 
 $w$ is a certificate that $x\in L$.
 
-$L\in NP$ if there exists a verifier for $L, V\in P$
+$L\in NP$ iff there exists a verifier for $L, V\in P$
 
 This means that $P$ means the language is easy to find an answer and $NP$ is easy to check if an answer is correct.
+
+If $x\in L$ then $V(x,w)$ will accept, $|w|\in O(|x|^k)$ and $t_v(|x|,|w|)\in O(\max(|x|,|w|)^k)$
+
+#### Proof
+Given $x$ and a NTM $N$ that decides $L$. Let $w$ be the sequence of choices $N$ uses of each step. Since $T_N(n)=O(n^k), |w|\in O(n^k)$. We can simulate $N$ with deterministic machine that uses $w$ for each choice. 
+
+### Reducibility
+If $A\leq_pB$ and $B\in P$ then $A\in P$ (bc we can use $B$ to solve $A$). Similarly, if $A\notin P$ then $B\notin P$.
+
+#### Example
+$HAMILTONIAN CYCLE \leq_p TRAVELING SALESMAN$
+
+Given $G$ on instance of Ham cycle problem. Create a network of cities + costs and a budget $K$. Make each vertex a city. set $K=n$ and if there is an edge between 2 verticies make the cost between them $1$ else $2$.
