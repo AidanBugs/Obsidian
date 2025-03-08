@@ -1,0 +1,56 @@
+---
+format: pdf
+---
+
+# 6-14
+## a
+Calculate sample mean and standard deviation by hand
+
+## b 
+Calculate sample meadian by hand
+
+## c
+Repeat above using R
+
+# 6-44
+## a
+Comment on the shape of the distribution
+
+## b
+Comment on the outliers of the data (DO NOT USE 1.5 IQR Rule)
+
+## c
+Which do you think has a higher value, sample meann or meadian? (EXPLAIN)
+
+## d
+Do you think the sample standard deviation is big or small? (EXPLAIN)
+
+## e
+Find the 3rd quartile and 80th percentile by hand
+
+## f
+Repeat part e using R
+
+# 6-42
+## a
+Use R to find the 5 number summary
+
+## b
+Identify any outliers by hand using the 1.5 IQR Rule
+
+## c
+Construct a box plot by hand based on your results in pars a and b.
+
+## d
+Describe the shape of the data distribution based on the boxplot that you created in part c
+
+## e
+Repeat part c using R
+
+## f
+Construct a normal probability plot for the data using R
+
+## g
+Is it reasonable to assume the data is normally distributed? Why or why not?
+
+```
