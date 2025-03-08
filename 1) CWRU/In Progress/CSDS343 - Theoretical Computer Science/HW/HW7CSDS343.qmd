@@ -1,0 +1,29 @@
+---
+format: pdf
+---
+
+# 1
+## A
+Prove if $L_1 \in P$ then $\bar{L_1}\in P$
+
+## B
+Explain why the techinque you used in part a fails to prove $L_1\in NP \rightarrow \bar{L_1}\in NP$
+
+## C
+Prove $(L_1\in P \land L_2\in P)\rightarrow L_1\circ L_2 \in P$
+
+## D
+Prove $(L_1\in NP \land L_2\in NP)\rightarrow L_1\circ L_2 \in NP$
+
+# 2
+## A
+Prove that $SUBGRAPH ISOMORPHISM \in NP$ (show $\exist V\in P$)
+
+## B
+Prove $HAMILTONIAN \leq_p SUBGRAPH ISOMORPHISM$
+
+# 3
+Prove MAJORITY-SAT is NP-complete
+
+# 4
+Prove the 0-1 integer programming problem is NP-complete
