@@ -57,4 +57,4 @@ yy -> copy line
 yw -> copy word
 p -> paste
 
-
+:%y+ -> copy entire file
