@@ -6,6 +6,20 @@ format: pdf
 ## A
 Prove if $L_1 \in P$ then $\bar{L_1}\in P$
 
+> Proof
+>
+> If $L_1\in P$ then $\exists k$ s.t. $L\in TIME(n^k)$, that is, $L_1$ is decided by a deterministic machine in polynomial time. 
+>
+> Since $L_1\in TIME(n^k)$, then the max of $t_m(n)$ of $x\in L_1$ and $t_m(n)$ of $x\notin L_1$ is $n^k$. This means a TM $M$ decides $L_1$ in polynomial time.
+>
+> We can create a 3 tape machine $M'$ that flips the output of $M$ on $x$ by running $M$ on tape 2 and keeping track of the state on tape 3. Once $M$ finishes $M'$ accepts if 
+>
+> As discussed, running $M$ will be $O(n^k)$ time. Reading the final state of $M$ would be $O(n)$ time (where $n$ is length of tape 3). So final runtime is $O(n^k)$, thus $M'\in t_m(n^k)$.
+>
+> We know $M'$ decides $\bar{L_1}$ because for $x\in \bar{L_1}$, $M$ rejects so $M'$ accepts and for $x\notin \bar{L_1}$, $M$ accepts so $M'$ rejects.
+>
+> Thus since $M'$ decides $\bar{L_1}$ and $M'\in t_m(n^k)$ then $\bar{L_1}\in TIME(n^k)$ so $\bar{L_1}\in P$
+
 ## B
 Explain why the techinque you used in part a fails to prove $L_1\in NP \rightarrow \bar{L_1}\in NP$
 
