@@ -13,7 +13,7 @@ $\delta : Q\times\{\Sigma\cup\{\epsilon\}\}\times \{\Gamma\cup\{\epsilon\}\}\rig
 Watch class video on 02/24 for an example of a drawn out PDA (I am too lazy to draw it :sob:)
 
 ## Pumping Lemma for context free languages
-Think of giant tree, some states must repeat so we are left with the following pumping lemma:
+Think of giant tree, essentially $p$ is the number of non terminals we have. If the length of the string exceeds $2p$ then some non terminals must repeat. This leaves us with the following pumping lemma:
 
 If $L$ is context free, $\exists p$ such that for all $s\in L, |s|>p$,
 
