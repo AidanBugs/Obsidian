@@ -23,8 +23,12 @@ Prove if $L_1 \in P$ then $\bar{L_1}\in P$
 ## B
 Explain why the techinque you used in part a fails to prove $L_1\in NP \rightarrow \bar{L_1}\in NP$
 
+> The proof would need to prove there exists a verifier for $\bar{L_1}$ which is not present in part A. The techinque used in part A determined the runtime of our machine whereas this proof for $NP$ would need to show there is a verifier $V\in P$ for $\bar{L_1}$
+
 ## C
 Prove $(L_1\in P \land L_2\in P)\rightarrow L_1\circ L_2 \in P$
+
+
 
 ## D
 Prove $(L_1\in NP \land L_2\in NP)\rightarrow L_1\circ L_2 \in NP$
