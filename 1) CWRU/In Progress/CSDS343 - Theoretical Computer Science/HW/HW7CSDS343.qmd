@@ -28,7 +28,13 @@ Explain why the techinque you used in part a fails to prove $L_1\in NP \rightarr
 ## C
 Prove $(L_1\in P \land L_2\in P)\rightarrow L_1\circ L_2 \in P$
 
-
+> Proof
+>
+> If $L_1\in P \land L_2\in P$ then $\exists M_1,M_2$ that run in polynomial time that decide $L_1,L_2$.
+>
+> Lets create a TM $M_3$ to decide $L_1\circ L_2$ and prove that it decides the concatenation in polynomial time.
+>
+> $M_3$ will be a 
 
 ## D
 Prove $(L_1\in NP \land L_2\in NP)\rightarrow L_1\circ L_2 \in NP$
