@@ -42,14 +42,22 @@ print(paste("Sample Median:", median(data)))
 ## a
 Comment on the shape of the distribution
 
+> There are a lot of data points in the 400s, and the data is much more sparse at higher numbers. This means the data is skewed left (smaller)
+
 ## b
 Comment on the outliers of the data (DO NOT USE 1.5 IQR Rule)
 
+> The outliers of this distribution would include 3469 and 3227. They are much higher than the median which is probably around 1000 or 1200.
+
 ## c
-Which do you think has a higher value, sample meann or meadian? (EXPLAIN)
+Which do you think has a higher value, sample mean or median? (EXPLAIN)
+
+> The mean is probably greater than the median because the mean is more affected by large outliers whereas the median is not.
 
 ## d
 Do you think the sample standard deviation is big or small? (EXPLAIN)
+
+> The sample standard deviation is probably big because there is a very large range in the data. If the data was clustered around 1000, then the std would be much lower.
 
 ## e
 Find the 3rd quartile and 80th percentile by hand
@@ -77,11 +85,23 @@ summary(data)
 ## b
 Identify any outliers by hand using the 1.5 IQR Rule
 
+> Q1 = $667.8$, Q2 = $703.2$ $\rightarrow$ IQR = $35.4$
+>
+> 1.5 IQR = $53.1$
+>
+> Therefore MIN = $614.7$ and MAX = $756.3$
+>
+> Outliers are all values outside of this range, which include: 763.
+
 ## c
 Construct a box plot by hand based on your results in pars a and b.
 
+![Box Plot](IMG/Plot.png)
+
 ## d
 Describe the shape of the data distribution based on the boxplot that you created in part c
+
+> It is skewed to the left slightly because the mean is slightly to the left of the center. The mean is 683 while Q1 is 667 and Q3 is 703. That being said, the data is still fairly evenly distributed because the Q1 vs Q3 are fairly close to eachother and there is only one outlier.
 
 ## e
 Repeat part c using R
@@ -94,15 +114,19 @@ boxplot(data)
 Construct a normal probability plot for the data using R
 
 ```{r}
-mean = mean(data)
-std = sd(data)
+#| ouput: false
+#| warning: false
+#| include: false
 
-x = seq(mean-3*std,mean+3*std, by=0.4)
-y = dnorm(x, mean, std)
-
-plot(x,y)
+install.packages("qqplotr", repos = "http://cran.us.r-project.org")
+library(ggplot2)
+library(qqplotr)
+```
+```{r}
+ggplot(mapping = aes(sample = data)) + stat_qq_point(size = 2,color = "red") + stat_qq_line(color="green") + xlab("x-axis") + ylab("y-axis")
 ```
 
 ## g
 Is it reasonable to assume the data is normally distributed? Why or why not?
 
+> It is reasonable to assume the data is normally distributed because the data more or less follows a straight line based on the normal probability plot. Additionally, I added a straight line that would imitate what a normal distribution for this data would look like and the straight line matches pretty well with the data. We can also see the slight curve in the data indicating that the data is slightly skewed to the right.
