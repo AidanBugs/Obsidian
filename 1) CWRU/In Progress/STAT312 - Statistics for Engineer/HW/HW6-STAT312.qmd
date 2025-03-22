@@ -62,6 +62,18 @@ Do you think the sample standard deviation is big or small? (EXPLAIN)
 ## e
 Find the 3rd quartile and 80th percentile by hand
 
+> $n=27$
+>
+> Sorted: 450  450  452  453  457  473  507 1066 1085 1111 1145 1215 1254 1256 1364 1396 1575 1617 1733 1911 2588 2635 2725 2753 3186 3227 3469
+>
+> Q3: $28*0.75=21$
+>
+> 21st number is 1911 so that is Q3
+>
+> 80th: $28*0.8=22.4$
+>
+> 22nd and 23rd number are 2588 and 2635 so 80th percentile is 2611.5
+
 ## f
 Repeat part e using R
 
@@ -70,6 +82,10 @@ data <- c(450, 450, 473, 507, 457, 452, 453, 1215, 1256, 1145, 1085, 1066, 1111,
 1575, 1617, 1733, 2753, 3186, 3227, 3469, 1911, 2588, 2635, 2725)
 
 quantile(data, probs=c(0.75,0.8))
+
+print(length(data))
+
+print(sort(data))
 ```
 
 # 6-42
@@ -80,6 +96,8 @@ Use R to find the 5 number summary
 str = "680 669 719 699 670 710 722 663 658 634 720 690 677 669 700 718 690 681 702 696 692 690 694 660 649 675 701 721 683 735 688 763 672 698 659 704 681 679 691 683 705 746 706 649 668 672 690 724 652 720 660 695 701 724 668 698 668 660 680 739 717 727 653 637 660 693 679 682 724 642 704 695 704 652 664 702 661 720 695 670 656 718 660 648 683 723 710 680 684 705 681 748 697 703 660 722 662 644 683 695 678 674 656 667 683 691 680 685 681 715 665 676 665 675 655 659 720 675 697 663"
 data = c(as.numeric(strsplit(str, " ")[[1]]))
 summary(data)
+
+print(sort(data))
 ```
 
 ## b
@@ -89,7 +107,9 @@ Identify any outliers by hand using the 1.5 IQR Rule
 >
 > 1.5 IQR = $53.1$
 >
-> Therefore MIN = $614.7$ and MAX = $756.3$
+> Therefore the range is between $614.7$ and $756.3$
+>
+> $MIN = 634, MAX=748$
 >
 > Outliers are all values outside of this range, which include: 763.
 
@@ -101,7 +121,7 @@ Construct a box plot by hand based on your results in pars a and b.
 ## d
 Describe the shape of the data distribution based on the boxplot that you created in part c
 
-> It is skewed to the left slightly because the mean is slightly to the left of the center. The mean is 683 while Q1 is 667 and Q3 is 703. That being said, the data is still fairly evenly distributed because the Q1 vs Q3 are fairly close to eachother and there is only one outlier.
+> The left whisker is much smaller than the right whisker and the median is slightly to the left of the box (Q1, Q3) so the data is skewed right.
 
 ## e
 Repeat part c using R
@@ -129,4 +149,4 @@ ggplot(mapping = aes(sample = data)) + stat_qq_point(size = 2,color = "red") + s
 ## g
 Is it reasonable to assume the data is normally distributed? Why or why not?
 
-> It is reasonable to assume the data is normally distributed because the data more or less follows a straight line based on the normal probability plot. Additionally, I added a straight line that would imitate what a normal distribution for this data would look like and the straight line matches pretty well with the data. We can also see the slight curve in the data indicating that the data is slightly skewed to the right.
+> The data is not normally distributed and is instead skewed right. This is because the box plot indicates a right skew and the normal probability plot also indicates a slight right skew.
