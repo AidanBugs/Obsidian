@@ -42,7 +42,7 @@ print(paste("Sample Median:", median(data)))
 ## a
 Comment on the shape of the distribution
 
-> There are a lot of data points in the 400s, and the data is much more sparse at higher numbers. This means the data is skewed left (smaller)
+> The data is skewed right because there are many outliers on the right that increase the mean to be bigger than the median.
 
 ## b
 Comment on the outliers of the data (DO NOT USE 1.5 IQR Rule)
@@ -68,11 +68,11 @@ Find the 3rd quartile and 80th percentile by hand
 >
 > Q3: $28*0.75=21$
 >
-> 21st number is 1911 so that is Q3
+> 21st number is 2588 so that is Q3
 >
 > 80th: $28*0.8=22.4$
 >
-> 22nd and 23rd number are 2588 and 2635 so 80th percentile is 2611.5
+> 22nd and 23rd number are 2635 and 2725 so 80th percentile is 2680
 
 ## f
 Repeat part e using R
@@ -149,4 +149,4 @@ ggplot(mapping = aes(sample = data)) + stat_qq_point(size = 2,color = "red") + s
 ## g
 Is it reasonable to assume the data is normally distributed? Why or why not?
 
-> The data is not normally distributed and is instead skewed right. This is because the box plot indicates a right skew and the normal probability plot also indicates a slight right skew.
+> The data is not normally distributed and is instead skewed right. This is because the box plot indicates a right skew and the normal probability plot also indicates a slight right skew. The box plot has a smaller left whisker than right and the median is not centered between Q1 and Q3, indicating a right skew. The normal probability plot has a slight right curve where initial points and last few points are before the line while some middle points are after the line, also indicating a slight right skew.

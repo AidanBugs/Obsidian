@@ -102,6 +102,8 @@ B'.  $\exists L'$ that is NP Complete and $L'\leq_p L$
 
 If $A\notin P$ then $B\notin P$
 
+This means if we can solve an NP complete problem then we can solve every other problem in NP. Thats because we can map every problem in NP to an NP complete problem.
+
 ### NP Compllete Satisfiability
 $SATISFIABILITY=\{w|w\text{is a boolean formula in conjunction normal form where there is an assignment that makes it true}\}$
 
