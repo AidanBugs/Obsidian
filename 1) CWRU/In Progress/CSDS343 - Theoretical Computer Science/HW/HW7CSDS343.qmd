@@ -28,13 +28,19 @@ Explain why the techinque you used in part a fails to prove $L_1\in NP \rightarr
 ## C
 Prove $(L_1\in P \land L_2\in P)\rightarrow L_1\circ L_2 \in P$
 
-> Proof
+> Idea
 >
 > If $L_1\in P \land L_2\in P$ then $\exists M_1,M_2$ that run in polynomial time that decide $L_1,L_2$.
 >
 > Lets create a TM $M_3$ to decide $L_1\circ L_2$ and prove that it decides the concatenation in polynomial time.
 >
-> $M_3$ will be a 
+> $M_3$ will be a 4 tape machine. Tape 1 contains the input string. Tape 2 is working space for $M_1/M_2$ and Tape 3 will contain the state of the current working machine. Tape 4 contains the length of the working substring (by storing the length as a number of 0's).
+>
+> $M_3$ will count the number of 0's o tape 4 and copy that many characters from the start of Tape 1 onto Tape 2. We then simulate $M_1$ on this string, storing the state on Tape 3. If $M_1$ accepts, then we clear Tapes 2 and 3 then count the number of 0's on Tape 4 and skip that many characters on Tape 1 then copy remaining string to Tape 2. Then simulate $M_2$ on Tape 2 and store the state on Tape 3. If $M_2$ accepts then $M_3$ will accept. Otherwiseif $M_1$ or $M_2$ reject then we add a 0 to Tape 4 and repeat the above steps. If at any point the number of 0's exceed the length of the input string then $M_3$ rejects.  
+>
+> Proof $M_3$ decides $L_1\circL_2$
+>
+> Proof $t_{M_3}(n)\in O(n^{k+1})$
 
 ## D
 Prove $(L_1\in NP \land L_2\in NP)\rightarrow L_1\circ L_2 \in NP$
