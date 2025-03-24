@@ -86,4 +86,12 @@ Prove the 0-1 integer programming problem is NP-complete
 >
 > For our function, each literal in $SAT$ matches to one $x$ variable in $INT$ and each clause in $SAT$ matches to one linear inequality in $INT$.
 >
-> Our function $f$ makes a set of linear equations mapping each literal $l_i$ to a variable $x_i$. Then all $b_1...b_m$ are equal to $-1$. For coeffecients, $a_{i,j}=-1$ if $l_i$ is a literal in the $m$th clause, and $a_{i,j}=0$ otherwise.
+> Our function $f$ makes a set of linear equations mapping each variable in $F$ to the variabls in our system of linear inequalities. Then all $b_1...b_m$ are equal to $-1$. For coeffecients, $a_{i,j}=-1$ if $l_j$ is a literal in the $i$th clause, and $a_{i,j}=0$ otherwise. For each negation of a literal $l_j$ in a clause ($i$), we increase $b_i$ by $1$ and flip the sign of $a_{i,j}$ (make $a_{i,j}=1$)
+>
+> Proof:
+>
+> If $F\in SAT$ then $f(F)\in INT$
+>
+> If $F\in SAT$ then there is an assignment to the literals where each clause is true.
+>
+> If each clause is true, then at least one literal is true. This carries over to our system of inequalities $f(F)$. If all literals in a clause are simply the variable, this means for our inequality to be true at least one $x_i$ is equal to $1$, so the sum is at most $-1*1 \leq -1$ so this inequality is true. If the clause contains negations of a variable, then the inequality will still hold because we incremented $b_j$ by $1$. 
