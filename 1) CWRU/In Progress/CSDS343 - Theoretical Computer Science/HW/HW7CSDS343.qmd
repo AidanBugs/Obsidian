@@ -72,7 +72,7 @@ Prove $(L_1\in NP \land L_2\in NP)\rightarrow L_1\circ L_2 \in NP$
 
 # 2
 ## A
-Prove that $SUBGRAPH ISOMORPHISM \in NP$ (show $\exist V\in P$)
+Prove that $SUBGRAPH ISOMORPHISM \in NP$ (show $\exists V\in P$)
 
 ## B
 Prove $HAMILTONIAN \leq_p SUBGRAPH ISOMORPHISM$
