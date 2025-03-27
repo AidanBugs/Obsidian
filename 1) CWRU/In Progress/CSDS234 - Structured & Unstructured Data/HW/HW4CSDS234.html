@@ -37,6 +37,35 @@ ul.task-list li input[type="checkbox"] {
 <script src="HW4CSDS234_files/libs/quarto-diagram/mermaid-init.js"></script>
 <link href="HW4CSDS234_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -55,10 +84,65 @@ ul.task-list li input[type="checkbox"] {
 <section id="a" class="level2">
 <h2 class="anchored" data-anchor-id="a">a</h2>
 <p>Find and mark all the nodes that are classes and properties in the given RDF statements (you may directly mark them in the figure).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="IMG/HW4IMG.png" class="img-fluid figure-img"></p>
+<figcaption>Markup</figcaption>
+</figure>
+</div>
+<blockquote class="blockquote">
+<p>Classes: Book, Publisher</p>
+<p>Properties: ISBN, publishedBy</p>
+</blockquote>
 </section>
 <section id="b" class="level2">
 <h2 class="anchored" data-anchor-id="b">b</h2>
 <p>Complete the rest of the RDF statements so it covers all the classes, property and domain/range relations in the RDF graph.</p>
+<pre class="{xml}"><code>&lt;rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"&gt;
+
+    &lt;rdfs:Class rdf:ID="author"&gt;
+        &lt;rdfs:comment&gt;The class of authors&lt;/rdfs:comment&gt;
+    &lt;/rdfs:Class&gt;
+
+    &lt;rdfs:Class rdf:ID="Copy"&gt;
+        &lt;rdfs:comment&gt;The class of copies&lt;/rdfs:comment&gt;
+    &lt;/rdfs:Class&gt;
+
+    &lt;rdfs:Property rdf:ID="writtenBy"&gt;
+        &lt;rdfs:comment&gt;Relates books to authors&lt;/rdfs:comment&gt;
+        &lt;rdfs:domain rdf:resource="#book"/&gt;
+        &lt;rdfs:range rdf:resource="#author"/&gt;
+    &lt;/rdfs:Property&gt;
+
+    &lt;rdfs:Property rdf:ID="presents"&gt;
+        &lt;rdfs:comment&gt;Relates books to copies&lt;/rdfs:comment&gt;
+        &lt;rdfs:domain rdf:resource="#book"/&gt;
+        &lt;rdfs:range rdf:resource="#copy"/&gt;
+    &lt;/rdfs:Property&gt;
+
+    &lt;rdfs:Property rdf:ID="year"&gt;
+        &lt;rdfs:comment&gt;It is a property of books and takes literals as values&lt;/rdfs:comment&gt;
+        &lt;rdfs:domain rdf:resource="#book"/&gt;
+        &lt;rdfs:range rdf:resource="&amp;rdf;Literal"/&gt;
+    &lt;/rdfs:Property&gt;
+
+    &lt;rdfs:Property rdf:ID="publishretName"&gt; 
+        &lt;rdfs:comment&gt;It is a property of publishers and takes literals as values&lt;/rdfs:comment&gt;
+        &lt;rdfs:domain rdf:resource="#publisher"/&gt;
+        &lt;rdfs:range rdf:resource="&amp;rdf;Literal"/&gt;
+    &lt;/rdfs:Property&gt;
+
+    &lt;rdfs:Property rdf:ID="copyNumber"&gt;
+        &lt;rdfs:comment&gt;It is a property of copiess and takes literals as values&lt;/rdfs:comment&gt;
+        &lt;rdfs:domain rdf:resource="#copy"/&gt;
+        &lt;rdfs:range rdf:resource="&amp;rdf;Literal"/&gt;
+    &lt;/rdfs:Property&gt;
+
+&lt;/rdf:RDF&gt;
+
+</code></pre>
 </section>
 </section>
 <section id="section-1" class="level1">
@@ -70,10 +154,49 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>“Find all the adverse events that are caused by Arimidex.”</li>
 </ul>
-<p>• “Find the proteins that are associated with the adverse events caused by ’Fulvestrant”.</p>
-<p>• “Find the drugs that cause both Headache and Kidney Infection “</p>
-<p>• “What are the proteins associated with all the diseases that can be treated by Arimidex”</p>
-<p>• “What are the proteins that can interact with those associated with diseases treated by Fulverstrant”.</p>
+<pre class="{SPARQL}"><code>SELECT ?v
+WHERE {
+  ?v rdf:type :AdverseEvent .
+  :Arimidex :Causes ?v .
+}</code></pre>
+<ul>
+<li>“Find the proteins that are associated with the adverse events caused by ’Fulvestrant”.</li>
+</ul>
+<pre class="{SPARQL}"><code>SELECT ?p
+WHERE{
+  ?p rdf:type :Protein .
+  :Fulvestrant :Causes ?e .
+  ?e :Assoc ?p .
+}
+</code></pre>
+<ul>
+<li>“Find the drugs that cause both Headache and Kidney Infection “</li>
+</ul>
+<pre class="{SPARQL}"><code>SELECT ?drug
+WHERE {
+  ?drug rdf:type :Drug .
+  ?drug :Causes :Headache .
+  ?drug :Causes :KidneyInfection .
+}</code></pre>
+<ul>
+<li>“What are the proteins associated with all the diseases that can be treated by Arimidex”</li>
+</ul>
+<pre class="{SPARQL}"><code>SELECT ?p
+WHERE {
+  ?p rdf:type :Protein .
+  :Arimidex :Treat ?disease .
+  ?disease :Assoc ?p .
+}
+</code></pre>
+<ul>
+<li>“What are the proteins that can interact with those associated with diseases treated by Fulverstrant”.</li>
+</ul>
+<pre class="{SPARQL}"><code>SELECT ?p
+WHERE {
+  :Fulverstrant :Treat ?disease .
+  ?disease :Assoc ?ap .
+  ?p :Interact ?ap .
+}</code></pre>
 </section>
 <section id="b-1" class="level2">
 <h2 class="anchored" data-anchor-id="b-1">b</h2>
@@ -132,17 +255,43 @@ ul.task-list li input[type="checkbox"] {
 <p>An (s, r, o) triple in an RDF statement is also simply denoted as r(s,o). A relation r is transitive if r(A,B) and r(B,C) implies r(A,C). Clearly, both “richer” and “taller” relations are transitive. Describe how you can use the graph and above transitivity rule to find the answer to the following questions (which is an example of “symbolic reasoning”):</p>
 <ul>
 <li>Who is the richest person?</li>
+</ul>
+<blockquote class="blockquote">
+<p><span class="math inline">\(O\)</span> is the richest.</p>
+</blockquote>
+<ul>
 <li>Who is the tallest person?</li>
+</ul>
+<blockquote class="blockquote">
+<p><span class="math inline">\(P\)</span> is the tallest.</p>
+</blockquote>
+<ul>
 <li>Find all people who are both taller and richer than M.</li>
+</ul>
+<blockquote class="blockquote">
+<p><span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> are both taller than and richer than <span class="math inline">\(M\)</span></p>
+</blockquote>
+<ul>
 <li>How many people are poorer than Q?</li>
 </ul>
+<blockquote class="blockquote">
+<p><span class="math inline">\(M,N,R\)</span> are all poorer than <span class="math inline">\(Q\)</span> so <span class="math inline">\(3\)</span> people are poorer than <span class="math inline">\(Q\)</span>.</p>
+</blockquote>
 <section id="c" class="level3">
 <h3 class="anchored" data-anchor-id="c">c</h3>
 <p>Assume we turn the graph G into a “edge weighted” graph, where an edge r(A,B) with a relation r and a weight w suggests A is taller than B by w inches (if r is “taller”) or by w dollars (if r is “richer”). Describe what algorithms you can use to find out the answers for the following questions.</p>
 <ul>
 <li>Find out those who are twice as rich as N.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Use Djikstra’s greedy algorithm to always take edges with the greatest increase in wealth from <span class="math inline">\(N\)</span>. Unfortunately it is impossible to determine if an edge is twice as rich as <span class="math inline">\(N\)</span> unless we have a base that <span class="math inline">\(N\)</span> (or some other node) has <span class="math inline">\(x\)</span> dollars, otherwise we can only determine that a node is <span class="math inline">\(w_1+w_2+...\)</span> richer than <span class="math inline">\(N\)</span>.</p>
+</blockquote>
+<ul>
 <li>Find out those who are at least 0.5 inches shorter than O</li>
 </ul>
+<blockquote class="blockquote">
+<p>Apply a breadth first search from <span class="math inline">\(O\)</span> and only take the edges for height with negative weighting to find people that are shorter than 0. We can calculate each person’s height as we traverse and see if their height is below -0.5 from <span class="math inline">\(O\)</span>.</p>
+</blockquote>
 </section>
 </section>
 </section>
