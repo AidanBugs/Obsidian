@@ -1,0 +1,65 @@
+---
+format: pdf
+---
+
+# 1
+Consider the following RDF graph, a graph representation of an RDF Schema for a library. A fraction of XML/RDF statements are provided below to model parts of the above RDF schema.
+
+## a
+Find and mark all the nodes that are classes and properties in the given RDF statements (you may directly mark them in the figure).
+
+## b
+Complete the rest of the RDF statements so it covers all the classes, property and domain/range relations in the RDF graph.
+
+# 2
+Consider the following biomedicine knowledge graph G, which describes proteins and the relevant diseases that may be, for example, treated, caused, or expressed by them.
+
+## a 
+Write SPARQL queries to express the following questions and give their answers. You may define variable names and RDF tags as you want, as long as the queries correctly express the questions.
+
+- “Find all the adverse events that are caused by Arimidex.”
+
+• “Find the proteins that are associated with the adverse events caused by ‘Fulvestrant”.
+
+• “Find the drugs that cause both Headache and Kidney Infection “
+
+• “What are the proteins associated with all the diseases that can be treated by Arimidex”
+
+• “What are the proteins that can interact with those associated with diseases treated by Fulverstrant”.
+
+## b
+
+A “knowledge hacker” tries to fool medical AI systems/ChatGPT which consults the above knowledge graph, by injecting fake triples or hiding true facts. He “attacks” G with the following modifications
+
+- Insert a triple <Arimidex, causes, Kidney Infection>
+- Remove a triple <Fulvestrant, causes, Kidney Infection>
+- Remove the edges between BRCA1 and ESR2.
+
+How your answers to any of the above queries change, under such an attack? Give the changed answers.
+
+# 3
+Among the advantages of representing facts with RDF (knowledge) graphs is its capability of supporting (logic) reasoning. Consider 6 people M, N, O, P, Q and R have the following facts.
+
+- M is poorer than N, and taller than R.
+- N is poorer than Q and shorter than R.
+- O is richer than P and shorter than M.
+- P is both richer and taller than Q.
+- Q is richer as well as taller than M.
+- R is poorer than M and shorter than O.
+
+## a 
+Draw a directed graph that can encode the above facts. For convenience, you may consider “reverting” the relation ‘poorer’ to ‘richer’ or vice versa as needed and changing the edge directions.
+
+## b
+An (s, r, o) triple in an RDF statement is also simply denoted as r(s,o). A relation r is transitive if r(A,B) and r(B,C) implies r(A,C). Clearly, both “richer” and “taller” relations are transitive. Describe how you can use the graph and above transitivity rule to find the answer to the following questions (which is an example of “symbolic reasoning”):
+
+- Who is the richest person?
+- Who is the tallest person?
+- Find all people who are both taller and richer than M.
+- How many people are poorer than Q?
+
+### c 
+Assume we turn the graph G into a “edge weighted” graph, where an edge r(A,B) with a relation r and a weight w suggests A is taller than B by w inches (if r is “taller”) or by w dollars (if r is “richer”). Describe what algorithms you can use to find out the answers for the following questions.
+
+- Find out those who are twice as rich as N.
+- Find out those who are at least 0.5 inches shorter than O

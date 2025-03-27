@@ -70,13 +70,19 @@ Prove $(L_1\in P \land L_2\in P)\rightarrow L_1\circ L_2 \in P$
 ## D
 Prove $(L_1\in NP \land L_2\in NP)\rightarrow L_1\circ L_2 \in NP$
 
-> Guess is split
+> We can create a machine $M$ that nondeterministically splits our input string $w$ into $x,y$ where $w=xy$ and accepts if $x$ is accepted by a NTM that decides $L_1$ in polynomial time and $y$ is accepted by a NTM that decides $L_2$ in polynomial time.
+>
+> Guess is the split of $w$ such that $w=xy\land x\in L_1 \land y\in L_2$. Our verifier $V$ can take this guess and run the verifiers of $L_1,L_2$ on $x,y$. Since $L_1,L_2\in NP$ their verifiers must be in $P$, so the total runtime of $V$ would be the runtime of running the verifiers of $L_1,L_2$ sequentially, which is $O(n^k)+O(n^k)=O(n^k)$. Therefore our verifier $V$ runs in $O(n^k)$ time so $V\in P$.
+>
+> Therefore since $\exists V \in P, L_1\circ L_2\in NP$.
 
 # 2
 ## A
 Prove that $SUBGRAPH ISOMORPHISM \in NP$ (show $\exists V\in P$)
 
-> Guess is mappings
+> Our machine $M$ that decides $SUBGRAPH ISOMORPHISM$ nondeterministically creates a function $f$ that maps each vertex in $H$ to a vertex in $G$ (no overlap). $M$ accepts if each vertex in $H$ is able to match to a unique vertex in $G$ and each edge in $H$ matches an edge found in $G$.
+>
+> Guess is the function that maps each vertex in $H$ to a unique vertex in $G$. $V$ will check to make sure the mapped verticies exist in $G$ and that each vertex in $H$ maps to a unique vertex in $G$. This process takes is $O(n^2)$ because for each vertex $v$ we check if $f(v)\in GV$ and that $f(v)$ is unique. This is accomplished by adding a tape that stores each output of $f$ and makes sure that for each new output it is not already on our tape. 
 
 ## B
 Prove $HAMILTONIAN \leq_p SUBGRAPH ISOMORPHISM$
@@ -118,13 +124,19 @@ Prove MAJORITY-SAT is NP-complete
 >
 > If $f(F)\in MAJORITY-SAT$ then $F\in 3-SAT$
 >
+>> If $f(F)\in MAJORITY-SAT$ then the majority of literals in each clause is true. Since each clause contains two literals that are always true, one of the remaining 3 literals must also be true. The remaining 3 literals in a given clause represent the literals of a clause in $F$, since one of these literals must be true for each clause, this is the assignment that would satisfy $F\in 3-SAT$. Thus, if $f(F)\in MAJORITY-SAT$ then $F\in 3-SAT$.
+>
 > If $f(F)\notin MAJORITY-SAT$ then $F\notin 3-SAT$
+>
+>> If $f(F)\notin MAJORITY-SAT$ then there is one clause where the majority of literals are false. Since each clause contains two literals that are always true, the remaining 3 literals must be false. The remaining 3 literals in a given clause represent the literals of a clause in $F$, since all of these literals are false, this is the assignment would not satisfy $3-SAT$. Thus, if $f(F)\notin MAJORITY-SAT$ then $F\notin 3-SAT$.
 >
 > As such, our clause in $3-SAT$ is true iff our clause in $MAJORITY-SAT$ is true. So $3-SAT\leq_p MAJORITY-SAT$.
 
 # 4
 Prove the 0-1 integer programming problem is NP-complete
 
+> ### Prove $INT\in NP$
+>
 > ### Prove $SAT\leq_p INT$
 >
 > For our function, each literal in $SAT$ matches to one $x$ variable in $INT$ and each clause in $SAT$ matches to one linear inequality in $INT$.
@@ -146,6 +158,10 @@ Prove the 0-1 integer programming problem is NP-complete
 >
 > If $f(F) \in INT$ then $F\in SAT$
 >
+>> If $f(F)\in INT$ then there exists an assignment to the variables where each inequality is true. That means each inequality has one literal that is true, either a positive coeffecient has an $x_i=0$ or a negative coeffecient has an $x_i=1$. This means our $F$ has an assignment (the same one as $f(F)$) where at least one literal is true in each clause. This means that $F\in SAT$
+>
 > If $f(F)\notin INT$ then $F\notin SAT$
+>
+>> If $f(F)\notin INT$ then there exists an inequality that is false. That means this inequality has all literals that are false, either a positive coeffecient has an $x_i=1$ or a negative coeffecient has an $x_i=0$. This results in the left side being one greater than our $b$. This means our $F$ has a clause (the same one as $f(F)$) where all literals are false. This means that $F\notin SAT$
 >
 > Therefore, $F\in SAT\leftrightarrow f(F)\in INT$ so $SAT\leq_p INT$.
