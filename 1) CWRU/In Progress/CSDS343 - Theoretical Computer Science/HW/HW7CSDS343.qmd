@@ -72,7 +72,7 @@ Prove $(L_1\in NP \land L_2\in NP)\rightarrow L_1\circ L_2 \in NP$
 
 > We can create a machine $M$ that nondeterministically splits our input string $w$ into $x,y$ where $w=xy$ and accepts if $x$ is accepted by a NTM that decides $L_1$ in polynomial time and $y$ is accepted by a NTM that decides $L_2$ in polynomial time.
 >
-> Guess is the split of $w$ such that $w=xy\land x\in L_1 \land y\in L_2$. Our verifier $V$ can take this guess and run the verifiers of $L_1,L_2$ on $x,y$. Since $L_1,L_2\in NP$ their verifiers must be in $P$, so the total runtime of $V$ would be the runtime of running the verifiers of $L_1,L_2$ sequentially, which is $O(n^k)+O(n^k)=O(n^k)$. Therefore our verifier $V$ runs in $O(n^k)$ time so $V\in P$.
+> Guess is the split of $w$ such that $w=xy\land x\in L_1 \land y\in L_2$ and it also includes the certificates for $V_1,V_2$ so that way they can correctly verify $x$ and $y$ respectively. Our verifier $V$ can take this guess and run the verifiers of $L_1,L_2$ on $x,y$. Since $L_1,L_2\in NP$ their verifiers must be in $P$, so the total runtime of $V$ would be the runtime of running the verifiers of $L_1,L_2$ sequentially, which is $O(n^k)+O(n^k)=O(n^k)$. Therefore our verifier $V$ runs in $O(n^k)$ time so $V\in P$.
 >
 > Therefore since $\exists V \in P, L_1\circ L_2\in NP$.
 
@@ -83,18 +83,46 @@ Prove that $SUBGRAPH ISOMORPHISM \in NP$ (show $\exists V\in P$)
 > Our machine $M$ that decides $SUBGRAPH ISOMORPHISM$ nondeterministically creates a function $f$ that maps each vertex in $H$ to a vertex in $G$ (no overlap). $M$ accepts if each vertex in $H$ is able to match to a unique vertex in $G$ and each edge in $H$ matches an edge found in $G$.
 >
 > Guess is the function that maps each vertex in $H$ to a unique vertex in $G$. $V$ will check to make sure the mapped verticies exist in $G$ and that each vertex in $H$ maps to a unique vertex in $G$. This process takes is $O(n^2)$ because for each vertex $v$ we check if $f(v)\in GV$ and that $f(v)$ is unique. This is accomplished by adding a tape that stores each output of $f$ and makes sure that for each new output it is not already on our tape. 
+>
+> Verifying edges is a similar process. We map an edge in $H$ to an edge in $G$ by appling the $f$ to the verticies of the edge. That is given an edge $e$ with verticies $u,v$ we look for an edge in $G$ such that $f(u),f(v)$ are the verticies of an edge in $G$. Similarly we store this output on a tape and ensure the outputed edge is unique. Doing both of these for each edge is $O(n)$ so total runtime for edges is $O(n^2$.
+>
+> Therefore the total runtime of $V$ is $O(n^2)+O(n^2)=O(n^2)$ so $V\in P$.
 
 ## B
 Prove $HAMILTONIAN \leq_p SUBGRAPH ISOMORPHISM$
 
-> $H$ is a hamiltonian circuit with same number of verticies as $G$.
+> ### Idea
+>
+> Our machine creates a function $f$ which maps our input $G\rightarrow G,H$ and inputs this into $SUBGRAPH ISOMORPHISM$ and accepts/rejects acccordingly. $H$ is a graph such that $|GV|=|HV|$ and the edges are $(v_1,v_2),(v_2,v_3),...(v_{|HV|-1},v_{|HV|}),(v_{|HV|},v_1)$. This means $H$ is a graph representation of an arbitrary hamiltonian circuit for a graph with $|GV| verticies. If $SUBGRAPH ISOMORPHISM$ accepts, then this means that there is a one to one function that maps each vertex in $H$ to a vertex in $G$ and all edges in $H$ exist in $G$. In other words, there is a subgraph of $G$ that is a hamiltonian circuit. Therefore if $ISO$ acceptts, $HAM$ accepts, otherwise reject.
+>
+> ### Proof:
+>
+> If $G\in HAM \rightarrow f(G)\in ISO$
+>
+>> If $G\in HAM$ then there is a hamiltonian circuit for $G$. This means that there is a subgraph that is a hamiltonian circuit of $G$ (remove any edges not used in the circuit). This results in a subgraph of $G$ with $|GV|$ verticies and $|GV|$ edges that connect these verticies in a perfect loop. Those are the same specifications of our graph $H$, so $ISO$ will map verticies in $H$ such that they correspond to verticies in $G$ to create a hamiltonian circuit. Thus $f(G)\in ISO$ because $H$ can be mapped to a valid subgraph of $G$.
+>
+> If $G\notin HAM \rightarrow f(G)\notin ISO$
+>
+>> If $G\notin HAM$ then there is not a hamiltonian circuit for $G$. This means that there is not a subgraph that is a hamiltonian circuit of $G$ (remove any edges not used in the circuit). So $ISO$ cannot map verticies in $H$ to verticies in $G$ to create valid circuit. Thus $f(G)\notin ISO$ because $H$ cannot be mapped to a valid subgraph of $G$. 
+>
+> If $f(G)\in ISO \rightarrow f(G)\in HAM$
+>
+>> If $f(G)\in ISO$ then we can map a hamiltonian circuit ($H$) onto a subgraph of $G$. This subgraph of $G$ has the same number of verticies but less edges. Since $H$ is a valid circuit of $G$, then $G$ has a hamiltonian circuit, therefore $G\in HAM$.
+>
+> If $f(G)\notin ISO \rightarrow f(G)\notin HAM$
+>
+>> If $f(G)\notin ISO$ then we cannot map a hamiltonian circuit ($H$) onto a subgraph of $G$. This subgraph of $G$ has the same number of verticies but less edges. Since there is no valid mapping of $H$ onto $G$, there is no valid hamiltonian circuit in $G$. Then $G$ has no valid hamiltonian circuit, therefore $G\notin HAM$.
+>
+> Therefore $G\in HAM \leftrightarrow f(G)\in ISO$. Since there is a function $f$ that maps $HAM$ to $ISO$ then $HAM\leq_p ISO$.
 
 # 3
 Prove MAJORITY-SAT is NP-complete
 
 > ### Prove $MAJORITY-SAT\in NP$
 >
-> Our guess would simply be the assignments of the variables (ie true or false).
+> Our guess would simply be the assignments of the variables (ie true or false). We can verify if this assignment is true by simply counting the number of true literals in a given clause and ensuring that the number is greater than half the number of literals in a clause. We do this by having a count tape to count every literal in a clause and for each true literal cross of 2 0's in the count. If we have all crossed off 0's then that clause is true. If any clause does not have all crossed 0's then we reject. Otherwise accept.
+>
+> This is $O(n)$ on our 2 tape machine because counting number of literals in a clause is $O(n)$, verifying there is a majority true is $O(n)$. Therefore $V\in P$ so $MAJORITY-SAT\in NP$
 >
 > ### Prove $3-SAT \leq_p MAJORITY-SAT$
 >
@@ -138,6 +166,12 @@ Prove MAJORITY-SAT is NP-complete
 Prove the 0-1 integer programming problem is NP-complete
 
 > ### Prove $INT\in NP$
+>
+> Our certificate for this problem is the 0,1 assignments for the variables. We can create a verifier $V$ that checks if the assignment results in each inequality being true. For each inequality, we check if the present variables are 0's or 1's then add up the left side accordingly. Then we check if the left side is less than or equal to the right side. If it is we move onto the next inequality, else reject. Thus if all inequalities hold true then we accept.
+>
+> The runtime for this is $O(n^2)$ because adding the left side of the equation is $O(n)$ then seeing which side is greater is also $O(n)$ and we need to do this for $m$ clauses. So this is $O(nm)=O(n^2)$.
+>
+> Since our verifier $V\in P, INT\in NP$.
 >
 > ### Prove $SAT\leq_p INT$
 >
