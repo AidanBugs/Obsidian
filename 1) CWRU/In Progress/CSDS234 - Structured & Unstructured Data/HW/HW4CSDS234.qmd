@@ -1,5 +1,5 @@
 ---
-format: pdf
+format: html
 ---
 
 # 1
@@ -49,6 +49,24 @@ Among the advantages of representing facts with RDF (knowledge) graphs is its ca
 
 ## a 
 Draw a directed graph that can encode the above facts. For convenience, you may consider “reverting” the relation ‘poorer’ to ‘richer’ or vice versa as needed and changing the edge directions.
+
+```{mermaid}
+graph TD;
+    M -->|poorer than| N;
+    N -->|poorer than| Q;
+    O -->|richer than| P;
+    P -->|richer than| Q;
+    Q -->|richer than| M;
+    R -->|poorer than| M;
+
+    M -->|taller than| R;
+    N -->|shorter than| R;
+    O -->|shorter than| M;
+    P -->|taller than| Q;
+    Q -->|taller than| M;
+    R -->|shorter than| O;
+
+```
 
 ## b
 An (s, r, o) triple in an RDF statement is also simply denoted as r(s,o). A relation r is transitive if r(A,B) and r(B,C) implies r(A,C). Clearly, both “richer” and “taller” relations are transitive. Describe how you can use the graph and above transitivity rule to find the answer to the following questions (which is an example of “symbolic reasoning”):
