@@ -88,6 +88,8 @@ Prove MAJORITY-SAT is NP-complete
 
 > ### Prove $MAJORITY-SAT\in NP$
 >
+> Our guess would simply be the assignments of the variables (ie true or false).
+>
 > ### Prove $3-SAT \leq_p MAJORITY-SAT$
 >
 > We can map each clause in $3-SAT$ which consists of literals $a,b,c$ to a new clause in MAJORITY-SAT which consists of literals $a,b,c,x,y$, where $x,y$ are new literals not in our $3-SAT$ problem. 
