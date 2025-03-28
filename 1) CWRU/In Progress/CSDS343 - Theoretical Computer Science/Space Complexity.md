@@ -66,3 +66,98 @@ Call stack for $CANYIELD$:
 This is $d(f(n))$ frames where each $CANYIELD$ uses up to $(3+d)f(n)$ space. $CANYIELD$ stores 3 configurations, each configuration uses $f(n)$ space and also needs space for the time which is $d(f(n))$.
 
 Therefore max possible space is $d*f(n)*(3+d)*f(n)=O(f(n)^2)$ so $NPSPACE(f(n))\subset SPACE(f(n)^2)$
+
+## PSPACE complete
+Is $P\subset PSPACE$?
+
+$L$ is PSPACE complete if 
+
+A. $L\inPSPACE$
+B. $\forall A\in PSPACE, A\leq_p L$
+C. $\exist A$ that is PSPACE complete and $A\leq_p L$
+
+### TQBF (Totall Quantified Boolean Formula)
+$n$ variables, each quantified and a bunch of formulas on the variables.
+
+$\exists x_0 \forall x_1 \exists x_2 \forall x_3 \exists x_4 ... \exists x_n (CNF)$
+
+That is there exists variables that regardless of other variables (T/F) it is true.
+
+1. Show $TQBF\in PSPACE$
+
+> Take formula as input
+>
+> If quantifier is $\forall x$
+>
+> - Set $x=T$ on the reduced formula
+> - Set $x=F$ on the reduced formula
+>
+> Return T if both are T.
+>
+> If quantifier is $\exists x$
+>
+> Return T if either assignment of $x$ returns T.
+>
+> SPACE = $n\times m$ so $O(f(m)^2)$
+
+2. Show $\forall L\in PSPACE, L\leq_p TQBF$
+
+> There exists a DTM $M$ that decies $L$ 
+>
+> Recall Cook-levin theorem that SAT is NP-complete.
+>
+> We create a formula using variables $c_{i,j,k}$ where it is the $i$th symbol of the $j$th configuration is symbol $k$,
+>
+> formula clauses:
+>
+> - init config is state $q_0$ and only $w$ is on the tape. 
+> - each cell has exactly one symbol
+> - q accept is cool
+> - each config is one transition away from the last one. 
+>
+> Since $L\in PSPACE$, then $M$ could use $2^{d(f(m))}$ configurations. 
+>
+> $\phi_{c_1,c_2,t}=$ formula that is true if $M$ goes from config $c_1$ to $c_2$ in $t$ steps.
+>
+> $\phi_{c_1,c_2,t}=\exists m | \phi_{c_1,m,t/2}\land \phi_{m,c_2,t/2}$
+>
+> The above doesn't quite work because we double size of formula at each step.
+>
+> $\exists m \forall a \forall b[(a=c_1\land b=m)\lor(a=m\land b=c_2)\rightarrow \phi_{c_1,c_2,t/2}]$
+>
+> This works because we dont double the size of the formula at each step. 
+
+## PSPACE Complete Problems
+Generalized full-knowledge non-random 2-player games
+
+Generalized Graph Game:
+
+> Given a directed Graph
+> 
+>Player 1 starts and chooses a node
+>
+> Each player chooses an adjacent node, but if a player has no move (cannot repeat nodes) the player looses
+
+$GG=\{<G,a>|G\text{is a graph and a is a vertex and player 1 is guarenteed to win starting at a}\}$
+
+1. $GG\in PSPACE$
+
+> Check each path in $G$, from a vertex in polynomial size ($n$).
+>
+> Only need linear space because we clear tape after each path is complete
+
+2. $TQBF\leq_p GG$
+
+> Given a TBQF
+>
+> Create a graph such that player 1 wins starting at vertex $a$ iff the TQBF is true
+>
+> Adjust formula so that it startes with $\exists$ and alternates $\forall,\exists$.
+>
+> Player 1: $\exists$, Player 2: $\forall$
+>
+> For each variable create: X_i--> B, X_i--> C, B-->D, C--> D, D-->X_i+1.
+>
+> After each variable is complete, the graph lets P2 choose a clause, and P1 can choose literal from clause. Literals are mapped to the T/F of the variable that make the literal true. 
+>
+> Proof left as exercise for the reader
