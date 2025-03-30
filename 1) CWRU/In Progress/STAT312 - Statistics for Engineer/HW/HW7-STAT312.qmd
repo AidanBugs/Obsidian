@@ -1,0 +1,123 @@
+---
+format: pdf
+---
+
+# 1
+The life in hours of a thermocouple used in a furnace is known to be approximately normally distributed, with standard deviation σ = 20 hours. A random sample of 15 thermocouples resulted in the following data: 553, 552, 567, 579, 550, 541, 537, 553, 552, 546, 538, 553, 581, 539 and 529
+
+## a Construct a 95% two-sided confidence interval (CI) for the mean life of all the thermocouples used in the furnaces
+
+> $\bar x = \frac{553+552+567+579+550+541+537+553+552+546+538+553+581+539+529}{15}= \frac{8270}{15}=551.3333$
+>
+> $\pm 1.96=z=\frac{\bar x-\mu}{\frac{\sigma}{\sqrt{n}}}=\frac{551.3333-\mu}{\frac{20}{\sqrt{15}}}$
+>
+> $\pm 1.96= \frac{551.3333-\mu}{5.164}\rightarrow \pm 10.121=551.3333-\mu$
+>
+> $\mu=551.3333\pm 10.121$
+>
+> $\mu = [541.21,561.25]$
+
+## b Interpret CI from a
+
+> We are 95% confident that the population mean is in between $[541.21,561.25]$
+
+## c Construct a 95% one-sided confidence interval with an upper bound for the mean life of all the thermocouples used in the furnaces
+
+> $\bar x = \frac{553+552+567+579+550+541+537+553+552+546+538+553+581+539+529}{15}= \frac{8270}{15}=551.3333$
+>
+> $-1.65=z=\frac{\bar x-\mu}{\frac{\sigma}{\sqrt{n}}}=\frac{551.3333-\mu}{\frac{20}{\sqrt{15}}}$
+>
+> $-1.65= \frac{551.3333-\mu}{5.164}\rightarrow -8.521 =551.3333-\mu$
+>
+> $\mu=551.3333+8.521 = 559.854$
+>
+> $\mu = (-\infty, 559.854]$
+
+## d Interpret CI from c
+
+> We are 95% confident that the population mean (true mean) is at most $559.854$
+
+## e If we would like to estimate the mean life of all the thermocouples used in the furnaces with an error that is less than 3 hours at 98% confidence. What sample size is required?
+
+> $3=\frac{2.33*20}{\sqrt n}\rightarrow n = \frac{2.33*20}{3}^2=(15.5333)^2=241.2844$
+>
+> Sample size of $\approx 241$ is requirerd for an error $\pm 3$
+
+# 2
+ A particular brand of diet margarine was analyzed to determine the level of polyunsaturated fatty acid (in percentages). A sample of six packages resulted in the following data: 16.8, 17.2, 17.4, 16.9, 16.5, 17.1.
+
+## a. Is the level of polyunsaturated fatty acid in the population normally distributed? Why or why not?
+
+> Given the small sample size (n=6) and no outliers, we can assume normality but we cannot say definitively that this distribution is normal. 
+
+## b. Calculate a 99% two-sided confidence interval for the mean level of polyunsaturated fatty acid for this particular brand of diet margarine.
+
+> $\bar x = \frac{16.8+17.2+17.4+16.9+16.5+17.1}{6}=\frac{101.9}{6}=16.9833$
+>
+> $s^2=\frac{(16.8-16.9833)^2+(17.2-16.9833)^2+(17.4-16.9833)^2+(16.9-16.9833)^2+(16.5-16.9833)^2+(17.1-16.9833)^2}{5}=\frac{0.0336+0.047+0.1736+0.0069+0.2336+0.0136}{5}=\frac{0.5083}{5}=0.1017$
+>
+> sqrt$s=\sqrt{0.1017}=0.319$
+>
+> Using $t$-test beacuse small $n$. We have $5$ degrees of freedom, 2-tailed, and 99% ci so $t=4.032$.
+>
+> $\pm t=\frac{\bar x - \mu}{s/\sqrt n}\rightarrow \pm 4.032=\frac{16.9833-\mu}{0.319/\sqrt 6}$
+>
+> $\mu = 16.9833 \pm 4.032 \times \frac{0.319}{\sqrt 6}= 16.9833 \pm 0.525$
+>
+> $\mu = [16.4583.17.5083]$
+
+## c. Is your method used in part (b) justified? Why or why not? If it is not justified, what assumption do you need to make for your solution in part (b) to be justified?
+
+> The t-test is valid for small sample sizes of normal data. Given the small sample normaility is assumed but not verified.
+
+## d. Repeat part (b) using R. Attached the R codes and output.
+
+```{r}
+data <- c(16.8,17.2,17.4,16.9,16.5,17.1)
+t.test(data, conf.level = 0.99)
+```
+
+## e. Calculate a 99% lower confidence bound for the mean level of polyunsaturated fatty acid for this particular brand  of diet margarine.
+
+> $t=3.365$ for 99% one tail.
+>
+> $t=\frac{\bar x - \mu}{s/\sqrt n}\rightarrow 3.365=\frac{16.9833-\mu}{0.319/\sqrt 6}$
+>
+> $\mu = 16.9833 -3.365 \times \frac{0.319}{\sqrt 6}= 16.9833 - 0.426$
+>
+> $\mu = [16.5573,\infty)$
+
+## f. Interpret your answer in part (e).
+
+> This means that we are 99% confident that the mean is at least $16.5573%$
+
+## g. Calculate a 95% two-sided confidence interval for the standard deviation of the level of polyunsaturated fatty acid for this particular brand of diet margarine.
+
+> $\chi_{0.025,5}=12.83,\chi_{0.975,5}=0.83$
+>
+> $\chi = \frac{(n-1)s^2}{\sigma ^2}\rightarrow \sigma = \sqrt{\frac{(5)(0.1017)}{\chi}}$
+>
+> For $\chi_{0.025,5}=12.83$: $\sigma =\sqrt{\frac{(5)(0.1017)}{12.83}}= 0.199$
+>
+> For $\chi_{0.975,5}=0.83$: $\sigma = \sqrt{\frac{(5)(0.1017)}{0.83}}= 0.783$
+>
+> $\sigma= [0.199,0.783]$
+
+## h. Is your method used in part (g) justified? Why or why not? If it is not justified, what assumption do you need to  make for your solution in part (g) to be justified?
+
+> The method above assumes normality. If the data is not normal then the method is invalid.
+
+## i. Repeat part (g) using R. Attached the R codes and output.
+
+```{r}
+n=6
+s2 = var(data)
+lower <- sqrt((n-1)*s2/qchisq(0.975,5))
+upper <- sqrt((n-1)*s2/qchisq(0.025,5))
+
+print(paste("[", lower, ",", upper, "]"))
+```
+
+## j. Interpret your confidence interval in part (g).
+
+> We are 95% confident that the standard deviation of the population (true standard deviation) is between 0.199 and 0.783
