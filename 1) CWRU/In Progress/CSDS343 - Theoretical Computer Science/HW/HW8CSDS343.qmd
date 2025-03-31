@@ -1,0 +1,67 @@
+---
+format: pdf
+---
+
+# 1
+Let $SET-SPLITTING = \{⟨S, C⟩\}$ where S is a finite set of n elements and $C = \{C_1, . . . , C_k\}$ is a collection of $k$ subsets of $S$, and we can color the elements of $S$ red or blue so that no subset $C_i ∈ C$ contains only elements of one color. Prove that $SET-SPLITTING$ is NP-complete.
+
+> ## Prove $SET-SPLITTING\in NP$
+>
+> To prove $SET-SPLITTING\in NP$ we need to show $\exists V\in P$ that verifies a string $w\in SET-SPLITTING$ given the non-deterministic guess of $SET-SPLITTING$.
+>
+> ## Prove $SAT\leq_p SET-SPLITTING$
+>
+> ### Idea
+>
+> Create a function $f$ that maps $F$ from $SAT$ to $<S,C>$ for $SET-SPLITTING$ and $F\in SAT \leftrightarrow f(F)\in SET-SPLITTING$.
+>
+> $F$ has $n$ variables, $f$ creates an $S$ with $2n$ variables where a variable $x_i\in F$ is mapped to $s_i$ and $\neg x_i\in F$ is mapped to $s_{i+n}$. We can ensure this by creating the first $n$ collections where for each variable $x_i\in F$ create $C_i=(s_i,s_{i+n})$. This ensures that the negation works correctly for each variable $x_i \in F$. Now we translate each clause from $F$ to a new collection in $C$. That is, the $i$th clause in $F$ maps to the $C_{i+n}$ clause. Each variable in $c_i$ is added to $C_{i+n}$ unless a given $x_j$ is negated in which case we would add $s_{j+n}$ to $C_{i+n}$ instead of $s_j$.
+>
+> ### Proof
+>
+> $F\in SAT\rightarrow f(F)\in SET-SPLITTING$
+>
+>>
+>
+> $F\notin SAT\rightarrow f(F)\notin SET-SPLITTING$
+>
+>>
+>
+> $f(F)\in SET-SPLITTING\rightarrow F\in SAT$
+>
+>>
+>
+> $f(F)\notin SET-SPLITTING\rightarrow F\notin SAT$
+>
+>>
+>
+> Therefore $\exists f$ such that $F\in SAT\leftrightarrow f(F)\in SET-SPLITTING$ then $SAT\leq_p SET-SPLITTING$ and $SET-SPLITTING\in NP$ so $SET-SPLITTING$ is NP-complete.
+
+# 2
+A ladder is a sequence of strings $s_1, s_2, . . . , s_k$. where every string differs from the preceding one in exactly one character. For example the following is a ladder of English words, starting with “head” and ending with “free”: head, hear, near, bear, beer, deer, deed, feed, feet, fret, free. Let $LADDERDFA = \{⟨M, s, t⟩ | M$ is a DFA and $L(M)$ contains a ladder of strings, starting with $s$ and ending with $t \}$. Show that $LADDERDFA$ is in PSPACE.
+
+> ## Prove $LADDERDFA\in PSPACE$
+> ### Idea
+> Take the ladder, start, and ending strings as input.
+>
+> If start = end return T
+>
+> If something False
+>
+> Otherwise, $\exists m \forall a,b [((a=s\land b=c)\lor (a=c\land b=t))\rightarrow LADDERDFA(M,a,b)]$
+
+# 3
+Define $ALBA = \{⟨M, w⟩ | M$ is a linear bounded Turing machine that accepts $w\}$. A linear bounded Turing machine is one where the head cannot move off of the cells that store the input. Any move to the right of the input (or the left off the tape) will result in the head staying in the same cell. Prove that $ALBA$ is PSPACE-complete
+
+> ## Prove $ALBA\in PSPACE$
+>
+>
+>
+> ## Prove $?(TQBF|GG)\leq_p ALBA$
+> ### Idea
+>
+>
+>
+> ### Proof
+>
+>
