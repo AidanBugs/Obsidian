@@ -213,3 +213,15 @@ We need to "always go left", we do this by always choosing the first edge as it 
 >>> If traversal revists $s$ and did not use edge $t\rightarrow s$ then we have a cycle
 >>>
 >>> When traversal goes from $a$ to $b$ consider the order the edges appear listed in $G$ and visit the vertex whose edge from $b$ is immediately after the edge from $b$ to $a$. If $b$ to $a$ is last edge for $b$ then we take the first edge for $b$. 
+
+Prove we eventually find a cycle because we are doing this for every edge (vertex pair).
+
+Proof
+
+> Suppose $G$ has a cycle but our algorithm fails to find it
+>
+> $s$ is start and $t$ is next vertex and there exists a cycle that can be visitied from $s\rightarrow t\rightarrow...$
+>
+> Let $u$ be the first vertex revisted on the traversal starting from $s\rightarrow t$
+>
+> We know that $u$ went to $w$, when we start the algorithm starting at $u$ to $w$ then this will detect the cycle. 
