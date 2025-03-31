@@ -161,3 +161,55 @@ $GG=\{<G,a>|G\text{is a graph and a is a vertex and player 1 is guarenteed to wi
 > After each variable is complete, the graph lets P2 choose a clause, and P1 can choose literal from clause. Literals are mapped to the T/F of the variable that make the literal true. 
 >
 > Proof left as exercise for the reader
+
+## LOGSpace
+$L=$ languages for which there is deterministic TM that decide the language using $O(\log n)$ space.
+
+$NL=$ languages for which there is nondeterministic TM that decide the language using $O(\log n)$ space.
+
+TM Model:
+
+- Tape 1: READ ONLY input (assume we know where start / end of input is)
+- Tape 2: Read / write work tape
+- Tape 3: Output tape
+
+### EX: $<a^nb^n>$
+1. Count num a's in binary on workspace
+2. Count num b's in binary on workspace
+3. Make sure theyre the same
+
+### EX: Palindromes
+1. Keep counter in binary, let $i=0,1,2,...,n/2$
+2. On input tape copy the $i$th symbol to work tape (separate counter for counting to $i$)
+3. On input tape go to the $n-i$th symbol and check if theyre the same as work tape symbol (separate counter for counting to $n-i$)
+4. repeat until reject or $i$ reaches max so accept.
+
+Total count is 2 counters, one symbol so $O(\log n)$
+
+### EX $PATH=\{<G,a,b>|\exists PATH a\rightarrow b \in G\}$
+Show $PATH\in NL$
+
+> Start at $a$
+>
+> nondeterministicly guess the next node in the path (constant space)
+>
+> verify that te next node is adjacent to current node (constant space)
+>
+> maintain a counter for number of nodes and reject if counter exceeds number of nodes (log space)
+>
+> accept if $b$ is reached
+
+Total space $O(\log n)$
+
+$UNDIRECTED-PATH\in L$ proven by Omar Rengold in 2008.
+
+### EX: $UNDIRECTED-CYCLE$
+We need to "always go left", we do this by always choosing the first edge as it appears in $G$.
+
+>For each vertex $s$ try with $s$ as starting vertex.
+>
+>> For each vertex $t$ adjacent to $s$ we make $t$ be 2nd vertex.
+>>
+>>> If traversal revists $s$ and did not use edge $t\rightarrow s$ then we have a cycle
+>>>
+>>> When traversal goes from $a$ to $b$ consider the order the edges appear listed in $G$ and visit the vertex whose edge from $b$ is immediately after the edge from $b$ to $a$. If $b$ to $a$ is last edge for $b$ then we take the first edge for $b$. 
