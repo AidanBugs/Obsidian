@@ -54,14 +54,31 @@ A ladder is a sequence of strings $s_1, s_2, . . . , s_k$. where every string di
 Define $ALBA = \{⟨M, w⟩ | M$ is a linear bounded Turing machine that accepts $w\}$. A linear bounded Turing machine is one where the head cannot move off of the cells that store the input. Any move to the right of the input (or the left off the tape) will result in the head staying in the same cell. Prove that $ALBA$ is PSPACE-complete
 
 > ## Prove $ALBA\in PSPACE$
+> Create machine $M_A$ that decides $ALBA$.
 >
+> $M_A$ runs $M$ on $w$ and accepts if $M$ accepts $w$ otherwise rejects.
 >
+> Since $M$ is a linear bound TM it uses $|w|$ space so $M_A$ only uses $|w|$ space. Therefore $ALBA\in O(n)\in P$
 >
-> ## Prove $?(TQBF|GG)\leq_p ALBA$
+> ## Prove $\forall L\in PSPACE, L\leq_p ALBA$
 > ### Idea
->
->
+> Let $M'$ take input $x$ as input and $M$ decides $L$ in $O(n^k)$ space. Create a function $f$ for $M'$ that takes $x$ as the input and outputs $<M_{LB},w>$ where $w=x\_^{|x|^{k+1}}$. In otherwords $f$ outputs a function that deicides $L$ in $O(n^k)$ space and a new string $w$ which is $x$ followed by $n^{k+1}$ blanks. $M_{LB}$ is $M$ but is bound to the input size, it still shares the same transition function but there is not an infinite amount of blanks after the input.
 >
 > ### Proof
+> $x\in L \rightarrow f(x)\in ALBA$
 >
+>> 
 >
+> $x\notin L \rightarrow f(x)\notin ALBA$
+>
+>>
+>
+> $f(x)\in ALBA \rightarrow x\in L$
+>
+>>
+>
+>$f(x)\notin ALBA\rightarrow x\notin L$
+>
+>>
+>
+> Therefore $\forall L\in PSPACE\exists f$ such that $x\in L\leftrightarrow f(x)\in ALBA$ then $L\leq_p ALBA$ and $ALBA\in PSPACE$ so $ALBA$ is PSPACE-complete.
