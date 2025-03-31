@@ -133,8 +133,22 @@ WHERE {
 A “knowledge hacker” tries to fool medical AI systems/ChatGPT which consults the above knowledge graph, by injecting fake triples or hiding true facts. He “attacks” G with the following modifications
 
 - Insert a triple <Arimidex, causes, Kidney Infection>
+
+> Query 1 now also accepts Kidney Infection -> Output: KidneyInfection, Headache
+>
+> Query 3 now accepts both Arimidex and Fulverstrant -> Output: Arimidex, Fulverstrant
+
 - Remove a triple <Fulvestrant, causes, Kidney Infection>
+
+> Query 2 no longer accepts PIM1 since Fulverstrant no longer causes KidneyInfection -> Output: CASP8
+>
+> Query 3 no longer accepts Fulverstrant -> Output: Arimidex
+>
+> *Note this is if 1st attack is also in place, otherwise output is blank
+
 - Remove the edges between BRCA1 and ESR2.
+
+> Query 5 no longer accepts BRCA1 -> Output: ESR2, ESR1
 
 How your answers to any of the above queries change, under such an attack? Give the changed answers.
 
