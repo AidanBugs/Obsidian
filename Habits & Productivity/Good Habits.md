@@ -9,6 +9,7 @@ status: 1
 ---
 # What is a Good Habit
 - Something you should do every day that will help you increase or maintain either your mental and/or your physical health
+
 # Examples
 - [[Fitness]] / Exercising
 	- Read linked section

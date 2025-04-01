@@ -8,6 +8,7 @@ status: 0.7
 ---
 # What are Negative Emotions?
 Negative emotions are deeply unpleasant feelings a person has towards others or themselves. Usually these emotions make people feel like they are in a rut or a low spot in life.
+
 # How to Deal with Negative Emotions
 ## Stress
 - What is stress?
@@ -19,6 +20,7 @@ Negative emotions are deeply unpleasant feelings a person has towards others or 
 	- Talk
 	- Meditate
 - Focus on trying to relax / distract yourself until you are ready to address the problem with a clear mind or recharge yourself and lighten the task load.
+
 ## Burnout
 - What is burning out?
 	- Burnout is a state of exhaustion after overworking oneself for an extended period of time 
@@ -29,6 +31,7 @@ Negative emotions are deeply unpleasant feelings a person has towards others or 
 	- Journal
 	- Bare Minimum / Show up
 - Relax and try to ease yourself into working. Additionally a break / change of scenery is a good way to reset yourself before you start working
+
 ## Tired / Sleepy
 - Tired / Sleepy vs Burnout
 	- Tired / sleepy due to a lack of sleep, change in sleep schedule, or extra physical exertion that day. This is different from burnout (which may cause tiredness) because the solution is to improve quality of sleep.
@@ -39,6 +42,7 @@ Negative emotions are deeply unpleasant feelings a person has towards others or 
 	- Power Nap
 	- Meditate
 - Summary
+
 ## Angry
 - Anger:
 	- Upset about an event that occured
@@ -48,6 +52,7 @@ Negative emotions are deeply unpleasant feelings a person has towards others or 
 	- Pray / Meditate
 	- Exercise
 - Ultimately one shouldn’t take their anger out on others so these are ways to dissipate those emotions before you interact with others
+
 ## Overthink / Anxious
 - What can cause someone to Overthink?
 	- Overthinking / anxiert comes from a fear something bad could happen in the future. Typically associated with trauma or similar events happening in the past.

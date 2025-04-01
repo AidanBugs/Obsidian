@@ -12,6 +12,7 @@ status: 1
 - Make the habit as easy and convenient as possible, START SMALL
 - Don’t start by overworking yourself, ease into new habits slowly and gradually
 - Use deadlines and make specific goals, easier for you to comprehend and focus
+
 # Convenience
 - Focus on making the habit super convenient and readily accessible
 - For example, goal is to start a reading habit then try doing the following:
@@ -27,6 +28,7 @@ status: 1
 	- Stop buying snacks
 	- Put snacks on the top shelf and out of sight
 		- Hard to get (less convenient) hard to see (less reminders)
+
 # Make the Habit Easy
 - Focus on just the start / setup
 	- Your brain won’t feel the daunting pressure of doing the actual task if you think of just setting up, examples:
@@ -45,6 +47,7 @@ status: 1
 		- Read for 2 minutes
 - Notes for the above rules:
 	- Just because the goal is just 1 or 2 does not mean only do 1 or 2 reps or whatever. It means that is the minimum you must do. This is just to start the habit and avoid making any excuses for not doing the habit. Once you take a few rest days is when you will start to make excuses and stop doing the habit. Also take note of the concept below.
+
 # Avoid Burnout
 - Do not try and maintain absurd numbers ei: 1000 pushups a day
 	- Start small and build your way up to higher numbers
@@ -60,6 +63,7 @@ status: 1
 		- You exercised 5/7 times this week looks a lot better than you had a 2 day streak and a 3 day streak this week. 
 - Burnout is okay AFTER you have fully integrated those habits
 	- Helps you find your limit and then try to maximize yourself just below your limit so you won’t burnout. Eventually you may find yourself at this “limit” and find that it is no longer your limit.
+
 # Know how to set and Stick to Deadlines
 - We have all been there, assignments due at 11:59 and so we start at 11 and it is an intense rush to turn this in on time. We naturally tend to focus more when we have a perceived deadline so use deadlines to your advantage! This can help with all aspects of building good habits. 
 - Many highschoolers tend to wake up early enough to meet the “deadline” of going to school / practice on time. Then on the weekends when they don’t have this deadline, they will sleep in. 
