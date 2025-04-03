@@ -17,25 +17,25 @@ Let $SET-SPLITTING = \{⟨S, C⟩\}$ where S is a finite set of n elements and $
 >
 > Create a function $f$ that maps $F$ from $3-SAT$ to $<S,C>$ for $SET-SPLITTING$ and $F\in 3-SAT \leftrightarrow f(F)\in SET-SPLITTING$.
 >
-> $F$ has $n$ variables, $f$ creates an $S$ with $2n$ variables where a variable $x_i\in F$ is mapped to $s_i$ and $\neg x_i\in F$ is mapped to $s_{i+n}$. We can ensure this by creating the first $n$ collections where for each variable $x_i\in F$ create $C_i=(s_i,s_{i+n})$. This ensures that the negation works correctly for each variable $x_i \in F$. Now we translate each clause from $F$ to a new collection in $C$. That is, the $i$th clause in $F$ maps to the $C_{i+n}$ clause. Each variable in $c_i$ is added to $C_{i+n}$ unless a given $x_j$ is negated in which case we would add $s_{j+n}$ to $C_{i+n}$ instead of $s_j$.
+> $F$ has $n$ variables, $f$ creates an $S$ with $2n$ variables where a variable $x_i\in F$ is mapped to $s_i$ and $\neg x_i\in F$ is mapped to $s_{i+n}$. We can ensure this by creating the first $n$ collections where for each variable $x_i\in F$ create $C_i=(s_i,s_{i+n})$. This ensures that the negation works correctly for each variable $x_i \in F$. Now we translate each clause from $F$ to a new collection in $C$. That is, the $i$th clause in $F$ maps to the $C_{i+n}$ clause. Each variable in $c_i$ is added to $C_{i+n}$ unless a given $x_j$ is negated in which case we would add $s_{j+n}$ to $C_{i+n}$ instead of $s_j$. Add a special element $s$ that is always blue (or whatever color false is) to every clause. 
 >
 > ### Proof
 >
 > $F\in 3-SAT\rightarrow f(F)\in SET-SPLITTING$
 >
->> $F\in 3-SAT$ means there exists an assignment for each variable such that at least one literal in each clause is true. If we take that assignment we can translate that to $f(F)$ where if the $i$th variable in $F$ is true then the $i$th variable in $f(F)$ is blue and red otherwise. This makes the $i+n$th variables the opposite colors of the $i$th variable becaue of the first $n$ clauses in $f(F)$. Every other clause matches exactly to the clauses in $F$ and we know each clause in $F$ must have at least one $T$
+>> $F\in 3-SAT$ means there exists an assignment for each variable such that at least one literal in each clause is true. If we take that assignment we can translate that to $f(F)$ where if the $i$th variable in $F$ is true then the $i$th variable in $f(F)$ is red and blue otherwise. This makes the $i+n$th variables the opposite colors of the $i$th variable becaue of the first $n$ clauses in $f(F)$. Every other clause matches exactly to the clauses in $F$ and we know each clause in $F$ must have at least one $T$ so each clause in $f(F)$ has at least one red element. Since all clauses have the special blue element then all clauses have at least one blue element. Therefore all clauses have at least one red and one blue. Therefore $F\in 3-SAT\rightarrow f(F)\in SET-SPLITTING$ is true.
 >
 > $F\notin 3-SAT\rightarrow f(F)\notin SET-SPLITTING$
 >
->>
+>> $F\notin 3-SAT$ means there does not exist an assignment for each variable such that at least one literal in each clause is true. If we take that assignment we can translate that to $f(F)$ where if the $i$th variable in $F$ is true then the $i$th variable in $f(F)$ is red and blue otherwise. This makes the $i+n$th variables the opposite colors of the $i$th variable becaue of the first $n$ clauses in $f(F)$. Every other clause matches exactly to the clauses in $F$ and we know one clause in $F$ must have all $F$ so that clause in $f(F)$ has all blue elements. Since all clauses have the special blue element then this clause has all blue elements. Therefore not all clauses have at least one red and one blue. Therefore $F\notin 3-SAT\rightarrow f(F)\notin SET-SPLITTING$ is true.
 >
 > $f(F)\in SET-SPLITTING\rightarrow F\in 3-SAT$
 >
->>
+>> $f(F)\in SET-SPLITTING$ means there is at least one red and one blue in each clause. Since each clause already has at least one blue from the special blue element, the more important fact is that all clauses have one red. This means that each clause in $F$ has at least one true element (the red element in $f(F)$). Therefore $f(F)\in SET-SPLITTING\rightarrow F\in 3-SAT$ is true.
 >
 > $f(F)\notin SET-SPLITTING\rightarrow F\notin 3-SAT$
 >
->>
+>> $f(F)\notin SET-SPLITTING$ means there is at least one clause that is all one color. Since each clause already has at least one blue from the special blue element, so there is one clause that is all the color blue. This means that one clause in $F$ has all false elements (the all blue clause in $f(F)$). Therefore $f(F)\notin SET-SPLITTING\rightarrow F\notin 3-SAT$ is true.
 >
 > Therefore $\exists f$ such that $F\in 3-SAT\leftrightarrow f(F)\in SET-SPLITTING$ then $3-SAT\leq_p SET-SPLITTING$ and $SET-SPLITTING\in NP$ so $SET-SPLITTING$ is NP-complete.
 
