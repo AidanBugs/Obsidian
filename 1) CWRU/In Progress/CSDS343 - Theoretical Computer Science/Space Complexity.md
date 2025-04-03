@@ -225,3 +225,54 @@ Proof
 > Let $u$ be the first vertex revisted on the traversal starting from $s\rightarrow t$
 >
 > We know that $u$ went to $w$, when we start the algorithm starting at $u$ to $w$ then this will detect the cycle. 
+
+## NL-comoplete
+Is $L=NL$ or is $L\subset NL$?
+
+Find $NL$-complete languages
+
+We need to create a log space transducer $f$ which takes input $x$ and $i$ and $f(x,i)$ will output the $i$th symbol of $f(x)$ and $f$ uses $O(\log n)$ space.
+
+### Prove $PATH$ is $NL$-complete:
+
+> See above for $PATH\in NL$
+>
+> Prove $\forall B\in NL, B\leq_{L} PATH$
+>>
+>> Given $M$, machine that decides $B$ and $M$ on input $w$ create a graph $G$ and identify $2$ verticies $a,b$ such that $G$ has a path $a\rightarrow b$ iff $M$ accepts $w$.
+>>
+>> ### Idea
+>> 
+>> Each vertex of $G$ is a valid configuration of $M$, each edge are the different steps $M$ could take, and we go from $a$ as the initial config and $b$ is accept state.
+>>
+>> A configuration needs to have state ($O(1)$), head location ($O(\log n)$), working tape ($O(\log n)$.
+>>
+>> $f$ if we need too produce a vertex generate all string of $O(\log n)$ (lexical graphical order) size and verify that the string is a possible configuration. If so it will be the $k$th vertex and increment $k$.
+>>
+>> if we need to produce an edge, generate all pairs of strings of $O(\log n)$ size. We need to verify that both are valid configurations of $M$ on $w$ and verify that the second configuration is produced by the transition function of $M$ on  the first configuration. Increment $k$
+>>
+>> Generate edges to $b$, for each configuration that is at accepts state then we add an edge from that configuration to $b$.
+>>
+>> ### Proof
+>>
+>> Left as exercise for the reader :+1:
+
+### Prove $SCC$ is $NL$-complete 
+
+Prove $SSC\in NL$ 
+
+> For each vertex $u_i$
+>
+>> for each vertex $v_i$
+>>
+>>> nondeterministicly guess the next node in the path from $u$ to $v$ checking that each next vertex is adjacent and keeping a count and reject if count $=n$
+>>>
+>>> accepting if $b$ is reached
+>>>
+>>> Keep track of next vertex, and count $O(\log n)$
+
+Prove $PATH\leq_L SCC$
+
+> Map everything to $a$ and $b$ can move to anything.
+>
+> Proof left for reader.
