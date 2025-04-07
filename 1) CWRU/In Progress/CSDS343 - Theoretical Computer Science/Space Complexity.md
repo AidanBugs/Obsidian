@@ -331,4 +331,56 @@ NTM $M$ on input $<G,a,b>$
 >>>
 >>> if $d\neq c_{i-1}$ reject
 
+## More subset stuff
+$L\subsetneq PSPACE$
 
+$P\subsetneq EXPTIME$
+
+### Theorem: There exists a language decidable in $O(f(n))$ space that is not decidable in $o(f(n))$ space.
+This means $SPACE(\log n)\subsetneq SPACE(n)\subsetneq SPACE(n^2)\subsetneq ... \subsetneq SPACE(n^k)\subset SPACE(c^n), c>1$.
+
+### Proof
+Language is strings of the form $<m>010^*$
+
+$M$ is a TM the description of $M$ uses binary but $01$ is a reserved symbol to indiccate end of TM so all sumbols start $00$, $11$, or $10$.
+
+Create $M'$ the language for proof is $L(M')\subset <m>010^*$, the number of $0$'s on the input are to limit the workspace of $<M>$
+
+Shows that $M'$ uses $O(f(n))$ space but any $M$ using $o(f(n))$ can't decide $L(M')$
+
+Definition of $o(f(n))$: $g(n)\in o(f(n)) $ if $\forall c>0 \exists n_0 | g(n)<cf(n) \land \forall n>n_0$
+
+$M'$ on input $w$
+
+> calculate $f(|w|)$ and reserve that much space 
+>
+> calculate $2^{f(|w|)}$ store this number as our count limit.
+>
+> simulate $m$ on input $w$
+>
+> if simulation goes past the reserved tape space reject
+>
+> if number of steps done on simulation exceed $2^{f(|w|)}$ reject 
+>
+> otherwise when $m$ halts if $m$ accepts $m'$ rejects, vice versa. 
+
+suppose $m$ uses $g(n)$ space $g(n)\in o(f(n))$, this means $m$ will not go past the reserved space so $m'$ will flip output so $L(M)\neq L(M')$
+
+### Theorem: there exists a language decidable in $O(f(n))$ time that is not decidable in $o(f(n)/\log n)$ time.
+This means $TIME(\log n)\subsetneq TIME(n)\subsetneq TIME(n^2)\subsetneq ... \subsetneq TIME(n^k)\subset TIME(c^n), c>1$.
+### Proof
+$M'$ on input $w$
+
+> calculate $f(|w|)$ and store this number as count limit 
+>
+> Start count at 0
+>
+> simulate $m$ on input $w$
+>
+> At each step increment the count
+>
+> if number of steps done on simulation exceed $f(|w|)$ reject 
+>
+> otherwise when $m$ halts if $m$ accepts $m'$ rejects, vice versa. 
+
+similar idea as above
