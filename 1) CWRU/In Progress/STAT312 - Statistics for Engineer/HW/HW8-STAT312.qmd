@@ -1,0 +1,62 @@
+---
+format: pdf
+---
+
+# P320 9-10 (Modified) (9 pt)
+The heat evolved in calories per gram of a cement mixture is approximately normally distributed with a standard deviation of 2. We wish to test $H_0$ : μ = 100 versus $H_1$ : μ ≠ 100 with a sample of size 5. If the rejection region is defined as $\bar x$ < 98.5 and $\bar x$ > 101.5, then find
+
+## a. $\alpha$ , the type I error probability;
+
+> $\alpha = P(\text{type 1 error}) = P(\text{reject }H_0 \text{ when }H_0\text{ is true})$
+>
+> $=P(\bar x <98.5\lor\bar x > 101.5)$
+>
+> z = $\pm \frac{1.5}{2/\sqrt 5}=1.677$
+>
+> $=P(Z<-1.677) + P(Z>1.677)$
+>
+> $= 0.04648+0.04648=0.09296$
+
+## b. $\beta$, the type II error probability, for the case when the true mean heat evolved is 103; and
+
+> $\beta = P(\text{type 2 error}) = P(\text{fail to reject }H_0 \text{ when }\mu = 103)$
+
+## c. the power of the test when the true mean heat evolved is 103.
+
+>
+
+# P330 9-42 (Modified) (17 pt)
+Humans are known to have a mean gestation period of 280 days (from last menstruation) with a standard deviation of about 9 days. A hospital wondered whether there was any evidence that their patients were at risk for giving birth prematurely. In a random sample of 70 women from this hospital, the average gestation time was 274.3 days.
+
+## a. Can you conclude that the sample data provides enough evidence that the average gestation time of all the patients at this hospital was less than 280 days at a significant level of 0.05? Use the 8-step critical region approach.
+
+>
+
+## b. Can you use the P-value to conclude that the sample data provides enough evidence that the average gestation time of all the patients at this hospital was less than 280 days at a significant level of 0.05? Why or why not?
+
+>
+
+## c. Can you conclude that the sample data provides enough evidence that the average gestation time of all the patients at this hospital was less than 280 days at a significant level of 0.05 using an appropriate confidence interval? State you reason.
+
+>
+
+## d. What additional assumptions are necessary for the method you used in part a-c to be valid? Explain.
+
+>
+
+# Problem 3 (8 pt)
+For the hypothesis test H0: μ = 10 against H1: μ > 10 with variance known and n = 15,
+
+## a. Use table III to find the P-value for each of the following values of test statistic.
+### (1) $z_0$ = - 2.05
+
+>
+
+### (2) $z_0$ = 1.84
+
+>
+
+## b. Use R to compute the P-values in part a. Attach the codes and output.
+```{r}
+
+```
