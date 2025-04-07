@@ -11,7 +11,7 @@ The heat evolved in calories per gram of a cement mixture is approximately norma
 >
 > $=P(\bar x <98.5\lor\bar x > 101.5)$
 >
-> z = $\pm \frac{1.5}{2/\sqrt 5}=1.677$
+> z = $\pm \frac{1.5}{2/\sqrt 5}=\pm 1.677$
 >
 > $=P(Z<-1.677) + P(Z>1.677)$
 >
@@ -20,6 +20,14 @@ The heat evolved in calories per gram of a cement mixture is approximately norma
 ## b. $\beta$, the type II error probability, for the case when the true mean heat evolved is 103; and
 
 > $\beta = P(\text{type 2 error}) = P(\text{fail to reject }H_0 \text{ when }\mu = 103)$
+>
+> $=P(\bar x <98.5\lor\bar x > 101.5)$
+>
+> z = $\pm \frac{1.5}{2/\sqrt 5}=1.677$
+>
+> $=P(Z<-1.677) + P(Z>1.677)$
+>
+> $= 0.04648+0.04648=0.09296$
 
 ## c. the power of the test when the true mean heat evolved is 103.
 
