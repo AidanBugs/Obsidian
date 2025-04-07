@@ -19,19 +19,21 @@ The heat evolved in calories per gram of a cement mixture is approximately norma
 
 ## b. $\beta$, the type II error probability, for the case when the true mean heat evolved is 103; and
 
-> $\beta = P(\text{type 2 error}) = P(\text{fail to reject }H_0 \text{ when }\mu = 103)$
+> $\beta(103) = P(\text{type 2 error}) = P(\text{fail to reject }H_0 \text{ when }\mu = 103)$
 >
-> $=P(\bar x <98.5\lor\bar x > 101.5)$
+> $=P(98.5 <\bar x < 101.5)$
 >
-> z = $\pm \frac{1.5}{2/\sqrt 5}=1.677$
+> z_{low} = $\frac{-4.5}{2/\sqrt 5}=-5.031$
 >
-> $=P(Z<-1.677) + P(Z>1.677)$
+> z_{high} = $\frac{-1.5}{2/\sqrt 5}=-1.677$
 >
-> $= 0.04648+0.04648=0.09296$
+> $=P(Z<z_{high}) - P(Z<z_{low})\rightarrow P(Z<-1.677)-P(Z<-5.031)$
+>
+> $=0.04648-0=0.04648$
 
 ## c. the power of the test when the true mean heat evolved is 103.
 
->
+> $1-\beta(103)=0.95352$
 
 # P330 9-42 (Modified) (17 pt)
 Humans are known to have a mean gestation period of 280 days (from last menstruation) with a standard deviation of about 9 days. A hospital wondered whether there was any evidence that their patients were at risk for giving birth prematurely. In a random sample of 70 women from this hospital, the average gestation time was 274.3 days.
