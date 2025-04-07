@@ -40,7 +40,46 @@ Humans are known to have a mean gestation period of 280 days (from last menstrua
 
 ## a. Can you conclude that the sample data provides enough evidence that the average gestation time of all the patients at this hospital was less than 280 days at a significant level of 0.05? Use the 8-step critical region approach.
 
+1. Identify the parameter of interest
+
+> $\mu $
+
+2. State the hypotheses to be tested.
+
+> $H_0 =\mu = 280$
 >
+> $H_1 =\mu \neq 280$
+
+3. Specify the level of significance α.
+
+> $\alpha = 0.05$
+
+4. Determine the test statistic and its distribution.
+
+> z-test
+>
+> $z=\frac{\bar x-\mu}{\sigma /\sqrt n}=\frac{\bar x-280}{9/\sqrt{70}}$
+>
+> Assuming $H_0$ is true
+
+5. Determine the rejection region.
+
+> $|z|>1.96$
+
+6. Calculate the observed value for the test statistic.
+
+> $z=\frac{\bar x-\mu}{\sigma /\sqrt n}=\frac{274.3-280}{9/\sqrt{70}}$
+>
+> $z= \frac{-5.7}{9/\sqrt 70}=-5.299$
+
+7. Make a statistical decision.
+
+> Reject $H_0$ because $z$ is in the reject region ($|z|>1.96$)
+
+8. State the conclusion.
+
+> At the $0.05$ significance level there is enough evidence to conclude that the population mean is not equal to $280$
+
 
 ## b. Can you use the P-value to conclude that the sample data provides enough evidence that the average gestation time of all the patients at this hospital was less than 280 days at a significant level of 0.05? Why or why not?
 
