@@ -276,3 +276,59 @@ Prove $PATH\leq_L SCC$
 > Map everything to $a$ and $b$ can move to anything.
 >
 > Proof left for reader.
+
+## Stuff
+$L\subset NL\subset_?P\subset NP\subset PSPACE=NPSPACE\subset EXPTIME\subset NEXPTIME$
+
+### Proving $NL\in P$
+Show $\forall L\in NL, L\leq_p PATH$
+
+We created a graph of configurations how big can graph be and how long will the loops to create it?
+
+Each config is the state, head position, work tape ($O(\log n)$ size). Total config size is $|\Gamma|^{O(\log n)}+ O(\log n)= 2^{d\log n}$, so each config is $O(n^d)$
+
+## CO-NP and CO-NL
+$CO-NP = \{L|\bar L\in NP\}$
+
+$CO-NL = \{L|\bar L\in NL\}$
+
+EX: $\bar{3-SAT}=\{x|x\text{not a set of clauses of 3 literals}\}\union \{x|x \nexists \text{assignment to make all clauses true}\}$
+
+$\bar{PATH}=\{x|x\text{is not a graph & 2 verticies}\}\union\{<G,a,b>|G\text{is a directed graph with no path } a\rightarrow b\}$
+
+If $A\in NP-complete$ then $\bar A\in CO-NP-complete$
+
+The issue with using nondeterminism here is that it will always try to accept if it can so in the case of $\bar{PATH}$ it will try to always say there is no path even if there is a path.
+
+### Creating M for $\bar{PATH}$
+Let $c_k=$# of verticies we can reach from vertex $a$ in $k$ or fewer steps.
+
+NTM $M$ on input $<G,a,b>$
+
+>$c_0=1$
+>
+>for $i=1$ to $n$
+>>
+>> $c_i=1$
+>>
+>> for each vertex $u\neq a$
+>>
+>>> $d=0$
+>>>
+>>> for each vertex $v\in G$
+>>>
+>>>> Have $m$ nondeterministicly say if $v$ is reachable from $a$ in $i-1$ steps
+>>>>
+>>>> If yes, verify path by having $M$ nondeterministicly give us path and verify the path & count path length
+>>>>
+>>>> If count > i-1 reject
+>>>>
+>>>> $d=d+1$
+>>>>
+>>>> smth here i cant read the board
+>>>>
+>>> 
+>>>
+>>> if $d\neq c_{i-1}$ reject
+
+
