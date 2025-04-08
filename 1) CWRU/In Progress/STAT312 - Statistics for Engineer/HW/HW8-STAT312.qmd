@@ -143,7 +143,7 @@ For the hypothesis test H0: μ = 10 against H1: μ > 10 with variance known and 
 ## a. Use table III to find the P-value for each of the following values of test statistic.
 ### (1) $z_0$ = - 2.05
 
->
+> $P()
 
 ### (2) $z_0$ = 1.84
 
@@ -151,5 +151,5 @@ For the hypothesis test H0: μ = 10 against H1: μ > 10 with variance known and 
 
 ## b. Use R to compute the P-values in part a. Attach the codes and output.
 ```{r}
-
+pnorm(-2.05)
 ```
