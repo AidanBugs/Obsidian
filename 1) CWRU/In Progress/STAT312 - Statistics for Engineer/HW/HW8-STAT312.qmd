@@ -42,7 +42,7 @@ Humans are known to have a mean gestation period of 280 days (from last menstrua
 
 1. Identify the parameter of interest
 
-> $\mu $
+> $\mu$
 
 2. State the hypotheses to be tested.
 
@@ -85,7 +85,7 @@ Humans are known to have a mean gestation period of 280 days (from last menstrua
 
 1. Identify the parameter of interest
 
-> $\mu $
+> $\mu$
 
 2. State the hypotheses to be tested.
 
@@ -143,11 +143,11 @@ For the hypothesis test H0: μ = 10 against H1: μ > 10 with variance known and 
 ## a. Use table III to find the P-value for each of the following values of test statistic.
 ### (1) $z_0$ = - 2.05
 
-> $P()
+> $P(Z\leq -2.05)=0.020182$
 
 ### (2) $z_0$ = 1.84
 
->
+> $P(Z\leq 1.84)=0.967116$
 
 ## b. Use R to compute the P-values in part a. Attach the codes and output.
 ```{r}
