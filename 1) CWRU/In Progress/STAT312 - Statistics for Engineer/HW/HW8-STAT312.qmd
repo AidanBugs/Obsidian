@@ -48,7 +48,7 @@ Humans are known to have a mean gestation period of 280 days (from last menstrua
 
 > $H_0 =\mu = 280$
 >
-> $H_1 =\mu \neq 280$
+> $H_1 =\mu \leq 280$
 
 3. Specify the level of significance α.
 
@@ -64,7 +64,7 @@ Humans are known to have a mean gestation period of 280 days (from last menstrua
 
 5. Determine the rejection region.
 
-> $|z|>1.96$
+> $z<-1.64$
 
 6. Calculate the observed value for the test statistic.
 
@@ -74,24 +74,68 @@ Humans are known to have a mean gestation period of 280 days (from last menstrua
 
 7. Make a statistical decision.
 
-> Reject $H_0$ because $z$ is in the reject region ($|z|>1.96$)
+> Reject $H_0$ because $z$ is in the reject region ($z<1.64$)
 
 8. State the conclusion.
 
-> At the $0.05$ significance level there is enough evidence to conclude that the population mean is not equal to $280$
+> At the $0.05$ significance level there is enough evidence to conclude that the population mean is less than $280$
 
 
 ## b. Can you use the P-value to conclude that the sample data provides enough evidence that the average gestation time of all the patients at this hospital was less than 280 days at a significant level of 0.05? Why or why not?
 
+1. Identify the parameter of interest
+
+> $\mu $
+
+2. State the hypotheses to be tested.
+
+> $H_0 =\mu = 280$
 >
+> $H_1 =\mu \leq 280$
+
+3. Specify the level of significance α.
+
+> $\alpha = 0.05$
+
+4. Determine the test statistic and its distribution.
+
+> z-test
+>
+> $z=\frac{\bar x-\mu}{\sigma /\sqrt n}=\frac{\bar x-280}{9/\sqrt{70}}$
+>
+> Assuming $H_0$ is true
+
+5. Calculate the observed value for the test statistic.
+
+> $z=\frac{\bar x-\mu}{\sigma /\sqrt n}=\frac{274.3-280}{9/\sqrt{70}}$
+>
+> $z= \frac{-5.7}{9/\sqrt 70}=-5.299$
+
+6. Compute the p-value
+
+> $P(z<-5.299)=0$
+
+7. Make a statistical decision.
+
+> Reject $H_0$ because P-value is less than $0.05$
+
+8. State the conclusion.
+
+> At the $0.05$ significance level there is enough evidence to conclude that the population mean is less than $280$
 
 ## c. Can you conclude that the sample data provides enough evidence that the average gestation time of all the patients at this hospital was less than 280 days at a significant level of 0.05 using an appropriate confidence interval? State you reason.
 
+> $z_\alpha =1.64$
 >
+> The range for $\mu$ is $(-\infty, 274.3+1,64*9/\sqrt 70]=(-\infty, 276.06]$
+>
+> $\mu = 280$ is outside of this range
+>
+> At the $0.05$ significance level there is enough evidence to conclude that the population mean is less than $280$ because 280 is outside of the range of $\mu$
 
 ## d. What additional assumptions are necessary for the method you used in part a-c to be valid? Explain.
 
->
+> Assumption of normality and random sampling
 
 # Problem 3 (8 pt)
 For the hypothesis test H0: μ = 10 against H1: μ > 10 with variance known and n = 15,
