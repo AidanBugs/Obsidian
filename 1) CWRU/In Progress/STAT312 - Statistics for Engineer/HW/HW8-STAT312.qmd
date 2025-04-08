@@ -135,7 +135,7 @@ Humans are known to have a mean gestation period of 280 days (from last menstrua
 
 ## d. What additional assumptions are necessary for the method you used in part a-c to be valid? Explain.
 
-> Assumption of normality and random sampling
+> Assumption $70/N \leq 5$%
 
 # Problem 3 (8 pt)
 For the hypothesis test H0: μ = 10 against H1: μ > 10 with variance known and n = 15,
@@ -143,13 +143,13 @@ For the hypothesis test H0: μ = 10 against H1: μ > 10 with variance known and 
 ## a. Use table III to find the P-value for each of the following values of test statistic.
 ### (1) $z_0$ = - 2.05
 
-> $P(Z\leq -2.05)=0.020182$
+> $1- P(Z\leq -2.05)=1-0.020182=0.979818$
 
 ### (2) $z_0$ = 1.84
 
-> $P(Z\leq 1.84)=0.967116$
+> $1- P(Z\leq 1.84)=1-0.967116=0.032884$
 
 ## b. Use R to compute the P-values in part a. Attach the codes and output.
 ```{r}
-pnorm(-2.05)
+1-pnorm(-2.05)
 ```
