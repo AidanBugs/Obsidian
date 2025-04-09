@@ -1,0 +1,30 @@
+---
+format: pdf
+---
+
+# Problem 1: (Sipser 8.20) Let MULT = {a#b#c | a, b, c are binary numbers and a × b = c}. Show that MULT ∈ L.
+Idea:
+
+Individually calculate each bit of $c$ using a counter to iterate through each bit in $c$, counters to iterate through bits in $a$ and $b$, counters to track carryover from the previous bit and also carrover to the next bit, and of course a bit to track the current bit. If the current bit is different than what it is supposed to be in $c$ then we reject. 
+
+$M$ on input $w$:
+
+> If $w$ not of form $a#b#c$ reject
+>
+
+# Problem 2: (Second half of Sipser 8.25) An undirected graph is bipartite if its nodes may be divided into two sets so that all edges go from a node in one set to a node in the other set. This is equivalent to stating that the graph does not contain a cycle that has an odd number of vertices. Let BIPARTITE = {⟨G⟩ | G is bipartite}. Prove that BIPARTITE ∈ NL.
+Idea:
+
+Similar to the UNDIRECTED CYCLE algorithm but this time we keep a parity checker and if at any point we return to a starting vertex with a different parity then we reject. This needs 2 counters (current start node and current start edge), constant space for the current vertex, constant space for the previous vertex, constant space for the parity bit.
+
+This machine would be done deterministically since there are no choices or guesses to be done nondeterministically, resulting in $UNDIRECTED CYCLE \in L$ and $L\subset NL$ so $UNDIRECTED CYCLE\in NL$
+
+$M$ on input $w$
+
+> If $w$ not a description of a graph $G$ reject
+
+# Problem 3: Let ACYCLIC-PATH = {⟨G, a, b⟩ | G is a directed graph with no cycles and there exists path from a to b in G}. Prove that ACYCLIC-PATH is NL-complete. (Hint: when doing the reduction, don’t try to remove cycles from the initial graph, but rather expand it in a way that gets rid of cycles.)
+Idea:
+
+Generate a graph that has different layers, with vertices $u_{v,i}$ where $v\in G$ and $i$ is the layer or number of steps from $a$. $i$ is bound from $0$ to $n-1$ because $0$ is only $a$ and any path consisting of more than $n-1$ edges has a loop. 
+
