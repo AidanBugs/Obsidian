@@ -45,3 +45,23 @@ Guess string $x$ with size $|x|=|w|$ and reject or accept if oracle accepts or r
 Let $M_1, M_2,...$ be all deterministic polynomial oracle TM's. Order TMs so $M_1$ runs in time $\leq n^i$. Choose a number $K_i$ so that $K_i\leq K_{i-1}$ and $2^{K_i}> n^i$.
 
 Define language $B$: consider $L(M_i^B)$, which runs in time $n^i$ and does $n^i$ queries of $B$. So $M_i$ on input $w$ will make some query $y$ of $B$. If $|y|<K_i$ then orracle for $B$ it will give same answer as previous. If $|y|\geq K_i$ oracle answers no so $y\notin B$
+
+# Oracele Machines
+Typical model of an Oracle Machine is a 2 Tape machine where tape 2 is the oracle tape. TM can write strings to the oracle tap,e enter state $q_{oracle}$ and the string is replaced with $Y/N$ in one step.
+
+$NP=\exists x \phi (x) | \phi(x)\in P$
+
+$CONP=\forall x \lnot \phi(x)\rightarrow \forall x \phi(x)$
+
+$NP^{NP}=NP^{\exists x \phi(x)}=NP^{\forall x \phi(x)}=\exists y \forall x \phi(x,y)$ which is another $NP$ problem. 
+
+## Oracle Notation Stuff:
+$\Sigma_1^P=NP, \Sigma_2^P=NP^{NP}...$
+
+$\Delta_1^P=P^{NP}, \Delta_2^P=NP^{NP^{NP}}...$
+
+$\Pi_1^P=NP, \Pi_2^P=CONP^{NP}...$
+
+$\Sigma_0^P=\Pi_0^P=\Delta_0^P=P$
+
+We can create a nest of these notations and we call this the Polynomial Heirarchy $PH$ and $PH\subset PSPACE$
