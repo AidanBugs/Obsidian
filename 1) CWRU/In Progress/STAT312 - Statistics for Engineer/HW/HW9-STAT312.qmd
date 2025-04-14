@@ -1,0 +1,62 @@
+---
+format: pdf
+---
+
+# Problem 1 (7 pt)
+For the hypothesis test $H_0: \mu = 10$ against $H_1: \mu < 10$ with variance unknown and $n = 20$, let the value of the test statistic be $t_0 = 1.25$.
+
+## a. Use table V to approximate the P-value.
+
+>
+
+## b. Use R to compute the P-value. Attach the code and output.
+
+```{r}
+
+```
+
+## c. Does your answer in part b agree with your answer in part a? Why or why not?
+
+>
+
+# P287 8-40 (Modified) (37 pt)
+A machine produces metal rods used in an automobile suspension system. A random sample of 15 rods is selected, and the diameter is measured. The resulting data (in millimeters) are as follows: 8.24 8.21 8.23 8.25 8.26 8.23 8.20 8.26 8.19 8.23 8.20 8.28 8.24 8.25 8.24
+
+## a. Check the assumption of normality for rod diameter in the population using a normal probability plot. What is your conclusion and why? Attach the plot.
+
+>
+
+## b. Calculate a 95% two-sided confidence interval for the mean rod diameter of all the metal rods produced by this machine. 
+
+>
+
+## c. Based on the data given, can you conclude that the mean rod diameter of all the metal rods produced by this machine is different from 8.25 mm at a significant level of 0.01? Use the 8-step P-value approach.
+
+>
+
+## d. Use R to conduct the same test given in part c. The resulting output should include all important information that can be used for 3 testing approaches, the rejection region approach, the p-value approach and the confidence interval approach. Attach the code and output.
+
+```{r}
+
+```
+
+## e. Can you use the confidence interval in part b to conduct the test in part c? Why or why not?
+
+>
+
+## f. Based on the data given, can you conclude that the variance of rod diameter of all the metal rods produced by this machine is greater than 0.0002 mm at a significant level of 0.01? Use the 8-step rejection region approach.
+
+>
+
+## g. Do you need any additional assumptions to justify your test in part f? Why or why not?
+
+>
+
+## h. Use an appropriate table to approximate the P- value for the test in part f.
+
+>
+
+## i. Use R to calculate the P-value for the test in part f. Attach the code and output.
+```{r}
+
+```
