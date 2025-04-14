@@ -27,3 +27,7 @@ Someone says something by accident that could hint at their subconscious thought
 
 # Sunk Cost Fallacy
 Continuing to invest into something because we have already invested into it, even when we are no longer getting a return on our investment (think gambling, one more mental).
+
+# Yes Ladder
+Getting people to say yes consequetively gets people to say more yes's. Even asking meaningless questions such as "Can I ask you a question?"
+
