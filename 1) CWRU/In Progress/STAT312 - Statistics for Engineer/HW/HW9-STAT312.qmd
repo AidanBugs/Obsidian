@@ -1,5 +1,5 @@
 ---
-format: pdf
+format: html
 ---
 
 # Problem 1 (7 pt)
@@ -7,56 +7,167 @@ For the hypothesis test $H_0: \mu = 10$ against $H_1: \mu < 10$ with variance un
 
 ## a. Use table V to approximate the P-value.
 
+> $t_0=1.25$ and we have $20-1=19$ degrees of freedom.
 >
+> A $t$ value of $1.25$ is between $0.688$ and $1.328$, which results in $0.25<\alpha<0.10$ or $0.75<P<0.9$. Since $1.25$ is a lot closer to $1.328$ than $0.688$ then we can approximate $P\approx 0.88$
 
 ## b. Use R to compute the P-value. Attach the code and output.
 
 ```{r}
-
+pt(1.25, df=19, lower.tail=TRUE)
 ```
 
 ## c. Does your answer in part b agree with your answer in part a? Why or why not?
 
->
+> Yes they do because R got an answer of $0.8867613$ which is in between the range specified above and my approximation of $0.88$ is close to the R output.
 
 # P287 8-40 (Modified) (37 pt)
 A machine produces metal rods used in an automobile suspension system. A random sample of 15 rods is selected, and the diameter is measured. The resulting data (in millimeters) are as follows: 8.24 8.21 8.23 8.25 8.26 8.23 8.20 8.26 8.19 8.23 8.20 8.28 8.24 8.25 8.24
 
 ## a. Check the assumption of normality for rod diameter in the population using a normal probability plot. What is your conclusion and why? Attach the plot.
 
->
+```{r}
+#| ouput: false
+#| warning: false
+#| include: false
+
+install.packages("qqplotr", repos = "http://cran.us.r-project.org")
+library(ggplot2)
+library(qqplotr)
+```
+```{r}
+data = c(8.24, 8.21, 8.23, 8.25, 8.26, 8.23, 8.20, 8.26, 8.19, 8.23, 8.20, 8.28, 8.24, 8.25, 8.24)
+
+ggplot(mapping = aes(sample = data)) + stat_qq_point(size = 2,color = "red") + stat_qq_line(color="green") + xlab("x-axis") + ylab("y-axis")
+```
+
+> All points are pretty close to the line and there is no clear curve to indicate a skewed distribution. Therefore the population is normal.
 
 ## b. Calculate a 95% two-sided confidence interval for the mean rod diameter of all the metal rods produced by this machine. 
 
+```{r}
+print(mean(data))
+print(sd(data))
+```
+
+> $df=15-1=14$, 2 tailed 95% $t$ for $df=14$ is $t=2.145$
 >
+> $\mu = \bar x \pm t \times \frac{s}{\sqrt n}$
+>
+> $8.234\pm 2.145\times\frac {0.02529822}{\sqrt {15}}$
+>
+> $\mu =[8.22, 8.248]$
 
 ## c. Based on the data given, can you conclude that the mean rod diameter of all the metal rods produced by this machine is different from 8.25 mm at a significant level of 0.01? Use the 8-step P-value approach.
 
+1. Identify the parameter of interest
+
+> $\mu$ is mean diameter of rods
+
+2. State the hypotheses to be tested.
+
+> $H_0: \mu=8.25$ 
 >
+> $H_1: \mu \neq 8.25$
+
+3. Specify the level of significance α.
+
+> 2 tailed so $\alpha = 0.005$
+
+4. Determine the test statistic and its distribution.
+
+> $t$ test:
+>
+> $t=\frac{\bar x-\mu}{s/\sqrt n }= \frac{\bar x - 8.25}{s/\sqrt {15}}$
+>
+> $t\approx t_{14}$ when $H_0$ is true
+
+5. Calculate the observed value for the test statistic.
+
+> $t=\frac{\bar x-\mu}{s/\sqrt n }= \frac{\bar x - 8.25}{s/\sqrt {15}}$
+>
+> $= \frac{8.234 -8.25}{0.02529822\sqrt{15}}=-2.4495$
+
+6. Compute the P-value
+
+> $P(t\leq -2.4495)=P(t\geq2.4495)$
+>
+> $2.145 < 2.4495 < 2.624$
+>
+> So $0.025 <p< 0.01$
+
+7. Make a statistical decision.
+
+> Fail to reject $H_0$ because $p > 0.005$
+
+8. State the conclusion.
+
+> At the $0.01$ significance level there is not enough evidence that the mean diameter of all rods produced by this machine is different than $8.25$
+
 
 ## d. Use R to conduct the same test given in part c. The resulting output should include all important information that can be used for 3 testing approaches, the rejection region approach, the p-value approach and the confidence interval approach. Attach the code and output.
 
 ```{r}
-
+t.test(data, mu=8.25, conf.level =0.99)
 ```
 
 ## e. Can you use the confidence interval in part b to conduct the test in part c? Why or why not?
 
->
+> No because they have different confidence intervals
 
 ## f. Based on the data given, can you conclude that the variance of rod diameter of all the metal rods produced by this machine is greater than 0.0002 mm at a significant level of 0.01? Use the 8-step rejection region approach.
 
+1. Identify the parameter of interest
+
+> $\sigma^2$ is standard deviation of the diameter of all rods in the population
+
+2. State the hypotheses to be tested.
+
+> $H_0: \sigma^2=0.0002$ 
 >
+> $H_1: \sigma^2 \geq 0.0002$
+
+3. Specify the level of significance α.
+
+> 1 tailed so $\alpha = 0.01$
+
+4. Determine the test statistic and its distribution.
+
+> $\chi^2$ test:
+>
+> $\chi^2 = (n-1)\frac{s^2}{\sigma^2}= 14\frac{s^2}{0.0002}=70,000 s^2$
+>
+> $\chi^2\approx \chi^2_{14}$ when $H_0$ is true and when the population distribution is normal
+
+5. Determine the rejection region
+
+> $\chi^2_{0.01,14}=29.14$
+>
+> If $\chi^2>29.14$ then we reject
+
+6. Compute the $\chi^2$-value
+
+> $\chi^2 = (n-1)\frac{s^2}{\sigma ^2}= 14\frac{s^2}{0.0002^2}=70,000 s^2$
+>
+> $=70,000 (0.02529822^2)=44.80$
+
+7. Make a statistical decision.
+
+> Reject $H_0$ because $\chi^2 > 29.14$
+
+8.
+
+> At the $0.01$ significance level there is enough evidence that the population variance of the diameter of all rods produced by this machine is greater than 0.0002
 
 ## g. Do you need any additional assumptions to justify your test in part f? Why or why not?
 
->
+> No additional assumptions because normailty was verified in part a
 
 ## h. Use an appropriate table to approximate the P- value for the test in part f.
 
->
+> $44.80 > 31.32$ so $p <0.005$
 
 ## i. Use R to calculate the P-value for the test in part f. Attach the code and output.
 ```{r}
-
+pchisq(44.8, 14, lower.tail=FALSE)
 ```
