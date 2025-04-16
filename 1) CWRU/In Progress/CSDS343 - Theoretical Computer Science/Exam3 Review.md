@@ -1,0 +1,6 @@
+# P
+# NP
+# PSPACE
+# NPSPACE
+# L
+# NL

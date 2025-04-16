@@ -65,3 +65,43 @@ $\Pi_1^P=NP, \Pi_2^P=CONP^{NP}...$
 $\Sigma_0^P=\Pi_0^P=\Delta_0^P=P$
 
 We can create a nest of these notations and we call this the Polynomial Heirarchy $PH$ and $PH\subset PSPACE$
+
+# Untrustworthy Oracle
+Verifier $V:\Sigma ^* \times \Sigma^* \times \Sigma^* \rightarrow \Sigma^*\cup \{accept, reject\}$ and $V$ is deterministic and polynomial time. First $\Sigma^*$ is the problem description, then history of queries to prover oracle, then a string of random bits, then a new query.
+
+Prover: $\Sigma^*\time \Sigma^*\rightarrow\Sigma ^*$, current query, history of queries, answer
+
+Zero knowledge proofs: if $x\in L$ we want verifier to accept with probability $>\frac{2}{3}$ without giving any information that lets verifier solve problem directly.
+
+Interactive proof: Class IP, $L\in IP$ if $\exists V$ such that:
+
+1. If $w\in L\rightarrow \exists P$ such that $V$ querying $P$ will accept with prob $>2/3$
+2. If $w\notin L\rightarrow V$ will accept after querying $P$ with prob $<2/3$ 
+
+## EX Zero Knowledge Proofs
+Zero knowledge proof of $HAM-CYC$, I am the prover & I have a graph is a $HC$ on the graph. How do I convince a verifier that $G$ has a HC without revealing anything about the cycle. 
+
+Prover does the follwing on each query of $V$ (Assuming graph isomorphism $\notin P$)
+
+> Create $G'$ which is a permutation of $G$
+>
+> Send $G'$ to the verifier.
+
+Verifier flips a coin (uses the random bits) and asks one of 2 questions: 
+
+1. Give me the HC of $G'$
+2. Give me the witness that $G$ is isomorphic to $G'$
+
+## EX Interactive Proofs
+Graph non-isomorphism $<G_1,G_2>|$ such that $G_1$ is not isomorphic to $G_2$
+
+I want the verifier to decide this language. 
+
+Verifier creates $G_1',G_1''$ and $G_2',G_2''$. Technically we need to create not isomorphic graphs and create questions 5,6.
+
+1. Ask $G_1'',G_1'$
+2. Ask $G_2'',G_2'$
+3. Ask $G_1'',G_2'$
+4. Ask $G_2'',G_1'$
+
+Each time verifier asks Q1 or Q2 it increases probability in correct answer to whether $G_1,G_2$ are isomorphic or not.
