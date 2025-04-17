@@ -76,7 +76,7 @@ Zero knowledge proofs: if $x\in L$ we want verifier to accept with probability $
 Interactive proof: Class IP, $L\in IP$ if $\exists V$ such that:
 
 1. If $w\in L\rightarrow \exists P$ such that $V$ querying $P$ will accept with prob $>2/3$
-2. If $w\notin L\rightarrow V$ will accept after querying $P$ with prob $<2/3$ 
+2. If $w\notin L\rightarrow \forall P, V$ will accept after querying $P$ with prob $<1/3$ 
 
 ## EX Zero Knowledge Proofs
 Zero knowledge proof of $HAM-CYC$, I am the prover & I have a graph is a $HC$ on the graph. How do I convince a verifier that $G$ has a HC without revealing anything about the cycle. 
