@@ -105,3 +105,52 @@ Verifier creates $G_1',G_1''$ and $G_2',G_2''$. Technically we need to create no
 4. Ask $G_2'',G_1'$
 
 Each time verifier asks Q1 or Q2 it increases probability in correct answer to whether $G_1,G_2$ are isomorphic or not.
+
+## More IP Examples
+$IP = PSPACE$
+
+$#SAT=\{<w,k>| w\text{is a SAT formula (CNF) and has exactly } k \text{ satisfying assignments}\}$
+
+Alternatively, given a $SAT$ formula, how many different assignments satisfy it?
+
+$V$ Given $w$ a $3-SAT$ formula 
+
+1. Ask $P$ how many different satisfying assignments and $P$ will return with a number $k$
+2. $V$ sets first variable to $T$ and adjust formulas and asks $P$ how many satisfying assignments to new formula. Then $V$ sets 1st variable to false and asks $V$ how many satisfying assignments. If these numbers don't add up to $k$ then reject. 
+3. Repeat step 2 for reach variable.
+
+We can't do step 3 for both assignments otherwise we will have a non polynomial number of queries. We can get around this by turning $SAT$ into a polynomial.
+
+- $\alpha\land \beta\rightarrow\alpha\beta$, where $\alpha,\beta$ are clauses
+- $\lnot \alpha\rightarrow (1-\alpha)$
+- $\alpha\lor\beta \rightarrow 1-(1-\alpha)(1-\beta)$
+
+For example:
+
+- $x\lor y\lor z\rightarrow 1-(1-x)(1-y)(1-z)$ we can expand this into a polynomial.
+
+Let $n$ be the final degree of the polynomial and $m$ be the # of variables. $n\leq m$
+
+We can ask what the polynomial's value is at arbitrary points. 
+
+So $V$ turns forumla into polynomial $f$ and ask $P$ how many assignments of variables make $f\neq 0$ (=$k$). 
+
+Let $f_1(0)$ = polynomial first var set to $0$ and $f_1(1)$ = polynomial first var set to $1$
+
+Ask $P$ how many assignments $f_1(1)\neq 0$ and $f_1(0)\neq 0$ and must $=k$. 
+
+$V$ chooses a randomm $r_1\in Z_q, q\text{ is a prime}>2^n$ 
+
+$V$ asks $P$ for the coeffecients of the polynomial $f_1(r_1)$ and $V$ verifies the coeffecients are for a degree $n$ polynomial
+
+Repeat the process to create $f_2(0)\land f_2(1)$ and sum must be equal to $k=P(f_1(r_1))$ and pick new random number and verify the polynomial.
+
+Once there are no more variables to assign $r_1,...,r_m$ then we can confirm that the answer is consistent.
+
+## MTIP
+$MIP=V$ can query $2$ or more provers & te provers cant communicate with eachother. $MIP=EXPTIME$
+
+$2020: MIP^*=$ 2 or more provers and the provers share quantumly entangled bits (shareable random bits) and $MIP^*=$ recognizable languages.
+
+
+
