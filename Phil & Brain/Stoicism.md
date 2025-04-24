@@ -4,7 +4,7 @@ Stoicism is a philisophical framework of ethics which laid out how to live a vir
 ## 4 Stoic Virtues
 
 1. Wisdom
-2. Couragw
+2. Courage
 3. Temperance
 4. Justice
 
