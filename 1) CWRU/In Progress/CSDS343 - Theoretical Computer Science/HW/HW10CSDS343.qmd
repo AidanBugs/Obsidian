@@ -20,6 +20,23 @@ Prove that an oracle C exists for which $NP^C \neq coNP^C$
 > The compliment of this language is $\bar L = \{w|\forall  x\notin C \lor |x| \neq |w|\}$
 >
 > Let $M_L$ be a NTM that decides $L$, we need to prove that $M_L$ halts in polynomial time.
+>
+> $M_L$ simply guesses a string $x$ with size $|x|=|w|$ and accepts or rejects if oracle accepts or rejects. $M_L\in TIME(n)$ because constructing a guess $x$ is $O(n)$ and the guess itself is constant time. If $w\in L$ then $M_L$ will guess $x\in C$ and accept because $C$ accepts $x$. If $w\notin L$ then $M_L$ will guess a random $x$ and reject because $x\notin C$.
+>
+> Therefore $L\in NP^C$ because there exists an oracle NTM that decides it in polynomial time.
+>
+> Since $L\in NP^C$ then $\bar L \in coNP^C$
+>
+> Now we need to show that $\bar L$ cannot be decided in polynomial time by an NTM.
+>
+> Suppose $\bar L\in NP$ then $\exists$ NTM $M_{\bar L}$ that decides $\bar L$ in polynomial time.
+>
+> Remember $\bar L$ accepts all strings $w$ for which there is no string of equal size in $C$. However the number of strings of equal size to $w$ is $O(2^n)$ which is the number of queries we would need to make to $C$ in order to accept. 
+>
+> Therefore since $M_{\bar L}$ can make up to $O(n^k)$ queries it will not be able to say with certainty whether or not a string $w$ is in the language.
+>
+> Therefore $\exists C (NP^C\neq coNP^C)$
+
 
 # 4
 Prove that in an interactive proof, if the verifier is required to be a deterministic, polynomial time algorithm with no access to random bits, then the class of languages this system can decide is equal to NP, even if we allow an arbitrary number of queries to the prover.
