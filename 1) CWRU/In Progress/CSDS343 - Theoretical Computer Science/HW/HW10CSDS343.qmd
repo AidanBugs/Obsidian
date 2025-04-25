@@ -15,7 +15,11 @@ Prove that $USAT \in P^{SAT}$
 # 3
 Prove that an oracle C exists for which $NP^C \neq coNP^C$ 
 
+> Suppose we have language $L=\{w|\exists x x\in C \land |x|=|w|\}$
 >
+> The compliment of this language is $\bar L = \{w|\forall x x\notin C \lor |x| \neq |w|\}$
+>
+> Let $M_L$ be a NTM that decides $L$, we need to prove that $M_L$ halts in polynomial time.
 
 # 4
 Prove that in an interactive proof, if the verifier is required to be a deterministic, polynomial time algorithm with no access to random bits, then the class of languages this system can decide is equal to NP, even if we allow an arbitrary number of queries to the prover.
