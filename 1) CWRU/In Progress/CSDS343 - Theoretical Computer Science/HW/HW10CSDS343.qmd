@@ -15,9 +15,9 @@ Prove that $USAT \in P^{SAT}$
 # 3
 Prove that an oracle C exists for which $NP^C \neq coNP^C$ 
 
-> Suppose we have language $L=\{w|\exists x x\in C \land |x|=|w|\}$
+> Suppose we have language $L=\{w|\exists x \in C \land |x|=|w|\}$
 >
-> The compliment of this language is $\bar L = \{w|\forall x x\notin C \lor |x| \neq |w|\}$
+> The compliment of this language is $\bar L = \{w|\forall  x\notin C \lor |x| \neq |w|\}$
 >
 > Let $M_L$ be a NTM that decides $L$, we need to prove that $M_L$ halts in polynomial time.
 
