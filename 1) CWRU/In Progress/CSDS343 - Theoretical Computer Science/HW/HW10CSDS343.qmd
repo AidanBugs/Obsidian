@@ -10,7 +10,37 @@ format: pdf
 # 2
 Prove that $USAT \in P^{SAT}$
 
+> We need to show there is an oracle machine $M$ that queries $SAT$ to solve $USAT$ in polynomial time.
 >
+> $M$ on input $w$:
+>
+>> Check if input is a CNF, reject if not
+>>
+>> Query $SAT$ on $w$, if $SAT$ rejects then reject.
+>>
+>> Otherwise:
+>>
+>> For each variable $x$:
+>>>
+>>> Set $x=T$ and create a new CNF based on $w$. If a clause in $w$ did not contain $x\lor \lnot x$ then add it to our new CNF. If a clause contained $\lnot x$ then remove that literal from the clause and add the new clause to the new CNF. If the clause contained $x$ (not the negation) then do not add this clause. Query $SAT$ with out new CNF.
+>>>
+>>> Set $x=F$ and create a new CNF based on $w$. If a clause in $w$ did not contain $x\lor \lnot x$ then add it to our new CNF. If a clause contained $x$ then remove that literal from the clause and add the new clause to the new CNF. If the clause contained $\lnot x$ then do not add this clause. Query $SAT$ with out new CNF.
+>>>
+>>> If both queries accept or if both queries reject then $M$ rejects, otherwise continue.
+>>
+>> $M$ accepts 
+>
+> **Proof of Correctness**
+>
+> If $w\in USAT$ then $M$ accepts $w$
+>
+>> $w\in USAT$ then there is only one assignment that makes the CNF true. Then for each variable, one assignment results in a satisfiable CNF and one does not. So for each variable $x$ SAT will say the new CNF is satisfiable for the assignment of $x$ that makes the CNF true and reject the other assignment. This means $M$ accepts $w$ because at each variable the queries were opposing.
+>
+> If $w\notin USAT$ then $M$ rejects $w$
+>
+>> $w\notin USAT$ then there is either more than one assignment that makes the CNF true or no assignment to make it true. If there is no assignment then $SAT$ returns false for the first query so $M$ rejects. Otherwise there exists at least one variable whose assignment can be either T or F and results in a satisfiable CNF. So for that variable $x$ SAT will say the new CNF is satisfiable for both assignments of $x$. This means $M$ rejects $w$ because at at least one variable the queries were the same.
+
+
 
 # 3
 Prove that an oracle C exists for which $NP^C \neq coNP^C$ 
