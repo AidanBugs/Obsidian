@@ -71,4 +71,30 @@ Prove that an oracle C exists for which $NP^C \neq coNP^C$
 # 4
 Prove that in an interactive proof, if the verifier is required to be a deterministic, polynomial time algorithm with no access to random bits, then the class of languages this system can decide is equal to NP, even if we allow an arbitrary number of queries to the prover.
 
+> Call this class $IP_P$, we need to prove $\exists L\in NPcomplete \land L\in IP_P$ and that $\forall L \notin NP \rightarrow L\notin IP_P$
 >
+> **Proof $NP \subset IP_P$**
+>
+> Lets do $3SAT \in IP_P$. 
+>
+> Reminder that $3SAT= \{w| w \text{ is a CNF formula where each clause is of size 3 and there exists an assignment to make the CNF true}\}$.
+>
+> The idea for this is very similar to how we prove any language is in NP. Given a string $w$, we ask the verifier what the assignment is to make the CNF true. Then the verifier simply checks if that assignment is true.
+>
+> **Proof of Correctness**
+>
+> If $w\in 3SAT$ then $\exists P$ that is truthful that convinces $V$ because it returns a valid assignment and our verifier will find that the assignment is valid so it returns true.
+>
+> If $w\notin 3SAT$ then $\forall P, P$ cannot convince $V$ that $w\in 3SAT$ because $P$ will not be able to come up with a valid assignment for the CNF because one does not exist. 
+>
+> **Proof $NP = IP_P$**
+>
+> Suppose the language $\bar{3SAT}=\{w|w\text{is a CNF with clauses of size 3 and no valid assignments such that it is true}\}$. In otherwords, $\forall a$ (assignments of $w$) $a$ does not make the CNF true.
+>
+> In order to accept $w$ we need to accept with probability 2/3, which means that we need to check 2/3 of all assignments of $w$ and make sure they are false.  
+>
+> Our verifier $V$ asks $P$ for an assignment of $w$ and checks to make sure that the assignment is false. If it is not false then $V$ rejects, otherwise ask for a different assignment until we have checked 2/3rds of all possible assignments.
+>
+> However the number of assignments is $O(2^n)$ and 2/3 of the number of assignments is also $O(2^n)$. This means we need $O(2^n)$ queries to $P$ to solve $\bar{3SAT}$
+>
+> This means in order to decide $\bar{3SAT}$ then we need to have a verifier with a runtime that is not polynomial. Therefore $\bar{3SAT}\notin IP_P$

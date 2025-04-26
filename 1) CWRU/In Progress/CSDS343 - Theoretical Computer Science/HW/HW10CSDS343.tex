@@ -1,0 +1,347 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\author{}
+\date{}
+
+\begin{document}
+
+
+\section{1}\label{section}
+
+(Sipser 9.12) Describe the error in the following ``proof'' that
+\(P \neq NP\). Assume that \(P = NP\), then \(SAT \in P\) and so for
+some \(k, SAT \in TIME(n^k)\). Because every language in NP is
+polynomial time reducible to SAT, you have \(NP \subset TIME(n^k)\). By
+the time hierarchy theorem, \(TIME(n^{k+1})\) contains a language that
+is not in \(TIME(n^k)\), which contradicts \(P \subset TIME(n^k)\).
+Therefore \(P\neq NP\)
+
+\begin{quote}
+The error in this proof comes in the line that ``every language in NP is
+polynomial time redicuble to SAT, then \(NP\subset TIME(n^k)\)''. While
+it is true that every language is in NP is polynomial time reducible to
+SAT, it is not guarenteed that the function \(f\) that reduces \(L\) to
+\(SAT\) is less than \(n^k\). The correct conclusion to their sentence
+is \(NP \subset TIME(O(f(n) + n^k))\). This then makes their following
+argument incorrect because we cannot determine if
+\(TIME(O(f(n)+n^k)) \subset TIME(n^{k+1})\) because \(f(n)\) is not a
+constant term for all languages in NP.
+\end{quote}
+
+\section{2}\label{section-1}
+
+Prove that \(USAT \in P^{SAT}\)
+
+\begin{quote}
+We need to show there is an oracle machine \(M\) that queries \(SAT\) to
+solve \(USAT\) in polynomial time.
+
+\(M\) on input \(w\):
+
+\begin{quote}
+Check if input is a CNF, reject if not
+
+Query \(SAT\) on \(w\), if \(SAT\) rejects then reject.
+
+Otherwise:
+
+For each variable \(x\): \textgreater{} \textgreater{} Set \(x=T\) and
+create a new CNF based on \(w\). If a clause in \(w\) did not contain
+\(x\lor \lnot x\) then add it to our new CNF. If a clause contained
+\(\lnot x\) then remove that literal from the clause and add the new
+clause to the new CNF. If the clause contained \(x\) (not the negation)
+then do not add this clause. Query \(SAT\) with out new CNF.
+\textgreater{} \textgreater{} Set \(x=F\) and create a new CNF based on
+\(w\). If a clause in \(w\) did not contain \(x\lor \lnot x\) then add
+it to our new CNF. If a clause contained \(x\) then remove that literal
+from the clause and add the new clause to the new CNF. If the clause
+contained \(\lnot x\) then do not add this clause. Query \(SAT\) with
+out new CNF. \textgreater{} \textgreater{} If both queries accept or if
+both queries reject then \(M\) rejects, otherwise continue.
+
+\(M\) accepts
+\end{quote}
+
+\textbf{Proof of Correctness}
+
+If \(w\in USAT\) then \(M\) accepts \(w\)
+
+\begin{quote}
+\(w\in USAT\) then there is only one assignment that makes the CNF true.
+Then for each variable, one assignment results in a satisfiable CNF and
+one does not. So for each variable \(x\) SAT will say the new CNF is
+satisfiable for the assignment of \(x\) that makes the CNF true and
+reject the other assignment. This means \(M\) accepts \(w\) because at
+each variable the queries were opposing.
+\end{quote}
+
+If \(w\notin USAT\) then \(M\) rejects \(w\)
+
+\begin{quote}
+\(w\notin USAT\) then there is either more than one assignment that
+makes the CNF true or no assignment to make it true. If there is no
+assignment then \(SAT\) returns false for the first query so \(M\)
+rejects. Otherwise there exists at least one variable whose assignment
+can be either T or F and results in a satisfiable CNF. So for that
+variable \(x\) SAT will say the new CNF is satisfiable for both
+assignments of \(x\). This means \(M\) rejects \(w\) because at at least
+one variable the queries were the same.
+\end{quote}
+\end{quote}
+
+\section{3}\label{section-2}
+
+Prove that an oracle C exists for which \(NP^C \neq coNP^C\)
+
+\begin{quote}
+Suppose we have language \(L=\{w|\exists x \in C \land |x|=|w|\}\)
+
+The compliment of this language is
+\(\bar L = \{w|\forall  x\notin C \lor |x| \neq |w|\}\)
+
+Let \(M_L\) be a NTM that decides \(L\), we need to prove that \(M_L\)
+halts in polynomial time.
+
+\(M_L\) simply guesses a string \(x\) with size \(|x|=|w|\) and accepts
+or rejects if oracle accepts or rejects. \(M_L\in TIME(n)\) because
+constructing a guess \(x\) is \(O(n)\) and the guess itself is constant
+time. If \(w\in L\) then \(M_L\) will guess \(x\in C\) and accept
+because \(C\) accepts \(x\). If \(w\notin L\) then \(M_L\) will guess a
+random \(x\) and reject because \(x\notin C\).
+
+Therefore \(L\in NP^C\) because there exists an oracle NTM that decides
+it in polynomial time.
+
+Since \(L\in NP^C\) then \(\bar L \in coNP^C\)
+
+Now we need to show that \(\bar L\) cannot be decided in polynomial time
+by an NTM.
+
+Suppose \(\bar L\in NP\) then \(\exists\) NTM \(M_{\bar L}\) that
+decides \(\bar L\) in polynomial time.
+
+Remember \(\bar L\) accepts all strings \(w\) for which there is no
+string of equal size in \(C\). However the number of strings of equal
+size to \(w\) is \(O(2^n)\) which is the number of queries we would need
+to make to \(C\) in order to accept.
+
+Therefore since \(M_{\bar L}\) can make up to \(O(n^k)\) queries it will
+not be able to say with certainty whether or not a string \(w\) is in
+the language.
+
+Therefore \(\exists C (NP^C\neq coNP^C)\)
+\end{quote}
+
+\section{4}\label{section-3}
+
+Prove that in an interactive proof, if the verifier is required to be a
+deterministic, polynomial time algorithm with no access to random bits,
+then the class of languages this system can decide is equal to NP, even
+if we allow an arbitrary number of queries to the prover.
+
+\begin{quote}
+Call this class \(IP_P\), we need to prove
+\(\exists L\in NPcomplete \land L\in IP_P\) and that
+\(\forall L \notin NP \rightarrow L\notin IP_P\)
+
+\textbf{Proof \(NP \subset IP_P\)}
+
+Lets do \(3SAT \in IP_P\).
+
+Reminder that
+\(3SAT= \{w| w \text{ is a CNF formula where each clause is of size 3 and there exists an assignment to make the CNF true}\}\).
+
+The idea for this is very similar to how we prove any language is in NP.
+Given a string \(w\), we ask the verifier what the assignment is to make
+the CNF true. Then the verifier simply checks if that assignment is
+true.
+
+\textbf{Proof of Correctness}
+
+If \(w\in 3SAT\) then \(\exists P\) that is truthful that convinces
+\(V\) because it returns a valid assignment and our verifier will find
+that the assignment is valid so it returns true.
+
+If \(w\notin 3SAT\) then \(\forall P, P\) cannot convince \(V\) that
+\(w\in 3SAT\) because \(P\) will not be able to come up with a valid
+assignment for the CNF because one does not exist.
+
+\textbf{Proof \(NP = IP_P\)}
+
+Suppose the language
+\(\bar{3SAT}=\{w|w\text{is a CNF with clauses of size 3 and no valid assignments such that it is true}\}\).
+In otherwords, \(\forall a\) (assignments of \(w\)) \(a\) does not make
+the CNF true.
+
+In order to accept \(w\) we need to accept with probability 2/3, which
+means that we need to check 2/3 of all assignments of \(w\) and make
+sure they are false.
+
+Our verifier \(V\) asks \(P\) for an assignment of \(w\) and checks to
+make sure that the assignment is false. If it is not false then \(V\)
+rejects, otherwise ask for a different assignment until we have checked
+2/3rds of all possible assignments.
+
+However the number of assignments is \(O(2^n)\) and 2/3 of the number of
+assignments is also \(O(2^n)\). This means we need \(O(2^n)\) queries to
+\(P\) to solve \(\bar{3SAT}\)
+
+This means in order to decide \(\bar{3SAT}\) then we need to have a
+verifier with a runtime that is not polynomial. Therefore
+\(\bar{3SAT}\notin IP_P\)
+\end{quote}
+
+
+
+
+\end{document}

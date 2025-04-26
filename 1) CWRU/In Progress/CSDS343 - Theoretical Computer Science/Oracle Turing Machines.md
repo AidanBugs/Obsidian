@@ -97,7 +97,7 @@ Graph non-isomorphism $<G_1,G_2>|$ such that $G_1$ is not isomorphic to $G_2$
 
 I want the verifier to decide this language. 
 
-Verifier creates $G_1',G_1''$ and $G_2',G_2''$. Technically we need to create not isomorphic graphs and create questions 5,6.
+Verifier creates $G_1',G_1''$ and $G_2',G_2''$. 
 
 1. Ask $G_1'',G_1'$
 2. Ask $G_2'',G_2'$
