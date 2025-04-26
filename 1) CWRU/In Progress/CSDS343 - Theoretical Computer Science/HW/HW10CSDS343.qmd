@@ -87,14 +87,41 @@ Prove that in an interactive proof, if the verifier is required to be a determin
 >
 > If $w\notin 3SAT$ then $\forall P, P$ cannot convince $V$ that $w\in 3SAT$ because $P$ will not be able to come up with a valid assignment for the CNF because one does not exist. 
 >
-> **Proof $NP = IP_P$**
+> Therefore since $3SAT\in IP_P$ then $NP\in IP_P$
 >
-> Suppose the language $\bar{3SAT}=\{w|w\text{is a CNF with clauses of size 3 and no valid assignments such that it is true}\}$. In otherwords, $\forall a$ (assignments of $w$) $a$ does not make the CNF true.
+> **Proof $NP = IP_P$ ($IP_P\subset NP$)**
 >
-> In order to accept $w$ we need to accept with probability 2/3, which means that we need to check 2/3 of all assignments of $w$ and make sure they are false.  
+> We need to show that $IP_P$ in $NP$. That is, given $L\in IP_P$ prove $L\in NP$. If $L\in IP_P$ then there exists a verifier $V_P$ such that:
 >
-> Our verifier $V$ asks $P$ for an assignment of $w$ and checks to make sure that the assignment is false. If it is not false then $V$ rejects, otherwise ask for a different assignment until we have checked 2/3rds of all possible assignments.
+> 1. If $w\in L\rightarrow \exists P$ s.t. $V_P$ querying $P$ will accept with prob $>2/3$
+> 2. If $w\notin L\rightarrow \forall P, V_P$ querying $P$ qill accept with prob $<1/3$
 >
-> However the number of assignments is $O(2^n)$ and 2/3 of the number of assignments is also $O(2^n)$. This means we need $O(2^n)$ queries to $P$ to solve $\bar{3SAT}$
+> Create an NTM $M$ that decides $L$.
 >
-> This means in order to decide $\bar{3SAT}$ then we need to have a verifier with a runtime that is not polynomial. Therefore $\bar{3SAT}\notin IP_P$
+> $M$ on input $w$:
+>
+>> Simulate $V_P$ on input $w$, whenever $V$ would query the prover, instead nondeterministically guess the output of $P$.
+>>
+>> If this leads to a prob > 2/3 accept other wise reject.
+>
+> Create a verifier $V$ to verify $M$ in polynomial time:
+>
+> $V$ gets the certificate of $M$ which contains the transcript of the query history. This certificate is $O(n^k)$ because there has to be a polynomial amount of guesses ($V_P\in P$) and the output of the prover at each point must also be $O(n^k)$ (again because $V_P\in P$). 
+>
+> $V$ verifies that the resulting probability is > 2/3 for an accept.
+>
+> **Proof of Correctness**
+>
+> If $L\in IP_P$ then there exists a $V_P$ that decides it within polynomial time. 
+>
+>> If $w\in L$ then $\exists P$ that convinces $V_P$ to accept, which means that there is a possible sequence of query outputs that make $V_P$ accept so $M$ nondeterministically chooses these outputs so $V_P$ will accept so $M$ accepts.
+>
+>> If $w\notin L$ then $\forall P, V$ accepts with probability greater than 1/3, in other words, there is no sequence of query outputs to make $V_P$ accept with probability greater than $2/3$ so $M$ rejects.
+>
+> Therefore if $L\in IP_P\rightarrow L\in NP$
+>
+> If $L\notin IP_P$ then there does not exist a $V_P$ that decides $L$ within polynomial time. Simply either the number of queries required for $V_P$ is $\omega(n^k)$ or the length of each queries is $\omega(n^k)$ (in other words we need exponential runtime). Thus the certificate required for $V$ would also be exponential so $V$ cannot exist so $L\notin NP$
+>
+> Therefore if $L\notin IP_P \rightarrow L\notin NP$
+>
+> Thus we have proved $NP\subset IP_P$ and $IP_P\subset NP$ so $NP=IP_P$
