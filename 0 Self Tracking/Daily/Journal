@@ -1,0 +1,4 @@
+mkdir "`date +%Y`/`date +%m`) `date +%b`" 
+touch "`date +%Y`/`date +%m`) `date +%b`/`date +%F`".md
+cat Template.md >> "`date +%Y`/`date +%m`) `date +%b`/`date +%F`".md
+# winpty nvim "`date +%Y`/`date +%m`) `date +%b`/`date +%F`".md
