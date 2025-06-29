@@ -1,4 +1,0 @@
-touch "`date +%Y`/`date +%m`) `date +%b`/`date +%F`".md
-cat Template.md >> "`date +%Y`/`date +%m`) `date +%b`/`date +%F`".md
-echo "Created: `date +%Y`/`date +%m`) `date +%b`/`date +%F`.md"
-# winpty nvim "`date +%Y`/`date +%m`) `date +%b`/`date +%F`".md
