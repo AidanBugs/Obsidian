@@ -148,13 +148,8 @@ This is not possible because the size of a set cannot be a non whole number. The
 
 
 # 1.34
-$|\Omega|=52^5$
 
-$FH=\{\text{set of full house hands}}$
 
-$|FH| = 13^2 - 13=156$ because 13 pair options with 13 triplet options removing the impossible cases of 5 of the same card.
-
-$P(FH)= \frac{156}{52^5}$
 
 
 
