@@ -148,8 +148,11 @@ This is not possible because the size of a set cannot be a non whole number. The
 
 
 # 1.34
+$\Omega = (i,j) \forall i,j (0\leqi\leq 1, 0\leq j \leq 1)$
 
+Circle lies within the square iff $(\frac 13 < i < \frac 23) \land (\frac 13 < j < \frac 23)$
 
+The range $(\frac 13,\frac 23)$ is one third the size of the possible range. Thus the probability the $i$ is within the range is $\frac 13$ and same for $j$.
 
-
+Since we apply this range to both $i$ and $j$ the resulting probability is $\frac13\times\frac13=\frac19$
 
