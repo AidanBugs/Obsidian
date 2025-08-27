@@ -53,16 +53,18 @@ $3P(GYG)=12/35$ this is because the probability of any order of 2 green and one 
 ## a
 $\Omega = \{\infty, 1,2,3,...\}$
 
-$P(\omega) = (\frac{5}{6})^{\omega-1}*\frac16$
+$\forall \omega \in \Omega \>P(\omega) = (\frac{5}{6})^{\omega-1}*\frac16$
 
 ## b
 $P(\omega=\infty)=\lim_{\omega\rightarrow \infty} (\frac{5}{6})^{\omega-1}*\frac16 = 0$
+
+$P(\{\infty\})=0$
 
 
 # 1.12 
 ## a
 
-$P(\omega <= 3) = P(1) + P(2) + P(3) = \frac{1}{6} + \frac{5}{36} + \frac{25}{216} = \frac{91}{216}$
+$P(\omega \leq 3) = P(1) + P(2) + P(3) = \frac{1}{6} + \frac{5}{36} + \frac{25}{216} = \frac{91}{216}$
 
 It is also important to note that P(1), P(2), P(3) are disjoint
 
@@ -81,7 +83,7 @@ $\forall \omega \in \Omega \> P(\{\omega\})=\frac{1}{|\Omega|}=\frac{1}{6^4}$
 ## b
 $|\Omega|=6^4$
 
-$B= $ {No 5's} $\cup$ {Only 1 5}
+$B=$ {No 5's} $\cup$ {Only 1 5}
 
 |{No 5's}| = $5^4$
 
@@ -144,11 +146,11 @@ Plugging in our known values: $\frac{|A|}{52} = \frac15$
 
 When solving for $|A|$: $|A|=\frac{52}{5}=10.4$
 
-This is not possible because the size of a set cannot be a non whole number. Therefore $\nexists A$ s.t. $P(A)=\frac15
+This is not possible because the size of a set cannot be a non whole number. Therefore $\nexists A$ s.t. $P(A)=\frac15$
 
 
 # 1.34
-$\Omega = (i,j) \forall i,j (0\leqi\leq 1, 0\leq j \leq 1)$
+$\Omega = (i,j) \forall i,j (0\leq i\leq 1, 0\leq j \leq 1)$
 
 Circle lies within the square iff $(\frac 13 < i < \frac 23) \land (\frac 13 < j < \frac 23)$
 
