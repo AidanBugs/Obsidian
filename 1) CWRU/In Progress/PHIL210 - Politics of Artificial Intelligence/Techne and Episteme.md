@@ -18,3 +18,8 @@ Wisdom (Sophia) the combination of Episteme and Nous, in the sense that a wise p
 
 # Whatever the other book was
 Plato dived technai into productive (techne) and theoretical (episteme) whereas Aristotle also diveded into the third category of practical knowledge (Phronesis as described above).
+
+# Definitions
+Episteme is in reference to the theoretical knowledge about a subject whereas Techne concerns itself more with the physical aspect of it.
+
+In modern terms episteme is the theoretical civil engineering portion of construction whereas techne refers more to the construction itself
