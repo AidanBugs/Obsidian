@@ -15,3 +15,6 @@ Intelligence (Phronesis) is defined as the ability to understand what to do to l
 Understanding (Nous) refers to the history and origin of things, which is distinct from the other groups which do not concern themselves with origin of things. 
 
 Wisdom (Sophia) the combination of Episteme and Nous, in the sense that a wise person is very excellent in their field and must have a deep understanding of the Episteme and the Nous.
+
+# Whatever the other book was
+Plato dived technai into productive (techne) and theoretical (episteme) whereas Aristotle also diveded into the third category of practical knowledge (Phronesis as described above).
