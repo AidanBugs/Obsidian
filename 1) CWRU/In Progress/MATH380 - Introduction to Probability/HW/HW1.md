@@ -23,24 +23,20 @@ $P(A)=\frac{|A|}{|\Omega|}=\frac{15}{36}=\frac{5}{12}$
 
 # 1.5 
 ## a 
-$\Omega = \{1,2,3,4,...,40\}^5$ using the cartesian power
+$\Omega = (a_1,a_2,a_3,a_4,a_5) | (a_1,a_2,a_3,a_4,a_5 \in \{1,2,3,4,...,40\})\land \forall i,j (i\neq j \rightarrow a_i\neq a_j)$ 
 
-$\forall \omega \in \Omega \> P(\{\omega\}) = 1/40^5$
+$|\Omega| = _{40}P_5 = \frac{40!}{35!}$
+
+$\forall \omega \in \Omega \> P(\{\omega\}) = 35!/40!=\frac{1}{40*39*38*37*36}=\frac{1}{78960960}$
 
 ## b 
-Let $3E=$ {3 of 5 numbers are even (1-40)}
+We can think of this problem as choosing 3 numbers from the set of the even numbers 1-40 and then choosing 2 numbers from the set of odd numbers 1-40.
 
-Let $E={2,4,6,...,40}$
+This results in the combinations of lottery numbers being $\frac{20!}{17!3!}\frac{20!}{18!2!}$
 
-Let $O={1,3,5,...,39}$
+If we want to find the permutations of these then we multiply by $5!$ so this results in $\frac{5!20!20!}{3!2!17!18!}=25992000$ different permutations of lottery numbers with exactly 3 evens.
 
-Since $|E|=|O|$ and $E^c = O$ then $P(E) = P(O) = 1/2$
-
-This means we can then translate a set of 5 numbers to ${E,O}^5$ resulting in $2^5=32$ different $E,O$ sets. 
-
-Therefore there are $\binom 53$ combinations of 3 even numbers. $\binom 53 = \frac{5!}{3!(5-3)!}=\frac{5*4}{2}=10$
-
-Thus $P(3E)=10/32= 5/16$
+Thus to find the probability we divide by $|\Omega$ which results in $P(3E)=\frac{5!20!20!35!}{3!2!17!18!40!}=\frac{25992000}{78960960}=0.3291753292$
 
 # 1.7 
 ## a
