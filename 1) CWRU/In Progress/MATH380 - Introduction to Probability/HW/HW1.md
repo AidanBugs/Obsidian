@@ -134,7 +134,7 @@ $\forall \omega \in \Omega \> P(\omega) = \frac{1}{|\Omega|}=\frac{1}{4*13}=\fra
 What is the probability of picking an Ace from the deck that is not the Ace of Spades?
 
 ## c
-Suppose $\exists A $ s.t. $P(A) = \frac{1}{5}$
+Suppose $\exists A$ s.t. $P(A) = \frac{1}{5}$
 
 By fact 1.8, then $P(A)= \frac{|A|}{|\Omega|} = \frac15$
 
