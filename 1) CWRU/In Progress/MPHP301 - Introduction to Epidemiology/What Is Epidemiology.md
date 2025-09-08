@@ -40,7 +40,6 @@ Result or possible results that stem from exposure to a causal factor
 ## Quantification
 Statistics or counting of the health outcome.
 
-
 # John Snow
 John Snow mapped Cholera cases to a sewer map and it showed that people closer to a specific water pump had high rates of having Cholera so he developed the idea Cholera spreads through the water.
 
