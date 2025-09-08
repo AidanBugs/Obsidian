@@ -31,14 +31,14 @@ $A$ is w/o replacement
 
 $P(A)= \frac{n^2-n + m^2-m}{(n+m)(n+m-1)}$
 
-Alternatively, $P(A) = 1- \frac{n*m}{(n+m)(n+m-1)}$
+Alternatively, $P(A) = 1- \frac{2*n*m}{(n+m)(n+m-1)}$
 
 ## b
 $B$ is w/ replacement
 
 $P(B)=\frac{n^2 + m^2}{(n+m)^2}$
 
-Alternatively, $P(B) = 1-\frac{n*m}{(n+m)^2}$
+Alternatively, $P(B) = 1-\frac{2*n*m}{(n+m)^2}$
 
 ## c
 Unless $P(B)=0$ or $P(B)=1$ then $P(B)>P(A)$. If $P(B)=0$ then $m,n < 2$ so $P(A)=0$ and thus $P(B)=P(A)$. For the case of $P(B)=1$ then $m$ or $n$ is at least 2 and the other must be 0, thus $P(A)$ is also $1$ and $P(B)=P(A)$.
@@ -47,13 +47,13 @@ For any other case where $m$ or $n$ is greater than 1 and the other is non zero,
 
 Intuitively, when you do not replace the ball, the probability you get the same color again is lower because there is less of the same color now. Therefore $P(A)$ is smaller than $P(B)$.
 
-For a more formal proof, looking at the compliments of $A$ and $B$, $P(A)= 1-\frac{n*m}{(n+m)(n+m-1)}$ and $P(B)=1-\frac{n*m}{(n+m)^2}$.
+For a more formal proof, looking at the compliments of $A$ and $B$, $P(A)= 1-\frac{2*n*m}{(n+m)(n+m-1)}$ and $P(B)=1-\frac{2*n*m}{(n+m)^2}$.
 
-It is clear that $(n+m)^2 > (n+m)(n+m-1)$ [when $n+m >1$] so that means that $\frac{nm}{(n+m)^2} < \frac{nm}{(n+m)(n+m-1)}$
+It is clear that $(n+m)^2 > (n+m)(n+m-1)$ [when $n+m >1$] so that means that $\frac{2nm}{(n+m)^2} < \frac{2nm}{(n+m)(n+m-1)}$
 
-$\rightarrow -\frac{nm}{(n+m)^2} > -\frac{nm}{(n+m)(n+m-1)}$
+$\rightarrow -\frac{2nm}{(n+m)^2} > -\frac{2nm}{(n+m)(n+m-1)}$
 
-$\rightarrow 1-\frac{nm}{(n+m)^2} > 1-\frac{nm}{(n+m)(n+m-1)}$
+$\rightarrow 1-\frac{2nm}{(n+m)^2} > 1-\frac{2nm}{(n+m)(n+m-1)}$
 
 $\rightarrow P(B) > P(A)$
 
