@@ -111,15 +111,16 @@ $P(Kevin)= P(Kevin|2MATCHES)P(2MATCHES) + ... + P(Kevin|100000)P(100000MATCHS)$
 
 $\rightarrow P(Kevin)= \sum_{i=2}^{100000} P(Kevin|iMATCHES)P(iMATCHES)$
 
-$P(XMATCHES)=\frac{1}{10,000}^{X-2}\frac{9,999}{10,000}^{99,998-X}$
+$P(XMATCHES)=\binom{99998}{X-2}\frac{1}{10,000}^{X-2}\frac{9,999}{10,000}^{99,998-X}$
 
 $\rightarrow P(Kevin) = \sum_{i=2}^{100,000} \frac1 i \frac{1}{10,000}^{i-2} \frac{9,999}{10,000}^{99,998-i}=$
 
 Below is the python code to determine the result of the summation
 
-```{python}
-print("P(Kevin)="+str(sum([1/x * 0.0001**(x-2) * 0.9999**(99998-x) for x in range(2,100000)])))
-```
+from decimal import Decimal
+from math import comb
+PK = [Decimal(0.0001**(x-2) * 0.9999**(99998-x) / x) * Decimal(comb(99998, x-2)) for x in range(2,100000)]
+print("P(Kevin)="+str(sum(PK)))
 
 $.$
 

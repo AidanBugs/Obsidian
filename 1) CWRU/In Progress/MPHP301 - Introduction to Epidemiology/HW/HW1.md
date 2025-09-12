@@ -70,9 +70,13 @@ Define the following and cite their applications
 ## \# 5
 Why is random sampling unbiased?
 
+> Samples are selected via a random process thus are unbiased because the samples aren't clustered around any particular group.
+
 # Chapter 3
 ## \# 7
 How are incedince and prevalence related to eachother?
+
+>
 
 ## \# 13
 What quantitative measure is shown in the table (3.3)? 
@@ -86,10 +90,10 @@ Why do we have to be careful about comparing counts across different populations
 # Problem
 Calculate the Incidence Rate
 
-> $\frac{\#\text{ of incidents}}{\#\text{ of ppl}} \times 100,000 = \frac{441}{11.42 \times 10^6} \times 100,000$
+> $\frac{\#\text{ of incidents}}{\#\text{ of ppl}} \times 100,000 = \frac{441}{11.42 \times 10^6} \times 100,000=3.8616$ per $100,000$
 
 
 Calculate the Fatality Rate
 
-> $\frac{\#\text{ of deaths}}{\#\text{ of cases}} = \frac{31}{441}$
+> $\frac{\#\text{ of deaths}}{\#\text{ of cases}} = \frac{31}{441}*100=7.029%$
 
