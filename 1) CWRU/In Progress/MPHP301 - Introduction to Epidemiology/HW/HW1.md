@@ -1,32 +1,32 @@
 ---
 format: pdf
 ---
+
 # Chapter 1
 ## \# 4
-What are some examples of risk factors that you experience in your life?
-
-> blah
-
 Define risk factor 
 
-> blah blah
+> Risk factors is an expore to something that is associated with a desease, morbitity, mortality, or other adverse health outcome. 
 
+What are some examples of risk factors that you experience in your life?
+
+> One of the big things in my life is I eat alot of foods high in sugar and highly processed, which is a risk factor for things like obeisity and diabetes. To mitigate this risk factor I try to exercise frequently.
+>
+> Another risk factor in my life is I participate in Judo club where we practice alot of Judo and Juijitsu. These sports are close contact and we practice on old wrestling mats. There is a wided variety of risk factors associated with this sport because its alot of close contact with other people (so if someone is sick many people can get sick) and the mats could be dirty as well allowing germs to spread when rolling on them. To mitigate these risk factors, the club asks that people do not roll if they are sick, we also clean the mats before and after using them, and everyone is strongly advised to thoroughly shower after the club meeting is over.
 
 ## \# 8
 What are four uses of epidemiology? (AND RANK THEM)
 
-1.
-    -
-2.
-    -
-3.
-    -
-4.
-    -
+> On the slides the listed uses of epidemiology are as follows: Historical, Community Health, Health Services, Risk Assessment, and Disease Causality.
+
+1. Disease Causality: Determining the causes of diseases by analyzing the experiences and environment of the infected population. An example of this is John Snow using disease causality to determine that cholera was caused by the infected water well.
+2. Health Services: Studying the current state of health services and ways to improve their effectiveness. The example given in the slides is optimizing the plaacement of health services to increase the total coverage of areas but another metric that could be studied is the average duration patients are in the hospital to determine the effeciency of an individual health service area.
+3. Risk Assessment: Determining an individual's risk of disease / accident / negative health outcome and trying to prevent / mitigate these outcomes. An example of this is at a yearly doctor checkup they know your medical history and the medical history of your family and if say diabetes runs in the family they can check you for diabetes while also offer ways to prevent you from getting diabetes.
+4. Community Health: The analysis of current overall health of the community using a variety of census statistics. An example of this could be a report of flu cases near college campuses spiking during the winter then suddently dropping during winter break (because students left campus area to go home).
 
 Why did you rank them in that order?
 
-> 
+> I ordered them based on my opinion on 2 factors: impact scale (individuals vs communities vs global) and use type (analytical, preventative, mitigative). For ordering, I think that the impact scale is ordered by more people means morer important, and for use type my order is 1. preventative, 2. mitigative, 3. analytical because I believe that preventating a disease from spreading is more important than miitigating the effects of a disease. In my opinion the disease causality use is the number one because its impact scale is number 1 and its use type is both preventative and mitigative. Health Services is both prevantative and mitigative as well but mainly looks at communities. Risk assessment is at an individual scale and is prevantative and mitigative use types. Lastly community health is last because it is community level and is mostly analytical which in my opinion is the least important use type. 
 
 
 ## \# 18
@@ -46,13 +46,16 @@ What is Qualitative Data?
 Categorize the following parameters:
 
 - Sex
-> Qualitative
+
+>> Qualitative
 
 - Race
-> Qualitative
 
-Weight
-> Quantitative
+>> Qualitative
+
+- Weight
+
+>> Quantitative
 
 
 ## \# 4

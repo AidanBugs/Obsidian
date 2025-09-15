@@ -83,46 +83,35 @@ $P(A\cap B)=0$ because they are disjoint. So $P(A)P(B)=P(A\cap B)$ for independe
 There is a lot of missing information so I will proceed with this question with the following assumptions:
 
 1. There is only a single perpetrator and they live in the town
-2. Only one person is going to be choosen as guilty
-3. Kevin is NOT the perpetrator (someone else is the perpetrator) and he lives in the town
-4. There is a 0% false negative rate with the DNA matching (the perpetrator is guranteed to have their DNA match)
-5. There is no evidence on the perpetrator (or anyone) so anyone DNA matched is equally likely to be choosen as guilty
-6. Everyone in the town had their DNA tested against the DNA in the crime scene
+2. There is a 0% false negative rate with the DNA matching (the perpetrator is guranteed to have their DNA match)
 
-Given the rules of the problem there will always be 2 DNA matches of the 100,000 (Kevin and the perpetrator). Meaning there are 99,998 other people to potentially have their DNA tested.
+$P(K)=$ {Person is the Killer}
 
-$2MATCHES=$ {2 people had their DNA match} 
+$P(M)=$ {Person has a DNA Match}
 
-$3MATCHES=$ {3 people had their DNA match} 
+Thus using the above assumptions we get the following values for the probabilities:
 
-...
+$P(K)= \frac{1}{100,000}$, obtained from assumption 1.
 
-$100000MATCHES=$ {100000 people had their DNA match} 
+$P(K^c)=1-P(K)= \frac{99,999}{100,000}$
 
-> Note that these events are disjoint
+$P(M|K)= 1$, obtained from assumption 2
 
-$Kevin=$ {Kevin is guilty}
+$P(M|K^c)= \frac{1}{10,000}$, obtained from the problem statements
 
-$P(Kevin|2MATCHES)= \frac 12$
+Thus we are solving for $P(K|M)$, what is the probability someone is the killer given they have a DNA match?
 
-$P(Kevin|XMATCHES) = \frac 1X$
+We can use Bayes Formula to solve for $P(K|M)$:
 
-$P(Kevin)= P(Kevin|2MATCHES)P(2MATCHES) + ... + P(Kevin|100000)P(100000MATCHS)$ 
+> $P(K|M)= \frac{P(M|K)P(K)}{P(M|K)P(K)+P(M|K^c)P(K^c)}$
+>
+> $P(K|M)= \frac{1*\frac{1}{100,000}}{1*\frac{1}{100,000}+\frac{1}{10,000}\frac{99,999}{100,000}}$
+>
+> $P(K|M)= \frac{10,000}{109,999}$
 
-$\rightarrow P(Kevin)= \sum_{i=2}^{100000} P(Kevin|iMATCHES)P(iMATCHES)$
+Thus knowing the Kevin has a DNA match means that there is a probability of $\frac{10,000}{109,999}$ that he is the killer.
 
-$P(XMATCHES)=\binom{99998}{X-2}\frac{1}{10,000}^{X-2}\frac{9,999}{10,000}^{99,998-X}$
 
-$\rightarrow P(Kevin) = \sum_{i=2}^{100,000} \frac1 i \frac{1}{10,000}^{i-2} \frac{9,999}{10,000}^{99,998-i}=$
-
-Below is the python code to determine the result of the summation
-
-from decimal import Decimal
-from math import comb
-PK = [Decimal(0.0001**(x-2) * 0.9999**(99998-x) / x) * Decimal(comb(99998, x-2)) for x in range(2,100000)]
-print("P(Kevin)="+str(sum(PK)))
-
-$.$
 
 # 2.54
 ## a 
