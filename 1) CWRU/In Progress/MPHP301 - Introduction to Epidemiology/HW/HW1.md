@@ -32,6 +32,12 @@ Why did you rank them in that order?
 ## \# 18
 Why do people regard John Snow as the Father of epidemiology? Provide 3 reasons
 
+> John Snow demonstrated the powers of observation and written expression.
+>
+> John Snow applied a variety of epidemiologic methods such as mapping cholera infections ontop of a map of water suppliers to determine that the one supplier had higher infections than the other
+>
+> Recommended a public health measures to prevent disease
+
 
 # Chapter 2
 ## \# 2
@@ -63,11 +69,19 @@ Define the following and cite their applications
 
 1. Stratified random sampling
 
+>> Stratified random samplinng is creating stratas of individual subgroups of the population and ensuring random sampling of each strata. An application of this could be to ensure each strata is sampled relatively equally in order to make accurate comparisons across the stratas. For example, for facial recognition software, it is ideal to use stratified random sampling to ensure each strata (in this case race) is thoroughly represented in the dataset to ensure that the functionality of the software is not dependent on race. 
+
 2. Systemic sampling
+
+>> Systemic sampling is choosing data samples from a predefined system such as using every other data point. The primary issue with systemic sampling is under representation of the data set by not sampling later samples. Applications of this could include trying to obtain a specific amount of data points.
 
 3. Convenience sampling
 
+>> Convenience sampling revolves around sampling data as convient. What this can look like is asking friends and those convenient to ask, typically resulting in a biased sample set. The primary application is to quickly collect data and use that to determine if additional study / research should be conducted. 
+
 4. Cluster sampling
+
+>> Cluster sampling is sampling from a single cluster. The example given in the book is sampling from a single city block. This sampling method is intentionally biased towards the clustered population and should not be used as an overarching representation of the population. An example of cluster sampling is John Snow's cholera map on the slides which samples only a few blocks of people and used this to create a small map of infections vs the water wells. 
 
 
 ## \# 5
@@ -77,14 +91,31 @@ Why is random sampling unbiased?
 
 # Chapter 3
 ## \# 7
-How are incedince and prevalence related to eachother?
+How are incidence and prevalence related to eachother?
 
->
+> Incidence refers to the number of new incidents of a given disease within a population at a certain time while prevalence is the number of people that are ill with a particular disease within a population at a certain time. In other words, incidence refers to new cases while prevalence is the total cases. As such, incidence will increase prevalence but prevalence may not necessarily increase incidence. For example, if an entire population is infected the incidence rate will not be high because there are no new cases while the prevalence will be super high.
 
 ## \# 13
+| Disease | \| | 2016 | 2017 | 2018 | 2019 |
+| ------    | -- | --- | --- | --- | --- | 
+| Butilsm | \| | 31 | 19 | 17 | 20 |
+| Cholera | \| | 15 | 10 | 14 | 14 |
+| Leprosy | \| | 78 | 94 | 90 | 77 |
+| Rabies |  \| | 0  | 2  |  3 | 0  |
+
 What quantitative measure is shown in the table (3.3)? 
 
+> Table 3.3 has the number of cases of certain diseases (Botulism, Cholera, Hansen's Disease, Rabies) in the US over the years 2016-2019.
+
 Describe the annual trends in the case of infrequently reported notifiable diseases
+
+> For Botulism, there was a sharp drop of 33% from 2016 (31 cases) to 2017 (19 cases) and remained relatively steady from 2017 to 2019 (20 cases)
+>
+> Cholera: the number of Cholera cases has remained relatively consistent at 14 cases per year except for 2017 which had 10 cases.
+> 
+> Leprosy started at 78 cases in 2016, then increased by roughly 20% in 2017 to 94 cases then 2018 there were similar cases amount of cases as 2017 but then in 2019 there was a decrease in cases back to 77.
+>
+> Rabies had 0 cases in 2016 and increased to 2/3 for 2017 and 2018 but then decreaesed back to 0 in 2019
 
 Why do we have to be careful about comparing counts across different populations?
 
