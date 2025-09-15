@@ -1,0 +1,74 @@
+---
+format: pdf
+---
+
+# 2.23
+## a
+$P(1N)= 0.95^1$
+
+$P(7N)=0.95^7=0.698337$
+
+## b
+September has 30 days.
+
+$P(Sept=2)= \binom{30}{2} (0.05)^2 (0.95)^28=0.2586367$
+
+## c
+$10N=$ {10 Days of no accidents}
+
+Therefore at least $1$ accident in 10 days is $10N^c$
+
+$P(10N^c|4N)= 1-P(6N)$ because we know that the accident must occur within the last 6 days
+
+$\rightarrow P(10N^c|4N)=1-(0.95^6)=0.2469$
+
+$P(10N^c \cap 4N)= P(10N^c|4N)*P(4N)=0.2469*0.95^4=0.215769$
+
+# 2.28
+## a
+Hypergeometric distribution, $X~ Hypergeom(52,4,13)$
+
+## b
+Binomial distribution, $X~bin(50,1-\frac{48!39!}{35!52!})\rightarrow X~bin(50, \frac{14498}{20825})$
+
+## c
+Binomial distribution, $X~bin(50, \frac{12!39!}{51!}\rightarrow X~bin(50,\frac{1}{8255176274800})$
+
+## d
+Hypergeometric distribution, $X~ Hypergeom(52, 13, 13)$
+
+# 2.47
+$P(2F)=\frac{55}{80} \frac{54}{79}=\frac{297}{632}$
+
+# 2.66
+We can treat this problem as a binomial distribution with $X~bin(n,\frac16)$ and we are solving for an $n$ with the highest resulting probability.
+
+$P(X=2)=\binom n 2 (\frac16)^2(\frac56)^{n-2}$ for $n=1,2,3,...,50$
+
+I will use the python code below to solve for $n$:
+
+```{python}
+from math import comb
+bestProb = 0
+bestRolls = 0
+for n in range(2,40):
+  prob=(comb(n,2) * ((1/6)**2) *((5/6)**(n-2)))
+  if prob > bestProb:
+    bestProb = prob
+    bestRolls = n
+print(f"Optimal number of rolls is {bestRolls} resulting in a probability of {bestProb}")
+```
+
+Therefore the optimal number of rolls is actually $11$ resulting in a probability of $0.296$
+
+# 2.71
+## a
+
+## b
+
+## c
+
+## d
+
+# 2.81
+
