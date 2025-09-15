@@ -1,0 +1,49 @@
+---
+format: pdf
+---
+
+# 1
+## i
+
+## ii
+
+# 2
+## i
+```{r}
+data = read.csv("data/slumptest.csv", sep=",")
+head(data)
+model = lm(CompressiveStrength ~ Water, data=data)
+print(paste("Beta0 =" , model$coefficients[1]))
+print(paste("Beta1 =" , model$coefficients[2]))
+```
+
+## ii
+If there is no water content then the compressive strength of concrete is on average 55.482. 
+
+On average, the compressive strength of the concrete decreases by 0.09861 per unit increase of water content
+
+## iii
+```{r}
+vcov(model)
+```
+
+## iv
+```{r}
+confint(model, level=0.95)
+```
+
+Thus we are 95% confident that when the water content is 0 then the compressive strength of the concrete is between $[40.807, 70.1577]$
+
+Thus we are 95% confident that the compressive strength of the concrete increases on average $[-0.1726577, -0.0245649]$ per unit increase of water content.
+
+## v
+
+## vi
+```{r}
+predict(model, data.frame(Water=230))
+```
+
+## vii
+```{r}
+predict(model, data.frame(Water=230), interval="predict", level=0.95)
+```
