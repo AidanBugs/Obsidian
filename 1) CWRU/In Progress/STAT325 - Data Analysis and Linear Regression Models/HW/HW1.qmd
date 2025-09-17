@@ -3,44 +3,48 @@ format: pdf
 ---
 
 # 1
-$Y_i = \beta_0 + \beta_1 X_i + \epsilon_i, i=1,...,n$
+$Y_i = \beta_1 X_i + \epsilon_i, i=1,...,n$
 
 ## i
 First find method of least squares, find the sum of residuals squared
 
 > $Q=\sum_{i=1}^n \epsilon_i ^2$
 >
-> $Q=\sum_{i=1}^n (Y_i - \beta_0 - \beta_1 X_i)^2$
+> $Q=\sum_{i=1}^n (Y_i - \beta_1 X_i)^2$
 
-Take derivative with respect to $\beta_0, \beta_1$ and set to 0
+Take derivative with respect to $\beta_1$ and set to 0
 
-1. $\frac{dQ}{d\beta_0} =-2\sum_{i=1}^n (Y_i - \beta_0 -\beta_1 X_i)=0$
-2. $\frac{dQ}{d\beta_1} =-2\sum_{i=1}^n X_i(Y_i - \beta_0 -\beta_1 X_i)=0$
+> $\frac{dQ}{d\beta_1} =-2\sum_{i=1}^n X_i(Y_i -\beta_1 X_i)=0$
 
-Solve for $\hat\beta_0$ 
+Solve for $\hat\beta_1$ 
 
-> Using eq 1) $\sum_{i=1}^n (Y_i - \hat\beta_0 -\hat\beta_1 X_i) = 0$
-> 
-> $\rightarrow \bar Y - \hat\beta_0 - \hat\beta_1 \bar X = \frac0n = 0$
+> $\sum_{i=1}^n X_i Y_i = \sum_{i=1}^n \hat\beta_1 X_i^2$
 >
-> $\rightarrow \hat \beta_0 = \bar Y - \hat\beta_1 \bar X$
+> $\sum_{i=1}^n X_i Y_i = \hat\beta_1 \sum_{i=1}^n X_i^2$
+>
+> $\frac{\sum_{i=1}^n X_i Y_i}{\sum_{i=1}^n X_i^2} = \hat\beta_1$
+>
+> $\frac{\sum_{i=1}^n Y_i}{\sum_{i=1}^n X_i} = \hat\beta_1$
+>
+> $\frac {n \bar Y}{n\bar X}=\hat\beta_1$
+>
+> $\hat \beta_1 = \frac{\bar Y}{\bar X}$
 
-Plug this into eq 2
-
-> $\sum_{i=1}^n X_i (Y_i - \hat\beta_0 -\hat\beta_1 X_i)=0$
->
-> $\rightarrow\sum_{i=1}^n X_i (Y_i - (\bar Y -\hat\beta_1 \bar X) -\hat\beta_1 X_i)=0$
->
-> $\rightarrow\sum_{i=1}^n X_iY_i - X_i\bar Y + X_i\hat\beta_1 \bar X - \hat\beta_1 X_i^2)=0$
->
-> $\rightarrow\sum_{i=1}^n (X_iY_i - X_i\bar Y) =  \sum_{i=0}^n (\hat\beta_1 X_i^2 - X_i\hat\beta_1 \bar X)$
->
-> $\rightarrow\sum_{i=1}^n (X_iY_i - X_i\bar Y) =  \hat\beta_1 \sum_{i=0}^n (X_i^2 - X_i\bar X)$
->
-> $\rightarrow \frac{\sum_{i=1}^n (X_iY_i - X_i\bar Y)}{\sum_{i=0}^n (X_i^2 - X_i\bar X)} =  \hat\beta_1$
-
+Therefore the OLS estimator for $\beta_1$ is $\hat\beta_1 = \frac{\bar Y}{\bar X}$
 
 ## ii
+Prove $E(\hat\beta_1) = \beta_1$
+
+> $\hat \beta_1 = \frac{\hat Y}{\hat X} = \frac{\sum_{i=1}^n Y_i}{\sum_{i=1}^n X_i}$
+>
+> $E(\hat\beta_1)= \frac{\sum_{i=1}^n E(Y_i)}{\sum_{i=1}^n E(X_i)}$
+>
+> $E(\hat\beta_1)= \frac{\sum_{i=1}^n \beta_1 X_i}{\sum_{i=1}^n X_i}$
+>
+> $E(\hat\beta_1)= \beta_1 \frac{\sum_{i=1}^n X_i}{\sum_{i=1}^n X_i}=\beta_1$
+
+Therefore the estimator is unbiased
+
 
 # 2
 ## i
