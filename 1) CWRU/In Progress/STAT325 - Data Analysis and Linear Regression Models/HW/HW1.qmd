@@ -3,7 +3,42 @@ format: pdf
 ---
 
 # 1
+$Y_i = \beta_0 + \beta_1 X_i + \epsilon_i, i=1,...,n$
+
 ## i
+First find method of least squares, find the sum of residuals squared
+
+> $Q=\sum_{i=1}^n \epsilon_i ^2$
+>
+> $Q=\sum_{i=1}^n (Y_i - \beta_0 - \beta_1 X_i)^2$
+
+Take derivative with respect to $\beta_0, \beta_1$ and set to 0
+
+1. $\frac{dQ}{d\beta_0} =-2\sum_{i=1}^n (Y_i - \beta_0 -\beta_1 X_i)=0$
+2. $\frac{dQ}{d\beta_1} =-2\sum_{i=1}^n X_i(Y_i - \beta_0 -\beta_1 X_i)=0$
+
+Solve for $\hat\beta_0$ 
+
+> Using eq 1) $\sum_{i=1}^n (Y_i - \hat\beta_0 -\hat\beta_1 X_i) = 0$
+> 
+> $\rightarrow \bar Y - \hat\beta_0 - \hat\beta_1 \bar X = \frac0n = 0$
+>
+> $\rightarrow \hat \beta_0 = \bar Y - \hat\beta_1 \bar X$
+
+Plug this into eq 2
+
+> $\sum_{i=1}^n X_i (Y_i - \hat\beta_0 -\hat\beta_1 X_i)=0$
+>
+> $\rightarrow\sum_{i=1}^n X_i (Y_i - (\bar Y -\hat\beta_1 \bar X) -\hat\beta_1 X_i)=0$
+>
+> $\rightarrow\sum_{i=1}^n X_iY_i - X_i\bar Y + X_i\hat\beta_1 \bar X - \hat\beta_1 X_i^2)=0$
+>
+> $\rightarrow\sum_{i=1}^n (X_iY_i - X_i\bar Y) =  \sum_{i=0}^n (\hat\beta_1 X_i^2 - X_i\hat\beta_1 \bar X)$
+>
+> $\rightarrow\sum_{i=1}^n (X_iY_i - X_i\bar Y) =  \hat\beta_1 \sum_{i=0}^n (X_i^2 - X_i\bar X)$
+>
+> $\rightarrow \frac{\sum_{i=1}^n (X_iY_i - X_i\bar Y)}{\sum_{i=0}^n (X_i^2 - X_i\bar X)} =  \hat\beta_1$
+
 
 ## ii
 
@@ -11,8 +46,8 @@ format: pdf
 ## i
 ```{r}
 data = read.csv("data/slumptest.csv", sep=",")
-head(data)
 model = lm(CompressiveStrength ~ Water, data=data)
+summary(model)
 print(paste("Beta0 =" , model$coefficients[1]))
 print(paste("Beta1 =" , model$coefficients[2]))
 ```
@@ -37,6 +72,22 @@ Thus we are 95% confident that when the water content is 0 then the compressive 
 Thus we are 95% confident that the compressive strength of the concrete increases on average $[-0.1726577, -0.0245649]$ per unit increase of water content.
 
 ## v
+$H_0: \beta_1= -1, H_1: \beta_1 < -1$
+
+$\alpha =0.1$
+
+Using the t-test:
+
+> $t^* = \frac{\hat\beta_1 - c}{s(\hat\beta_1)}=\frac{-0.098611 + 1}{\sqrt{0.001393292}}$
+>
+> $t^* = 24.1485568675$
+>
+> From summary, $df=101$, and from above $\alpha=0.1$ so the critical $t$ value is $-1.29$ (left tailed)
+>
+> Since this is left tailed, any $t$ value greater than $-1.29$ is rejection. Since $24.1485568675>-1.29$ we reject $H_0$.
+
+Thus using the $t$ test we can conclude that the engineer is wrong and the slope is not less than $-1$.
+
 
 ## vi
 ```{r}
