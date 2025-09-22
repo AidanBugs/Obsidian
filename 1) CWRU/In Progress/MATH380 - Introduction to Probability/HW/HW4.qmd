@@ -43,7 +43,7 @@ $P(2F)=\frac{55}{80} \frac{54}{79}=\frac{297}{632}$
 # 2.66
 We can treat this problem as a binomial distribution with $X~bin(n,\frac16)$ and we are solving for an $n$ with the highest resulting probability.
 
-$P(X=2)=\binom n 2 (\frac16)^2(\frac56)^{n-2}$ for $n=1,2,3,...,50$
+$P(X=2)=\binom n 2 (\frac16)^2(\frac56)^{n-2}$ for $n=2,3,...,40$
 
 I will use the python code below to solve for $n$:
 
@@ -63,12 +63,90 @@ Therefore the optimal number of rolls is actually $11$ resulting in a probabilit
 
 # 2.71
 ## a
+Let $A_n$ denote the set where the $n$th flip is tails and $A_1A_2...A_n$ represent a $n$ consecutive tails flips.
+
+Let $P(B)$ be the probability the coin is biased.
+
+The question is solving for $P(B|A_1), P(B|A_1A_2), P(B|A_1...A_n)$
+
+$P(B|A_1)= \frac{P(A_1|B)P(B)}{P(A_1)}$
+
+From the problem (and exercise 2.38) we have the following values:
+
+- $P(A_i)=\frac{51}{100}$
+- $P(B)= \frac1{10}$
+- $P(A_1|B)= \frac35$
+
+Plug those in to the above equation:
+
+> $P(B|A_1)= \frac{P(A_1|B)P(B)}{P(A_1)}=\frac35\frac{1}{10}\frac{100}{51}=\frac{2}{17}$
+
+For $P(B|A_1A_2)$:
+
+> $P(A_1A_2|B)= \frac{3}{5}^2=\frac{9}{25}$
+>
+> $P(A_1A_2)= \frac12^2 \frac9{10} + \frac35^2 \frac1{10} =\frac{261}{1000}$
+>
+> $P(B|A_1A_2)= \frac{P(A_1A_2|B)P(B)}{P(A_1A_2)}=\frac{9}{25}\frac{1}{10}\frac{1000}{261}=\frac{4}{29}$
+
+For $P(B|A_1...A_n)$:
+
+> $P(A_1...A_n|B)= \frac35^n$
+>
+> $P(A_1...A_n)= \frac12^n \frac9{10} + \frac35^n \frac1{10}$
+>
+> $P(B|A_1...A_n)=\frac{P(A_1...A_n|B)P(B)}{P(A_1...A_n)}=\frac{\frac35^n\frac1{10}}{\frac12^n\frac{9}{10} + \frac35^n\frac1{10}}=\frac{\frac35^n}{9\frac12^n+\frac35^n}$
 
 ## b
+This question is for what $n$ is $P(B|A_1...A_n)\geq 0.9$?
+
+Below is the python code to help figure this out:
+
+```{python}
+n=1
+p=2/17
+
+while(p < 0.9):
+  n+=1 
+  p = ((3/5)** n) / (9*((1/2)**n) + (3/5)**n)
+print(f"n = {n}: p = {p}")
+```
+
+Thus after 25 straight tails we can say that with 90% probability that the coin is biased.
 
 ## c
+$P(A_{n+1}|A_1...A_n)=P(A_{n+1}|B)P(B|A_1...A_n) + P(A_{n+1}|F)P(F|A_1...A_n)$
+
+$\rightarrow P(A_{n+1}|A_1...A_n)=P(A_{n+1}|B)P(B|A_1...A_n) + P(A_{n+1}|B^c)P(B^c|A_1...A_n)$
+
+$\rightarrow P(A_{n+1}|A_1...A_n)=\frac35 \frac{\frac 35^n}{9\frac12^n + \frac35^n} + \frac12 (1-\frac{\frac35 ^n}{9\frac12^n + \frac35^n})$
 
 ## d
+$\lim_{n\rightarrow\infty} P(A_{n+1}|A_1...A_n)=\frac35$ because $\lim_{n\rightarrow\infty}P(B|A_1...A_n)=1$.
 
 # 2.81
+$|\Omega| = 669^n$
 
+$U=$ {Unique birthdays}
+
+$U^c=$ {At least 2 with the same birthday}
+
+$|U|= P_{n}^{669}$
+
+$P(U^c) = 1-\frac{|U|}{|\Omega|} = 1- \frac{669!}{669^n (669-n)!}$
+
+Now for what $n$ is $P(U^c) \geq 0.9$?
+
+Again using python:
+
+```{python}
+from math import perm
+n=0
+p=0
+while (p< 0.9):
+  n+=1
+  p = 1 - (perm(669,n) / (669**n))
+print(f"n = {n}: p = {p}")
+```
+
+Therefore the $n$ resulting in $P(U^c)>0.9$ is $n=56$, in other words a group of martians of size $56$ has a $0.9$ probability of having at least two matching birthdays.
