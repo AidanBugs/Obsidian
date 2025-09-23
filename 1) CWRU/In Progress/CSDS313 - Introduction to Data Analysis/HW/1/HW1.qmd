@@ -5,30 +5,660 @@ format: pdf
 ## A) Data Clean
 
 ```{python}
+#| echo: false
+#| output: false
+
 import pandas as pd
 album_data = pd.read_csv("data/Top_10_Albums_By_Year.csv")
 anime_data = pd.read_csv("data/Anime.csv")
 algorithm_data = pd.read_csv("data/algorithm_trials.csv")
 
-print("Displaying Album Data Columns")
+# Filter Album Data
+## For Album Data we want the year to be greater than 2015
+album_data = album_data[album_data["Year"] >= 2015]
+
+## Now that we have only relevant entries, we can remove the irrelevant columns (as specified in instructions)
 print(album_data.columns)
-print("\n\nDisplaying Anime Data")
-print(anime_data.columns)
-print("\n\nDisplaying Algorithm Data")
-print(algorithm_data.columns)
+album_data = album_data[["Genre", "Worldwide Sales (Est.)"]]
+
+# Clean Album data
+## Find any inconsistencies in Genre column
+print(album_data["Genre"].unique())
+
+album_data["Genre"] = album_data["Genre"].str.upper()
+
+## Fixed casing inconsistencies
+
+## Sales Column
+print(album_data["Worldwide Sales (Est.)"].unique())
+
+## All entries look correct (no 0's or NaN) but we need to convert these to integers
+album_data["Sales"] = album_data["Worldwide Sales (Est.)"].str.replace(",", "").astype(int)
+
+album_data = album_data.drop(columns=["Worldwide Sales (Est.)"])
+
+print(album_data.head())
+
+## Album Data filtered and cleaned
 ```
 
-Above are all of the columns associated with each of the datasets. First 
+For cleaning the Album Data, we first need to filter any data entries that are not within the past decade. Then we go through the related columns and ensure all entries are consistent. 
+
+
+```{python}
+#| echo: false
+#| output: false
+
+# Filter Anime Data
+## For Anime data, we want the year to be greater than 2015
+anime_data = anime_data[anime_data["Release_year"] >= 2015]
+
+## Now that we only have relevant entries we can remove the irrelevant columns
+anime_data = anime_data[["Rating", "Type"]]
+
+# Clean Anime Data
+## Check the Rating column
+print(anime_data["Rating"].unique())
+
+## There are a few NaN so we can remove those rows
+anime_data = anime_data.dropna()
+
+## Check the Type column
+print(anime_data["Type"].unique())
+
+## Extra white spaces we can remove
+anime_data["Type"] = anime_data["Type"].str.strip()
+
+## We only care about TV and Movie
+anime_data = anime_data[anime_data["Type"].isin(["TV", "Movie"])]
+
+print(anime_data.head())
+
+## Anime Data filtered and cleaned
+```
+
+For cleaning the Anime Data, we first need to filter any data entries that are not within the past decade. Then we go through the related columns and ensure all entries are consistent. 
+
+```{python}
+#| echo: false
+#| output: false
+
+
+# Filter algorithm_data
+## We dont need the first column so we can drop it 
+print(algorithm_data.columns)
+
+algorithm_data = algorithm_data.drop(columns=["Unnamed: 0"])
+
+# Clean Data
+## There are NaN values so we can remove those
+algorithm_data = algorithm_data.dropna()
+
+## Check Epoch Column
+print(algorithm_data["Epoch"].unique())
+
+## Looks good
+
+## Check Algorithm Column
+print(algorithm_data["Algorithm"].unique())
+
+algorithm_data["Algorithm"] = algorithm_data["Algorithm"].str.strip().str.upper()
+
+## Changed them to all be identical
+
+## Check Accuracy
+print(algorithm_data["Accuracy"].unique())
+
+algorithm_data = algorithm_data[algorithm_data["Accuracy"] <= 1]
+
+## Removed accuracy greater than 1
+
+## Check Run
+print(algorithm_data["Run"].unique())
+
+## Looks good 
+
+print(algorithm_data.head())
+```
+For cleaning the algorithm data we need to ensure all entries are consistent with the parameters and the naming is consistent.
 
 ## B) Generate Visualizations
+### Album Data
+
+```{python}
+#| echo: false
+#| column: screen-inset
+#| layout-nrow: 1
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Error Bar Plot
+plt.figure(figsize=(4, 4))
+sns.barplot(data=album_data, x='Genre', y='Sales', 
+            errorbar='sd',  
+            capsize=0.1, palette='flare', hue="Genre")
+
+plt.title('Sales by Genre with Error Bars (Album Data)')
+plt.xlabel('Genre')
+plt.ylabel('Average Sales')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+# Barcode 
+genres = album_data["Genre"].unique()
+
+fig, axes = plt.subplots(len(genres), 1, figsize=(4, 4), sharex=True)
+
+for i, genre in enumerate(genres):
+    genre_sales = album_data[album_data['Genre'] == genre]['Sales']
+    
+    # Create rug plot (barcode)
+    axes[i].vlines(x=genre_sales, ymin=0, ymax=1, 
+                   color=f'C{i}', alpha=0.7, linewidth=1)
+    axes[i].set_ylabel(genre, rotation=0, ha='right', va='center')
+    axes[i].set_yticks([])
+    axes[i].set_xlim(album_data['Sales'].min(), album_data['Sales'].max())
+    axes[i].grid(axis='x', alpha=0.3)
+
+plt.suptitle('Sales Distribution by Genre (Barcode/Rug Plot)')
+plt.xlabel('Sales (Millions $)')
+plt.tight_layout()
+plt.show()
+
+# Histogram
+
+plt.figure(figsize=(4, 4))
+ax = sns.histplot(data=album_data, x='Sales', hue='Genre', 
+             alpha=0.6, bins=30)
+
+plt.title('Sales Distribution by Genre (Overlaid Histograms)')
+plt.xlabel('Sales (Millions $)')
+plt.ylabel('Frequency')
+handles, labels = ax.get_legend_handles_labels()
+if handles and labels:
+    ax.legend(handles=handles, labels=labels, title='Genre')
+plt.grid(alpha=0.3)
+plt.tight_layout()
+plt.show()
+```
+
+Above are the plots for the album data. The plots are Error Bar Plots, Barcode Plots, Histograms
+
+### Anime Data
+
+```{python}
+#| echo: false
+#| column: screen-inset
+#| layout-nrow: 1
+
+# Error Bar Plot
+plt.figure(figsize=(4, 4))
+sns.barplot(data=anime_data, x='Type', y='Rating', 
+            errorbar='sd',  
+            capsize=0.1, palette='flare', hue="Type")
+
+plt.title('Ratings by Type with Error Bars (Anime Data)')
+plt.xlabel('Type')
+plt.ylabel('Average Ratings')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+# Barcode 
+types = anime_data["Type"].unique()
+
+fig, axes = plt.subplots(len(types), 1, figsize=(4, 4), sharex=True)
+
+for i, type in enumerate(types):
+    type_ratings = anime_data[anime_data['Type'] == type]['Rating']
+    
+    # Create rug plot (barcode)
+    axes[i].vlines(x=type_ratings, ymin=0, ymax=1, 
+                   color=f'C{i}', alpha=0.7, linewidth=1)
+    axes[i].set_ylabel(type, rotation=0, ha='right', va='center')
+    axes[i].set_yticks([])
+    axes[i].set_xlim(anime_data['Rating'].min(), anime_data['Rating'].max())
+    axes[i].grid(axis='x', alpha=0.3)
+
+plt.suptitle('Anime Ratings by Media Type (Barcode/Rug Plot)', fontsize=14)
+plt.xlabel('Ratings', fontsize=12)
+plt.tight_layout()
+plt.show()
+
+# Histogram
+
+plt.figure(figsize=(4, 4))
+ax = sns.histplot(data=anime_data, x='Rating', hue='Type', 
+             alpha=0.6, bins=30)
+
+plt.title('Anime Ratings by Media Type (Overlaid Histograms)', fontsize=14)
+plt.xlabel('Ratings', fontsize=12)
+plt.ylabel('Frequency', fontsize=12)
+handles, labels = ax.get_legend_handles_labels()
+if handles and labels:
+    ax.legend(handles=handles, labels=labels, title='Media Types')
+plt.grid(alpha=0.3)
+plt.tight_layout()
+plt.show()
+```
+
+Below are the plots for the anime data. The plots are Error Bar Plots, Barcode Plots, Histograms
+
+### Algorithm Data
+
+```{python}
+#| echo: false
+#| column: screen-inset
+#| layout-nrow: 1
+
+# Error Bar Plot
+plt.figure(figsize=(4, 4))
+sns.barplot(data=algorithm_data, x='Epoch', y='Accuracy', 
+            errorbar='sd',  
+            capsize=0.1, palette='flare', hue="Algorithm")
+
+plt.title('Accuracy by Algorithm with Error Bars (Algorithm Data)')
+plt.xlabel('Algorithm')
+plt.ylabel('Accuracy')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+plt.figure(figsize=(4, 4))
+sns.scatterplot(data=algorithm_data, x='Epoch', y='Accuracy', hue='Algorithm', 
+                s=100, alpha=0.7, palette=['red', 'blue'])
+
+plt.title('Accuracy by Epoch - Barcode Plot')
+plt.xlabel('Epoch Number')
+plt.ylabel('Accuracy')
+plt.grid(alpha=0.3)
+plt.legend()
+plt.tight_layout()
+plt.show()
+
+# Histogram
+
+plt.figure(figsize=(4, 4))
+ax = sns.histplot(data=algorithm_data, x='Accuracy', hue='Algorithm', 
+             alpha=0.6, bins=30)
+
+plt.title('Accuracy by Algorithm (Overlaid Histograms)', fontsize=14)
+plt.xlabel('Accuracy (0-1)', fontsize=12)
+plt.ylabel('Frequency', fontsize=12)
+handles, labels = ax.get_legend_handles_labels()
+if handles and labels:
+    ax.legend(handles=handles, labels=labels, title='Genre')
+plt.grid(alpha=0.3)
+plt.tight_layout()
+plt.show()
+```
+
+
+Above are the plots for the algorithm data. The plots are Error Bar Plots, Barcode Plots, Histograms
 
 ## C) Justify Best Visualization
+
+### Album Data
+#### Error Bars
+
+Pros:
+
+- Nicely ordered by average sales
+- Easy to look at
+
+Cons:
+
+- Pop has a large variance
+- Population size is hidden
+- Outliers hidden
+
+#### Barcode Plot
+
+Pros:
+
+- Easy to see size of a category and the distribution / variance
+- Outliers easily identifiable
+- Not Cluttered
+
+Cons:
+
+- Hard to gauge the mean
+
+#### Histogram
+
+Pros: 
+
+- Can see the size of population / distribution / variance
+
+Cons:
+
+- Very cluttered
+- Smaller categories are hard to see
+- Hard to actually interperet any data
+
+#### Best Visualization
+The best visualization for the album data is the barcode plot because it is very decluttered (unlike the histogram) while still allowing to see accurate information about the overall distribution of the data, ie outliers and density. Additionally, despite the genres being vastly different in size we are still able to clearly see information on each genre accordingly. 
+
+### Anime Data
+#### Error Bar Plot
+
+Pros:
+
+- Easily identify mean and variance
+
+Cons:
+
+- Cannot get much insight on the data itself
+- Unsure about population size / outliers
+
+
+#### Barcode Plot
+
+Pros:
+
+- Can see that the TV population is much larger
+
+Cons:
+
+- Very cluttered and difficult to get any insight on the data
+
+#### Histogram
+
+Pros:
+
+- Easily see average and overall distribution of each type
+- Anime Types are slightly similar in size allowing to easily see both types
+- Easy comparison between the two types
+
+Cons:
+
+- Slight size difference causes the movie type to always be behind the TV type
+
+#### Best Visualization
+Overall the best visualization for this dataset is definitely the histogram plot. This is because the graph is not cluttered and quite easy to read. Additionally unlike the error bar plot, the histogram allows us to look at the different sizes of the categories and compare the overall distribution. 
+
+### Algorithm Data
+#### Error Bar Plot
+
+Pros:
+
+- Easily compare change across the epochs
+- Easily compare the two algorithms
+- Easy to read
+
+Cons:
+
+- Early Epochs with low accuracy and high variance are slightly off
+
+#### Barcode Plot
+
+Pros:
+
+- Can see the accuracy across the epochs
+- In general can see that red performs better than blue
+
+Cons:
+
+- Data points tend to overlap causing clutter
+
+#### Histogram
+
+Pros:
+
+- Easy to see how variant the data set is
+
+Cons:
+
+- No good way to plot to display the epoch number
+- Quite clustered making it difficult to see
+
+#### Best Visualization
+
+Overall the best visualization is the error bar plot because it is very easy to analyze the differences across the different epoch while also comparing the two algorithms side by side. Additionally since the population sizes of each epoch are relatively small, the barcoode plot tends to over due it while the histogram has no good way of representing the three categories (Algorithm, Accuracy and Epoch) because one of the Axis must be for frequency.
 
 
 # Task 2
 ## A) Develop Hypothesis
 
+### Normal
+For a normal distribution i have found a dataset for the height of a population. I hypothesize this data is normally distributed because it is highly clustered at an average point and very sparse at the extremes.
+
+[https://www.kaggle.com/datasets/mustafaali96/weight-height?resource=download](https://www.kaggle.com/datasets/mustafaali96/weight-height?resource=download)
+
+### Uniform
+I found a fake employee dataset and I hypothesize that the ID numbers of the employees are uniformly dsitributed because each ID should be unique to an individual. 
+
+[https://www.kaggle.com/datasets/ravindrasinghrana/employeedataset](https://www.kaggle.com/datasets/ravindrasinghrana/employeedataset)
+
+### Power Law Distribution
+I choose population size of cities because there will be a higher frequency of lower population cities than higher population cities and the city size frequency does not decrease at an exponential rate.
+
+[https://www.kaggle.com/datasets/dataanalyst001/population-of-all-us-cities-2024](https://www.kaggle.com/datasets/dataanalyst001/population-of-all-us-cities-2024)
+
+### Exponential Distribution
+For exponential distribution im hypothesizing that number of consecutive heads is exponentially distributed because an increase by one is approximately 50% decrease in probability.
+
+[https://www.kaggle.com/datasets/irkanhadi/256-coin-flip-entries](https://www.kaggle.com/datasets/irkanhadi/256-coin-flip-entries)
+
 ## B) Fitting Distributions
+
+```{python}
+#| echo: false
+#| output: false
+
+import powerlaw
+from scipy.stats import expon
+import numpy as np
+
+height_data = pd.read_csv("data/weight_height.csv")["Height"]
+employeeid_data = pd.read_csv("data/employee_data.csv")["EmpID"]
+city_population_data = pd.read_csv("data/populations.csv")["Population 2024"]
+coin_data = pd.read_csv("data/Coin_Flip.csv")
+
+consecutive_heads = []
+x = 0
+for flip in coin_data["Coin_Flip_Binary"]:
+  if flip == 0:
+    if x != 0: 
+      consecutive_heads.append(x)
+      x = 0
+  else:
+    x += 1
+
+datasets = [height_data, employeeid_data, city_population_data, pd.Series(consecutive_heads)]
+datanames = ["Height of People", "Employee Id Number", "City Populations", "#Consecutive Heads"]
+observations = [len(height_data), len(employeeid_data), len(city_population_data), len(consecutive_heads)]
+normals = [(x.mean(), x.std()) for x in datasets]
+uniforms = [(x.min(), x.max()) for x in datasets]
+powerlaw = [(powerlaw.Fit(x, discrete=True).alpha, x.min()) for x in datasets]
+exponential = [1/ (expon.fit(x)[1]) for x in datasets]
+
+data = {
+  "Datasets": datanames, 
+  "#Observations": observations,
+  "Normal": normals,  
+  "Uniform": uniforms,
+  "Power Law": powerlaw,
+  "Exponential": exponential
+}
+
+df = pd.DataFrame(data)
+```
+
+```{python}
+#| echo: false
+#| column: screen-inset
+#| layout-nrow: 1
+# Round only numeric columns (this will handle column D automatically)
+df_rounded = df.round(2)
+
+# For column C (list of floats), we need to apply rounding to each list
+df_rounded['Normal'] = df['Normal'].apply(lambda x: [round(float(i), 2) for i in x])
+df_rounded['Uniform'] = df['Uniform'].apply(lambda x: [round(float(i), 2) for i in x])
+df_rounded['Power Law'] = df['Power Law'].apply(lambda x: [round(float(i), 2) for i in x])
+
+df_rounded.drop(columns=["Power Law", "Exponential"])
+```
+
+```{python}
+#| echo: false
+df_rounded.drop(columns=["Normal", "Uniform"])
+
+```
+
+For estimating the normal and uniform parameters, they were obtained by finding the mean, std, min, and max of the datasets. Then the $\alpha$ was found using a powerlaw fit built into python, this is a valid approach as it will find the most accurate $\alpha$ for each dataset. Similarly, $\lambda$ was found using similar methods and is also valid with similar reasoning.
 
 ## C) Comparing Real and Synthetic Data
 
+### Generating Synthetic Data
+
+```{python}
+#| echo: false
+
+np.random.seed(32)
+syn = []
+for i in range(4):
+  # Norm
+  norm_syn = np.random.normal(loc=df["Normal"][i][0], scale=df["Normal"][i][1], size=df["#Observations"][i])
+  
+  # Unifrom
+  uniform_syn = np.random.uniform(low=df["Uniform"][i][0], high=df["Uniform"][i][1], size=df["#Observations"][i])
+  
+  # Power Law
+  power_law_syn = np.random.power(df["Power Law"][i][0], df["#Observations"][i])
+  power_law_syn = df["Power Law"][i][1] * (1-power_law_syn) ** (-1 / df["Power Law"][i][0])
+  power_law_syn = np.round(power_law_syn).astype(int)
+  
+  # Exponential
+  exponential_cyn = np.random.exponential(scale= 1/ df["Exponential"][i], size=df["#Observations"][i])
+  exponential_cyn = np.round(exponential_cyn).astype(int)
+  
+  syn.append([norm_syn, uniform_syn, power_law_syn, exponential_cyn])
+```
+
+Here, for each dataset and each distribution type we generate a random population of datapoints given the information from the dataset following the specified distribution. Additionally, we ensure that this random population is of equal size to the original dataset for easier comparisons.
+
+### Generating Plots
+#### Heights
+
+```{python}
+#| echo: false
+#| column: screen-inset
+#| layout-nrow: 1
+
+DisTypes = ["Normal", "Uniform", "Power Law", "Exponential"]
+
+for i in range(4):
+  combined_min = min(height_data.min(), syn[0][i].min())
+  combined_max = max(height_data.max(), syn[0][i].max())
+  common_bins = np.linspace(combined_min, combined_max, 30)
+  plt.figure(figsize=(3, 3))
+  sns.histplot(height_data, bins=common_bins, alpha=0.7, label="Real", color='blue', kde=True)
+  sns.histplot(syn[0][i], bins=common_bins, alpha=0.7, label="Synthetic", color='red', kde=True)
+  
+  plt.xlabel('Heights')
+  plt.ylabel('Frequency')
+  plt.title(f'Real vs {DisTypes[i]} Synthetic Data')
+  plt.legend()
+  plt.show()
+
+```
+
+Above are the Real vs Synthetic plots for the height dataset.  These include Normal, Uniform, Power Law, and Exponential Distributions.
+
+
+{{< pagebreak >}}
+
+#### Employee Ids
+
+```{python}
+#| echo: false
+#| column: screen-inset
+#| layout-nrow: 1
+
+
+for i in range(4):
+  combined_min = min(employeeid_data.min(), syn[1][i].min())
+  combined_max = max(employeeid_data.max(), syn[1][i].max())
+  common_bins = np.linspace(combined_min, combined_max, 30)
+  plt.figure(figsize=(3, 3))
+  sns.histplot(employeeid_data, bins=common_bins, alpha=0.7, label="Real", color='blue', kde=True)
+  sns.histplot(syn[1][i], bins=common_bins, alpha=0.7, label="Synthetic", color='red', kde=True)
+  
+  plt.xlabel('ID Number')
+  plt.ylabel('Frequency')
+  plt.title(f'Real vs {DisTypes[i]} Synthetic Data')
+  plt.legend()
+  plt.show()
+
+```
+
+Above are the Real vs Synthetic plots for the Employee ID
+
+#### City Populations
+
+```{python}
+#| echo: false
+#| column: screen-inset
+#| layout-nrow: 1
+
+
+for i in range(4):
+  combined_min = min(city_population_data.min(), syn[2][i].min())
+  combined_max = max(city_population_data.max(), syn[2][i].max())
+  common_bins = np.linspace(combined_min, combined_max, 30)
+  plt.figure(figsize=(3, 3))
+  sns.histplot(city_population_data, bins=common_bins, alpha=0.7, label="Real", color='blue', kde=True)
+  sns.histplot(syn[2][i], bins=common_bins, alpha=0.7, label="Synthetic", color='red', kde=True)
+  
+  plt.xlabel('City Population Size')
+  plt.ylabel('Frequency')
+  plt.title(f'Real vs {DisTypes[i]} Synthetic Data')
+  plt.legend()
+  plt.show()
+
+```
+
+Above are the Real vs Synthetic plots for the City Populations dataset
+
+
+#### Consecutive Heads
+
+```{python}
+#| echo: false
+#| column: screen-inset
+#| layout-nrow: 1
+
+
+for i in range(4):
+  combined_min = min(min(consecutive_heads), syn[3][i].min())
+  combined_max = max(max(consecutive_heads), syn[3][i].max())
+  common_bins = np.linspace(combined_min, combined_max, 11)
+  plt.figure(figsize=(3, 3))
+  sns.histplot(consecutive_heads, bins=common_bins, alpha=0.7, label="Real", color='blue', kde=True)
+  sns.histplot(syn[3][i], bins=common_bins, alpha=0.7, label="Synthetic", color='red', kde=True)
+  
+  plt.xlabel('Number of Consecutive Heads')
+  plt.ylabel('Frequency')
+  plt.title(f'Real vs {DisTypes[i]} Synthetic Data')
+  plt.legend()
+  plt.show()
+
+```
+
+Above are the Real vs Synthetic plots for the Consecutive Heads dataset
+
+### Evaluating Initial Hypothesis
+#### Heights
+For the Heights Dataset, the synthetic dataset that is most similar to the model is the Normal dataset. This means that the Heights Dataset behave as expected and another model was not a better fit. 
+
+#### Employee ID
+For the Employee ID Dataset, the synthetic dataset that is most similar to the model is the Uniform dataset. This means that the Employee ID Dataset behave as expected and another model was not a better fit. 
+
+#### City Population Sizes
+For the City Population Sizes dataset, the Power Law and the Exponential synthetic datasets are the ones that most match the original. Personally, I think the power law synthetic data matches slightly more than the exponential law. This means that the dataset does behave as expected however there is a potential arguement for the exponential model to be a better fit.
+
+#### Consecutive Heads
+For the consecutive heads data, the synthetic dataset that is the most similar to the original is the exponential dataset. Thus the dataset behaved as expected and there is not another model that would be a better fit.
