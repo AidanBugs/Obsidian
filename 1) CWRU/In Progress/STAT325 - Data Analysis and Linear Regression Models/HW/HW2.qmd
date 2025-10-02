@@ -1,0 +1,15 @@
+---
+format: pdf
+---
+
+
+```{r}
+data = read.csv("data/slumptest-1.csv", sep=",")
+
+dim(data)
+
+head(data)
+
+ggpairs(data)
+
+```

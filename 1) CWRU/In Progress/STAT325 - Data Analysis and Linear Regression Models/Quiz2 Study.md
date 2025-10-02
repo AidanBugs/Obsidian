@@ -36,6 +36,17 @@ $\beta_1$ is the the change in the response mean $E(Y)$ for a unit change of $X$
 
 $\beta_1$ is the response mean when $X=0$
 
+# Properties of SLR
+1. Sum of residuals is 0
+2. Sum of residuals squared is the minimum of $Q$ (residual sum of squares [SSE])
+3. $\sum_{i=1}^n y_i = \sum_{i=1}^n \hat y_i$
+3. $\sum_{i=1}^n x_i e_i = 0$
+3. $\sum_{i=1}^n \hat y_i e_i = 0$
+6. Regression line always goes through the point $(\bar x , \bar y)$
 
+MSE = $\hat \sigma^2 = \frac{SSE}{df} = \frac{SSE}{n-2}$
+
+# Normal SLR model
+This model assumes the errors are normally distributed around $0$ with std $\sigma$
 
 
