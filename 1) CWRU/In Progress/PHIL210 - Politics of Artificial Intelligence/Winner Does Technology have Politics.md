@@ -10,6 +10,6 @@ Other: global cloud computing infastructure, surviellance systems, search engine
 
 # What are the associated moral claims one might associate with each each example, i.e., on what moral basis might one maintain or seek to revise the design and implementation of a politically significant technology?
 
-Maintain: utilitarian perspectives
+Maintain: utilitarian perspectives, convenient and objective
 
 Revision: deontological, privacy concerns, 
