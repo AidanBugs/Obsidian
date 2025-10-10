@@ -1,0 +1,149 @@
+---
+format: pdf
+---
+
+# 1
+## a
+$\hat M_{MLE} = x_n$
+
+## b
+Given from the announcement:
+
+$E(\hat M_{MLE}) = \frac{n}{n+1}(M+1)$
+
+> This is a biased estimator, as $\hat M_{ME} \leq M$ and will underestimate $M$.
+
+$E(\hat M_{MEAN}) = M$
+
+> This is an unbiased estimator as the expected value of $M_{MEAN}$ is equal to the value it is trying to estimate ($M$)
+
+$E(\hat M_{MVU}) = M$
+
+> This is an unbiased estimator as the expected value of $M_{MVU}$ is equal to the value it is trying to estimate ($M$)
+
+## c
+
+```{python}
+#| echo: false
+
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy import stats
+import json
+import os.path
+
+def predict_m_mle(x):
+  return max(x)
+
+def predict_m_mean(x):
+  return 2* np.mean(x) - 1
+
+def predict_m_mvu(x):
+  return max(x)*(len(x)+1)/len(x)-1
+
+def simulate_german_tank(M, n):
+  results = {
+      'mle': [],
+      'mean': [],
+      'mvu': []
+  }
+  
+  for _ in range(100):
+      sample = np.random.randint(1, M + 1, n)
+      
+      results['mle'].append(predict_m_mle(sample))
+      results['mean'].append(predict_m_mean(sample))
+      results['mvu'].append(predict_m_mvu(sample))
+  
+  stats_dict = {}
+  for estimator in ['mle', 'mean', 'mvu']:
+      estimates = np.array(results[estimator])
+      stats_dict[estimator] = {
+          'mean': np.mean(estimates),
+          'std': np.std(estimates),
+      }
+  
+  return stats_dict
+
+def plot_results(all_results, M_values):
+    fig, axes = plt.subplots(2, 3, figsize=(18, 10))
+    estimators = ['mle', 'mean', 'mvu']
+    estimator_names = ['MLE', 'Mean-based', 'MVU']
+    colors = ['red', 'blue', 'green']
+    
+    for i, M in enumerate(M_values):
+        M = str(M)
+        M_data = all_results[M]
+        n_values = list(M_data.keys())
+        
+        ax_mean = axes[0, i]
+        for j, estimator in enumerate(estimators):
+            means = [M_data[n][estimator]['mean'] for n in n_values]
+            
+            ax_mean.plot(n_values, means, label=estimator_names[j], 
+                      color=colors[j], linewidth=2, alpha=0.7)
+        
+        ax_mean.axhline(y=int(M), color='black', linestyle='--', alpha=0.7, label='True M')
+        ax_mean.set_xlabel('Sample Size (n)')
+        ax_mean.set_ylabel('Mean Estimate')
+        ax_mean.set_title(f'Mean of Estimates (M = {M})')
+        ax_mean.set_xticks(n_values[::int(int(M)/5)])
+        ax_mean.legend()
+        ax_mean.grid(True, alpha=0.3)
+        
+        # Plot variances
+        ax_var = axes[1, i]
+        for j, estimator in enumerate(estimators):
+            variances = [M_data[n][estimator]['std']**2 for n in n_values]
+            ax_var.plot(n_values, variances, label=estimator_names[j], 
+                      color=colors[j], linewidth=2, alpha=0.7)
+        
+        ax_var.set_xlabel('Sample Size (n)')
+        ax_var.set_ylabel('Variance')
+        ax_var.set_title(f'Variance of Estimates (M = {M})')
+        ax_var.set_xticks(n_values[::int(int(M)/5)])
+        ax_var.legend()
+        ax_var.grid(True, alpha=0.3)
+        ax_var.set_yscale('log')
+    
+    plt.tight_layout()
+    plt.show()
+
+def run_simulation_for_fixed_M(M_values):
+    all_results = {}
+
+    
+    for M in M_values:
+        M_results = {}
+        
+        for n in range(M):
+            n += 1
+            if n <= M: 
+                stats_dict = simulate_german_tank(M, n)
+                M_results[n] = stats_dict
+        
+        all_results[M] = M_results
+    
+    return all_results
+
+M_val = [100,1000,10000]
+
+
+if (os.path.isfile("data/output.json")):
+  with open('data/output.json', 'r') as file:
+    results = json.load(file)
+else:
+  results = run_simulation_for_fixed_M(M_val)
+  with open('data/output.json', 'w') as file:
+    json.dump(results, file)
+  with open('data/output.json', 'r') as file:
+    results = json.load(file)
+
+
+plot_results(results, M_val)
+```
+
+According to the Mean of estimates graph it is clear to see that the $\hat M_{MEAN}$ and $\hat M_{MVU}$ estimates are unbiased estimators of $M$ as they their expected value is $M$. On the other hand, $\hat M_{MLE}$ is evidently an unbiased estimator as it falls significantly below $M$ for smaller values of $n$. For sufficiently large $n$, the three estimators all approach $M$ which is good.
+
+Their variances on the other hand tell a different story. The $\hat M_{MEAN}$ estimator has an extremely volatile variance many orders of magnitude above both $\hat M_{MLE}$ and $\hat M_{MVU}$. This demonstrates that the $\hat M_{MVU}$ estimator should be the best estimator for $M$ as the variance is tied for smallest and is an unbiased estimator of $M$. 
