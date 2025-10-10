@@ -147,3 +147,77 @@ plot_results(results, M_val)
 According to the Mean of estimates graph it is clear to see that the $\hat M_{MEAN}$ and $\hat M_{MVU}$ estimates are unbiased estimators of $M$ as they their expected value is $M$. On the other hand, $\hat M_{MLE}$ is evidently an unbiased estimator as it falls significantly below $M$ for smaller values of $n$. For sufficiently large $n$, the three estimators all approach $M$ which is good.
 
 Their variances on the other hand tell a different story. The $\hat M_{MEAN}$ estimator has an extremely volatile variance many orders of magnitude above both $\hat M_{MLE}$ and $\hat M_{MVU}$. This demonstrates that the $\hat M_{MVU}$ estimator should be the best estimator for $M$ as the variance is tied for smallest and is an unbiased estimator of $M$. 
+
+# 2
+## a
+
+## b
+
+## c
+
+## d
+
+# 3
+## a
+```{python}
+#| include: false
+import pandas as pd
+
+# note i edited the csv to have the column heads as US and JP
+cars = pd.read_csv("data/cars.csv")
+
+us_cars = cars[cars.columns[0]].dropna()
+jp_cars = cars[cars.columns[1]].dropna()
+
+print(cars.columns)
+
+print(len(us_cars))
+
+print(len(jp_cars))
+
+```
+
+The number of US cars is 249 and the number of Japanese cars is 79 in this dataset.
+
+## b
+Let $\mu_{US}$ be the population mean mileage for US cars and $\mu_{JP}$ be the population mean mileage for Japanese cars. 
+
+$H_0: \mu_{US} = \mu_{JP}$ and $H_1: \mu_{US} < \mu_{JP}$
+
+## c
+To test our hypothesis we can use a two sample t-test. The test statistic is:
+
+$$t = \frac{\bar x_{JP} - \bar x_{US}}{\sqrt{\frac{s_{JP}^2}{n_{JP}} + \frac{s_{US}^2}{n_{US}}}}$$
+
+But first we would check the normaility and the variances of the two car samples to see if this is the right test. When checking, the normaility, we find that the US cars are not normally distributed. However using the central limit theorem (both samples are larger than 30), we can say that the sample mean approaches a normal distribution so we will continue with our tests.
+
+```{python}
+#| include: false
+
+_, us_normality_p = stats.shapiro(us_cars)
+_, japanese_normality_p = stats.shapiro(jp_cars)
+
+print(f"Shapiro-Wilk test for normality:")
+print(f"  US cars p-value: {us_normality_p:.4f}")
+print(f"  Japanese cars p-value: {japanese_normality_p:.4f}")
+```
+
+## d
+```{python}
+#| include: false
+
+t_stat, p_value = stats.ttest_ind(jp_cars, us_cars, 
+                                     equal_var=False, 
+                                     alternative='greater')
+
+print(t_stat)
+
+print(p_value)
+
+```
+
+The value of the test statistic is $12.946$, resulting in a p-value of $7.854\times 10^{-26}$.
+
+## e
+Since the p-value is smaller than any reasonable $\alpha$ we reject the null hypothesis and there is enough statistical evidence to support the salesman's claim.
+
