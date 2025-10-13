@@ -150,12 +150,176 @@ Their variances on the other hand tell a different story. The $\hat M_{MEAN}$ es
 
 # 2
 ## a
+```{python}
+#| echo: false
+
+np.random.seed(0)
+
+uniform = {}
+uniform[10] = np.random.uniform(low=0.25, high=1.25, size=(10,100))
+uniform[100] = np.random.uniform(low=0.25, high=1.25, size=(100,100))
+uniform[1000] = np.random.uniform(low=0.25, high=1.25, size=(1000,100))
+
+
+power = {}
+power[10] = np.random.pareto(2.3, size=(10,100))
+power[100] = np.random.pareto(2.3, size=(100,100))
+power[1000] = np.random.pareto(2.3, size=(1000,100))
+
+fig, (ax1, ax2) = plt.subplots(1,2, figsize=(12,5))
+ax1.hist(uniform[10][0], bins=30, color="blue", edgecolor="black")
+ax1.set_title("Example Uniform Plot")
+ax1.set_xlabel("Values")
+ax1.set_ylabel("Frequency (Count)")
+
+plt.figure()
+ax2.hist(power[10][0], bins=30, color="red", edgecolor="black")
+ax2.set_title("Example Power Law Plot")
+ax2.set_xlabel("Values")
+ax2.set_ylabel("Frequency (Count)")
+plt.tight_layout()
+plt.show()
+```
 
 ## b
+```{python}
+#| echo: false
+
+uniform_means = {n: [np.mean(row) for row in uniform[n]] for n in uniform.keys()}
+power_means = {n: [np.mean(row) for row in power[n]] for n in power.keys()}
+
+fig, axes = plt.subplots(2, 3, figsize=(15, 10))
+    
+colors = ['blue', 'red', 'green']
+
+for i, sample_size in enumerate([10,100,1000]):
+    means = uniform_means[sample_size]
+    
+    axes[0, i].hist(means, bins=15, alpha=0.7, color=colors[i], edgecolor='black', density=True)
+    axes[0, i].set_xlabel('Sample Mean')
+    axes[0, i].set_ylabel('Density')
+    axes[0, i].set_title(f'Uniform: Sample Size = {sample_size}\n(n={len(means)} replicates)')
+    axes[0, i].grid(True, alpha=0.3)
+    
+    true_mean = (0.25 + 1.25) / 2 
+    axes[0, i].axvline(true_mean, color='red', linestyle='--', linewidth=2, 
+                      label=f'True mean: {true_mean:.2f}')
+    axes[0, i].axvline(np.mean(means), color='blue', linestyle='--', linewidth=2,
+                      label=f'Sample mean: {np.mean(means):.2f}')
+    axes[0, i].legend()
+
+for i, sample_size in enumerate([10,100,1000]):
+    means = power_means[sample_size]
+    
+    axes[1, i].hist(means, bins=15, alpha=0.7, color=colors[i], edgecolor='black', density=True)
+    axes[1, i].set_xlabel('Sample Mean')
+    axes[1, i].set_ylabel('Density')
+    axes[1, i].set_title(f'Power Law: Sample Size = {sample_size}\n(n={len(means)} replicates)')
+    axes[1, i].grid(True, alpha=0.3)
+    
+    axes[1, i].axvline(np.mean(means), color='blue', linestyle='--', linewidth=2,
+                      label=f'Sample mean: {np.mean(means):.2f}')
+    axes[1, i].legend()
+
+plt.tight_layout()
+plt.show()
+
+
+```
 
 ## c
 
+```{python}
+#| echo: false
+
+uniform_params = {n: (np.mean(uniform_means[n]), np.std(uniform_means[n])) for n in uniform_means.keys()}
+power_params = {n: (np.mean(power_means[n]), np.std(power_means[n])) for n in power_means.keys()}
+
+
+fig, axes = plt.subplots(2, 3, figsize=(15, 10))
+    
+colors = ['blue', 'red', 'green']
+
+for i, sample_size in enumerate([10,100,1000]):
+    means = uniform_means[sample_size]
+    mean, std = uniform_params[sample_size]
+    x = np.linspace(min(means), max(means), 1000)
+    y = stats.norm.pdf(x, loc=mean, scale=std)
+    axes[0, i].hist(means, bins=15, alpha=0.7, color=colors[i], edgecolor='black', density=True)
+    axes[0, i].set_xlabel('Sample Mean')
+    axes[0, i].set_ylabel('Density')
+    axes[0, i].set_title(f'Uniform: Sample Size = {sample_size}\n(n={len(means)} replicates)')
+    axes[0, i].plot(x, y, linewidth=2, color="orange", label=f'CLT Normal\nμ={mean:.3f}, σ={std:.3f}')
+    axes[0, i].grid(True, alpha=0.3)
+    
+    true_mean = (0.25 + 1.25) / 2 
+    axes[0, i].axvline(true_mean, color='red', linestyle='--', linewidth=2, 
+                      label=f'True mean: {true_mean:.2f}')
+    axes[0, i].axvline(np.mean(means), color='blue', linestyle='--', linewidth=2,
+                      label=f'Sample mean: {np.mean(means):.2f}')
+    axes[0, i].legend()
+
+for i, sample_size in enumerate([10,100,1000]):
+    means = power_means[sample_size]
+    mean, std = power_params[sample_size]
+    x = np.linspace(min(means), max(means), 1000)
+    y = stats.norm.pdf(x, loc=mean, scale=std)
+    
+    axes[1, i].hist(means, bins=15, alpha=0.7, color=colors[i], edgecolor='black', density=True)
+    axes[1, i].set_xlabel('Sample Mean')
+    axes[1, i].set_ylabel('Density')
+    axes[1, i].set_title(f'Power Law: Sample Size = {sample_size}\n(n={len(means)} replicates)')
+    axes[1, i].grid(True, alpha=0.3)
+    axes[1, i].plot(x, y, linewidth=2, color="orange", label=f'CLT Normal\nμ={mean:.3f}, σ={std:.3f}')
+    
+    axes[1, i].axvline(np.mean(means), color='blue', linestyle='--', linewidth=2,
+                      label=f'Sample mean: {np.mean(means):.2f}')
+    axes[1, i].legend()
+
+plt.tight_layout()
+plt.show()
+
+```
+
 ## d
+```{python}
+#| include: false
+
+def perform_ks_test(means):
+    for i, sample_size in enumerate([10, 100, 1000]):
+        standardized = (means[sample_size]- np.mean(means[sample_size])) / np.std(means[sample_size]) 
+        ks_stat, p_val = stats.kstest(standardized, stats.norm.cdf)
+        print(f"Sample Size: {sample_size}:")
+        print(f"KS Statistic: {ks_stat}, p-value: {p_val}")
+
+print("Uniform Tests")
+perform_ks_test(uniform_means)
+print("\nPower Law Tests")
+perform_ks_test(power_means)
+
+```
+
+### Uniform
+
+| Samples | KS Statistic | P-Value |
+|-  |-  |-  |
+| 10 | $0.178$| $0.855$|
+| 100 |$0.079$ | $0.541$|
+| 1000 | $0.017$| $0.929$|
+
+### Power Law
+
+| Samples | KS Statistic | P-Value |
+|-  |-  |-  |
+| 10 | $0.268$| $0.397$|
+| 100 | $0.160$| $0.011$|
+| 1000 | $0.126$| $2.28\times 10^{-14}$|
+
+First thing to do was to standardize the distributions to attempt to compare them to $N(0,1)$. For both the uniform distribution and the power law distribution, as the number of samples increased then the KS Statistic decreased. This is as expected because CLT refers to as samples increase then the distribution is more normal. For uniform, all the p-values will fail to reject the null hypothesis (under any reasonable $\alpha$), this means that the samples come from the normal distribution. However this isn't the case for the power law distribution. For $\alpha=0.05$, the power law samples only fail to reject when $n=10$, thus for $n=100,n=1000$ we reject the null hypothesis and say that the means do not follow the normal distribution. While this may seem off at first, according to the slides, the power law distribution is very slow to converge thus these outcomes make sense. 
+
+For the power of the KS-test as $n$ increases, it is evident that the p-value converges to either 0 or 1 as $n$ increases. This is intuitive as the number of samples increase the ks-test becomes more certain about the distribution matching to a normal distribution. 
+
+
 
 # 3
 ## a
@@ -189,7 +353,7 @@ To test our hypothesis we can use a two sample t-test. The test statistic is:
 
 $$t = \frac{\bar x_{JP} - \bar x_{US}}{\sqrt{\frac{s_{JP}^2}{n_{JP}} + \frac{s_{US}^2}{n_{US}}}}$$
 
-But first we would check the normaility and the variances of the two car samples to see if this is the right test. When checking, the normaility, we find that the US cars are not normally distributed. However using the central limit theorem (both samples are larger than 30), we can say that the sample mean approaches a normal distribution so we will continue with our tests.
+But first we would check the normaility and the variances of the two car samples to see if this is the right test. When checking, the normaility, we find that the US cars are not normally distributed. However using the central limit theorem (both samples are larger than 30 and are samples of sample means), we can say that the sample mean approaches a normal distribution so we will continue with our tests.
 
 ```{python}
 #| include: false
