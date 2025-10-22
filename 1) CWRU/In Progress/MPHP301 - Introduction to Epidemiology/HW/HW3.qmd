@@ -1,0 +1,125 @@
+---
+format: pdf
+---
+
+
+# Chapter 6 
+## 4 (6 points)
+Distinguish between a cause that is sufficient but not necessary and one that is necessary but not sufficient (w/ examples)
+
+> Sufficient but not necessary means that the cause will cause the disease but is not required to cause the disease. This just means that there are other causes that will cause the disease than the one at question. The example given in the textbook was exposure to cancer causing chemicals can cause cancer but radiation can also be a cause of cancer. Another example could be heart attacks and high blood pressure. High blood pressure could lead to a heart attack, but it isn't necessary to cause heart attacks because there are other sufficient causes of heart attacks such as poor diet or sedentary lifestyle.
+>
+> On the other hand, necessary but not sufficient means that the cause alone is not enough to cause the disease. The example in the textbook was exposure to SARS virus doesn't gurantee symptomatic COVID19 but all people with symptomatic COVID19 were exposed to the SARS virus. Another example outside of the health world would be if a class has a final worth 50% of the grade, then it is necessary to get a nonzero score in order to pass the class (pass > 60), but getting a nonzero score on the final does not mean that a student is guranteed to pass.
+
+## 6 (5 points)
+Describe the sufficient component cause model and using your own ideas give an example
+
+> These models are basically series of pi charts, each pi chart represents a sufficient sum of causes to cause the disease. If a cause is present in every pi chart then that cause must be a necessary cause. If a singular cause makes an entire pi chart then that cause must be sufficient. 
+
+
+### Sufficient Component Cause Model for Heart Attacks
+```{python}
+#| echo: false
+from matplotlib import pyplot as plt
+
+
+color_labels = {"high blood pressure": "red", "high cholesterol": "blue", "poor diet / lifestyle": "green"}
+funs = list(color_labels.items())
+
+fig, axs = plt.subplots(3,2)
+
+axs[0,0].pie([1], labels=[funs[0][0]], colors=[funs[0][1]])
+axs[0,1].pie([1], labels=[funs[1][0]], colors=[funs[1][1]])
+axs[1,0].pie([1,1], labels=list(map(lambda x: x[0], funs[0::2])), colors=list(map(lambda x: x[1], funs[0::2])))
+axs[1,1].pie([1,1], labels=list(map(lambda x: x[0], funs[1:])), colors=list(map(lambda x: x[1], funs[1:])))
+axs[2,0].pie([1], labels=[funs[2][0]], colors=[funs[2][1]])
+axs[2,1].pie([1,1,1], labels=list(map(lambda x: x[0], funs)), colors=list(map(lambda x: x[1], funs)))
+
+plt.show()
+```
+
+Here this is an example of a sufficient component cause model for heart attacks. We can see that high blood pressure, high cholesterol, poor diet / lifestyle are all sufficient causes but none of the causes are necessary for causing heart attacks.
+
+## 10d (4 points)
+How is clinical significance different from statistical significance?
+
+> Statistical significance refers to the probability that the the correlation / differences / effects are not due to random chance. Clinical significance is more of the practical significance of these causes and their effects, specifically if the effects have a meaningful impact on the cause. For example, a statistical test might find that a drug reduces the blood pressure of patients by 0.001 mmHg. Depending on the sample size and confidence level, the statistical tests might come to the conclusion that this difference is statistically significant, however most doctors will not find this difference practically / clinically significant because the difference is so small. 
+
+# Chapter 7 
+## 2 (10 points)
+List the key factors that distinguish study designs and explain each one
+
+> Descriptive or analytic?
+
+>> Analytic studies look at causes of disease / health outcomes while descriptive studies look at the distribution of health outcomes in relation to people variables, location variables, or time variables. 
+
+> What is the unit of observation?
+
+>> This means is an observation an individual or a group.
+
+> Who manipulates the exposure factor? / How does exposure occur?
+
+>> If the investigator controls the exposure factor then it is more of an expiremental design, otherwise its an observational designn
+
+> How many observations are made?
+
+>> This refers to how many times an individual subject is observed. Some studies analyze a single time for an individual while others might make observations multiple times over the course of many weeks, months, or even years.
+
+> What is the directionality of exposure?
+
+>> This differentiates studies that look out exposures then outcomes vs studies that look at outcomes then exposures vs studies that look at both at the same time. In other words, which measurement is made first?
+
+> What are the methods of data collection? / Data types being collected?
+
+>> Looking at collecting new data or using old / data thats already been collected
+
+## 9 (10 points)
+Identify the study design for each of the following:
+
+### a
+Association between average unemployment levels and mortality from coronary heart disease was studied in counties in New York
+
+> This is an ecologic study, or more specifically ecologic comparison study because it involves an assessment of the association between different rates of unemployment and mortality from coronary heart disease at a specific point in time.
+
+### b
+A group of men who had been diagnosed with lung cancer was compared to a cancer free group of men. Participants were asked if they used e-cigs in the past
+
+> This is a case-control study because subjects are defined as individuals w/ vs w/o the health outcome then asked about their past exposures.
+
+### c
+A group of recent college grads (exercise and nonexercise) were followed over the period of 20 years to track the incidence of coronary heart disease
+
+> This is a prospective based cohort study because the subjects are first classified by exposure to exercise then observed over time. It is also important to note that this is an exposure based cohort study because we are comparing the different exposures.
+
+### d
+A pharma company wanted to test a new medicine for control of blood sugar. Study participants were assigned randomly to either a new medication group or a group that used an older medication. Both investigator and participants were blinded to enrollment in the study conditions.
+
+> This is an expiremental study because the investigators are controlling the exposures of the participants. While this question may attempt to decieve the reader by saying the investigator does not know which participants will be assigned to which group, it is still expiremental because the exposure is induced by the investigator and is not observed naturally. 
+
+## 12 (10 points)
+Define what is meant by bias in epidemiologic studies. How does selection bias differ from information bias? Give examples.
+
+> Selection bias is when there are flaws when selecting individuals to partake in the study. An example could be a business owner doing a customer satisfaction survey but to save money they only asked their friends who use the product. This is selection bias because the owner's friends likely won't share many of their negative experiences with the owner because they are friends. 
+>
+> Information bias refers to issues with collecting the data from the individuals in the study. This includes things like interviewer bias where the quality of data/information varies group to group (could be from either differences between interviewers or interviewers paying less attention to information from the control group of a study). Another example of information bias is recall bias where subjects who are part of the case group remember more often their exposures while subjects in the control group do not. An example of this is poison ivy where if subjects have a rash they are more likely to recall passing near poison ivy whereas members who do not have a rash may not recall passing / walking near poison ivy.
+
+# Do the following problem: (10 points)
+Spasmodic dyphonia (SD) is an idiopathic, chronic and disabling voice disorder. In a case-control study, 150 cases of SD were identified along with 150 controls. Of those with SD, 16 had previously experienced meningitis. Of the controls, 3 had experienced meningitis. Use an appropriate statistic to measure the association between meningitis and SD.
+
+| Exposure | SD Y | SD N | Total |
+| - | - | - | - |
+| Meningitis Y | 16 | 3 | 19 |
+| Meningitis N | ? | ? | ? |
+| Total | 150 | 150 | 300 |
+
+> Filling in the blanks:
+
+| Exposure | SD Y | SD N | Total |
+| - | - | - | - |
+| Meningitis Y | 16 | 3 | 19 |
+| Meningitis N | 134 | 147 | 281 |
+| Total | 150 | 150 | 300 |
+
+> Finding the Odds Ratio: (AD)/BC $= \frac{16(147)}{3(134)}=\frac{2352}{402} \approx 5.85>1$
+>
+> According to the slides, this means that meningitis has a positive association with SD 
