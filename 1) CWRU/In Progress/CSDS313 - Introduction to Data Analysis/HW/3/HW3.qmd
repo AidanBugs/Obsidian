@@ -1,0 +1,135 @@
+---
+format: pdf
+---
+
+# Task 1
+```{python}
+#| include: false
+  
+import pandas as pd
+import numpy as np
+from scipy.stats import pearsonr
+import matplotlib.pyplot as plt
+
+```
+
+## a
+```{python}
+#| echo: false
+
+p1a = pd.read_csv("data/p1a.csv", header=None)
+q1a = pd.read_csv("data/q1a.csv", header=None)
+
+```
+
+## b
+```{python}
+#| echo: false
+
+p1b = pd.read_csv("data/p1b.csv", header=None)
+
+```
+
+
+# Task 2
+## a
+```{python}
+#| include: false
+
+p2a = pd.read_csv("data/p2a.csv", header=None)
+
+var1 = p2a.iloc[:, 0]  # First column
+var2 = p2a.iloc[:, 1]  # Second column
+
+# Compute Pearson correlation and p-value
+r_a, p_a = pearsonr(var1, var2)
+
+# Set significance level α (commonly 0.05)
+alpha = 0.05
+
+# Determine if the association is statistically significant
+significant = p_a < alpha
+
+# Print results
+print(f"Pearson correlation (r_a): {r_a:.4f}")
+print(f"P-value (p_a): {p_a}")
+print(f"Significance level (α): {alpha}")
+print(f"Statistically significant? {significant}")
+
+```
+
+The pearson correlation coefficient between the two variables in p2a.csv is $r_a=0.3809$ and the p-value was $p_a=1.0409\times 10^{-83}$. This means at significance level $\alpha=0.05$ there is a statistically significant relationship between the two variables. According to the $r_a$ coefficient, there is a weak to moderate positive association between the variables.
+
+## b
+```{python}
+#| include: false
+
+p2b = pd.read_csv("data/p2b.csv", header=None)
+
+r_b, p_b = pearsonr(p2b.iloc[:,0], p2b.iloc[:,1])
+print(f"Pearson correlation (r_b): {r_b:.4f}")
+print(f"P-value (p_b): {p_b}")
+```
+The pearson correlation coefficient between the two variables in p2b.csv is $r_b=0.9312$ and the p-value was $p_a=3.7373\times 10^{-49}$. This means at significance level $\alpha=0.05$ there is a statistically significant relationship between the two variables. According to the $r_b$ coefficient, there is a strong positive association between the variables.
+
+According to the correlation coefficients, the variable pair in $b$ has a stronger association. According to the p-values, the association between the variable pair in $a$ is less likely to have occured by chance than the association between the variables in $b$. The p-value is not necessarily an indicator of strength of association as p-value will decrease as $n$ increases. As such, although the p-value and correlation coefficient disagree with eachother on which pair is more associated, this is primarily due to the fact that these two statistics measures different things. The correlation is a measure of strength of the linear relationship between two variables while the p-value is a measure of how sure we are of this measurement. Thus, the p-value is lower for $a$ simply because $n_a>n_b$ which results in the statistic being more sure of the measurement in part $a$.
+
+```{python}
+#| echo: false
+
+plt.subplot(1,2,1)
+plt.scatter(var1,var2, s=10)
+plt.title("Part A")
+plt.xlabel("A1")
+plt.ylabel("A2")
+
+plt.subplot(1,2,2)
+plt.scatter(p2b.iloc[:,0],p2b.iloc[:,1], s=20)
+plt.title("Part B")
+plt.xlabel("B1")
+plt.ylabel("B2")
+
+plt.tight_layout()
+plt.show()
+```
+
+According to the scatterplots, the variables in part $b$ have a higher association because the scatter plot is much tighter than the one for part $a$. This conclusion agrees with my previous statements because it is clear that the number of points in $a$ is significantly larger than the number in $b$ which is probably what lead to the p-value being higher in $a$ than in $b$ despite $b$ having a stronger correlation than $a$.
+
+
+
+## c
+```{python}
+#| echo: false
+
+p2c = pd.read_csv("data/p2c.csv", header=None)
+
+r_c, p_c = pearsonr(p2c.iloc[:,0], p2c.iloc[:,1])
+print(f"Pearson correlation (r_c): {r_c:.4f}")
+print(f"P-value (p_c): {p_c}")
+```
+
+The pearson correlation coefficient between the two variables in p2c.csv is $r_c=0.0412$ and the p-value was $p_c=0.5919$. This means at significance level $\alpha=0.05$ there is not a statistically significant relationship between the two variables. According to the $r_c$ coefficient, there is a very weak positive association / no association between the variables.
+
+According to the correlation coefficients, the variable pair in $a$ has a stronger association. According to the p-values, the association between the variable pair in $a$ is less likely to have occured by chance than the association between the variables in $c$. The p-value is not necessarily an indicator of strength of association as p-value will decrease as $n$ increases. For this part, the p-value and correlation coefficient agree with eachother, as they both assert that $a$ has a higher correlation and statistical significance.
+
+```{python}
+#| echo: false
+
+plt.subplot(1,2,1)
+plt.scatter(var1,var2, s=10)
+plt.title("Part A")
+plt.xlabel("A1")
+plt.ylabel("A2")
+
+plt.subplot(1,2,2)
+plt.scatter(p2c.iloc[:,0],p2c.iloc[:,1], s=20)
+plt.title("Part C")
+plt.xlabel("C1")
+plt.ylabel("C2")
+
+plt.tight_layout()
+plt.show()
+```
+
+Looking at the graph, it is clear that the variables in part $c$ have an extremely high association and roughly follow the line of $C2=|C1|$. This is a clear disagreement to the statements made before seeing the scatterplot. Since the pearson's correlation coefficient is solving for a single straight line, the best it can do is roughly a flat horizontal line through the center of the scatter plot in $c$. As such, the correlation coefficient will be small (as the line of best fit has a near $0$ slope), which explains the differences between the two conclusions. 
+
