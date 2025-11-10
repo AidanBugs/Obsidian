@@ -79,9 +79,9 @@ print(p1a_results)
 | Jaccard Index | $0.000000$ | $1.0$ | permutation | $5000$ |
 | Pearson $\chi^2$ | $7.78365$ | $0.005003$ | $\chi^2$ parametric | $None$ |
 
-MI and $\chi^2$ both reject the null of independence at α = 0.05 (p < 0.01).
+MI and $\chi^2$ both reject the null of independence at $\alpha$ = 0.05 (p < 0.01).
 
-JI = 0 means both columns almost never share 1’s simultaneously; the dependence found by MI/$\chi^2$ must therefore involve other value patterns (i.e, non-co-occurrence of ones, or correlation of zeros).
+JI = 0 means both columns almost never share 1’s simultaneously
 
 Conclusion: the two binary variables in p1a are dependent, but not through shared “1” events.
 
@@ -179,26 +179,27 @@ overlap_df = pd.DataFrame({
 
 1. High agreement between MI and $\chi^2$ (91 overlap of 93 $\chi^2$ rejections):
 
-MI and $\chi^2$ are both sensitive to any dependence between two categorical variables, not just co-occurrence of 1’s.
-They generally pick up the same signals of association.
+MI and $\chi^2$ are both sensitive to any dependence between two categorical variables, not just co-occurrence of 1’s like JI.
+
+Therefore, they detect similar dependent pairs which explains the high agreement between the two.
 
 2. Jaccard Index much more conservative (56 pairs):
 
 JI measures co-occurrence of 1’s only.
 
-It ignores mutual absence and other forms of dependence, so it finds fewer associations.
+It ignores mutual absence and other forms of dependence, so it finds fewer associations than the above two schemes.
 
-Almost every JI-significant pair (55/56) is also MI- and $\chi^2$-significant, showing that when there is strong co-occurrence, all three metrics agree.
+Almost every JI-significant pair (55/56) is also MI and $\chi^2$-significant, showing that when there is strong co-occurrence, all three metrics agree.
 
 3. Patterns in overlaps:
 
-The 55 triply-significant pairs correspond to genuinely strong “co-activation” relationships (both 1s appear together often).
+The 55 pairs that are marked significant in all schemes correspond to genuinely strong “co-activation” relationships (both 1s appear together often).
 
-The additional 36–38 pairs that are MI/$chi^2$-only likely represent inverse or asymmetric dependencies (e.g., one variable tends to be 0 when the other is 1).
+The additional 36–38 pairs that are MI/$chi^2$-only likely represent inverse or asymmetric dependencies.
 
 4. FDR correction effect:
 
-Even after multiple-testing adjustment (105 pairs), most associations remain significant → the dataset contains substantial inter-variable dependence.
+Even after multiple-testing adjustment (105 pairs), most pairs remain to be significant, suggesting a strong dependence within the dataset.
 
 ```{python}
 #| echo: false
