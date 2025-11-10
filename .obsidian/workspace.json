@@ -78,9 +78,21 @@
               "icon": "lucide-file",
               "title": "Drawing 2025-04-13 22.33.50.excalidraw"
             }
+          },
+          {
+            "id": "9cb5caef6e9d3b70",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "Excalidraw/Drawing 2025-04-13 22.33.53.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "Drawing 2025-04-13 22.33.53.excalidraw"
+            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -153,7 +165,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "0e7a0a9cae64058b",
@@ -253,7 +266,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -270,9 +284,10 @@
       "qmd-as-md-obsidian:Toggle Quarto Preview": false
     }
   },
-  "active": "cf50adc83336cec9",
+  "active": "9cb5caef6e9d3b70",
   "lastOpenFiles": [
     "Excalidraw/Drawing 2025-04-13 22.33.50.excalidraw.md",
+    "Excalidraw/Drawing 2025-04-13 22.33.53.excalidraw.md",
     "2) 2nd Brain/Daily/2025/03) Mar/27 Thursday, March 27th, 2025.md",
     "2) 2nd Brain/Daily/2025/02) Feb/22 Saturday, February 22nd, 2025.md",
     "2) 2nd Brain/Daily/2025/03) Mar/21 Friday, March 21st, 2025.md",
@@ -307,7 +322,6 @@
     "1) CWRU/In Progress/CSDS343 - Theoretical Computer Science/Finite State Automata.md",
     "2) 2nd Brain/Daily/2025/02) Feb/08 Saturday, February 8th, 2025.md",
     "2) 2nd Brain/Daily/2025/02) Feb/09 Sunday, February 9th, 2025.md",
-    "2) 2nd Brain/Daily/2025/02) Feb/07 Friday, February 7th, 2025.md",
     "Untitled.canvas",
     "Image Dump/Pasted Image 20241204095142_977.png",
     "Image Dump/Pasted image 20241204145930.png",
