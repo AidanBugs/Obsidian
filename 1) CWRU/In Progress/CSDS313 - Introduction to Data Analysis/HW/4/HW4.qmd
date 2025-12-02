@@ -1,0 +1,490 @@
+---
+format: pdf
+---
+# 2
+## a
+```{python}
+#| echo: false
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
+import matplotlib.patches as mpatches
+
+np.random.seed(0)
+
+red_wine = pd.read_csv('data/wine+quality/winequality-red.csv', sep=';')
+white_wine = pd.read_csv('data/wine+quality/winequality-white.csv', sep=';')
+
+threshold = 6
+
+red_wine["quality_binary"] = (red_wine["quality"]>=threshold).astype(int)
+white_wine["quality_binary"] = (white_wine["quality"]>=threshold).astype(int)
+
+fig, axes = plt.subplots(2, 2, figsize=(14, 12))
+
+red_quality_counts = red_wine['quality'].value_counts().sort_index()
+red_quality_scores = list(red_quality_counts.index)
+red_counts = list(red_quality_counts.values)
+
+red_colors = ['lightcoral' if score < threshold else 'limegreen' for score in red_quality_scores]
+
+bars_red = axes[0, 0].bar(red_quality_scores, red_counts, 
+                          color=red_colors, edgecolor='black', linewidth=1.5, alpha=0.8)
+
+# Add value labels on top of bars
+for bar in bars_red:
+    height = bar.get_height()
+    axes[0, 0].text(bar.get_x() + bar.get_width()/2., height + 10,
+                   f'{int(height)}', ha='center', va='bottom', fontsize=10, fontweight='bold')
+
+axes[0, 0].set_title('Red Wine: Quality Score Distribution', fontsize=14, fontweight='bold')
+axes[0, 0].set_xlabel('Quality Score', fontsize=12)
+axes[0, 0].set_ylabel('Count', fontsize=12)
+axes[0, 0].set_xticks(red_quality_scores)
+axes[0, 0].grid(True, alpha=0.3, axis='y')
+axes[0, 0].axhline(y=0, color='black', linewidth=1)
+
+# Add threshold line
+axes[0, 0].axvline(x=threshold - 0.5, color='darkred', linestyle='--', linewidth=2, alpha=0.7)
+
+white_quality_counts = white_wine['quality'].value_counts().sort_index()
+white_quality_scores = list(white_quality_counts.index)
+white_counts = list(white_quality_counts.values)
+
+white_colors = ['lightcoral' if score < threshold else 'limegreen' for score in white_quality_scores]
+
+bars_white = axes[0, 1].bar(white_quality_scores, white_counts,
+                            color=white_colors, edgecolor='black', linewidth=1.5, alpha=0.8)
+
+for bar in bars_white:
+    height = bar.get_height()
+    axes[0, 1].text(bar.get_x() + bar.get_width()/2., height + 25,
+                   f'{int(height)}', ha='center', va='bottom', fontsize=10, fontweight='bold')
+
+axes[0, 1].set_title('White Wine: Quality Score Distribution', fontsize=14, fontweight='bold')
+axes[0, 1].set_xlabel('Quality Score', fontsize=12)
+axes[0, 1].set_ylabel('Count', fontsize=12)
+axes[0, 1].set_xticks(white_quality_scores)
+axes[0, 1].grid(True, alpha=0.3, axis='y')
+axes[0, 1].axhline(y=0, color='black', linewidth=1)
+
+axes[0, 1].axvline(x=threshold - 0.5, color='darkred', linestyle='--', linewidth=2, alpha=0.7)
+
+bad_color = 'lightcoral'
+good_color = 'limegreen'
+explode = (0.05, 0.05)
+
+# Red wine binary distribution
+red_bad = sum(red_wine['quality_binary'] == 0)
+red_good = sum(red_wine['quality_binary'] == 1)
+red_sizes = [red_bad, red_good]
+red_labels = [f'Bad (<{threshold})\n{red_bad} wines\n({red_bad/len(red_wine)*100:.1f}%)',
+              f'Good (≥{threshold})\n{red_good} wines\n({red_good/len(red_wine)*100:.1f}%)']
+
+wedges_red, texts_red, autotexts_red = axes[1, 0].pie(red_sizes, explode=explode, colors=[bad_color, good_color],
+                                                      autopct='%1.1f%%', startangle=90,
+                                                      textprops={'fontsize': 10})
+axes[1, 0].set_title('Red Wine: Binary Classification', fontsize=14, fontweight='bold')
+axes[1, 0].legend(wedges_red, red_labels, title="Quality Classes", loc="center left", 
+                  bbox_to_anchor=(1, 0, 0.5, 1), fontsize=10)
+
+# White wine binary distribution
+white_bad = sum(white_wine['quality_binary'] == 0)
+white_good = sum(white_wine['quality_binary'] == 1)
+white_sizes = [white_bad, white_good]
+white_labels = [f'Bad (<{threshold})\n{white_bad} wines\n({white_bad/len(white_wine)*100:.1f}%)',
+                f'Good (≥{threshold})\n{white_good} wines\n({white_good/len(white_wine)*100:.1f}%)']
+
+wedges_white, texts_white, autotexts_white = axes[1, 1].pie(white_sizes, explode=explode, colors=[bad_color, good_color],
+                                                            autopct='%1.1f%%', startangle=90,
+                                                            textprops={'fontsize': 10})
+axes[1, 1].set_title('White Wine: Binary Classification', fontsize=14, fontweight='bold')
+axes[1, 1].legend(wedges_white, white_labels, title="Quality Classes", loc="center left", 
+                  bbox_to_anchor=(1, 0, 0.5, 1), fontsize=10)
+
+# Create custom legend patches
+bad_patch = mpatches.Patch(color='lightcoral', label=f'Bad Quality (<{threshold})', alpha=0.8)
+good_patch = mpatches.Patch(color='limegreen', label=f'Good Quality (≥{threshold})', alpha=0.8)
+
+# Place legend at the top
+fig.legend(handles=[bad_patch, good_patch], loc='upper center', 
+           ncol=2, bbox_to_anchor=(0.5, 0.97), fontsize=11, frameon=True,
+           fancybox=True, shadow=True)
+
+# Adjust layout
+plt.suptitle('Wine Quality Distribution Analysis', fontsize=16, fontweight='bold', y=0.99)
+plt.tight_layout(rect=[0, 0.04, 1, 0.95])  # Adjust for summary text
+plt.show()
+```
+
+The label design is to create a binary response of roughly even split. Here the threshold is quality $\geq 6$, which results in good class balance, interpretability (roughly same amount of quality levels above and below threshold for both wines) and applied evenly to both datasets.
+
+## b
+
+```{python}
+#| echo: false
+#| include: false
+
+features =["fixed acidity","volatile acidity","citric acid","residual sugar","chlorides","free sulfur dioxide","total sulfur dioxide","density","pH","sulphates","alcohol"]
+
+# Prepare datasets
+X_red = red_wine[features]
+y_red = red_wine['quality_binary']
+
+X_white = white_wine[features]
+y_white = white_wine['quality_binary']
+
+# Split data (80/20)
+X_red_train, X_red_test, y_red_train, y_red_test = train_test_split(
+    X_red, y_red, test_size=0.2, random_state=42, stratify=y_red
+)
+
+X_white_train, X_white_test, y_white_train, y_white_test = train_test_split(
+    X_white, y_white, test_size=0.2, random_state=42, stratify=y_white
+)
+
+downsample_indices = np.random.choice(
+    X_white_train.index, 
+    size=len(X_red_train), 
+    replace=False
+)
+X_white_train_down = X_white_train.loc[downsample_indices]
+y_white_train_down = y_white_train.loc[downsample_indices]
+
+# Standardize features
+scaler = StandardScaler()
+X_red_train_scaled = scaler.fit_transform(X_red_train)
+X_red_test_scaled = scaler.transform(X_red_test)
+
+scaler_white = StandardScaler()
+X_white_train_scaled = scaler_white.fit_transform(X_white_train_down) 
+X_white_test_scaled = scaler_white.transform(X_white_test)
+
+logreg = LogisticRegression(
+    max_iter=1000,
+    class_weight='balanced' 
+)
+
+rf = RandomForestClassifier(
+    n_estimators=100,
+    max_depth=10,
+    class_weight='balanced'
+)
+
+def train_and_evaluate(model, X_train, y_train, X_test, y_test, model_name, scenario):
+    """Train model and return performance metrics."""
+    model.fit(X_train, y_train)
+    y_pred = model.predict(X_test)
+    y_train_pred = model.predict(X_train)
+    
+    # Handle edge case where model predicts only one class
+    if len(np.unique(y_pred)) == 1:
+        precision = precision_score(y_test, y_pred, zero_division=0)
+        recall = recall_score(y_test, y_pred, zero_division=0)
+    else:
+        precision = precision_score(y_test, y_pred)
+        recall = recall_score(y_test, y_pred)
+    if len(np.unique(y_train_pred)) == 1:
+        train_precision = precision_score(y_train, y_train_pred, zero_division=0)
+        train_recall = recall_score(y_train, y_train_pred, zero_division=0)
+    else:
+        train_precision = precision_score(y_train, y_train_pred)
+        train_recall = recall_score(y_train, y_train_pred)
+    
+    return {
+        'Model': model_name,
+        'Scenario': scenario,
+        'Accuracy': accuracy_score(y_test, y_pred),
+        'Precision': precision,
+        'Recall': recall,
+        'F1-Score': f1_score(y_test, y_pred),
+        'Train Accuracy': accuracy_score(y_train, y_train_pred),
+        'Train Precision': train_precision,
+        'Train Recall': train_recall,
+        'Train F1-Score': f1_score(y_train, y_train_pred),
+    }
+
+
+
+results = []
+
+print("\n" + "="*60)
+print("IN-DOMAIN TESTING RESULTS:")
+print("="*60)
+
+# Red → Red
+print("\n1. Training on Red wine, Testing on Red wine:")
+
+# Logistic Regression
+res = train_and_evaluate(
+    logreg, X_red_train_scaled, y_red_train,
+    X_red_test_scaled, y_red_test,
+    'Logistic Regression', 'Red→Red'
+)
+results.append(res)
+print(f"   Logistic Regression - Accuracy: {res['Accuracy']:.3f}, Precision: {res["Precision"]:.3f}, Recall: {res['Recall']:.3f}")
+
+# Random Forest
+res = train_and_evaluate(
+    rf, X_red_train_scaled, y_red_train,
+    X_red_test_scaled, y_red_test,
+    'Random Forest', 'Red→Red'
+)
+results.append(res)
+print(f"   Random Forest - Accuracy: {res['Accuracy']:.3f}, Precision: {res["Precision"]:.3f}, Recall: {res['Recall']:.3f}")
+
+# White → White (using downsampled training)
+print("\n2. Training on White wine, Testing on White wine:")
+
+# Logistic Regression
+res = train_and_evaluate(
+    logreg, X_white_train_scaled, y_white_train_down,
+    X_white_test_scaled, y_white_test,
+    'Logistic Regression', 'White→White'
+)
+results.append(res)
+print(f"   Logistic Regression - Accuracy: {res['Accuracy']:.3f}, Precision: {res["Precision"]:.3f}, Recall: {res['Recall']:.3f}")
+
+# Random Forest
+res = train_and_evaluate(
+    rf, X_white_train_scaled, y_white_train_down,
+    X_white_test_scaled, y_white_test,
+    'Random Forest', 'White→White'
+)
+results.append(res)
+print(f"   Random Forest - Accuracy: {res['Accuracy']:.3f}, Precision: {res["Precision"]:.3f}, Recall: {res['Recall']:.3f}")
+
+print("\n" + "="*60)
+print("CROSS-DOMAIN TESTING RESULTS:")
+print("="*60)
+
+# Red → White (train on red, test on white)
+print("\n1. Training on Red wine, Testing on White wine:")
+
+# Need to scale white test data using red wine's scaler
+X_white_test_redscaler = scaler.transform(X_white_test)
+
+# Logistic Regression
+res = train_and_evaluate(
+    logreg, X_red_train_scaled, y_red_train,
+    X_white_test_redscaler, y_white_test,
+    'Logistic Regression', 'Red→White'
+)
+results.append(res)
+print(f"   Logistic Regression - Accuracy: {res['Accuracy']:.3f}, Precision: {res["Precision"]:.3f}, Recall: {res['Recall']:.3f}")
+
+# Random Forest
+res = train_and_evaluate(
+    rf, X_red_train_scaled, y_red_train,
+    X_white_test_redscaler, y_white_test,
+    'Random Forest', 'Red→White'
+)
+results.append(res)
+print(f"   Random Forest - Accuracy: {res['Accuracy']:.3f}, Precision: {res["Precision"]:.3f}, Recall: {res['Recall']:.3f}")
+
+# White → Red (train on white, test on red)
+print("\n2. Training on White wine, Testing on Red wine:")
+
+# Need to scale red test data using white wine's scaler
+X_red_test_whitescaler = scaler_white.transform(X_red_test)
+
+# Logistic Regression
+res = train_and_evaluate(
+    logreg, X_white_train_scaled, y_white_train_down,
+    X_red_test_whitescaler, y_red_test,
+    'Logistic Regression', 'White→Red'
+)
+results.append(res)
+print(f"   Logistic Regression - Accuracy: {res['Accuracy']:.3f}, Precision: {res["Precision"]:.3f}, Recall: {res['Recall']:.3f}")
+
+# Random Forest
+res = train_and_evaluate(
+    rf, X_white_train_scaled, y_white_train_down,
+    X_red_test_whitescaler, y_red_test,
+    'Random Forest', 'White→Red'
+)
+results.append(res)
+print(f"   Random Forest - Accuracy: {res['Accuracy']:.3f}, Precision: {res["Precision"]:.3f}, Recall: {res['Recall']:.3f}")
+
+# Convert results to DataFrame
+results_df = pd.DataFrame(results)
+```
+For this section, I used an 80/20 test/trainging split and the models I chose were Logistic and Random Forest. For the models, I used all of the features and did not perform any sort of feature selection. As mentioned in the problem, since the red wine set has significantly less data points than the white wine set, I decreased the white wine training set to match the size of the red wine training set ($1279$ samples). The results of applying the models to the data is shown in the table below.
+
+
+| Testing Scenario         | Model               | Accuracy | Precision | Recall |
+|---------------------------|---------------------|---------|----------|-------|
+| Red → Red (In-domain)    | Logistic Regression | 0.747    | 0.800     | 0.702  |
+| Red → Red (In-domain)    | Random Forest       | 0.812    | 0.836     | 0.807  |
+| White → White (In-domain)| Logistic Regression | 0.712    | 0.839     | 0.702  |
+| White → White (In-domain)| Random Forest       | 0.767    | 0.836     | 0.804  |
+| Red → White (Cross)      | Logistic Regression | 0.650    | 0.864     | 0.563  |
+| Red → White (Cross)      | Random Forest       | 0.699    | 0.779     | 0.764  |
+| White → Red (Cross)      | Logistic Regression | 0.559    | 0.941     | 0.187  |
+| White → Red (Cross)      | Random Forest       | 0.691    | 0.816     | 0.544  |
+
+
+
+## C
+### 1) In Domain Model Consistency
+```{python}
+#| echo: false
+
+# Visualization 1: Performance Comparison
+fig, axes = plt.subplots(2, 2, figsize=(14, 10))
+
+# Accuracy comparison
+scenarios = results_df['Scenario'].unique()
+x = np.arange(len(scenarios))
+width = 0.2
+
+for i, metric in enumerate(['Accuracy', 'F1-Score', 'Precision', 'Recall']):
+    ax = axes[i//2, i%2]
+    
+    logreg_vals = results_df[results_df['Model'] == 'Logistic Regression'][metric].values
+    logreg_train_vals = results_df[results_df['Model'] == 'Logistic Regression'][f"Train {metric}"].values
+    rf_vals = results_df[results_df['Model'] == 'Random Forest'][metric].values
+    rf_train_vals = results_df[results_df['Model'] == 'Random Forest'][f"Train {metric}"].values
+    
+    ax.bar(x - width/2, logreg_vals, width, label='Logistic Regression', color='steelblue', alpha=0.8)
+    ax.bar(x - 3*width/2, logreg_train_vals, width, label='Train Logistic Regression', color='blue', alpha=0.8)
+    ax.bar(x + width/2, rf_train_vals, width, label='Train Random Forest', color='darkorange', alpha=0.8)
+    ax.bar(x + 3*width/2, rf_vals, width, label='Random Forest', color='orange', alpha=0.8)
+    
+    ax.set_xlabel('Test Scenario')
+    ax.set_ylabel(metric)
+    ax.set_title(f'{metric} Comparison Across Scenarios')
+    ax.set_xticks(x)
+    ax.set_xticklabels(scenarios, rotation=45, ha='right')
+    ax.legend(loc="lower left")
+    ax.grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+```
+
+When looking solely at the in domain scenarios within the graph, we see that Random Forest outperforms the linear regression for all metrics in all in domain scenarios (except for maybe precision in White -> White). However when looking at consistency, it appears the models are similar in consistency with a slight edge to the random forest. If we look at the accuracy graph, the difference between the accuracies in the in domain scenarios for logistic rergression is roughly $0.035$, while the accuracy difference for the Random Forest is roughly $0.045$. For precision, Logistic Regressions had a difference of $0.039$ while Random Forest was roughly $0$. Lastly, for recall Logistic Regression had a difference of $0$ and the Random Forest had a difference $0.03$. 
+
+When looking at overfitting, it appears that the logistic regression is not overfitted as the different performance metrics increase and decrease by very small margins between training and testing. Random Forest however, there is significant decrease in all performance metrics when going from training to testing suggesting the presence of overfitting.
+
+
+### 2) Cross Domain Model Generalization
+```{python}
+#| echo: false
+# Visualization 2: Performance degradation in cross-domain
+fig, ax = plt.subplots(figsize=(10, 5))
+
+# Calculate performance drop
+performance_drop = []
+models = ['Logistic Regression', 'Random Forest']
+for model in models:
+    # Get in-domain performance (average of Red→Red and White→White)
+    in_domain = results_df[(results_df['Model'] == model) & 
+                          (results_df['Scenario'].isin(['Red→Red', 'White→White']))]['Accuracy'].mean()
+    
+    # Get cross-domain performance (average of Red→White and White→Red)
+    cross_domain = results_df[(results_df['Model'] == model) & 
+                             (results_df['Scenario'].isin(['Red→White', 'White→Red']))]['Accuracy'].mean()
+    
+    performance_drop.append({
+        'Model': model,
+        'In-Domain': in_domain,
+        'Cross-Domain': cross_domain,
+        'Drop (%)': ((in_domain - cross_domain) / in_domain) * 100
+    })
+
+drop_df = pd.DataFrame(performance_drop)
+x = np.arange(len(models))
+width = 0.35
+
+ax.bar(x - width/2, drop_df['In-Domain'], width, label='In-Domain', color='green', alpha=0.7)
+ax.bar(x + width/2, drop_df['Cross-Domain'], width, label='Cross-Domain', color='red', alpha=0.7)
+
+# Add drop percentage text
+for i, row in drop_df.iterrows():
+    ax.text(i, row['Cross-Domain'] + 0.01, f"-{row['Drop (%)']:.1f}%", 
+            ha='center', va='bottom', fontweight='bold')
+
+ax.set_xlabel('Model')
+ax.set_ylabel('Accuracy')
+ax.set_title('Performance Drop in Cross-Domain Testing')
+ax.set_xticks(x)
+ax.set_xticklabels(models)
+ax.legend(loc="lower left")
+ax.grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+
+```
+
+Using the information from this graph, the table in 2b, and the graph in 2c1, it appears that the random forest performs slightly better than the logistic regression for cross domain. With the exception of precision, random forest outperforms the logistic regression model in every metric. The logistic regression decreased accuracy by an average of $0.13$ whereas the random foresst model decreased accuracy by an average of $0.1$ when switching from in domain to cross domain.
+
+
+### 3) Cross Domain Performance Differences
+```{python}
+#| echo: false
+# Visualization 3: Feature importance comparison
+fig, axes = plt.subplots(2, 2, figsize=(14, 6))
+
+# Get coefficients from Logistic Regression
+red_lr = logreg.fit(X_red_train_scaled, y_red_train)
+
+# Plot Random Forest feature importance
+importances = rf.fit(X_red_train_scaled,y_red_train).feature_importances_
+indices = np.argsort(importances)[::-1]
+
+axes[0, 0].barh(range(len(features)), importances[indices], color='darkorange', alpha=0.7)
+axes[0, 0].set_yticks(range(len(features)))
+axes[0, 0].set_yticklabels([features[i] for i in indices])
+axes[0, 0].set_xlabel('Importance')
+axes[0, 0].set_title('Random Forest Feature Importance (Red Wine)')
+axes[0, 0].invert_yaxis()
+
+# Plot Random Forest feature importance
+white_rf = rf.fit(X_white_train_scaled, y_white_train_down)
+importance = white_rf.feature_importances_
+indice = np.argsort(importance)[::-1]
+
+axes[0, 1].barh(range(len(features)), importance[indice], color='darkorange', alpha=0.7)
+axes[0, 1].set_yticks(range(len(features)))
+axes[0, 1].set_yticklabels([features[i] for i in indice])
+axes[0, 1].set_xlabel('Importance')
+axes[0, 1].set_title('Random Forest Feature Importance (White Wine)')
+axes[0, 1].invert_yaxis()
+
+# Plot Logistic Regression coefficients
+coef = red_lr.coef_[0]
+indices_lr = np.argsort(np.abs(coef))[::-1]
+
+axes[1, 0].barh(range(len(features)), np.abs(coef[indices_lr]), color='steelblue', alpha=0.7)
+axes[1, 0].set_yticks(range(len(features)))
+axes[1, 0].set_yticklabels([features[i] for i in indices_lr])
+axes[1, 0].set_xlabel('Absolute Coefficient Value')
+axes[1, 0].set_title('Logistic Regression Feature Importance (Absolute Coefficients for Red Wine)')
+axes[1, 0].invert_yaxis()
+
+# Plot Logistic Regression coefficients
+white_lr = logreg.fit(X_white_train_scaled, y_white_train_down)
+coefw = white_lr.coef_[0]
+indices_lrw = np.argsort(np.abs(coefw))[::-1]
+
+axes[1, 1].barh(range(len(features)), np.abs(coefw[indices_lrw]), color='steelblue', alpha=0.7)
+axes[1, 1].set_yticks(range(len(features)))
+axes[1, 1].set_yticklabels([features[i] for i in indices_lrw])
+axes[1, 1].set_xlabel('Absolute Coefficient Value')
+axes[1, 1].set_title('Logistic Regression Feature Importance (Absolute Coefficients for White Wine)')
+axes[1, 1].invert_yaxis()
+
+plt.tight_layout()
+plt.show()
+```
+
+When trying to determine what factors that could explain the performance differences across domains, perhaps one of the biggest factors is the shift in feature importance across domains. From the graph we can see that both Logistic Regression and Random Forest models both think that the residual sugar is quite important for white wine predictions but not very important for red wine predictions. Essentially, the models do not perform well cross domain because it is weighing factors as important while the factor may not necessarily be important. A good analogy would be determining performance of football atheletes based on age, weight, and height. Weight might be an important factor for linemen, but not as important for determining performance of a wide reciever.
+
