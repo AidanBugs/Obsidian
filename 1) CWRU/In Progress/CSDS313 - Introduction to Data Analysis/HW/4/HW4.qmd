@@ -1,10 +1,11 @@
 ---
 format: pdf
 ---
-# 2
+# 1
 ## a
 ```{python}
 #| echo: false
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -15,8 +16,325 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
 import matplotlib.patches as mpatches
+from sklearn.decomposition import PCA
+from sklearn.cluster import KMeans
+from sklearn.metrics import mutual_info_score, adjusted_rand_score, silhouette_score
+from sklearn.utils import shuffle
+from scipy.stats import percentileofscore
 
 np.random.seed(0)
+
+party_df = pd.read_csv("data/congress/p1_congress_1984_party_affiliations.csv", names=["Party"])
+votes_df = pd.read_csv("data/congress/p1_congress_1984_votes.csv", names=["Issue 1", "Issue 2","Issue 3", "Issue 4","Issue 5", "Issue 6","Issue 7", "Issue 8","Issue 9", "Issue 10","Issue 11", "Issue 12","Issue 13", "Issue 14","Issue 15", "Issue 16"])
+
+# Extract data as arrays
+X = votes_df.values  # 435 x 16
+y = party_df['Party'].values  # 435
+
+# Map party to numeric values for coloring
+party_numeric = np.where(y == 'Republican', 0, 1)
+
+# Standardize the data (important for PCA)
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# Perform PCA
+pca = PCA()
+X_pca = pca.fit_transform(X_scaled)
+
+# Calculate cumulative explained variance
+explained_variance_ratio = pca.explained_variance_ratio_
+cumulative_variance = np.cumsum(explained_variance_ratio)
+# Plot cumulative variance explained
+plt.figure(figsize=(10, 6))
+plt.plot(range(1, len(cumulative_variance) + 1), cumulative_variance, 
+         'bo-', linewidth=2, markersize=8)
+plt.axhline(y=0.9, color='r', linestyle='--', alpha=0.5, label='90% threshold')
+plt.axhline(y=0.95, color='g', linestyle='--', alpha=0.5, label='95% threshold')
+plt.xlabel('Number of Principal Components', fontsize=12)
+plt.ylabel('Cumulative Explained Variance Ratio', fontsize=12)
+plt.title('Cumulative Variance Explained by Principal Components', fontsize=14)
+plt.grid(True, alpha=0.3)
+plt.legend()
+plt.tight_layout()
+plt.show()
+
+# Determine number of components for sufficient summary
+threshold_90 = np.argmax(cumulative_variance >= 0.9) + 1
+threshold_95 = np.argmax(cumulative_variance >= 0.95) + 1
+```
+If we are using a threshold of $\alpha=0.1$ then we need 11 components. If we area instead using $\alpha=0.05$ we should use 13 components.
+
+
+
+```{python}
+#| echo: false
+
+# Project data onto first 3 principal components
+pc1 = X_pca[:, 0]
+pc2 = X_pca[:, 1]
+pc3 = X_pca[:, 2]
+
+# Create scatter plots for each PC pair
+fig, axes = plt.subplots(1, 3, figsize=(18, 5))
+
+# PC1 vs PC2
+scatter1 = axes[0].scatter(pc1, pc2, c=party_numeric, cmap='coolwarm_r', 
+                          alpha=0.7, edgecolors='k', linewidth=0.5)
+axes[0].set_xlabel('PC1', fontsize=12)
+axes[0].set_ylabel('PC2', fontsize=12)
+axes[0].set_title('PC1 vs PC2', fontsize=14)
+axes[0].grid(True, alpha=0.3)
+
+# PC1 vs PC3
+scatter2 = axes[1].scatter(pc1, pc3, c=party_numeric, cmap='coolwarm_r', 
+                          alpha=0.7, edgecolors='k', linewidth=0.5)
+axes[1].set_xlabel('PC1', fontsize=12)
+axes[1].set_ylabel('PC3', fontsize=12)
+axes[1].set_title('PC1 vs PC3', fontsize=14)
+axes[1].grid(True, alpha=0.3)
+
+# PC2 vs PC3
+scatter3 = axes[2].scatter(pc2, pc3, c=party_numeric, cmap='coolwarm_r', 
+                          alpha=0.7, edgecolors='k', linewidth=0.5)
+axes[2].set_xlabel('PC2', fontsize=12)
+axes[2].set_ylabel('PC3', fontsize=12)
+axes[2].set_title('PC2 vs PC3', fontsize=14)
+axes[2].grid(True, alpha=0.3)
+
+# Add legend
+from matplotlib.lines import Line2D
+legend_elements = [Line2D([0], [0], marker='o', color='w', 
+                          markerfacecolor='red', markersize=10, label='Republican'),
+                   Line2D([0], [0], marker='o', color='w', 
+                          markerfacecolor='blue', markersize=10, label='Democrat')]
+fig.legend(handles=legend_elements, loc='lower center', ncol=2, fontsize=12)
+fig.suptitle('Congress Members Projected onto Principal Components (Colored by Party)', 
+             fontsize=16, y=1.02)
+plt.tight_layout()
+plt.show()
+
+```
+The prinicipal components that separate the parties the best is PC1 vs PC2. It appears that the congress members tend to vote similarly if they are with the same party affiliation. We come to this conclusion because our PC's are able to generate a pretty good separation of the two parties. 
+
+## b
+
+```{python}
+#| echo: false
+
+# Apply K-means clustering (k=2)
+kmeans = KMeans(n_clusters=2, random_state=0, n_init=10)
+clusters_original = kmeans.fit_predict(X_scaled)
+
+# Calculate inertia (objective function) as clustering quality score
+inertia_original = kmeans.inertia_
+
+# Visualize clusters on first two principal components
+plt.figure(figsize=(12, 5))
+
+# Plot colored by cluster
+plt.subplot(1, 2, 1)
+scatter_clusters = plt.scatter(pc1, pc2, c=clusters_original, cmap='viridis', 
+                               alpha=0.7, edgecolors='k', linewidth=0.5)
+plt.xlabel('PC1', fontsize=12)
+plt.ylabel('PC2', fontsize=12)
+plt.title('Clusters on PC1-PC2 Projection', fontsize=14)
+plt.grid(True, alpha=0.3)
+plt.colorbar(scatter_clusters, label='Cluster')
+
+# Plot colored by party for comparison
+plt.subplot(1, 2, 2)
+scatter_party = plt.scatter(pc1, pc2, c=party_numeric, cmap='coolwarm_r', alpha=0.7, edgecolors='k', linewidth=0.5)
+plt.xlabel('PC1', fontsize=12)
+plt.ylabel('PC2', fontsize=12)
+plt.title('Party Affiliation on PC1-PC2 Projection', fontsize=14)
+plt.grid(True, alpha=0.3)
+plt.colorbar(scatter_party, label='Party (0=Rep, 1=Dem)')
+
+plt.suptitle('K-means Clustering (k=2) vs Party Affiliation', fontsize=16, y=1.02)
+plt.tight_layout()
+plt.show()
+
+```
+
+According to the scatterplot, the groups are quite visually separated. Here the cluster groups are roughly split vertically in half where the left cluster group closely alligns with the republican party while the right cluster group closely matches with the democratic affiliation. Note that the clusters are on the 16 voting topics and not on the PC's.
+
+```{python}
+#| echo: false
+#| include: false
+
+# Calculate agreement with party affiliations
+def calculate_agreement_metrics(clusters, parties):
+    # Calculate accuracy (assuming we can map clusters to parties)
+    # Find the best mapping between clusters and parties
+    from scipy.stats import mode
+    
+    
+    # Calculate alignment accuracy
+    total_correct = 0
+
+    for cluster_idx in np.unique(clusters):
+        mask = clusters == cluster_idx
+        if np.any(mask):
+            # Use keepdims=False for compatibility with recent scipy
+            majority_party = mode(parties[mask], keepdims=False).mode
+            total_correct += np.sum(parties[mask] == majority_party)
+    
+    accuracy = total_correct / len(parties)
+    
+    return {
+        'accuracy': accuracy,
+        'mi': mutual_info_score(parties, clusters)
+    }
+
+# Calculate metrics for original clustering
+metrics_original = calculate_agreement_metrics(clusters_original, party_numeric)
+
+print(f"Alignment Accuracy: {metrics_original['accuracy']:.4f}")
+
+```
+
+
+```{python}
+#| echo: false
+
+def permute_dataset(X):
+    """
+    Permute each congress member's votes across different matters.
+    This preserves the distribution of votes for each member but breaks
+    correlations between members.
+    """
+    X_permuted = X.copy()
+    for i in range(X.shape[0]):
+        # Permute the votes for each member independently
+        np.random.shuffle(X_permuted[i, :])
+    return X_permuted
+
+def run_permutation_test(X, n_permutations=100):
+    """
+    Run permutation test to assess statistical significance of clustering.
+    """
+    # Original clustering and score
+    kmeans_original = KMeans(n_clusters=2, random_state=42, n_init=10)
+    clusters_original = kmeans_original.fit_predict(X)
+    inertia_original = kmeans_original.inertia_
+    
+    # Store permutation scores
+    permutation_scores = []
+    permutation_clusters = []
+    
+    for perm in range(n_permutations):
+        # Permute the dataset
+        X_permuted = permute_dataset(X)
+        
+        # Cluster the permuted dataset
+        kmeans_perm = KMeans(n_clusters=2, random_state=perm, n_init=10)
+        clusters_perm = kmeans_perm.fit_predict(X_permuted)
+        inertia_perm = kmeans_perm.inertia_
+        
+        permutation_scores.append(inertia_perm)
+        permutation_clusters.append(clusters_perm)
+        
+    # Calculate p-value (proportion of permutation scores as good or better)
+    # For inertia (lower is better), we count how many permutations have <= inertia
+    p_value = np.sum(np.array(permutation_scores) <= inertia_original) / n_permutations
+    
+    return {
+        'original_score': inertia_original,
+        'permutation_scores': permutation_scores,
+        'p_value': p_value,
+        'permutation_clusters': permutation_clusters
+    }
+
+# Run permutation test
+results = run_permutation_test(X_scaled, n_permutations=100)
+
+# Plot distribution of permutation scores
+plt.figure(figsize=(10, 6))
+plt.hist(results['permutation_scores'], bins=20, alpha=0.7, color='skyblue', 
+         label='Permutation Scores')
+plt.axvline(results['original_score'], color='red', linestyle='--', 
+           linewidth=2, label=f'Original Score: {results["original_score"]:.2f}')
+plt.xlabel('K-means Inertia (Clustering Score)', fontsize=12)
+plt.ylabel('Frequency', fontsize=12)
+plt.title(f'Permutation Test Results (p-value = {results["p_value"]:.4f})', fontsize=14)
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.show()
+```
+
+The score used to measure the quality of the clustering was the kmeans inertia score. According to the graph, it is quite clear that the clustering is statistically significant and that the congress members votes show meaningful clustering patterns that are unlikely to occur from random chance. With the kmeans inertia score, it measures the squared distance from a point to the center of the cluster, so having a lower kmeans inertia means the clusters are stronger.
+
+## c
+
+```{python}
+#| echo: false
+#| include: false
+
+# Use only first two principal components
+X_pca_2d = X_pca[:, :2]
+
+# Apply K-means on the PCA-reduced data
+kmeans_pca = KMeans(n_clusters=2, random_state=42, n_init=10)
+clusters_pca = kmeans_pca.fit_predict(X_pca_2d)
+print(f"Inertia {kmeans_pca.inertia_}")
+
+# Calculate metrics for PCA-based clustering
+metrics_pca = calculate_agreement_metrics(clusters_pca, party_numeric)
+
+print("\nClustering on first 2 PCs vs Party Affiliations:")
+print(f"Alignment Accuracy: {metrics_pca['accuracy']:.4f}")
+
+print("\nOriginal data (16 votes) clustering:")
+print(f"  Accuracy: {metrics_original['accuracy']:.4f}")
+print(f"  MI: {metrics_original['mi']:.4f}")
+
+print("\nPCA-reduced data (2 PCs) clustering:")
+print(f"  Accuracy: {metrics_pca['accuracy']:.4f}")
+print(f"  MI: {metrics_pca['mi']:.4f}")
+
+```
+
+For quantifying the agreement of clusters and party affiliation, I will use accuracy and mutual information. The clusters had an overall accuracy of $0.8828$, meaning they assigned a congress member to the correct group $88.28%$ of the time. Here the MI was $0.3461$.
+
+```{python}
+#| echo: false
+
+# Visual comparison of the two clustering methods
+fig, axes = plt.subplots(1, 2, figsize=(15, 6))
+
+# Original data clustering
+scatter1 = axes[0].scatter(pc1, pc2, c=clusters_original, cmap='viridis', 
+                          alpha=0.7, edgecolors='k', linewidth=0.5)
+axes[0].set_xlabel('PC1', fontsize=12)
+axes[0].set_ylabel('PC2', fontsize=12)
+axes[0].set_title(f'Clustering on 16 Votes Acc: {metrics_original["accuracy"]:.4f}', 
+                  fontsize=14)
+axes[0].grid(True, alpha=0.3)
+
+# PCA-reduced data clustering
+scatter2 = axes[1].scatter(pc1, pc2, c=clusters_pca, cmap='viridis', 
+                          alpha=0.7, edgecolors='k', linewidth=0.5)
+axes[1].set_xlabel('PC1', fontsize=12)
+axes[1].set_ylabel('PC2', fontsize=12)
+axes[1].set_title(f'Clustering on 2 Principal Components Acc: {metrics_pca["accuracy"]:.4f}', 
+                  fontsize=14)
+axes[1].grid(True, alpha=0.3)
+
+plt.suptitle('Comparison of Clustering Methods', fontsize=16, y=1.02)
+plt.tight_layout()
+plt.show()
+```
+ 
+For quantifying the agreement of the 2 PC clusters and party affiliation, the overall accuracy was $0.8828$, meaning they assigned a congress member to the correct group $88.28%$ of the time and the MI was $0.3461$. Additionally, the kmeans inertia was $1118.96$, which makes sense as since the dimensions are lower the distances will also decrease.
+
+This means that the original clustering using the 16 votes was more accurate and agreed more with the affiliations than the principal component clustering. This makes sense because the first two PC's only capture roughly 55% of the variation within the data. Since we only have 2PC's we are projecting the 16 dimensional vote space onto 2 dimensions, thus we may be removing some meaningful distinctions.
+
+# 2
+## a
+```{python}
+#| echo: false
 
 red_wine = pd.read_csv('data/wine+quality/winequality-red.csv', sep=';')
 white_wine = pd.read_csv('data/wine+quality/winequality-white.csv', sep=';')
