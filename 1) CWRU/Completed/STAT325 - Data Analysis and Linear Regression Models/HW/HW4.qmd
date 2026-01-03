@@ -1,0 +1,130 @@
+```{r}
+#| ouput: false
+#| warning: false
+#| include: false
+
+# install.packages('GGally', repos = "http://cran.us.r-project.org")
+# install.packages("car", repos = "http://cran.us.r-project.org")
+# install.packages("faraway", repos = "http://cran.us.r-project.org")
+# install.packages("onewaytests", repos = "http://cran.us.r-project.org")
+# install.packages("corrplot", repos = "http://cran.us.r-project.org")
+
+library(faraway)
+library(GGally)
+library(car)
+library(onewaytests)
+library(corrplot)
+```
+
+
+# 1
+```{r}
+corn_data = read.table("data/cornnit.txt", header=T)
+
+head(corn_data)
+```
+## (i) (1 pt) What does the scatter plot of yields versus nitrogen suggest?
+```{r}
+plot(y=corn_data$yield, x=corn_data$nitrogen, xlab="Nitrogen Application", ylab="Corn Yields")
+```
+
+The scatter plot suggests a non linear relationship between nitrogen application and corn yields because the scatter plot does not form a straight line and is instead high slope at the start then starts to level off towards the end.
+
+## (ii) (1 pt) Fit separate linear first-order and second-order models with yield as the response and nitrogen as the predictor.
+```{r}
+fit1 = lm(yield ~ nitrogen, data=corn_data)
+summary(fit1)
+
+fit2 = lm(yield ~ nitrogen + I(nitrogen^2), data=corn_data)
+summary(fit2)
+```
+
+## (iii) (2 pt) Is the second-order model a better fit?
+```{r}
+par(mfrow=c(1,2))
+plot(fit1, 1, main="1st-order linear")
+plot(fit2, 1, main="2nd-order linear")
+
+anova(fit1, fit2, test="F")
+```
+
+According to the anova test there is a significant relationship between yield and the extra predictor nitrogen^2. Thus, the second-order model is a better fit than the first-order model.
+
+## (iv) (2 pt) What can you conclude about the relationship between yield and nitrogen?
+This the relationship between yield and nitrogen is non linear because the second-order model is a better fit since the nitrogen^2 predictor had a statistically significant relationship with the response variable yield.
+
+# 2
+```{r}
+diabetes = read.csv("data/diabetes.csv")
+
+head(diabetes)
+```
+## (i) (1 pt) Fit a multiple linear regression with ratio as the response and age, gender, and frame as predictors.
+```{r}
+mult = lm(ratio ~ age + gender + frame, data = diabetes)
+summary(mult)
+```
+
+## (ii) (2 pt) Is there a significant difference in the ratio of HDL between males and females?
+There is not a significant difference in the ratio of HDL between males and females because the male coefficient has a p-value of $0.2397$ which is greater than $\alpha=0.1$ and additionally $0\in[0.207224-(1.64)0.17598,0.207224+(1.64)0.17598]$. This means that the gender male coefficient does not differentiate significantly from baseline (gender = female)
+
+## (iii) (2pt) Report and interpret the coefficients for frame.
+```{r}
+summary(mult)$coefficients
+```
+The framesmedium predictor has a coefficients of $-0.22677652$ with a std of $0.21324632$ and p-value of $0.2882451$. This means that the difference between a medium frame and a large frame is not statistically significant because the p-value is greater than $\alpha=0.1$ and $0\in [-0.22677652-(1.64)0.21324632, -0.22677652+(1.64)0.21324632]$.
+
+The framessmall predictor has a coefficients of $-0.97057840$ with a std of $0.24477916$ and p-value of $8.746412e-05$. This means that the difference between a small frame and a large frame is statistically significant because the p-value is smaller than $\alpha=0.1$ and $0\notin [-0.97057840-(1.64)0.24477916, -0.97057840+(1.64)0.24477916]$. More specifically, the average change in the response mean from a change from large frame to small frame is $-0.97057840$.
+
+## (iv) (1 pt) Is there an interaction between gender and frame based on the interaction plot?
+```{r}
+interaction.plot(x.factor = diabetes$gender, trace.factor = diabetes$frame, response=diabetes$ratio, xlab="Gender", ylab="HDL Ratio", trace.label = "Frame", col=c("red","blue", "green"))
+```
+
+There is an interaction between gender and frame based on the interaction plot because the lines are not parallel. More specifically, it appears there may be an interaction between frame and gender because large/medium frame increases the HDL ratio when going from female to male but the small frame decreases the HDL ration when going from female to male.
+
+## (v) (1 pt) If yes, is the interaction effect between gender and frame significant at α “ 0.10?
+```{r}
+int_model = lm(ratio ~ age + gender * frame + gender + frame, data = diabetes)
+summary(int_model)
+anova(mult, int_model)
+```
+
+The interaction affect appears not to be significant at $\alpha=0.10$ because the anova table resulted in a p-value of $0.2609$ which is greater than our $\alpha$. This means that the extra predictors do not have statistically significant relationship with the response mean HDL ratio.
+
+# 3
+```{r}
+job_data = read.table("data/jobprof.txt", header=T)
+
+head(job_data)
+```
+## (i) (1 pt) Calculate the correlation matrix of the test scores.
+```{r}
+X = subset(job_data, select=-c(JBS))
+corrplot.mixed(cor(X), order="AOE")
+
+```
+
+## (ii) (1 pt) Does the correlation matrix suggest a possible multicollinearity problem for predicting job proficiency score (JPS) from the test scores?
+The correlation matrix suggests possible multicollinearity problems because the correlation coefficient between test1 and test4 is $0.9$ which is close to $1$.
+
+## (iii) (1 pt) Fit a multiple linear regression model with JPS as the response and the test scores as the predictors.
+```{r}
+model = lm(JBS ~ test1 + test2 + test3 + test4, data=job_data)
+summary(model)
+```
+
+## (iv) (1 pt) Compute the variance inflation factors for each of the model parameters in (iii).
+```{r}
+vif(model)
+```
+
+## (v) (1 pt) What does the VIF suggest?
+test1 and test4 have VIF scores above $10$ which suggests there is multicollinearity within the data.
+
+
+## (vi) (2 pt) Use a stepwise regression with AIC criterion to select the best model for predicting JPS.
+```{r}
+library(MASS)   ## this package is required for the stepAIC function
+both_sel <- stepAIC(model, direction = "both")
+```

@@ -1,0 +1,39 @@
+---
+format: pdf
+---
+
+
+Assume participation decreases with age but mean and std stay the same
+
+
+```{python}
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Set random seed for reproducibility
+np.random.seed(42)
+
+# Generate data for running events
+ages = [5*x for x in range(2,20)]
+
+participation = [10000/(x*np.sqrt(x)) for x in ages]
+
+# performances = [np.max(np.random.normal(50,20,p)) for p in participation]
+
+performances = []
+for i,p in enumerate(participation):
+  performances.append(np.max(np.random.normal(50,10,[int(p)])))
+
+
+
+plt.plot(participation, performances)
+plt.gca().invert_xaxis()
+plt.xlabel("Participation")        # Label for the X-axis
+plt.ylabel("Performance")        # Label for the Y-axis
+plt.title("Performance decreasing with participation (participation decreases with age)")  # Chart title
+plt.show()
+
+
+```

@@ -1,0 +1,135 @@
+```{r}
+#| ouput: false
+#| warning: false
+#| include: false
+
+# install.packages('GGally', repos = "http://cran.us.r-project.org")
+# install.packages("car", repos = "http://cran.us.r-project.org")
+# install.packages("faraway", repos = "http://cran.us.r-project.org")
+# install.packages("onewaytests", repos = "http://cran.us.r-project.org")
+# install.packages("corrplot", repos = "http://cran.us.r-project.org")
+# install.packages("ROCR", repos = "http://cran.us.r-project.org")
+# install.packages("ResourceSelection", repos = "http://cran.us.r-project.org")
+
+library(faraway)
+library(GGally)
+library(car)
+library(onewaytests)
+library(corrplot)
+```
+
+# 1
+| | Unvaccinated | Vaccinated | Total | 
+| -- | -- | -- | - |
+| Death | 253 | 481 | 734 |
+| Survived | 150799 | 116633 | 267432 |
+| Total | 151052 | 117114 | 268166 |
+
+## i 
+
+Odds_Overall $\frac{\#\text{Deaths of Vaccinated PPL}}{\#\text{PPL Survived w/ Vaccine}}= \frac{481}{116633}$
+
+
+## ii 
+
+### Under 50
+| | Unvaccinated | Vaccinated | Total | 
+| -- | -- | -- | - |
+| Death | 48 | 21 | 69 |
+| Survived | 147564 | 89786 | 237350 |
+| Total | 147612 | 89807 | 237419 |
+
+Odds_Under50 $\frac{\#\text{Deaths of Vaccinated PPL}}{\#\text{PPL Survived w/ Vaccine}}= \frac{21}{89786}$
+
+### Over 50
+| | Unvaccinated | Vaccinated | Total | 
+| -- | -- | -- | - |
+| Death | 205 | 460 | 265 |
+| Survived | 3235  | 26847 | 30082 |
+| Total | 3440 | 27307 | 30747 |
+
+Odds_Over50 $\frac{\#\text{Deaths of Vaccinated PPL}}{\#\text{PPL Survived w/ Vaccine}}= \frac{460}{26847}$
+
+## iii
+Odds_Overall $\frac{\#\text{Deaths of Vaccinated PPL}}{\#\text{PPL Survived w/ Vaccine}}= \frac{253}{150799}$
+
+OR_Overall $= \frac{253*116633}{150799*481}=0.4068163789$
+
+Odds_Under50 $\frac{\#\text{Deaths of Vaccinated PPL}}{\#\text{PPL Survived w/ Vaccine}}= \frac{48}{147564}$
+
+OR_Under50 $= \frac{48*89786}{147564*21}=1.3907534552$
+
+Odds_Over50 $\frac{\#\text{Deaths of Vaccinated PPL}}{\#\text{PPL Survived w/ Vaccine}}= \frac{205}{3235}$
+
+OR_Under50 $= \frac{205*26847}{3235*460}=3.6984308850$
+
+Here, all odds ratios are outside of $[0.8,1.2]$ which would suggest that the vaccination has a relevant change to the odds of a person dying to the disease. According to the data, vaccination decreased a person's odds of survival when looking at the data overall, however when we break the data down by it's strata, then we find that vaccination increases a person's odds of survival for each strata.
+
+## iv
+Yes simpson's paradox is occuring. It is clear in by the Odds Ratios calculated in the above problem that overall it appears that vaccination causes an increased risk of death but when calculating the Odds Ratios by each strata, it comes out that the vaccine increases a person's odds of survival for both stratas. Thus. simpson's paradox is occuring because the data shows different changes from the vaccine based on if you look at the overall statisttic vs the statistics at teh strata level.
+
+# 2
+## i
+```{r}
+diabetes = read.csv("data/diabete.csv")
+
+head(diabetes)
+
+model = glm(diabetic ~ age + gender + ratio + frame, data = diabetes, family = binomial(link="logit"))
+
+summary(model)
+```
+
+## ii
+```{r}
+reduced_model = glm(diabetic ~ age + ratio, data = diabetes, family = binomial(link="logit"))
+
+anova(reduced_model, model, test="Chisq")
+```
+
+According to the nested model test, the extra predictors (gender and frame) do not have a significant association with the response variable diabetes.
+
+## iii
+```{r}
+summary(reduced_model)
+```
+
+Thus age has a coefficient of $0.035272$ which represents the change in log odds of diabetes for every unit increase of age, while holding all other predictors constant.
+
+Thus ratio has a coefficient of $0.214832$ which represents the change in log odds of diabetes for every unit increase of ratio, while holding all other predictors constant.
+
+
+## iv
+```{r}
+library(ResourceSelection)
+
+HL <- hoslem.test(model$y, reduced_model$fitted.values, g=7)
+HL
+```
+This resulted in a p-value of $0.2882$ which is greater than $\alpha=0.05$ so we do not reject the null hypothesis and the model is a good fit for the data.
+
+## v
+```{r}
+library(ROCR)
+## ROC 
+pred <- prediction(reduced_model$fitted.values, diabetes$diabetic)
+perf <- performance(pred, measure="tpr", x.measure = "fpr")
+
+## area under curve
+auc <- performance(pred, "auc")
+auc <- round(as.numeric(auc@y.values),4)
+
+plot(perf, colorize=T)
+abline(a=0, b=1)
+text(0.8,0.2, labels= paste("AUC=", auc*100, "%") )
+```
+
+## vi
+```{r}
+cost_perf = performance(pred, "cost") 
+
+optimal_pi0 <- pred@cutoffs[[1]][which.min(cost_perf@y.values[[1]])]
+optimal_pi0
+```
+
+Thus the optimal cutoff is $0.4630625$

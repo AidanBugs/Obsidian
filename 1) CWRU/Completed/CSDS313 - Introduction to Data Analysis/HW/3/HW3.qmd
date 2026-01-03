@@ -1,0 +1,334 @@
+---
+format: pdf
+---
+
+# Task 1
+
+## a
+```{python}
+#| include: false
+import pandas as pd
+import numpy as np
+from scipy.stats import pearsonr
+import matplotlib.pyplot as plt
+from pathlib import Path
+from sklearn.metrics import mutual_info_score
+from scipy.stats import chi2_contingency
+import time
+
+def jaccard_index(x, y):
+    """Binary Jaccard index."""
+    x = np.asarray(x).astype(int)
+    y = np.asarray(y).astype(int)
+    inter = np.logical_and(x == 1, y == 1).sum()
+    union = np.logical_or(x == 1, y == 1).sum()
+    return inter / union if union > 0 else 0.0
+
+def mutual_information(x, y):
+    return mutual_info_score(x, y)
+
+def chi2_stat_and_p(x, y):
+    table = pd.crosstab(x, y)
+    chi2_stat, p, dof, expected = chi2_contingency(table, correction=False)
+    return chi2_stat, p 
+
+def permutation_p_value(obs_stat, stat_func, a, b, N=500, higher_is_more_extreme=True):
+    """Permutation test: permute both columns independently."""
+    count = 0
+    for i in range(N):
+        sa = np.random.permutation(a)
+        sb = np.random.permutation(b)
+        stat = stat_func(sa, sb)
+        if higher_is_more_extreme and stat >= obs_stat:
+            count += 1
+        elif not higher_is_more_extreme and stat <= obs_stat:
+            count += 1
+    return (count + 1) / (N + 1)
+
+
+
+p1a = pd.read_csv("data/p1a.csv", header=None)
+
+a = p1a.iloc[:, 0].values
+b = p1a.iloc[:, 1].values
+mi_obs = mutual_information(a, b)
+ji_obs = jaccard_index(a, b)
+chi2_obs, chi2_p = chi2_stat_and_p(a, b)
+
+p1a_N = 5000
+t0 = time.time()
+mi_pval = permutation_p_value(mi_obs, mutual_information, a, b, N=p1a_N)
+ji_pval = permutation_p_value(ji_obs, jaccard_index, a, b, N=p1a_N)
+t1 = time.time()
+
+p1a_results = pd.DataFrame({
+    "statistic": ["Mutual Information", "Jaccard Index", "Pearson_chi2"],
+    "value": [mi_obs, ji_obs, chi2_obs],
+    "p_value": [mi_pval, ji_pval, chi2_p],
+    "p_method": ["permutation", "permutation", "chi2_parametric"],
+    "N_perm": [p1a_N, p1a_N, None]
+})
+
+print("\n--- p1a results ---")
+print(p1a_results)
+```
+
+| statistic | value | p_value | p_method | N_perm |
+| ---- | --- | --- | --- | --- |
+| Mutual Information | $0.032573$ | $0.002200$ | permutation | $5000$ | 
+| Jaccard Index | $0.000000$ | $1.0$ | permutation | $5000$ |
+| Pearson $\chi^2$ | $7.78365$ | $0.005003$ | $\chi^2$ parametric | $None$ |
+
+MI and $\chi^2$ both reject the null of independence at $\alpha$ = 0.05 (p < 0.01).
+
+JI = 0 means both columns almost never share 1’s simultaneously
+
+Conclusion: the two binary variables in p1a are dependent, but not through shared “1” events.
+
+
+## b
+```{python}
+#| echo: false
+def benjamini_hochberg(pvals, alpha=0.05):
+    """Return rejection mask and critical p-value."""
+    pvals = np.asarray(pvals)
+    m = len(pvals)
+    order = np.argsort(pvals)
+    sorted_p = pvals[order]
+    thresholds = (np.arange(1, m + 1) / m) * alpha
+    below = sorted_p <= thresholds
+    if not np.any(below):
+        return np.zeros(m, dtype=bool), None
+    max_idx = np.where(below)[0].max()
+    crit_p = sorted_p[max_idx]
+    rejected = pvals <= crit_p
+    return rejected, crit_p
+p1b = pd.read_csv("data/p1b.csv", header=None)
+
+n_cols_b = p1b.shape[1]
+pairs = [(i, j) for i in range(n_cols_b) for j in range(i + 1, n_cols_b)]
+p1b_N = 500
+
+records = []
+tstart = time.time()
+for (i, j) in pairs:
+    ai = p1b.iloc[:, i].values
+    bj = p1b.iloc[:, j].values
+    mi_val = mutual_information(ai, bj)
+    ji_val = jaccard_index(ai, bj)
+    chi2_val, chi2_pval = chi2_stat_and_p(ai, bj)
+    mi_p = permutation_p_value(mi_val, mutual_information, ai, bj, N=p1b_N)
+    ji_p = permutation_p_value(ji_val, jaccard_index, ai, bj, N=p1b_N)
+    records.append({
+        "i": i, "j": j,
+        "MI": mi_val, "MI_p": mi_p,
+        "JI": ji_val, "JI_p": ji_p,
+        "chi2": chi2_val, "chi2_p": chi2_pval
+    })
+tend = time.time()
+
+results_df = pd.DataFrame.from_records(records)
+
+# Benjamini–Hochberg FDR
+alpha = 0.05
+results_df["MI_reject"], _ = benjamini_hochberg(results_df["MI_p"].values, alpha)
+results_df["JI_reject"], _ = benjamini_hochberg(results_df["JI_p"].values, alpha)
+results_df["chi2_reject"], _ = benjamini_hochberg(results_df["chi2_p"].values, alpha)
+
+# Summaries and overlaps
+mi_sig = results_df["MI_reject"].sum()
+ji_sig = results_df["JI_reject"].sum()
+chi2_sig = results_df["chi2_reject"].sum()
+mi_ji_overlap = ((results_df["MI_reject"]) & (results_df["JI_reject"])).sum()
+mi_chi_overlap = ((results_df["MI_reject"]) & (results_df["chi2_reject"])).sum()
+ji_chi_overlap = ((results_df["JI_reject"]) & (results_df["chi2_reject"])).sum()
+all_three = ((results_df["MI_reject"]) &
+             (results_df["JI_reject"]) &
+             (results_df["chi2_reject"])).sum()
+
+summary = pd.DataFrame({
+    "stat": ["MI", "JI", "chi2"],
+    "n_significant": [mi_sig, ji_sig, chi2_sig]
+})
+overlap_df = pd.DataFrame({
+    "pair": ["MI & JI", "MI & chi2", "JI & chi2", "MI & JI & chi2"],
+    "count": [mi_ji_overlap, mi_chi_overlap, ji_chi_overlap, all_three]
+})
+
+# print("\n--- p1b significant counts ---")
+# print(summary)
+# print("\n--- Overlaps ---")
+# print(overlap_df)
+
+
+```
+
+| Statistic | n_significant |
+| --- | --- |
+| MI | $93$ |
+| JI | $56$ |
+| $\chi^2$ | $93$ |
+
+| Pair | count |
+| --- | --- |
+| MI & JI | $55$ |
+| MI & $\chi^2$ | $91$ |
+| JI & $\chi^2$ | $56$ |
+| MI & JI & $\chi^2$ | $55$ |
+
+
+1. High agreement between MI and $\chi^2$ (91 overlap of 93 $\chi^2$ rejections):
+
+MI and $\chi^2$ are both sensitive to any dependence between two categorical variables, not just co-occurrence of 1’s like JI.
+
+Therefore, they detect similar dependent pairs which explains the high agreement between the two.
+
+2. Jaccard Index much more conservative (56 pairs):
+
+JI measures co-occurrence of 1’s only.
+
+It ignores mutual absence and other forms of dependence, so it finds fewer associations than the above two schemes.
+
+Almost every JI-significant pair (55/56) is also MI and $\chi^2$-significant, showing that when there is strong co-occurrence, all three metrics agree.
+
+3. Patterns in overlaps:
+
+The 55 pairs that are marked significant in all schemes correspond to genuinely strong “co-activation” relationships (both 1s appear together often).
+
+The additional 36–38 pairs that are MI/$chi^2$-only likely represent inverse or asymmetric dependencies.
+
+4. FDR correction effect:
+
+Even after multiple-testing adjustment (105 pairs), most pairs remain to be significant, suggesting a strong dependence within the dataset.
+
+```{python}
+#| echo: false
+plt.subplot(1,3,1)
+plt.scatter(results_df["MI"], results_df["JI"])
+plt.xlabel("Mutual Information")
+plt.ylabel("Jaccard Index")
+plt.title("MI vs JI (p1b pairs)")
+
+plt.subplot(1,3,2)
+plt.scatter(results_df["MI"], results_df["chi2"])
+plt.xlabel("Mutual Information")
+plt.ylabel("Chi2 statistic")
+plt.title("MI vs Chi2 (p1b pairs)")
+
+plt.subplot(1,3,3)
+plt.scatter(results_df["JI"], results_df["chi2"])
+plt.xlabel("Jaccard Index")
+plt.ylabel("Chi2 statistic")
+plt.title("JI vs Chi2 (p1b pairs)")
+plt.tight_layout()
+plt.show()
+```
+
+5. Visualization analysis:
+
+MI vs $\chi^2$: a nearly linear positive relationship (both increase with strength of dependence).
+
+JI vs MI/$\chi^2$: points cluster near 0 for weak pairs, and a small subset with high JI correspond to the 55 triply significant pairs.
+
+# Task 2
+## a
+```{python}
+#| include: false
+
+p2a = pd.read_csv("data/p2a.csv", header=None)
+
+var1 = p2a.iloc[:, 0]  # First column
+var2 = p2a.iloc[:, 1]  # Second column
+
+# Compute Pearson correlation and p-value
+r_a, p_a = pearsonr(var1, var2)
+
+# Set significance level α (commonly 0.05)
+alpha = 0.05
+
+# Determine if the association is statistically significant
+significant = p_a < alpha
+
+# Print results
+print(f"Pearson correlation (r_a): {r_a:.4f}")
+print(f"P-value (p_a): {p_a}")
+print(f"Significance level (α): {alpha}")
+print(f"Statistically significant? {significant}")
+
+```
+
+The pearson correlation coefficient between the two variables in p2a.csv is $r_a=0.3809$ and the p-value was $p_a=1.0409\times 10^{-83}$. This means at significance level $\alpha=0.05$ there is a statistically significant relationship between the two variables. According to the $r_a$ coefficient, there is a weak to moderate positive association between the variables.
+
+## b
+```{python}
+#| include: false
+
+p2b = pd.read_csv("data/p2b.csv", header=None)
+
+r_b, p_b = pearsonr(p2b.iloc[:,0], p2b.iloc[:,1])
+print(f"Pearson correlation (r_b): {r_b:.4f}")
+print(f"P-value (p_b): {p_b}")
+```
+The pearson correlation coefficient between the two variables in p2b.csv is $r_b=0.9312$ and the p-value was $p_a=3.7373\times 10^{-49}$. This means at significance level $\alpha=0.05$ there is a statistically significant relationship between the two variables. According to the $r_b$ coefficient, there is a strong positive association between the variables.
+
+According to the correlation coefficients, the variable pair in $b$ has a stronger association. According to the p-values, the association between the variable pair in $a$ is less likely to have occured by chance than the association between the variables in $b$. The p-value is not necessarily an indicator of strength of association as p-value will decrease as $n$ increases. As such, although the p-value and correlation coefficient disagree with eachother on which pair is more associated, this is primarily due to the fact that these two statistics measures different things. The correlation is a measure of strength of the linear relationship between two variables while the p-value is a measure of how sure we are of this measurement. Thus, the p-value is lower for $a$ simply because $n_a>n_b$ which results in the statistic being more sure of the measurement in part $a$.
+
+```{python}
+#| echo: false
+
+plt.subplot(1,2,1)
+plt.scatter(var1,var2, s=10)
+plt.title("Part A")
+plt.xlabel("A1")
+plt.ylabel("A2")
+
+plt.subplot(1,2,2)
+plt.scatter(p2b.iloc[:,0],p2b.iloc[:,1], s=20)
+plt.title("Part B")
+plt.xlabel("B1")
+plt.ylabel("B2")
+
+plt.tight_layout()
+plt.show()
+```
+
+According to the scatterplots, the variables in part $b$ have a higher association because the scatter plot is much tighter than the one for part $a$. This conclusion agrees with my previous statements because it is clear that the number of points in $a$ is significantly larger than the number in $b$ which is probably what lead to the p-value being higher in $a$ than in $b$ despite $b$ having a stronger correlation than $a$.
+
+
+
+## c
+```{python}
+#| include: false
+
+p2c = pd.read_csv("data/p2c.csv", header=None)
+
+r_c, p_c = pearsonr(p2c.iloc[:,0], p2c.iloc[:,1])
+print(f"Pearson correlation (r_c): {r_c:.4f}")
+print(f"P-value (p_c): {p_c}")
+```
+
+The pearson correlation coefficient between the two variables in p2c.csv is $r_c=0.0412$ and the p-value was $p_c=0.5919$. This means at significance level $\alpha=0.05$ there is not a statistically significant relationship between the two variables. According to the $r_c$ coefficient, there is a very weak positive association / no association between the variables.
+
+According to the correlation coefficients, the variable pair in $a$ has a stronger association. According to the p-values, the association between the variable pair in $a$ is less likely to have occured by chance than the association between the variables in $c$. The p-value is not necessarily an indicator of strength of association as p-value will decrease as $n$ increases. For this part, the p-value and correlation coefficient agree with eachother, as they both assert that $a$ has a higher correlation and statistical significance.
+
+```{python}
+#| echo: false
+
+plt.subplot(1,2,1)
+plt.scatter(var1,var2, s=10)
+plt.title("Part A")
+plt.xlabel("A1")
+plt.ylabel("A2")
+
+plt.subplot(1,2,2)
+plt.scatter(p2c.iloc[:,0],p2c.iloc[:,1], s=20)
+plt.title("Part C")
+plt.xlabel("C1")
+plt.ylabel("C2")
+
+plt.tight_layout()
+plt.show()
+```
+
+Looking at the graph, it is clear that the variables in part $c$ have an extremely high association and roughly follow the line of $C2=|C1|$. This is a clear disagreement to the statements made before seeing the scatterplot. Since the pearson's correlation coefficient is solving for a single straight line, the best it can do is roughly a flat horizontal line through the center of the scatter plot in $c$. As such, the correlation coefficient will be small (as the line of best fit has a near $0$ slope), which explains the differences between the two conclusions. 
+

@@ -1,0 +1,88 @@
+---
+format: pdf
+---
+
+# 7.4
+$f_{X+Y}(z) = f_X*f_Y(z)=\int_{0}^\infty f_X(x)f_Y(z-x)dx$
+
+> $\int_{0}^z \lambda e^{-\lambda x}*\mu e^{-\mu(z-x)} dx$
+
+> $\int_{0}^z \lambda\mu e^{-\lambda x +\mu x -\mu z} dx$
+
+> $\int_{0}^z \lambda\mu e^{(-\lambda+\mu) x -\mu z} dx$
+
+> $\lambda\mu (\frac{1}{\mu-\lambda}e^{(\mu-\lambda)x -\mu z})|_{0}^z$
+
+> $\frac{\lambda\mu}{\mu-\lambda}e^{-\mu z}(e^{(\mu-\lambda)x})|_{0}^z$
+
+> $\frac{\lambda\mu}{\mu-\lambda}e^{-\mu z}(e^{(\mu-\lambda)z}-1)$
+
+> $\frac{\lambda\mu}{\mu-\lambda}(e^{-\lambda z}-e^{-\mu z})$ for $z\geq 0$
+
+$f_{X+Y}(z) = \frac{\lambda\mu}{\mu-\lambda}(e^{-\lambda z}-e^{-\mu z})$ for $z\geq 0$ else $0$
+
+
+# 7.6
+The positions are symmetric so we can use the exchangability rule.
+
+$P(X_3=K,X_5=A_S)=P(X_1=K,X_2=A_S)=\frac4{52}\frac1{51}=\frac1{663}$
+
+Alternatively: $\forall i,j (i\neq j) \rightarrow P(X_i=A_S,X_j=K_S)=\frac{50!}{52!}=\frac{1}{52\times 51}$
+
+Since there are $4$ different possibilities we need to look out for $4\times P(X_i=A_S,X_j=K_S)=\frac{1}{663}$
+
+
+# 7.16
+$p_{X+Y}(n)=p_X*p_Y(n)=\sum_k p_X(n-k)p_Y(n)$
+
+$p_X(k)=\frac{\lambda^ke^{-\lambda}}{k!}$
+
+$p_Y(k)=p^k(1-p)^{1-k}$ for $k\in\{0,1\}$
+
+$\sum_{k=0}^1 p^k(1-p)^{1-k}\frac{\lambda^{n-k}e^{\lambda}}{(n-k)!}$
+
+$(1-p)\frac{\lambda^{n}e^{\lambda}}{n!} + p\frac{\lambda^{n-1}e^{-\lambda}}{(n-1)!}$
+
+$e^{-\lambda}((1-p)\frac{\lambda^n}{n!}+p\frac{\lambda^{n-1}}{(n-1)!})$
+
+> For $n=0\rightarrow (1-p)e^{-\lambda}$
+
+> For $n>0\rightarrow\frac{e^{-\lambda}\lambda^{n-1}}{(n-1)!}((1-p)\frac{\lambda}{n}+p)$
+
+$$p_{X+Y}(n)=\begin{cases}0 & n<0 \\ (1-p)e^{-\lambda} & n=0 \\ \frac{e^{-\lambda}\lambda^{n-1}}{(n-1)!}((1-p)\frac\lambda n + p) & n>0\end{cases}$$
+
+# 7.22
+$X,Y\sim N(\mu,\sigma^2)$
+
+$2X\sim N(2\mu, (2\sigma)^2)\rightarrow 2X\sim N(2\mu, 4\sigma^2)$
+
+$p_{X+Y}(n)=\int_{-\infty}^\infty \frac1{\sigma\sqrt{2\pi}}e^{-\frac{(n-x-\mu)^2}{2\sigma^2}}\frac1{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}dx$
+
+$p_{X+Y}(n)=\frac1{\sigma^22\pi}\int_{-\infty}^\infty e^{-\frac{(n-x-\mu)^2-(x-\mu)^2}{2\sigma^2}}dx$
+
+> Evaluated with integral calculator
+
+$p_{X+Y}(n)=\frac{1}{2\sigma\sqrt \pi}e^{-\frac{(n-2\mu)^2}{4\sigma^2}}$
+
+According to this pdf, $X+Y\sim N(2\mu,2\sigma^2)$
+
+Thus the parameter $\sigma^2$ for $2X$ and $X+Y$ are not the same for $\sigma^2>0$ while they still have the same mean of $2\mu$
+
+# 7.28
+$\int_0^\infty\int_{x_1}^\infty\int_{x_2}^\infty \lambda e^{-\lambda x_1}\lambda e^{-\lambda x_2}\lambda e^{-\lambda x_3}dx_3dx_2dx_1$
+
+$\int_0^\infty\int_{x_1}^\infty\int_{x_2}^\infty \lambda^3 e^{-\lambda (x_1+x_2+x_3)}dx_3dx_2dx_1$
+
+$\int_0^\infty\int_{x_1}^\infty\lambda^2 e^{-\lambda (x_1+2x_2)}dx_2dx_1$
+
+$\int_0^\infty \frac{\lambda}{2} e^{-\lambda (3x_1)}dx_1$
+
+$-\frac{1}{6} e^{-\lambda (3x_1)}|_0^\infty=\frac16$
+
+# 8.2
+$E(X_4+X_6+X_{12})=E(X_4)+E(X_6)+E(X_{12})=2.5+3.5+6.5=12.5$ 
+
+# 8.8 
+$E(X_p+X_f)=E(X_p)+E(X_f)=4+0.5=4.5$ PM
+
+$Var(X_p+X_f)=Var(X_p)+Var(X_f)=\frac1{12}(6)^2 + 0.5^2 = 3 +\frac14 = 3.25$
