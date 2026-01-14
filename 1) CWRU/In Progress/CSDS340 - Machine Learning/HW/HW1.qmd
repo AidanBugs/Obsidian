@@ -14,25 +14,24 @@ $z\geq 0 \leftarrow y=1$
 
 $z< 0 \leftarrow y=0$
 
-$y(0,0) = 0$
+$\sigma(0,0) = 0$
 
-$y(0,1) = 1$
+$\sigma(0,1) = 1$
 
-$y(1,0) = 1$
+$\sigma(1,0) = 1$
 
-$y(1,1) = 1$
+$\sigma(1,1) = 1$
 
-$y(0,0.5) = 0$
+$\sigma(0,0.5) = 0$
 
-$y(0.5,0) = 0$
+$\sigma(0.5,0) = 0$
 
-$y(0.5,0.5) = 1$
+$\sigma(0.5,0.5) = 1$
 
 ## 2
 ```{python}
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.patches import Patch
 
 def plot_bounds(points, m, b):
   x = np.linspace(-0.5,1.5,100)
@@ -70,11 +69,6 @@ def plot_bounds(points, m, b):
   ax.axvline(0, color='black', linewidth=0.5)
   ax.legend(loc='upper right', fontsize=10)
   
-  ax.text(0.7, 0.8, 'Region 1\n(Class 1)', color='darkblue', 
-          fontsize=10, bbox=dict(boxstyle="round,pad=0.3", facecolor="lightblue", alpha=0.7))
-  ax.text(-0.7, -0.8, 'Region 0\n(Class 0)', color='darkred', 
-          fontsize=10, bbox=dict(boxstyle="round,pad=0.3", facecolor="lightcoral", alpha=0.7))
-
   plt.tight_layout()
 
 q1 = [
@@ -103,9 +97,9 @@ $w_1=-1,w_2=-1,b=1.5$
 We can get these weights and biases as long as they follow these inequalities: 
 
 1. $w_1+w_2+b<0$
-1. $w_1+b>0$
-1. $w_2+b>0$
-1. $b>0$
+1. $w_1+b\geq 0$
+1. $w_2+b\geq 0$
+1. $b\geq 0$
 
 For an $n$ input NAND operator:
 
@@ -116,7 +110,7 @@ Assuming only $x_1$ we get the following:
 $w_1=-1, b=0.5$
 
 1. $w_1+b<0$
-1. $b>0$
+1. $b\geq 0$
 
 # 3
 ## 1
@@ -171,19 +165,19 @@ No single straight line can separate the two classes because the classes are in 
 No it is not possible to construct a perceptron for the two input XOR. We know that the weights and biases must follow the below inequalities:
 
 1. $w_1+w_2+b<0$
-1. $w_1+b>0$
-1. $w_2+b>0$
+1. $w_1+b\geq 0$
+1. $w_2+b\geq 0$
 1. $b<0$
 
 From 4, we know $b$ must be negative. Using this information we know that $w_1,w_2$ must both be positive to make 2,3 true. 
 
 Now looking at number 1, $w_1+w_2+b < 0$, we can substitue inequalities 2,3 in to get:
 
-$w_1+w_2+b>-b-b+b$
+$w_1+w_2+b\geq -b-b+b$
 
 $\rightarrow -b-b+b = -b$
 
-From inequality 4, we know that $-b>0$ so we know that $w_1+w_2+b>0$ which creates a contradiction because inequality 1 says that $w_1+w_2+b<0$.
+From inequality 4, we know that $-b>0$ so we know that $w_1+w_2+b\geq 0$ which creates a contradiction because inequality 1 says that $w_1+w_2+b<0$.
 
 Therefore it is not possible to create a perceptron for the XOR logica operation.
 
