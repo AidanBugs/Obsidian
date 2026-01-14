@@ -1,3 +1,9 @@
+---
+format: pdf
+execute: 
+  echo: false
+---
+
 # 1
 ## 1
 $z = \sum w_i x_i + b$ 
@@ -23,6 +29,67 @@ $y(0.5,0) = 0$
 $y(0.5,0.5) = 1$
 
 ## 2
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.patches import Patch
+
+def plot_bounds(points, m, b):
+  x = np.linspace(-0.5,1.5,100)
+  y = np.linspace(-0.5,1.5,100)
+  X,Y = np.meshgrid(x,y)
+  Z = Y >= (m * X + b)
+
+  fig, ax = plt.subplots(figsize=(8, 6))
+    
+  cmap = plt.cm.RdYlBu
+  ax.contourf(X, Y, Z, levels=[-0.5, 0.5, 1.5], alpha=0.3, colors=['red', 'blue'])
+  
+  x_line = np.array([-0.5, 1.5])
+  y_line = m * x_line + b
+  ax.plot(x_line, y_line, 'k-', linewidth=3, label=f'Decision Boundary\ny = {m}x + {b}')
+  
+  class0_points = [(x, y) for x, y, c in points if c == 0]
+  class1_points = [(x, y) for x, y, c in points if c == 1]
+  
+  if class0_points:
+    class0_x, class0_y = zip(*class0_points)
+    ax.scatter(class0_x, class0_y, c='red', s=100, edgecolors='black', linewidth=2, label='Class 0', marker='o')
+  
+  if class1_points:
+    class1_x, class1_y = zip(*class1_points)
+    ax.scatter(class1_x, class1_y, c='blue', s=100, edgecolors='black', linewidth=2, label='Class 1', marker='s')
+
+  ax.set_xlabel('Input x₁', fontsize=12)
+  ax.set_ylabel('Input x₂', fontsize=12)
+  ax.set_title('Perceptron Decision Boundary', fontsize=14, pad=20)
+  ax.set_xlim([-0.5,1.5])
+  ax.set_ylim([-0.5,1.5])
+  ax.grid(True, alpha=0.3)
+  ax.axhline(0, color='black', linewidth=0.5)
+  ax.axvline(0, color='black', linewidth=0.5)
+  ax.legend(loc='upper right', fontsize=10)
+  
+  ax.text(0.7, 0.8, 'Region 1\n(Class 1)', color='darkblue', 
+          fontsize=10, bbox=dict(boxstyle="round,pad=0.3", facecolor="lightblue", alpha=0.7))
+  ax.text(-0.7, -0.8, 'Region 0\n(Class 0)', color='darkred', 
+          fontsize=10, bbox=dict(boxstyle="round,pad=0.3", facecolor="lightcoral", alpha=0.7))
+
+  plt.tight_layout()
+
+q1 = [
+  [0,0,0],
+  [0,1,1],
+  [1,0,1],
+  [1,1,1],
+  [0,0.5,0],
+  [0.5,0,0],
+  [0.5,0.5,1]
+]
+
+plot_bounds(q1,-1,0.6)
+```
+#
 
 ## 3
 This would represent the logical OR function because the perceptron is $0$ iff $x_1=0\land x_2=0$
@@ -53,6 +120,49 @@ $w_1=-1, b=0.5$
 
 # 3
 ## 1
+```{python}
+def plot_points(points):
+  x = np.linspace(-0.5,1.5,100)
+  y = np.linspace(-0.5,1.5,100)
+  X,Y = np.meshgrid(x,y)
+
+  fig, ax = plt.subplots(figsize=(6, 4))
+    
+  class0_points = [(x, y) for x, y, c in points if c == 0]
+  class1_points = [(x, y) for x, y, c in points if c == 1]
+  
+  if class0_points:
+    class0_x, class0_y = zip(*class0_points)
+    ax.scatter(class0_x, class0_y, c='red', s=100, edgecolors='black', linewidth=2, label='Class 0', marker='o')
+  
+  if class1_points:
+    class1_x, class1_y = zip(*class1_points)
+    ax.scatter(class1_x, class1_y, c='blue', s=100, edgecolors='black', linewidth=2, label='Class 1', marker='s')
+
+  ax.set_xlabel('Input x₁', fontsize=12)
+  ax.set_ylabel('Input x₂', fontsize=12)
+  ax.set_title('XNOR Class Label Graph', fontsize=14, pad=20)
+  ax.set_xlim([-0.5,1.5])
+  ax.set_ylim([-0.5,1.5])
+  ax.grid(True, alpha=0.3)
+  ax.axhline(0, color='black', linewidth=0.5)
+  ax.axvline(0, color='black', linewidth=0.5)
+  
+  ax.legend(loc='upper right', fontsize=10)
+  
+  plt.tight_layout()
+
+xnor = [
+  [0,0,1],
+  [0,1,0],
+  [1,0,0],
+  [1,1,1],
+]
+
+plot_points(xnor)
+```
+
+#
 
 ## 2
 No single straight line can separate the two classes because the classes are in opposite corners as shown above.
