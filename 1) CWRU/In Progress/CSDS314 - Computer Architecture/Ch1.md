@@ -32,11 +32,19 @@ How long it takes to execute a task
 ## Throughput
 Number of Tasks completed per Unit Time
 
-## Both Throughput and Response Time
+## Knowledge Check
+How does replacing the chip with a faster one affect response time & throughput?
 
+> Both improve
+
+How does adding more processors affect them?
+
+> Response time stays the same but throughput increases
 
 # Relative Performance
-$\frac{Perf_A}{Perf_B} = \frac{Exe_A}{Exe_B} = n$
+$Perf=\frac{1}{Exe}$
+
+$\frac{Perf_A}{Perf_B} = \frac{Exe_B}{Exe_A} = n$
 
 Results in computer $A$ is $n$ times faster than computer $B$
 
