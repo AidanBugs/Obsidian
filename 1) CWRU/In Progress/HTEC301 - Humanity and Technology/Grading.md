@@ -1,6 +1,22 @@
 # Engagement 25%
 Attendance, participation, and presentations (x2-3)
 
+## Presentations
+### Context
+Who is the author and what is the central problem they are exploring
+
+### Key Concepts
+What are the most important concepts, in your own terms, and how does the author use them?)
+
+### Discussion Questions 
+What was unclear to you? 
+
+What tensions arise in the text? 
+
+What do you disagree with? 
+
+What are the ethical stakes of the arguement?
+
 # Sociotechnical Glossary 15%
 Mapping of terms and definitions used throughout the semester
 
