@@ -182,5 +182,162 @@ From inequality 4, we know that $-b>0$ so we know that $w_1+w_2+b\geq 0$ which c
 Therefore it is not possible to create a perceptron for the XOR logica operation.
 
 # 4
+| x | y |
+| - | - |
+| 1 | 0 |
+| 2 | 0 |
+| 3 | 1 |
+| 4 | 1 |
+
+## 1
+Initial
+
+> $w_0 = 0$
+> $b_0 = 0.1$
+> $\eta = 0.1$
+
+First Pass
+
+> $\delta w = \eta(0-1)(1)=-0.1$
+> $\delta b = \eta(0-1)=-0.1$
+> $\rightarrow w_1 = -0.1$
+> $\rightarrow b_1 = 0$
+
+Second Pass
+
+> $\delta w = \eta(0-0)(2)=0$
+> $\delta b = \eta(0-0)=0$
+> $\rightarrow w_2 = -0.1$
+> $\rightarrow b_2 = 0$
+
+Third Pass
+
+> $\delta w = \eta(1-0)(3)=0.3$
+> $\delta b = \eta(1-0)=0.1$
+> $\rightarrow w_3 = 0.2$
+> $\rightarrow b_3 = 0.1$
+
+Fourth Pass
+
+> $\delta w = \eta(1-1)(4)=0$
+> $\delta b = \eta(1-1)=0$
+> $\rightarrow w_4 = 0.2$
+> $\rightarrow b_4 = 0.1$
+
+## 2
+$w=0.1,b=0.1$
+
+$z = [0.2,0.3,0.4,0.5]$
+
+$L(w,b) = \frac 1n \sum (y_i - \sigma'(z_i))^2$
+
+$L(w,b) = \frac 14 (0.2^2 + 0.3^2 + 0.6^2 + 0.5^2)$
+
+$L(w,b) = \frac 14 (0.74)$
+
+$L(w,b) = 0.185$
+
+## 3
+$\nabla_w L(w,b)$
+
+$\frac{dL}{dw} = -\frac2n \sum (y_i - \sigma'(z_i))x_i$
+
+$\frac{dL}{dw} = -\frac12 (-0.2(1)-0.3(2) + 0.6(3) + 0.5(4)$
+
+$\frac{dL}{dw} = -\frac12 (3)$
+
+$\frac{dL}{dw} = 1.5$
+
+$\frac{dL}{db} = -\frac2n \sum (y_i - \sigma'(z_i))$
+
+$\frac{dL}{db} = -\frac12 (-0.2-0.3 + 0.6 + 0.5$
+
+$\frac{dL}{db} = -\frac12 0.6$
+
+$\frac{dL}{db} = 0.3$
+
+Thus after one epoch (with $\eta=0.1$):
+
+$w= -0.5, b=0.07$
+
+## 4
+Order of inputs does not matter for the gradient descent algorithm because the gradient descent algorithm uses consistent weights and biases for each input in a single epoch. In other words, since we only update the weights and biases AFTER performing gradient descent (and apply the same weight to each input in the gradient descent function) the order of inputs does not matter. This is different to the perceptron model which updates the weights and biases within a single epoch (and each input could have different weights and biases applied), thus the order matters for the perceptron model.
 
 # 5
+## 1
+### Input Features
+preg = Number of times pregnant
+
+plas = Plasma glucose concentration a 2 hours in an oral glucose tolerance test
+
+pres = Diastolic blood pressure (mm Hg)
+
+skin = Triceps skin fold thickness (mm)
+
+test = 2-Hour serum insulin (mu U/ml)
+
+mass = Body mass index (weight in kg/(height in m)^2)
+
+pedi = Diabetes pedigree function
+
+age = Age (years)
+
+### Output Classes
+1:tested positive for diabetes 
+
+0: tested negative for diabetes
+
+## 2
+```{python}
+# imports
+import pandas as pd
+import numpy as np
+import kagglehub
+from kagglehub import KaggleDatasetAdapter
+from sklearn.linear_model import Perceptron
+from sklearn.metrics import accuracy_score
+```
+
+```{python}
+#| eval: false
+
+# Login (skip if data is downloaded, note that the data is stored in the below path)
+
+path ='data/pimaindians.csv'
+
+kagglehub.login()
+
+kagglehub.dataset_download("kumargh/pimaindiansdiabetescsv", path=path)
+```
+
+```{python}
+header_names = ["preg", "plas", "pres", "skin", "test", "mass", "pedi", "age", "class"]
+df = pd.read_csv("data/pimaindians.csv", names=header_names)
+
+etas = np.linspace(0.0000000000000000000000000000001, 100, num=2500)[::-1]
+
+Y=header_names.pop()
+X=header_names
+
+accuracies = []
+
+for eta in etas:
+  perceptron = Perceptron(max_iter=1000, eta0=eta)
+  perceptron.fit(df[X], df[Y])
+  y_pred = perceptron.predict(df[X])
+  accuracies.append(accuracy_score(df[Y], y_pred))
+
+max_acc = max(accuracies)
+
+best_eta = etas[accuracies.index(max_acc)]
+
+print("Best ETA:" + str(best_eta))
+
+print("Highest Accuracy:" + str(max_acc))
+
+plt.plot(etas, accuracies, marker='o')
+plt.title("Etas vs Accuracy")
+plt.xlabel("Eta")
+plt.ylabel("Accuracy (%)")
+plt.show()
+```
