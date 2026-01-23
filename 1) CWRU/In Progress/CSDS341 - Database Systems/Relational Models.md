@@ -60,7 +60,7 @@ $\forall i,j \in m (i\neq j \rightarrow t_i[SK]\neq t_j[SK])$
 
 Note that $SK$ is a set of attributes in $R$
 
-### Key (or minimal key)
+### Key (or minimal key or candidate key)
 This is a superkey were the removal of any attribute of the key makes the attribute set no longer a super key
 
 Note that the primary key refers to the desegnated key of the database schema (typically denoted by attributes being underlined)
@@ -71,4 +71,4 @@ The primary key attributes cannot be null in any tuple of $r(R)$
 $\forall i\in |r(R)| (t_i[PK]\neq [null]\times |PK|)$
 
 ## Referential Integrity
-
+The foreign keys (FKs) must reference an entity in the external relation OR a null. This means FKs must either be to a corresponding PK in the external relation OR FK must be null. Note that PK cannot be null in either relation so if FK is part of the PK it cannot be null.

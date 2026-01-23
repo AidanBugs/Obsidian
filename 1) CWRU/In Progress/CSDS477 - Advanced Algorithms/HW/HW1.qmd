@@ -1,12 +1,12 @@
 ---
 format: pdf
 execute:
-  echo: false
+  echo: true
 ---
 
 # 1
 ## i
-Our goal is to show that the edges in $T^*$ are all the same (althought the edge weights may be different).
+Our goal is to show that the edges in $T^*$ are all the same (although the edge weights may be different).
 
 If $T$ is an optimal message-passing tree then $T$ is an MST of a graph whose edge weights are $w_e=p_e$
 
@@ -22,24 +22,95 @@ If $T$ is not a MST of a graph whose edge weights are $w_e=p_e$ then $T$ is not 
 ## a
 
 ```{python}
+#| echo: false
 import numpy as np
 import matplotlib.pyplot as plt
-from sympy.solvers import solve
-from sympy import Symbol
 
+x_1 = np.array([0, 1.5])
+x_2 = np.array([3, 0])
 
+x_1b = np.array([0,1,1,0,0])
+x_2b = np.array([1,1,0,0,1])
+
+plt.plot(x_1,x_2, label="Constraints")
+plt.plot(x_1b,x_2b, "-.", label="Bounds")
+plt.xlabel("x1")
+plt.ylabel("x2")
+plt.legend()
+plt.show()
 
 ```
 
+This program has a unique optimal solution which is $x^*=(x_1=1, x_2=1)$
+
 ## b
+$$
+x=
+\begin{pmatrix}
+x_1 \\
+x_2
+\end{pmatrix}
+$$
+
+$$
+c=
+\begin{pmatrix}
+-1 \\
+-1
+\end{pmatrix}
+$$
+
+$$
+A=
+\begin{pmatrix}
+2 \\
+1
+\end{pmatrix}
+$$
+
+$$ b = (3)$$
 
 ## c
+```{cplex}
+Maximize
+  obj: x1 + x2
+Subject To
+  c1: 2x1 + x2 <= 3
+Bounds
+  0 <= x1 <= 1
+  0 <= x2 <= 1
+
+```
 
 # 3
 ## a
 
 ## b
+$$
+x=
+\begin{pmatrix}
+x_1 \\
+x_2
+\end{pmatrix}
+$$
 
+$$
+c=
+\begin{pmatrix}
+-1 \\
+-(1-\lambda)
+\end{pmatrix}
+$$
+
+$$
+A=
+\begin{pmatrix}
+2 \\
+1
+\end{pmatrix}
+$$
+
+$$ b = (3)$$
 ## c
 
 ## d
