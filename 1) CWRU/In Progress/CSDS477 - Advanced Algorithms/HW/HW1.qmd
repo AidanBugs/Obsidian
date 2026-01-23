@@ -1,0 +1,73 @@
+---
+format: pdf
+execute:
+  echo: false
+---
+
+# 1
+## i
+Our goal is to show that the edges in $T^*$ are all the same (althought the edge weights may be different).
+
+If $T$ is an optimal message-passing tree then $T$ is an MST of a graph whose edge weights are $w_e=p_e$
+
+If $T$ is a MST of a graph whose edge weights are $w_e=p_e$ then $T$ is an optimal message-passing tree
+
+If $T$ is not an optimal message-passing tree then $T$ is not a MST of a graph whose edge weights are $w_e=p_e$
+
+If $T$ is not a MST of a graph whose edge weights are $w_e=p_e$ then $T$ is not an optimal message-passing tree
+
+## ii
+
+# 2 
+## a
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+from sympy.solvers import solve
+from sympy import Symbol
+
+
+
+```
+
+## b
+
+## c
+
+# 3
+## a
+
+## b
+
+## c
+
+## d
+
+# 4
+
+# 5
+## a
+
+## b
+
+## c
+
+## d
+
+## e
+
+# 6
+## a
+
+## b
+
+## c
+
+## d
+
+## e
+
+## f
+
+
