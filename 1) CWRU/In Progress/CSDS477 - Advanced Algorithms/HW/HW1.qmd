@@ -6,17 +6,40 @@ execute:
 
 # 1
 ## i
-Our goal is to show that the edges in $T^*$ are all the same (although the edge weights may be different).
+Our goal is to show that $T^* = \arg\max_{T\in X} \Pi_{e\in T} (1-p_e)\equiv \arg\min_{T\in X} \sum_{e\in T} p_e$  
 
-If $T$ is an optimal message-passing tree then $T$ is an MST of a graph whose edge weights are $w_e=p_e$
+We can follow a similar proof shown in class:
 
-If $T$ is a MST of a graph whose edge weights are $w_e=p_e$ then $T$ is an optimal message-passing tree
+> $T^* = \arg\max_{T\in X} \Pi_{e\in T} (1-p_e)$
+>
+> $\equiv \arg\max_{T\in X} \ln (\Pi_{e\in T} (1-p_e))$
+>
+> $= \arg\max_{T\in X} \sum_{e\in T} \ln (1-p_e)$
+>
+> $\equiv \arg\min_{T\in X} -\sum_{e\in T} \ln (1-p_e)\equiv T^*$
 
-If $T$ is not an optimal message-passing tree then $T$ is not a MST of a graph whose edge weights are $w_e=p_e$
+Let $T'$ denote $\arg\min_{T\in X} \sum_{e\in T} p_e$ or the MST of a graph whose edge weights are $w_e=p_e$
 
-If $T$ is not a MST of a graph whose edge weights are $w_e=p_e$ then $T$ is not an optimal message-passing tree
+Suppose $T' \neq T^*$ then $\exists e_1\in T'\land e_1\notin T^*$ and $\exists e_2\notin T' \land e_2\in T^*$
+
+From $T'$ and from the Optimal Message Passing Problem we determine $0<p_{e1} < p_{e2}<1$
+
+> Thus it is clear that $1-p_{e1} > 1-p_{e2}$
+
+From $T^*$ we determine that $-\ln(1-p_{e2}) < -\ln(1-p_{e1})\rightarrow \ln(1-p_{e2}) > \ln(1-p_{e1})$
+
+This is a contradiction because the $\ln$ function is strictly increasing function meaning if $x_1 > x_2 \rightarrow \ln x_1 > \ln x_2$ which is not the case shown above.
+
+Thus $T^*=T'$ because $T^*\neq T'$ creates a contradiction.
 
 ## ii
+Claim: $\exists R:(X,p)\rightarrow (X,w)$ which creates an instance of MST Problem from an instance of Optimal Message Passing Problem by defining weights of the given graph for Optimal Message Passing Problem as follows:
+
+$$\forall e \in E, w^*(e) = p(e)$$
+
+We are claiming that the optimal spanning tree for the MST is also an optimal spanning tree for the Optimal Mssage Passing Problem. 
+
+Proof: Given from the Optimal Message Passing Problem that $0<p(e)<1$, thus $1-p(e)>0$, we are able to apply the transformations done in **1i**. Using **1i**, we come to the conclusion that $T^*=T'$ thus the proposed reduction algorithm R optimally solves Optimal Message Passing Problem using reduction to Minimum Spanning Tree Problem. 
 
 # 2 
 ## a
@@ -29,19 +52,17 @@ import matplotlib.pyplot as plt
 x_1 = np.array([0, 1.5])
 x_2 = np.array([3, 0])
 
-x_1b = np.array([0,1,1,0,0])
-x_2b = np.array([1,1,0,0,1])
-
-plt.plot(x_1,x_2, label="Constraints")
-plt.plot(x_1b,x_2b, "-.", label="Bounds")
+plt.fill_between([0,1],[1,1],[0,0], label="Bounds", alpha=0.5)
+plt.plot(x_1,x_2, "-.", label="Constraints", color="red")
 plt.xlabel("x1")
 plt.ylabel("x2")
+plt.ylim(0,1.5)
 plt.legend()
 plt.show()
 
 ```
 
-This program has a unique optimal solution which is $x^*=(x_1=1, x_2=1)$
+This program has a unique optimal solution which is $x^*=(x_1=1, x_2=1)$ because 
 
 ## b
 We are given:
@@ -77,61 +98,21 @@ End
 
 # 3
 ## a
+```{python}
+#| echo: false
+
+plt.fill_between([0,1],[3,3],[0,0], label="Bounds", alpha=0.5)
+plt.plot(x_1,x_2, "-.", label="Constraints", color="red")
+plt.xlabel("x1")
+plt.ylabel("x2")
+plt.legend()
+plt.show()
+
+```
 
 ## b
-$$
-x=
-\begin{pmatrix}
-x_1 \\
-x_2
-\end{pmatrix}
-$$
 
-$$
-c=
-\begin{pmatrix}
--1 \\
--(1-\lambda)
-\end{pmatrix}
-$$
-
-$$
-A=
-\begin{pmatrix}
-2 \\
-1
-\end{pmatrix}
-$$
-
-$$ b = (3)$$
-## c
-
-## d
-
-# 4
-
-# 5
-## a
-
-## b
 
 ## c
 
 ## d
-
-## e
-
-# 6
-## a
-
-## b
-
-## c
-
-## d
-
-## e
-
-## f
-
-
