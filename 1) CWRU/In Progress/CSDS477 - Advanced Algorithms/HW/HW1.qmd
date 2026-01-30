@@ -96,6 +96,8 @@ Bounds
 End
 ```
 
+This results in an optimum of $x_1=1,x_2=1$
+
 # 3
 ## a
 ```{python}
@@ -107,12 +109,41 @@ plt.xlabel("x1")
 plt.ylabel("x2")
 plt.legend()
 plt.show()
-
 ```
 
 ## b
+We are given:
+$\max x_1 + (1-\lambda)x_2$
 
+s.t. $2x_1 +x_2 \leq 3$
+
+> $0\leq x_1 \leq 1$
+
+> $0\leq x_2$
+
+Thus the standard form is:
+
+$\min -y_1-(1-\lambda)y_2$
+
+s.t.  $2(y_1)+(y_2) +s_1 = 3$
+
+> $y_1 + z_1 = 1$
+
+> $y_1,z_1,y_2,s_1 \geq 0$
 
 ## c
+$\lambda = \frac34$ results in the same optimum of $x_1=1,x_2=1$ as in **2.c**
+
 
 ## d
+
+```{python}
+#| echo: false
+
+plt.fill_between([0,1],[3,3],[0,0], label="Bounds", alpha=0.5)
+plt.plot(x_1,x_2, "-.", label="Constraints", color="red")
+plt.xlabel("x1")
+plt.ylabel("x2")
+plt.legend()
+plt.show()
+```
