@@ -8,9 +8,16 @@ format:
 
 ## Summary
 
+::: {layout-ncol="2"}
+::: {}
 ## Strengths
 
+:::
+::: {}
 ## Weaknesses
+
+:::
+:::
 
 ## Comments On Strengths & Weaknesses
 
