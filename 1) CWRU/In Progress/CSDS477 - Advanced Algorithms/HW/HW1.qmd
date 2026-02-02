@@ -49,11 +49,11 @@ Proof: Given from the Optimal Message Passing Problem that $0<p(e)<1$, thus $1-p
 import numpy as np
 import matplotlib.pyplot as plt
 
-x_1 = np.array([0, 1.5])
-x_2 = np.array([3, 0])
+x_1 = np.array([0, 2])
+x_2 = np.array([2, 0])
 
-plt.fill_between([0,1],[1,1],[0,0], label="Bounds", alpha=0.5)
-plt.plot(x_1,x_2, "-.", label="Constraints", color="red")
+plt.fill_between([0,1],[1,1],[0,0], label="Feasible Region", alpha=0.5)
+plt.plot(x_1,x_2, "-.", label="Objective Function", color="red")
 plt.xlabel("x1")
 plt.ylabel("x2")
 plt.ylim(0,1.5)
@@ -62,7 +62,7 @@ plt.show()
 
 ```
 
-This program has a unique optimal solution which is $x^*=(x_1=1, x_2=1)$ because 
+This program has a unique optimal solution which is $x^*=(x_1=1, x_2=1)$ because the highest value of the objective function is $2$ and only intersects at a single point of the bounds ($x_1=1,x_2=1$) as shown in the above image.
 
 ## b
 We are given:
@@ -89,7 +89,7 @@ s.t.  $2(y_1)+(y_2) +s_1 = 3$
 Maximize
   obj: x1 + x2
 Subject To
-  c1: 2x1 + x2 <= 3
+  c1: 2 x1 + x2 <= 3
 Bounds
   0 <= x1 <= 1
   0 <= x2 <= 1
@@ -100,15 +100,42 @@ This results in an optimum of $x_1=1,x_2=1$
 
 # 3
 ## a
+
 ```{python}
 #| echo: false
+x1 = np.linspace(0, 1, 100)
 
-plt.fill_between([0,1],[3,3],[0,0], label="Bounds", alpha=0.5)
-plt.plot(x_1,x_2, "-.", label="Constraints", color="red")
-plt.xlabel("x1")
-plt.ylabel("x2")
-plt.legend()
-plt.show()
+x2_max = 3 - 2*x1
+
+def plot_for_lambda(lambda_val):
+    plt.fill_between(x1, 0, x2_max, alpha=0.5, label='Feasible Region')
+    
+    objective_slope = (1 - lambda_val) if lambda_val != 1 else None
+
+    plt.plot([1,0], [0,1.0/objective_slope], "-.", color='red', label='Objective Function')
+
+    for level in [0.5, 1.5, 2.0]:
+      plt.plot([level,0], [0,level/objective_slope], "-.", color='red')
+        
+    plt.xlabel('x1')
+    plt.ylabel('x2')
+    plt.ylim(-0.1,3.1)
+    plt.title(f'Feasible Region and Objective for λ = {lambda_val}')
+    plt.grid(True, alpha=0.3)
+    plt.legend(loc='upper right')
+    plt.show()
+
+plot_for_lambda(0)
+```
+
+```{python}
+#| echo: false
+plot_for_lambda(0.5)
+```
+
+```{python}
+#| echo: false
+plot_for_lambda(-0.5)
 ```
 
 ## b
@@ -140,10 +167,23 @@ $\lambda = \frac34$ results in the same optimum of $x_1=1,x_2=1$ as in **2.c**
 ```{python}
 #| echo: false
 
-plt.fill_between([0,1],[3,3],[0,0], label="Bounds", alpha=0.5)
-plt.plot(x_1,x_2, "-.", label="Constraints", color="red")
-plt.xlabel("x1")
-plt.ylabel("x2")
-plt.legend()
+plt.fill_between(x1, 0, x2_max, alpha=0.5, label='Feasible Region')
+
+
+objective_slope = (1 - 0.75) 
+
+plt.plot([1,0], [0,1.0/objective_slope], "-.", color='red', label='Objective Function')
+
+for level in [0.5, 1.5, 2.0]:
+  plt.plot([level,0], [0,level/objective_slope], "-.", color='red')
+
+plt.plot([1.25,0], [0,1.25/objective_slope], "-.", color='green', label='Max Objective Function')
+    
+plt.xlabel('x1')
+plt.ylabel('x2')
+plt.ylim(-0.1,3.1)
+plt.title(f'Feasible Region and Objective for λ = {0.75}')
+plt.grid(True, alpha=0.3)
+plt.legend(loc='upper right')
 plt.show()
 ```

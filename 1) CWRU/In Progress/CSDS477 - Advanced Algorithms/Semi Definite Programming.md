@@ -1,4 +1,6 @@
 # SDP
+Note that SDP is a generalization of LP and there is a Poly time apx algorithm for SDP $(1+\epsilon)\forall \epsilon >0$ apx and the poly time is in size of input, $\ln \frac1\epsilon$
+
 Define a matrix to be positive semidefinite: $Q\in R^{p\times p}$ is symmetric positiive (semi)definite 
 
 iff $\forall x\in R^P - \{0\}, x^TQx \geq 0$ (semidefinite if $Q\geq 0$ and definite if $Q>0$)
@@ -55,3 +57,11 @@ $A_3 = [(0,1),(1,0)], b_3=0$ which now forces $x_12$ to be $0$ which now forces 
 So this $A_3$ turns the problem into a linear program because the eigenvalues are $>0$ and they are the diagonal entries
 
 > Note to self figure out why SDP isnt by default a linear program if we dont add this $A_3$ constraint
+
+## Feb 2
+$X=[(x_11, x_12), (x_12, x_22)]$
+
+$\rightarrow \exists b_1,b_2\in R^h: X=[(b_1^2, b_1^Tb_2), (b_1^Tb_2, b_2^2)]$
+
+If I wish to restrict: $b_1,b_2\in S_h$ where $S_h$ is a unit hypersphere
+
