@@ -143,3 +143,45 @@ Proof: $x^*,y^*\in X\rightarrow z^*$ feasible
 **THM** If LP has a finite optimal solution then $\exists$ opitmal solution extreme point(s).
 
 This means that extreme points are candidates for optimality
+
+Suppose we have an optimal solution $x^*$, the non-zero components of $x^*$ relate to $A$ such that those components of $A$ are a set of lin indep vectors. In fact, since any extreme point can become the optimal solution from different cost functions, all edge points $\bar x$ can create a set of lin indep vectors from $A$ via the same method above. 
+
+**THM** Let $\bar x$ be a feasible solution
+
+$A=[a_1,a_2,...,a_q]$
+
+Define $A_c = \{a_j: \bar x_j > 0\}$ (note this is a caligraphic $A$)
+
+Extreme point iff $A_c$ is a set of lin indep vectors
+
+**Proof 1** See examples
+
+**Proof 2** See correctness of simplex algorithm (later)
+
+Since $rank(A)=p, \exists$ Basis of $R^p$ among $a_1,...,a_q$
+
+**Def** Basis of $A$
+
+$\bar x$ feasible $A_c$
+
+If $A_c$ is a basis of $A$ then $\bar x$ extreme pt (because if $A_c$ is basis then its columns are lin indep)
+
+If $\bar x$ is extreme pt, then $A_c$ basis? No because we don't know if $A_c$ contains enough vectors to create a basis of $R^p$. However we can complete $A_c$ to be a basis $B$ of $A$
+
+Do all basis of $A$ correspond to an extreme point? Suppose we have a basis $B$ and leftover $L$ from $A$. $x_B$ basic decision vectors and $x_L$ non-basic decision vectors.
+
+> $Ax=b \rightarrow Bx_B + Lx_L = b$ 
+
+> $\rightarrow x_B B^{-1}L x_L = B^{-1}b$ (we know $B^{-1}$ exists because $B$ is a basis)
+
+> If we want an extreme point then $\bar x_B = B^{-1}b$
+
+**Def** $A$ basic solution corresponding to a basis $B$ is $\bar x=[$B^{-1}b, 0]$
+
+$B\rightarrow \bar x \rightarrow A_c \subset B \rightarrow A$ lin indep $\bar x$ is extreme pt
+
+However is $\bar x$ feasible? NO bc we cannot guarentee $\bar x \geq 0$
+
+**Def** Basic Feasible Solution (bfs) is a basic soolution and feasible so $x_B\geq 0$
+
+We find that if our basis results in a feasible solution then $\bar x$ is an extreme point
