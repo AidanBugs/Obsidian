@@ -185,3 +185,4 @@ However is $\bar x$ feasible? NO bc we cannot guarentee $\bar x \geq 0$
 **Def** Basic Feasible Solution (bfs) is a basic soolution and feasible so $x_B\geq 0$
 
 We find that if our basis results in a feasible solution then $\bar x$ is an extreme point
+
