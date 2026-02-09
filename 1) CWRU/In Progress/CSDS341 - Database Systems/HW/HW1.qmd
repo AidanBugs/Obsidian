@@ -1,0 +1,201 @@
+---
+format: html
+
+book:
+  title: "Hands-On Programming with R"
+---
+
+# 1
+## a
+### Entity Sets
+
+- Account
+- Branch
+- Customer
+- Loan
+
+### Relations
+
+- Account branch
+
+>> Many Accounts to One Branch with all Accounts needing to have a branch
+
+- Loan branch
+
+>> Many Loans to One Branch with all Loans needing to have a branch
+
+- Depositor
+
+>> Accounts to Customer
+
+- Borrower
+
+>> Customer to Loan
+
+## b
+### Entities
+Account(<u>Account_No</u>, Balance, B_name)
+
+Branch(<u>B_name</u>, B_city, Assets)
+
+Customer(<u>C_name</u>, C_city, C_street)
+
+Loan(<u>Loan_No</u>, Amount, B_name)
+
+### Relations
+Depositor(<u>Account_No,C_name</u>)
+
+Borrower(<u>C_name,Loan_No</u>)
+
+## c
+In Account and Loan, B_name should have a foreign key constraint and a not null constraint
+
+In Depositor, Account_No and C_name should have foreign key constraints
+
+In Borrower, Loan_No and C_name should have foreign key constraints
+
+
+# 2 
+## a
+```{dot}
+digraph {
+    rankdir=LR;
+    node [shape=box];
+    
+    /* Entities */
+    Member [label="Member\n(memberID, name, email)"];
+    Address [label="Address\n(addressID, street, city,\nstate, zip, emergency_phone)"];
+    Equipment [label="Equipment\n(equipmentID, type,\nresistance_level)"];
+    FitnessCenter [label="FitnessCenter\n(centerID, name, city,\nopening_year)"];
+    WorkoutSession [label="WorkoutSession\n(sessionID, title,\ndifficulty_level)"];
+    
+    m[label="date, time"]
+
+    /* Relationships */
+    node [shape=diamond];
+    
+    lives_at [label="lives_at"];
+    uses [label="uses"];
+    offers [label="offers"];
+    attends [label="attends"];
+    trainer [label="trainer"];
+    
+    /* Connections with cardinalities */
+    edge [dir=forward]
+    lives_at -> Address 
+    lives_at -> Address 
+
+    in -> FitnessCenter
+    
+    trainer -> Member 
+    
+    offers -> FitnessCenter 
+    offers -> FitnessCenter 
+
+    edge [dir=none]
+    Equipment -> in
+    Equipment -> in
+
+    lives_at -> Member
+    lives_at -> Member
+
+    Member -> attends 
+
+    WorkoutSession -> attends 
+    WorkoutSession -> attends 
+
+    WorkoutSession -> offers 
+    WorkoutSession -> offers 
+    
+    trainer -> WorkoutSession
+    trainer -> WorkoutSession
+
+    Member -> uses 
+    Equipment -> uses
+
+    edge [dir=none, style=dashed]
+
+    uses -> m
+}
+
+```
+
+**Assumptions**
+
+1. All Equipments must be in a Fitness Center
+2. All Fitness Centers must offer at least one Workout Session
+3. All Workout Sessions must have one trainer, at least one member attending, and be in one fitness center
+4. All Members have one Address
+5. All Addresses corresspond to at least one Member
+6. Member can use a piece of Equipment more than once so a date and time was created
+
+## b
+Equipment(<u>equipmentID</u>, type, resistance_level, centerID)
+
+FitnessCenter(<u>centerID</u>, name, city, opening_year, sessionIDs)
+
+WorkoutSession(<u>sessionID</u>, title, difficulty_level, trainerID, attendee's IDs, centerID)
+
+Member(<u>memberID</u>, name, email, addressID)
+
+Address(<u>addressID</u>, street, city, state, zip, emergency_phone, memberIDs)
+
+Uses(<u>equipmentID, memberID, date,time</u>)
+
+<div style="page-break-before:always">&nbsp;</div> 
+
+# 3
+## a
+```{dot}
+digraph {
+    node [shape=box]
+    
+    Attendee [label="Attendee\n(Attendee_ID, name)"]
+    Conference [label="Conference\n(Conference_ID, Conference_Name,\nDate, Time, Status)"]
+    Room [label="Room\n(Room_ID,Room_Name)"]
+    Seat [label="Seat Number"]
+    
+    node [shape=diamond]
+
+    Reg [label="Registration"]
+    Loc [label="Location"]
+
+    edge [dir=none]
+    
+    Attendee -> Reg
+
+    Conference -> Reg
+
+    Loc -> Conference
+    Loc -> Conference
+    
+    edge [dir=forward]
+
+    Loc -> Room
+
+    edge [dir=none, style=dashed]
+    Reg -> Seat
+}
+```
+
+**Assumptions**
+
+1. Seats are numbered specifically for an event
+2. Attendee only has one seat for an event
+3. Conference only has one room
+4. Conference_ID References a Unique instance of a conference (ie if a conference has multiple schedules they have different ids despite having the same name but different times)
+5. Attendee doesn't need to be regestired to a conference (could be in system from a previous year, maybe they didn't complete all registration steps etc)
+6. Not all conferences need to have an attendee
+
+## b
+
+Attendee(<u>Attendee_ID</u>, name)
+
+Conference(<u>Conference_ID</u>, Conference_Name, Ddate, Time, Status, Room_ID, Room_Name)
+
+Registration(<u>Attendee_ID,Conference_ID</u>, Seat Number)
+
+### Constraints
+Registration should have foreign key constraints on Attendee_ID and Conference_ID and the two should have key constraints as well
+
+Attendee and Conference should have key constraints on Attendee_ID and Conference_ID respectively
