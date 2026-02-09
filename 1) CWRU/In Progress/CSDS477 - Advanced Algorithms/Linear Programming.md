@@ -186,3 +186,64 @@ However is $\bar x$ feasible? NO bc we cannot guarentee $\bar x \geq 0$
 
 We find that if our basis results in a feasible solution then $\bar x$ is an extreme point
 
+## LP in Canonical Form
+$\min (c^\pi_L)^T x_L(+\pi^T b)$ [note the constant term can be ommitted]
+
+s.t. $x_b + \bar A x_L = \bar b$
+
+> $x_b, x_l \geq 0$
+
+$\bar A=(\bar a_{i,j}) \bar b=(\bar b_{i})$
+
+### EX
+$\min 3x_3 -x_4$
+
+s.t. $x_1 - 3x_3 + 3x_4 = 6$
+
+> $x_2 -8x_3 + 4x_4=4$
+
+> $x_1,x_2,x_3,x_4\geq 0$
+
+BFS is $\bar x = (6,4,0,0)$
+
+NOT OPTIMAL bc Cost has a minus
+
+**THM** Let $(1)$ be LP in canonical form and $\bar x$ corresponding BFS
+
+> $\bar x$ is opt iff $c^\pi\geq 0$
+
+**Remark**: optimality condition
+
+**Proof** Non-degenerate case ($\delta >0$)
+
+$\leftarrow$ If $c^\pi \geq 0$, then $z=(c^\pi_L)^T x_L\geq 0$ (by constraints)
+
+> Meanwhile, bfs $\bar x, z=0\times \bar x_B + (c^\pi_L)^T \times 0 = 0\rightarrow \bar x$ optimal  
+
+$\rightarrow$ Assume $c^\pi_s < 0$. Let
+
+> $\delta = \bar a_{i,s} \forall i \rightarrow \infty$ otherwise $\min_{h:\bar a(hs)>0} \frac{\bar b_h}{\bar a_{hs}}$
+
+From $\bar x$ create $x'$ under the following conditions:
+
+$x_j' = 0$ if $j\in L-\{s\}$, $\delta$ if $j=s$, $\bar_j-a_{js}\delta$ if $j\in B$ [note $s$ is the variable we are trying to increase]
+
+1) $x'$ feasible
+
+> $x_i +\bar a_{is}x_s + \sum \bar a_{ij}x_j =\bar b_i$ 
+
+> For $x_i': \bar b_i - \bar a_{is}\delta + a_{is}\delta + 0 = \bar b_{ij}$ annd we know $\delta>0$ because assuming non degenerate case
+
+> Show $x_j' \geq 0$ demonstrated fairly straightforward because $\delta>0$ except the case $j\in B$
+
+> $x_j'=\bar b_j - \bar a_{js}\delta$, if $\bar a_{js}\leq 0$ then clearly positive (double negative), if $\bar a_{js} > 0, \bar b_j \bar a_{js}\delta = \bar b_j - \bar a_{js} \min_{h: \bar a(hs)>0} \frac{\bar b_h}{\bar a_{hs}}$ we can sub $\frac{\bar b_j}{\bar a_{js}}$ in because it is greater than or equal to the min which results in the equation being $0$ 
+> Thus clearly $\bar x_j' \geq 0$
+
+2) $x'$ has lower cost:
+
+> $z' = (c^\pi _L)^T x_L = c^\pi_s \times \delat< 0$ because assuming $c^\pi_s<0$
+
+**Proof** Degenerate case ($\delta=0$) ends up revisiting the same spot over and over while changing Basis which map to the same extreme point
+
+Lexigraphical order of $B$ to prevent going back to same basis
+
