@@ -421,6 +421,75 @@ $$
 
 Let $x^i$ denote the basic solution for basis $B_i$
 
+$$
+x^1 =
+\begin{pmatrix}
+1 \\
+1 \\
+-1 \\
+0 \\
+0
+\end{pmatrix}
+,x^2 =
+\begin{pmatrix}
+1 \\
+1 \\
+0 \\
+0 \\
+0
+\end{pmatrix}
+,x^3 =
+\begin{pmatrix}
+1 \\
+1 \\
+0 \\
+0 \\
+0
+\end{pmatrix}
+,x^4 =
+\begin{pmatrix}
+0 \\
+3 \\
+1 \\
+-2 \\
+0
+\end{pmatrix}
+,x^5 =
+\begin{pmatrix}
+0 \\
+0 \\
+1 \\
+1 \\
+3
+\end{pmatrix}
+,x^6 =
+\begin{pmatrix}
+0 \\
+1 \\
+1 \\
+0 \\
+2
+\end{pmatrix}
+,x^7 =
+\begin{pmatrix}
+1 \\
+0 \\
+0 \\
+1 \\
+1
+\end{pmatrix}
+,x^8 =
+\begin{pmatrix}
+1.5 \\
+0 \\
+-0.5 \\
+1 \\
+0
+\end{pmatrix}
+$$
+
+Of these it is clear that $x^1, x^4, x^8$ are not feasible solutions.
+
 ### e
 Omit, moved to HW3
 
@@ -452,8 +521,49 @@ Omit, moved to HW3
 
 ## 4
 ### a
+$\min s_1 + s_2$
+
+s.t. $2x_1 + x_2 + s_3 = 3$
+
+> $x_1+s_1 = 1$
+
+> $x_2+s_2 = 1$
+
+> $x_1,x_2,s_1,s_2,s_3\geq 0$
 
 ### b
+We can convert this into standard form by adding vector $s$ such taht $|x|=|s|$ and we add new constraints: $x+s=u$ and of course $x,s\geq 0$. To create our new cost vector $\tilde c$ where $|\tilde c| = |x|+|s|$ and we create it using the following piecewise function by flipping the sign of any negative costs and assigning that cost to the corresponding slack variable: 
+
+$$
+\tilde c_i = 
+\begin{cases}
+0 & \text{if } i\leq|x| \land c_i < 0 \\
+c_i & \text{if } i\leq|x| \land c_i \geq 0 \\
+0 & \text{if } i>|x| \land c_{i-|x|} \geq 0 \\
+-c_{i-|x|} & \text{if } i>|x| \land c_{i-|x|} < 0 \\
+\end{cases}
+$$
+
+Thus our cost vector has only positive components and our new LP is as follows and is an equivalent minimization problem:
+
+$$
+\min \tilde c^T 
+\begin{pmatrix}
+x \\
+s
+\end{pmatrix}
+$$
+$$
+\text{s.t. }
+Ax=b
+$$
+$$
+x+s=u
+$$
+$$
+x,s\geq 0
+$$
+
 
 ## 5
 ### a
