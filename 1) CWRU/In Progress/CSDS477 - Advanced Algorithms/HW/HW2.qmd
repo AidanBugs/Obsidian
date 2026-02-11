@@ -1,0 +1,468 @@
+---
+format: pdf
+---
+
+# HW1
+## 4
+We can simply create a $z^*$ as a strict convex converge of $x^*,y^*$.
+
+Here to create 5 optimal $z^*$, let $\lambda =[\frac 1{\sqrt 2},\frac 1{\sqrt 3},\frac 1{\sqrt 5},\frac 1{\sqrt 6},\frac 1{\sqrt 7}]$ and $z^*=\lambda x^*, (1-\lambda)y^*$ creates 5 non integer solutions. Using irrational $\lambda$ guarentees a non-integer solution
+
+## 5
+### a
+Let variables $x_1,x_2,...,x_m$ be binary LP variables to represent the $n$-arcs in our set $A$. A variable $a_i$ is equal to $1$ iff it is choosen as a part of our subset and it does not conflict with other variables in our subset and $0$ otherwise. Since we are trying to find the largest subset, our objective function should be to maximize $\sum_i x_i$. To ensure no conflicting, we create $n$ constraints, with each constraint corresponding to a number $1-n$ (problem definition was unclear if we include $0$ in our arcs but if that is the case simply add a new $0$ constraint). For these constraints, $x_i$ has a coefficient of $1$ iff it's arc covers the integer corresponding to the constraint (which can easily be found by iterating through the integers each arc covers).
+
+Thus our binary LP looks like this:
+
+$\max \sum_i x_i$
+
+s.t. $Ax=b$
+
+> $\forall i, x_i \in \{0,1\}$
+
+$b=1_n$ which is a vector of length $n$ of all $1$'s
+
+And to formulate $A$:
+
+$$ 
+a_{ij} = \begin{cases}
+  0 & \text{if the } j \text{th arc does not cover } i \\
+  1 & \text{if the } j \text{th arc covers } i
+\end{cases}
+$$
+
+### b
+$A=\{(1,1),(1,2),(1,3),(2,4),(2,5),(2,6),(2,7),(2,8),(3,9)\}$
+
+### c
+
+### d
+$A=\{(1,2),(2,3),(3,4),(4,6),(5,7),(6,8),(7,9),(8,1),(9,3)\}$
+
+### e
+
+## 6
+### a
+Suppose there exists an optimal solution $S$ with arc $a_r$ appearing in two districts $d_1,d_2$. Create an $S'$ by removing $a_r$ from $d_2$, this is still a valid solution because all arcs are being represented and removing an arc from a district cannot introduce any sort of conflicting arcs. We also know that $S$ and $S'$ are both optimal solutions because the number of districts did not change from $S$ to $S'$ and we defined $S$ as the optimal solution. We can repeat this process recursively until we end with an $S^*$ with each arc appearing a single time and similarly to the $S'$ idea, $S^*$ is also an optimal solution because no new districts were created.
+
+### b
+Omit as solved in HW2 **5.a**
+
+### c
+$A=\{(1,1),(1,2),(1,3),(2,4),(2,5),(2,6),(2,7),(2,8),(3,9)\}$
+
+### d
+
+### e
+$A=\{(1,2),(2,3),(3,4),(4,6),(5,7),(6,8),(7,9),(8,1),(9,3)\}$
+
+### f
+
+# HW2
+## 1
+### a
+```{python}
+#| echo: false
+import numpy as np
+import matplotlib.pyplot as plt
+
+x_1 = np.array([0, 2])
+x_2 = np.array([2, 0])
+
+end_x = [0,0,1,1]
+end_y = [0,1,1,0]
+labels = ["A", "B", "C", "D"]
+
+plt.fill_between([0,1],[1,1],[0,0], label="Feasible Region", alpha=0.5)
+plt.plot(x_1,x_2, "-.", label="Objective Function", color="red")
+plt.xlabel("x1")
+plt.ylabel("x2")
+plt.scatter(end_x,end_y, color="red")
+for i in range(len(end_x)):
+    plt.annotate(labels[i], (end_x[i]+0.05, end_y[i] + 0.05))
+plt.ylim(0,1.5)
+plt.legend()
+plt.show()
+
+```
+# 
+
+### b
+Remember the standard form is (from HW1 with slight changes for consistency):
+
+$\min -x_1-x_2$
+
+s.t.  $2(x_1)+(x_2) +s_3 = 3$
+
+> $x_1 + s_1 = 1$
+
+> $x_2 + s_2 = 1$
+
+> $x_1,s_1,x_2,s_2,s_3 \geq 0$
+
+So we can write $A$ as:
+
+$$
+A=
+\begin{pmatrix}
+2 & 1 & 0 & 0 & 1 \\
+1 & 0 & 1 & 0 & 0 \\
+0 & 1 & 0 & 1 & 0 
+\end{pmatrix}
+, C=
+\begin{pmatrix}
+-1 \\
+-1 \\
+0 \\
+0 \\
+0 
+\end{pmatrix}
+$$
+
+Thus we can create our $B$ and $L$ for the origin as:
+
+$$
+B=
+\begin{pmatrix}
+0 & 0 & 1 \\
+1 & 0 & 0 \\
+0 & 1 & 0 
+\end{pmatrix}
+,\quad L=
+\begin{pmatrix}
+2 & 1 \\
+1 & 0 \\
+0 & 1 
+\end{pmatrix}
+$$
+
+Thus we have:
+
+$$
+\pi = (B^{-1})^T C_B = 
+\begin{pmatrix}
+0 & 1 & 0 \\
+0 & 0 & 1 \\
+1 & 0 & 0 
+\end{pmatrix}
+^{T}
+\begin{pmatrix}
+0 \\
+0 \\
+0
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 \\
+0 \\
+0
+\end{pmatrix}
+$$
+
+And it trivially follows that:
+
+$$
+C^\pi = C-A^T \pi = 
+\begin{pmatrix}
+-1 \\
+-1 \\
+0 \\
+0 \\
+0 
+\end{pmatrix}
+-A^{T}
+\begin{pmatrix}
+0 \\
+0 \\
+0
+\end{pmatrix}
+=
+\begin{pmatrix}
+-1 \\
+-1 \\
+0 \\
+0 \\
+0 
+\end{pmatrix}
+$$
+
+### c
+$$
+\text{A BFS for the optimal point is }\bar x=
+\begin{pmatrix}
+1 \\
+1 \\
+0 \\
+0 \\
+0 
+\end{pmatrix}
+$$
+
+Thus we can create our $B$ and $L$ for the optimal point $\bar x$ as:
+
+$$
+B=
+\begin{pmatrix}
+2 & 1 & 0 \\
+1 & 0 & 1 \\
+0 & 1 & 0 
+\end{pmatrix}
+,\quad L=
+\begin{pmatrix}
+0 & 1 \\
+0 & 0 \\
+1 & 0 
+\end{pmatrix}
+$$
+
+Thus we have:
+
+$$
+\pi = (B^{-1})^T C_B = 
+\begin{pmatrix}
+0.5 & 0 & -0.5 \\
+0 & 0 & 1 \\
+-0.5 & 1 & 0.5 
+\end{pmatrix}
+^{T}
+\begin{pmatrix}
+-1 \\
+-1 \\
+0
+\end{pmatrix}
+=
+\begin{pmatrix}
+0.5 & 0 & -0.5 \\
+0 & 0 & 1 \\
+-0.5 & 1 & 0.5 
+\end{pmatrix}
+\begin{pmatrix}
+-1 \\
+-1 \\
+0
+\end{pmatrix}
+=
+\begin{pmatrix}
+-0.5 \\
+0 \\
+-0.5
+\end{pmatrix}
+$$
+
+And it trivially follows that:
+
+$$
+C^\pi = C-A^T \pi = 
+\begin{pmatrix}
+-1 \\
+-1 \\
+0 \\
+0 \\
+0 
+\end{pmatrix}
+-A^{T}
+\begin{pmatrix}
+-0.5 \\
+0 \\
+-0.5
+\end{pmatrix}
+=
+\begin{pmatrix}
+-1 \\
+-1 \\
+0 \\
+0 \\
+0 
+\end{pmatrix}
+-
+\begin{pmatrix}
+-1 \\
+-1 \\
+0 \\
+-0.5 \\
+-0.5 
+\end{pmatrix}
+=
+\begin{pmatrix}
+-2 \\
+-2 \\
+0 \\
+-0.5 \\
+-0.5 
+\end{pmatrix}
+$$
+
+### d
+We can find the basic solutions through the following formula then check if the solution is a feasible one:
+
+$$
+b=
+\begin{pmatrix}
+3\\
+1 \\
+1
+\end{pmatrix}
+, x_B =
+\begin{pmatrix}
+B^{-1}b\\
+0
+\end{pmatrix}
+$$
+
+Naively there are $5$ choose $3$ different basis but there are a few basis that are invalid as they dont span $R^3$. Namely these were the basis that span $R^3$
+
+$$
+B_1=
+\begin{pmatrix}
+2 & 1 & 0 \\
+1 & 0 & 1 \\
+0 & 1 & 0 
+\end{pmatrix}
+,B_2=
+\begin{pmatrix}
+2 & 1 & 0 \\
+1 & 0 & 0 \\
+0 & 1 & 1 
+\end{pmatrix}
+,B_3=
+\begin{pmatrix}
+2 & 1 & 1 \\
+1 & 0 & 0 \\
+0 & 1 & 0 
+\end{pmatrix}
+,B_4=
+\begin{pmatrix}
+1 & 0 & 0\\
+0 & 1 & 0\\
+1 & 0 & 1
+\end{pmatrix}
+$$
+$$
+B_5=
+\begin{pmatrix}
+0 & 0 & 1 \\
+1 & 0 & 0 \\
+0 & 1 & 0 
+\end{pmatrix}
+B_6=
+\begin{pmatrix}
+1 & 0 & 1 \\
+0 & 1 & 0 \\
+1 & 0 & 0 
+\end{pmatrix}
+,B_7=
+\begin{pmatrix}
+2 & 0 & 1 \\
+1 & 0 & 0 \\
+0 & 1 & 0 
+\end{pmatrix}
+,B_8=
+\begin{pmatrix}
+2 & 0 & 0 \\
+1 & 1 & 0 \\
+0 & 0 & 1 
+\end{pmatrix}
+$$
+
+Thus we can find all of the $B^{-1}$:
+
+$$
+B_1^{-1}=
+\begin{pmatrix}
+0.5 & 0 & -0.5 \\
+0 & 0 & 1 \\
+-0.50 & 1 & 0.5 
+\end{pmatrix}
+,B_2^{-1}=
+\begin{pmatrix}
+0 & 1 & 0 \\
+1 & -2 & 0 \\
+-1 & 2 & 1 
+\end{pmatrix}
+,B_3^{-1}=
+\begin{pmatrix}
+0 & 1 & 0 \\
+0 & 0 & 1 \\
+1 & -2 & -1 
+\end{pmatrix}
+,B_4^{-1}=
+\begin{pmatrix}
+1 & 0 & 0\\
+0 & 1 & 0\\
+-1 & 0 & 1
+\end{pmatrix}
+$$
+$$
+B_5^{-1}=
+\begin{pmatrix}
+0 & 1 & 0 \\
+0 & 0 & 1 \\
+1 & 0 & 0 
+\end{pmatrix}
+B_6^{-1}=
+\begin{pmatrix}
+0 & 0 & 1 \\
+0 & 1 & 0 \\
+1 & 0 & -1
+\end{pmatrix}
+,B_7^{-1}=
+\begin{pmatrix}
+0 & 1 & 0 \\
+0 & 0 & 1 \\
+1 & -2 & 0 
+\end{pmatrix}
+,B_8^{-1}=
+\begin{pmatrix}
+0.5 & 0 & 0 \\
+-0.5 & 1 & 0 \\
+0 & 0 & 1 
+\end{pmatrix}
+$$
+
+Let $x^i$ denote the basic solution for basis $B_i$
+
+### e
+Omit, moved to HW3
+
+### f
+Omit, moved to HW3
+
+## 2
+### a
+
+### b
+#### i
+
+#### ii
+
+#### iii
+
+## 3
+### a
+
+### b
+
+### c
+Omit, moved to HW3
+
+### d
+Omit, moved to HW3
+
+### e
+
+## 4
+### a
+
+### b
+
+## 5
+### a
+Omit, moved to HW3
+
+### b
+
+### c
+
+### d
+
+
