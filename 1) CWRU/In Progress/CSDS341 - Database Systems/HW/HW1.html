@@ -336,14 +336,39 @@ ul.task-list li input[type="checkbox"] {
 <section id="b-1" class="level2">
 <h2 class="anchored" data-anchor-id="b-1">b</h2>
 <p>Equipment(<u>equipmentID</u>, type, resistance_level, centerID)</p>
+<blockquote class="blockquote">
+<p>FK centerID contains PKs from FitnessCenter</p>
+</blockquote>
 <p>FitnessCenter(<u>centerID</u>, name, city, opening_year, sessionIDs)</p>
-<p>WorkoutSession(<u>sessionID</u>, title, difficulty_level, trainerID, attendee’s IDs, centerID)</p>
+<blockquote class="blockquote">
+<p>sessionIDs contains a non empty list of WorkoutSession PKs (FK Constraint) and ALL sessions are covered</p>
+</blockquote>
+<p>WorkoutSession(<u>sessionID</u>, title, difficulty_level, trainerID, centerID)</p>
+<blockquote class="blockquote">
+<p>FK centerID contains PKs from FitnessCenter and ALL centers are covered</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>FK trainerID contains PKs from Member</p>
+</blockquote>
+<p>Attends(<u>sessionID, memberID</u>)</p>
+<blockquote class="blockquote">
+<p>FK sessionID contains PKs from WorkoutSession</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>FK memberID contains PKs from Member</p>
+</blockquote>
 <p>Member(<u>memberID</u>, name, email, addressID)</p>
-<p>Address(<u>addressID</u>, street, city, state, zip, emergency_phone, memberIDs)</p>
+<blockquote class="blockquote">
+<p>FK addressID contains PKs from Address and ALL Address entries are covered</p>
+</blockquote>
+<p>Address(<u>addressID</u>, street, city, state, zip, emergency_phone)</p>
 <p>Uses(<u>equipmentID, memberID, date,time</u>)</p>
-<div style="page-break-before:always">
-&nbsp;
-</div>
+<blockquote class="blockquote">
+<p>FK equipmentID contains PK from Equipment</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>FK memberID contains PKs from Member</p>
+</blockquote>
 </section>
 </section>
 <section id="section-2" class="level1">

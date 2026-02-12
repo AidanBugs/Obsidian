@@ -1,8 +1,5 @@
 ---
 format: html
-
-book:
-  title: "Hands-On Programming with R"
 ---
 
 # 1
@@ -132,17 +129,35 @@ digraph {
 ## b
 Equipment(<u>equipmentID</u>, type, resistance_level, centerID)
 
+> FK centerID contains PKs from FitnessCenter
+
 FitnessCenter(<u>centerID</u>, name, city, opening_year, sessionIDs)
 
-WorkoutSession(<u>sessionID</u>, title, difficulty_level, trainerID, attendee's IDs, centerID)
+> sessionIDs contains a non empty list of WorkoutSession PKs (FK Constraint) and ALL sessions are covered
+
+WorkoutSession(<u>sessionID</u>, title, difficulty_level, trainerID, centerID)
+
+> FK centerID contains PKs from FitnessCenter and ALL centers are covered
+
+> FK trainerID contains PKs from Member
+
+Attends(<u>sessionID, memberID</u>)
+
+> FK sessionID contains PKs from WorkoutSession
+
+> FK memberID contains PKs from Member
 
 Member(<u>memberID</u>, name, email, addressID)
 
-Address(<u>addressID</u>, street, city, state, zip, emergency_phone, memberIDs)
+> FK addressID contains PKs from Address and ALL Address entries are covered
+
+Address(<u>addressID</u>, street, city, state, zip, emergency_phone)
 
 Uses(<u>equipmentID, memberID, date,time</u>)
 
-<div style="page-break-before:always">&nbsp;</div> 
+> FK equipmentID contains PK from Equipment
+
+> FK memberID contains PKs from Member
 
 # 3
 ## a
