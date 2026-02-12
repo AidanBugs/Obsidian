@@ -22,17 +22,6 @@ Thus the one we are most confident on is $z^5$ because its probability is furthe
 
 
 # 2
-We simply need to change our increments in the opposite direction. That is if we get a false positive then we should decrease the weight instead of increasing it. Similarly if we eget a false negative we should increase our weight rather than decrease it. So it follows that we just do the opposite of our steps for a class $1$ regression so:
-
-$$
-\frac{dL}{dw_j}= -\sum_{i=1}^n(\sigma(z^i)-y^i)x_j^i
-, w_j\leftarrow w_j -\eta \frac{dL}{dw_j}
-$$
-$$
-\frac{dL}{db}= -\sum_{i=1}^n(\sigma(z^i)-y^i)
-, b\leftarrow b -\eta \frac{dL}{db}
-$$
-
 For the full derivation we simply replace the $\sigma(z^i)$ with $1-\sigma(z^i)$ thus:
 
 $L =\sum_{i=1}^N y^i \log (1-\sigma (z^i))+ (1-y^i)\log(\sigma (z^i))$
@@ -154,16 +143,22 @@ plot_points(q4, [-0.5,2.5])
 The dataset is linearly seperable by the line $y=1.5-x$ 
 
 ## b
-Decision boundary: $y+x-1.5=0$
+Decision boundary: $2y+2x-3=0$
 
-Hyperplane: $x+y-1.5=\pm 0.5$
+Hyperplane: $2x+2y-3=\pm 1$
 
-So class 1 hyperplane: $x+y-2=0$
+So class 1 hyperplane: $2x+2y-4=0$
 
-So class 2 hyperplane: $x+y-1=0$
+So class 2 hyperplane: $2x+2y-2=0$
 
 ## c
-The margin is of size $1$
+The margin is of size $\frac{2}{\sqrt{2^2+2^2}}=0.7071067812$
+
+Support vectors are the points that lie directly on the class hyperplane. In this case:
+
+Class 1 has the point $(1,1)$
+
+Class 2 has the points $(0,1),(1,0)$
 
 # 5
 ```{python}
@@ -184,9 +179,18 @@ plot_points(q5, [-0.5, 2.5])
 
 ```
 
-$\xi_7=0.25$
+$w^Tx^7+b\rightarrow 2(1)+2(0.75)-3=0.5$
 
-$\xi_8=-0.5$
+$0.5\times y^i \geq 1-\xi_7\rightarrow 0.5\geq 1-\xi_7$
+
+$\xi_7=0.5$
+
+
+$w^Tx^8+b\rightarrow 2(0.75)+2(1)-3=0.5$
+
+$0.5\times y^i \geq 1-\xi_8\rightarrow -0.5\geq 1-\xi_8$
+
+$\xi_8=1.5$
 
 # 6
 ## a
@@ -211,12 +215,74 @@ plot_points(q6, [-2.5,2.5])
 This is not linearly seperable
 
 ## b
-$K(x^i,x^j)=
+$K(x^i,x^j)=(x^i\cdot x^j)^2\rightarrow \phi(x^i) \cdot \phi(x^j)$ where $\phi(x)=(x_1^2,x_2^2,\sqrt 2 x_1 x_2)$
+
+When applying this to our current dataset:
+
+**Class 1:**
+
+$$
+\phi(x^1)=
+\begin{pmatrix}
+4 \\
+0 \\
+0
+\end{pmatrix}
+, \phi(x^2)=
+\begin{pmatrix}
+0 \\
+4 \\
+0
+\end{pmatrix}
+, \phi(x^3)=
+\begin{pmatrix}
+0 \\
+4 \\
+0
+\end{pmatrix}
+\phi(x^4)=
+\begin{pmatrix}
+4 \\
+0 \\
+0
+\end{pmatrix}
+$$
+
+**Class 2:**
+
+$$
+\phi(x^5)=
+\begin{pmatrix}
+1 \\
+0 \\
+0
+\end{pmatrix}
+, \phi(x^6)=
+\begin{pmatrix}
+1 \\
+0 \\
+0
+\end{pmatrix}
+, \phi(x^7)=
+\begin{pmatrix}
+0 \\
+1 \\
+0
+\end{pmatrix}
+, \phi(x^8)=
+\begin{pmatrix}
+0 \\
+1 \\
+0
+\end{pmatrix}
+$$
+
+Since all of the $z$ values are $0$ we can project our vectors onto a 2d plane as so
 
 ```{python}
 #| echo: false
 
-q6a = [
+q6b = [
   [4,0,1],
   [0,4,1],
   [0,4,1],
@@ -227,17 +293,91 @@ q6a = [
   [0,1,2],
 ]
 
-plot_points(q6a, [-0.5,4.5])
+plot_points(q6b, [-0.5,4.5])
 ```
 
+Here it is clear that this is linearly seperable along the line $x+y-2.5=0$
+
 ## c
+```{python}
+#| echo: false
+
+# Yoinked from scikit learn docs with some slight modifications
+
+from sklearn import svm
+from sklearn.inspection import DecisionBoundaryDisplay
+
+
+def plot_training_data_with_decision_boundary(
+    kernel, ax=None, long_title=True, support_vectors=True
+):
+    # Train the SVC
+    clf = svm.SVC(kernel=kernel, gamma=2).fit(X, y)
+
+    # Settings for plotting
+    if ax is None:
+        _, ax = plt.subplots(figsize=(4, 3))
+    x_min, x_max, y_min, y_max = -3, 3, -3, 3
+    ax.set(xlim=(x_min, x_max), ylim=(y_min, y_max))
+
+    # Plot decision boundary and margins
+    common_params = {"estimator": clf, "X": X, "ax": ax}
+    DecisionBoundaryDisplay.from_estimator(
+        **common_params,
+        response_method="predict",
+        plot_method="pcolormesh",
+        alpha=0.3,
+    )
+    DecisionBoundaryDisplay.from_estimator(
+        **common_params,
+        response_method="decision_function",
+        plot_method="contour",
+        levels=[-1, 0, 1],
+        colors=["k", "k", "k"],
+        linestyles=["--", "-", "--"],
+    )
+
+    if support_vectors:
+        # Plot bigger circles around samples that serve as support vectors
+        ax.scatter(
+            clf.support_vectors_[:, 0],
+            clf.support_vectors_[:, 1],
+            s=150,
+            facecolors="none",
+            edgecolors="k",
+        )
+
+    # Plot samples by color and add legend
+    ax.scatter(X[:, 0], X[:, 1], c=y, s=30, edgecolors="k")
+    if long_title:
+        ax.set_title(f" Decision boundaries of {kernel} kernel in SVC")
+    else:
+        ax.set_title(kernel)
+
+    if ax is None:
+        plt.show()
+
+X = np.array([[2,0],[-2,0],[0,2],[0,-2],[1,0],[-1,0],[0,1],[0,-1]])
+y = np.array([1,1,1,1,2,2,2,2])
+plot_training_data_with_decision_boundary("rbf")
+```
+
+Gaussian kernel SVM can perfectly separate the two classes
 
 # 7
 ```{python}
 #| echo: false
 
 import pandas as pd
+from sklearn.model_selection import train_test_split
 
-df = pd.read_csv("data/blah.csv")
+df = pd.read_csv("data/wine_dataset.csv")
+
+X = df.drop("style", axis=1)
+y = df["style"]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.5, random_state=1
+)
 
 ```
