@@ -1,7 +1,6 @@
 ---
 format: pdf
 ---
-
 # 1
 $\log(\frac{p}{1-p})=z=w^Tx +b$
 
@@ -24,68 +23,64 @@ Thus the one we are most confident on is $z^5$ because its probability is furthe
 # 2
 For the full derivation we simply replace the $\sigma(z^i)$ with $1-\sigma(z^i)$ thus:
 
-$L =\sum_{i=1}^N y^i \log (1-\sigma (z^i))+ (1-y^i)\log(\sigma (z^i))$
+$L =-\sum_{i=1}^N y^i \log (1-\sigma (z^i))+ (1-y^i)\log(\sigma (z^i))$
 
 For $w_j$:
 
-> $\frac{\delta L}{\delta w_j} =\sum_{i=1}^N y^i \frac{1}{1-\sigma (z^i)}\sigma(z^i)(1-\sigma(z^i))x^i_j+ (1-y^i)\frac{1}{\sigma (z^i)}\sigma(z^i)(1-\sigma(z^i))x^i_j$
+> $\frac{\delta L}{\delta w_j} =\sum_{i=1}^N -y^i \frac{1}{1-\sigma (z^i)}(-\sigma(z^i))(1-\sigma(z^i))x^i_j- (1-y^i)\frac{1}{\sigma (z^i)}\sigma(z^i)(1-\sigma(z^i))x^i_j$
 > 
-> $\frac{\delta L}{\delta w_j} =\sum_{i=1}^N y^i \sigma(z^i)x^i_j+ (1-y^i)(1-\sigma(z^i))x^i_j$
+> $\frac{\delta L}{\delta w_j} =\sum_{i=1}^N y^i \sigma(z^i)x^i_j- (1-y^i)(1-\sigma(z^i))x^i_j$
 > 
-> $\frac{\delta L}{\delta w_j} =\sum_{i=1}^N y^i \sigma(z^i)x^i_j+ (1-y^i-\sigma(z^i)+y^i\sigma(z^i))x^i_j$
+> $\frac{\delta L}{\delta w_j} =\sum_{i=1}^N y^i \sigma(z^i)x^i_j- (1-y^i-\sigma(z^i)+y^i\sigma(z^i))x^i_j$
 > 
-> $\frac{\delta L}{\delta w_j} =\sum_{i=1}^N (1-y^i-\sigma(z^i)+2y^i\sigma(z^i))x^i_j$ 
+> $\frac{\delta L}{\delta w_j} =\sum_{i=1}^N (y^i-(1-\sigma(z^i)))x^i_j$ 
 
 For $b$:
 
-> $\frac{\delta L}{\delta b} =\sum_{i=1}^N y^i \frac{1}{1-\sigma (z^i)}\sigma(z^i)(1-\sigma(z^i))+ (1-y^i)\frac{1}{\sigma (z^i)}\sigma(z^i)(1-\sigma(z^i))$
+> $\frac{\delta L}{\delta b} =\sum_{i=1}^N -y^i \frac{1}{1-\sigma (z^i)}(-\sigma(z^i))(1-\sigma(z^i))- (1-y^i)\frac{1}{\sigma (z^i)}\sigma(z^i)(1-\sigma(z^i))$
 > 
-> $\frac{\delta L}{\delta b} =\sum_{i=1}^N y^i \sigma(z^i)+ (1-y^i)(1-\sigma(z^i))$
+> $\frac{\delta L}{\delta b} =\sum_{i=1}^N y^i \sigma(z^i)- (1-y^i)(1-\sigma(z^i))$
 > 
-> $\frac{\delta L}{\delta b} =\sum_{i=1}^N y^i \sigma(z^i)+ (1-y^i-\sigma(z^i)+y^i\sigma(z^i))$
+> $\frac{\delta L}{\delta b} =\sum_{i=1}^N y^i \sigma(z^i)- (1-y^i-\sigma(z^i)+y^i\sigma(z^i))$
 > 
-> $\frac{\delta L}{\delta b} =\sum_{i=1}^N (1-y^i-\sigma(z^i)+2y^i\sigma(z^i))$
+> $\frac{\delta L}{\delta b} =\sum_{i=1}^N (y^i-(1-\sigma(z^i)))$ 
 
 Thus it follows that 
 
 $$
-w_j \leftarrow w_j - \eta \frac{dL}{dw_j}
+w_j \leftarrow w_j - \eta \frac{\delta L}{\delta w_j}
 $$
 $$
-b \leftarrow b - \eta \frac{dL}{db}
+b \leftarrow b - \eta \frac{\delta L}{\delta b}
 $$
 
 # 3
 
-$L =\frac{\lambda}{2n}\sum_{i=1}^m w_i^2 + \sum_{i=1}^N y^i \log (\sigma (z^i))+ (1-y^i)\log(1-\sigma (z^i))$
+$L =\frac{\lambda}{2n}\sum_{i=1}^m w_i^2  -\sum_{i=1}^N y^i \log (\sigma (z^i))+ (1-y^i)\log(1-\sigma (z^i))$
 
 For $w_j$:
 
->$\frac{\delta L}{\delta w_j} = \frac{\lambda}{2n} + \sum_{i=1}^N y^i \frac{1}{1-\sigma (z^i)}\sigma(z^i)(1-\sigma(z^i))x^i_j+ (1-y^i)\frac{1}{\sigma (z^i)}\sigma(z^i)(1-\sigma(z^i))x^i_j$
+>$\frac{\delta L}{\delta w_j} = \frac{\lambda w_j}{n} + \sum_{i=1}^N - y^i \frac{1}{\sigma (z^i)}\sigma(z^i)(1-\sigma(z^i))x^i_j+ (1-y^i)\frac{1}{1-\sigma (z^i)}\sigma(z^i)(1-\sigma(z^i))x^i_j$
 >
->$\frac{\delta L}{\delta w_j} =\sum_{i=1}^N y^i \sigma(z^i)x^i_j+ (1-y^i)(1-\sigma(z^i))x^i_j +\frac{\lambda}{2n}$
+>$\frac{\delta L}{\delta w_j} =\sum_{i=1}^N -y^i (1-\sigma(z^i))x^i_j + (1-y^i)(\sigma(z^i))x^i_j +\frac{\lambda w_j}{n}$
 >
->$\frac{\delta L}{\delta w_j} =\sum_{i=1}^N y^i \sigma(z^i)x^i_j+ (1-y^i-\sigma(z^i)+y^i\sigma(z^i))x^i_j+\frac{\lambda}{2n}$
->
->$\frac{\delta L}{\delta w_j} =\sum_{i=1}^N (1-y^i-\sigma(z^i)+2y^i\sigma(z^i))x^i_j+\frac{\lambda}{2n}$
+>$\frac{\delta L}{\delta w_j} =\sum_{i=1}^N (\sigma(z^i)-y^i)x^i_j+\frac{\lambda w_j}{n}$
 
 For $b$:
 
->$\frac{\delta L}{\delta b} =\sum_{i=1}^N y^i \frac{1}{1-\sigma (z^i)}\sigma(z^i)(1-\sigma(z^i))+ (1-y^i)\frac{1}{\sigma (z^i)}\sigma(z^i)(1-\sigma(z^i))$
+>$\frac{\delta L}{\delta w_j} = - \sum_{i=1}^N y^i \frac{1}{\sigma (z^i)}\sigma(z^i)(1-\sigma(z^i))x^i_j+ (1-y^i)\frac{1}{1-\sigma (z^i)}\sigma(z^i)(1-\sigma(z^i))x^i_j$
 >
->$\frac{\delta L}{\delta b} =\sum_{i=1}^N y^i \sigma(z^i)+ (1-y^i)(1-\sigma(z^i))$
+>$\frac{\delta L}{\delta w_j} =\sum_{i=1}^N -y^i (1-\sigma(z^i))x^i_j + (1-y^i)(\sigma(z^i))x^i_j$
 >
->$\frac{\delta L}{\delta b} =\sum_{i=1}^N y^i \sigma(z^i)+ (1-y^i-\sigma(z^i)+y^i\sigma(z^i))$
->
->$\frac{\delta L}{\delta b} =\sum_{i=1}^N (1-y^i-\sigma(z^i)+2y^i\sigma(z^i))$
+>$\frac{\delta L}{\delta w_j} =\sum_{i=1}^N (\sigma(z^i)-y^i)x^i_j$
 
 Again it still applies that 
 
 $$
-w_j \leftarrow w_j - \eta \frac{dL}{dw_j}
+w_j \leftarrow w_j - \eta \frac{\delta L}{\delta w_j}
 $$
 $$
-b \leftarrow b - \eta \frac{dL}{db}
+b \leftarrow b - \eta \frac{\delta L}{\delta b}
 $$
 
 # 4
@@ -161,6 +156,7 @@ Class 1 has the point $(1,1)$
 Class 2 has the points $(0,1),(1,0)$
 
 # 5
+
 ```{python}
 #| echo: false
 
@@ -176,7 +172,6 @@ q5 = [
 ]
 
 plot_points(q5, [-0.5, 2.5])
-
 ```
 
 $w^Tx^7+b\rightarrow 2(1)+2(0.75)-3=0.5$
@@ -194,6 +189,7 @@ $\xi_8=1.5$
 
 # 6
 ## a
+
 ```{python}
 #| echo: false
 
@@ -209,7 +205,6 @@ q6 = [
 ]
 
 plot_points(q6, [-2.5,2.5])
-
 ```
 
 This is not linearly seperable
@@ -299,6 +294,7 @@ plot_points(q6b, [-0.5,4.5])
 Here it is clear that this is linearly seperable along the line $x+y-2.5=0$
 
 ## c
+
 ```{python}
 #| echo: false
 
@@ -365,19 +361,4 @@ plot_training_data_with_decision_boundary("rbf")
 Gaussian kernel SVM can perfectly separate the two classes
 
 # 7
-```{python}
-#| echo: false
-
-import pandas as pd
-from sklearn.model_selection import train_test_split
-
-df = pd.read_csv("data/wine_dataset.csv")
-
-X = df.drop("style", axis=1)
-y = df["style"]
-
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.5, random_state=1
-)
-
-```
+The code submitted tests a variety of different kernels (linear, polynomial and RBF/Gaussian) with different regularization paramaters $(0.01,0.1,1,10,100)$, different gamma values $(0.01,0.1,1,10)$ and degree values $(2,3,4)$ for the kernels. Slight caveat that gamma$=10$ and $C=100$ together takes too long and was skipped. This resulted in the best model being an RBF/Gaussian kernel with a regularization parameter of $100$ and a gamma value of $0.01$ which achieved an accuracy of $99.69\%$ on the test set. With the best polynomial kernel being a degree $3$ polynomial with a regularization parameter of $11$ and a gamma value of $0.1$ which achieved an accuracy of $99.45\%$ on the test set. The best linear kernel was with a regularization parameter of $1$ which achieved an accuracy of $99.48\%$ on the test set.
