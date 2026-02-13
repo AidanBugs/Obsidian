@@ -361,4 +361,6 @@ plot_training_data_with_decision_boundary("rbf")
 Gaussian kernel SVM can perfectly separate the two classes
 
 # 7
+For the logistic regression it resulted in an accuracy of $98\%$
+
 The code submitted tests a variety of different kernels (linear, polynomial and RBF/Gaussian) with different regularization paramaters $(0.01,0.1,1,10,100)$, different gamma values $(0.01,0.1,1,10)$ and degree values $(2,3,4)$ for the kernels. Slight caveat that gamma$=10$ and $C=100$ together takes too long and was skipped. This resulted in the best model being an RBF/Gaussian kernel with a regularization parameter of $100$ and a gamma value of $0.01$ which achieved an accuracy of $99.69\%$ on the test set. With the best polynomial kernel being a degree $3$ polynomial with a regularization parameter of $11$ and a gamma value of $0.1$ which achieved an accuracy of $99.45\%$ on the test set. The best linear kernel was with a regularization parameter of $1$ which achieved an accuracy of $99.48\%$ on the test set.

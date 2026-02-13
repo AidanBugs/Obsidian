@@ -1,0 +1,88 @@
+from docplex.mp.model import Model
+
+mdl = Model(name='binary_lp')
+
+x1 = mdl.binary_var(name='x1')
+x2 = mdl.binary_var(name='x2')
+x3 = mdl.binary_var(name='x3')
+x4 = mdl.binary_var(name='x4')
+x5 = mdl.binary_var(name='x5')
+x6 = mdl.binary_var(name='x6')
+x7 = mdl.binary_var(name='x7')
+x8 = mdl.binary_var(name='x8')
+x9 = mdl.binary_var(name='x9')
+
+mdl.add_constraint(x1 + x2 + x3 <= 1)
+mdl.add_constraint(x2 + x3 + x4 + x5 + x6 + x7 + x8 <= 1)
+mdl.add_constraint(x3 + x4 + x5 + x6 + x7 + x8 + x9 <= 1)
+mdl.add_constraint(x4 + x5 + x6 + x7 + x8 + x9 <= 1)
+mdl.add_constraint(x5 + x6 + x7 + x8 + x9 <= 1)
+mdl.add_constraint(x6 + x7 + x8 + x9 <= 1)
+mdl.add_constraint(x7 + x8 + x9 <= 1)
+mdl.add_constraint(x8 + x9 <= 1)
+mdl.add_constraint(x9 <= 1)
+
+mdl.maximize(x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9)
+
+solution = mdl.solve()
+
+print(solution)
+
+mdl = Model(name='binary_lp')
+
+x1 = mdl.binary_var(name='x1')
+x2 = mdl.binary_var(name='x2')
+x3 = mdl.binary_var(name='x3')
+x4 = mdl.binary_var(name='x4')
+x5 = mdl.binary_var(name='x5')
+x6 = mdl.binary_var(name='x6')
+x7 = mdl.binary_var(name='x7')
+x8 = mdl.binary_var(name='x8')
+x9 = mdl.binary_var(name='x9')
+
+mdl.add_constraint(x1 + x8 + x9 <= 1)
+mdl.add_constraint(x1 + x2 + x9 <= 1)
+mdl.add_constraint(x2 + x3 + x9 <= 1)
+mdl.add_constraint(x3 + x4 <= 1)
+mdl.add_constraint(x4 + x5 <= 1)
+mdl.add_constraint(x4 + x5 + x6 <= 1)
+mdl.add_constraint(x5 + x6 + x7 <= 1)
+mdl.add_constraint(x6 + x7 + x8 <= 1)
+mdl.add_constraint(x7 + x8 + x9 <= 1)
+
+mdl.maximize(x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9)
+
+solution = mdl.solve()
+
+print(solution)
+
+from docplex.mp.model import Model
+
+mdl = Model(name='basic_lp')
+
+x1 = mdl.continuous_var(name='x1', lb=0)
+x2 = mdl.continuous_var(name='x2', lb=0)
+x3 = mdl.continuous_var(name='x3', lb=0)
+x4 = mdl.continuous_var(name='x4', lb=0)
+gamma = mdl.continuous_var(name='gamma')
+
+mdl.minimize(gamma)
+
+mdl.add_constraint(3*x1 + 4*x2 + 2*x3 + 2*x4 <= 2*gamma)
+mdl.add_constraint(3*x1 + 4*x2 + 5*x3 + 3*x4 <= 3*gamma)
+mdl.add_constraint(3*x1 + 4*x2 + 5*x3 + 6*x4 <= 3*gamma)
+mdl.add_constraint(x1 + x2 + x3 + x4 == 1)
+
+solution = mdl.solve()
+print(solution)
+
+best_gamma = mdl.solution.objective_value
+
+mdl.add_constraint(gamma<=best_gamma+0.001)
+
+mdl.maximize(x4)
+
+solution = mdl.solve()
+print(mdl)
+print(solution)
+

@@ -16,7 +16,7 @@ Thus our binary LP looks like this:
 
 $\max \sum_i x_i$
 
-s.t. $Ax=b$
+s.t. $Ax\leq b$
 
 > $\forall i, x_i \in \{0,1\}$
 
@@ -34,12 +34,142 @@ $$
 ### b
 $A=\{(1,1),(1,2),(1,3),(2,4),(2,5),(2,6),(2,7),(2,8),(3,9)\}$
 
+```{python}
+#| eval: false
+
+from docplex.mp.model import Model
+
+mdl = Model(name='binary_lp')
+
+x1 = mdl.binary_var(name='x1')
+x2 = mdl.binary_var(name='x2')
+x3 = mdl.binary_var(name='x3')
+x4 = mdl.binary_var(name='x4')
+x5 = mdl.binary_var(name='x5')
+x6 = mdl.binary_var(name='x6')
+x7 = mdl.binary_var(name='x7')
+x8 = mdl.binary_var(name='x8')
+x9 = mdl.binary_var(name='x9')
+
+mdl.add_constraint(x1 + x2 + x3 <= 1)
+mdl.add_constraint(x2 + x3 + x4 + x5 + x6 + x7 + x8 <= 1)
+mdl.add_constraint(x3 + x4 + x5 + x6 + x7 + x8 + x9 <= 1)
+mdl.add_constraint(x4 + x5 + x6 + x7 + x8 + x9 <= 1)
+mdl.add_constraint(x5 + x6 + x7 + x8 + x9 <= 1)
+mdl.add_constraint(x6 + x7 + x8 + x9 <= 1)
+mdl.add_constraint(x7 + x8 + x9 <= 1)
+mdl.add_constraint(x8 + x9 <= 1)
+mdl.add_constraint(x9 <= 1)
+
+mdl.maximize(x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9)
+
+solution = mdl.solve()
+
+print(solution)
+```
+
+This results in an optimal solution of $x_1=1,x_9=1$ with an objective of $2$
+
 ### c
+The linear relaxation for this LP looks like this:
+
+$\max \sum_i x_i$
+
+s.t. $Ax\leq b$
+
+> $\forall i, 0 \leq x_i \leq 1$
+
+$b=1_n$ which is a vector of length $n$ of all $1$'s
+
+And to formulate $A$:
+
+$$ 
+a_{ij} = \begin{cases}
+  0 & \text{if the } j \text{th arc does not cover } i \\
+  1 & \text{if the } j \text{th arc covers } i
+\end{cases}
+$$
+
+Thus for our case the linear relaxation is:
+
+$\max \sum_i x_i$
+
+$\text{s.t.} x_1 + x_2 + x_3 \leq 1$
+
+> $x_2 + x_3 + x_4 + x_5 + x_6 + x_7 + x_8 \leq 1$
+> 
+> $x_3 + x_4 + x_5 + x_6 + x_7 + x_8 + x_9 \leq 1$
+> 
+> $x_4 + x_5 + x_6 + x_7 + x_8 + x_9 \leq 1$
+> 
+> $x_5 + x_6 + x_7 + x_8 + x_9 \leq 1$
+> 
+> $x_6 + x_7 + x_8 + x_9 \leq 1$
+> 
+> $x_7 + x_8 + x_9 \leq 1$
+> 
+> $x_8 + x_9 \leq 1$
+> 
+> $x_9 \leq 1$
+> 
+> $\forall i 0\leq x_i \leq 1$
 
 ### d
 $A=\{(1,2),(2,3),(3,4),(4,6),(5,7),(6,8),(7,9),(8,1),(9,3)\}$
 
+```{python}
+#| eval: false
+
+from docplex.mp.model import Model
+
+mdl = Model(name='binary_lp')
+
+x1 = mdl.binary_var(name='x1')
+x2 = mdl.binary_var(name='x2')
+x3 = mdl.binary_var(name='x3')
+x4 = mdl.binary_var(name='x4')
+x5 = mdl.binary_var(name='x5')
+x6 = mdl.binary_var(name='x6')
+x7 = mdl.binary_var(name='x7')
+x8 = mdl.binary_var(name='x8')
+x9 = mdl.binary_var(name='x9')
+
+mdl.add_constraint(x1 + x8 + x9 <= 1)
+mdl.add_constraint(x1 + x2 + x9 <= 1)
+mdl.add_constraint(x2 + x3 + x9 <= 1)
+mdl.add_constraint(x3 + x4 <= 1)
+mdl.add_constraint(x4 + x5 <= 1)
+mdl.add_constraint(x4 + x5 + x6 <= 1)
+mdl.add_constraint(x5 + x6 + x7 <= 1)
+mdl.add_constraint(x6 + x7 + x8 <= 1)
+mdl.add_constraint(x7 + x8 + x9 <= 1)
+
+mdl.maximize(x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9)
+
+solution = mdl.solve()
+
+print(solution)
+```
+
+This results in an optimal solution of $x_1=1,x_3=1,x_5=1$ and an objective value of 3
+
 ### e
+The linear relaxation of this problem is as follows:
+
+$\max \sum_i x_i$
+
+$\text{s.t.} x_1 + x_8 + x_9 \leq 1$
+
+mdl.add_constraint(x1 + x2 + x9 <= 1)
+mdl.add_constraint(x2 + x3 + x9 <= 1)
+mdl.add_constraint(x3 + x4 <= 1)
+mdl.add_constraint(x4 + x5 <= 1)
+mdl.add_constraint(x4 + x5 + x6 <= 1)
+mdl.add_constraint(x5 + x6 + x7 <= 1)
+mdl.add_constraint(x6 + x7 + x8 <= 1)
+mdl.add_constraint(x7 + x8 + x9 <= 1)
+
+mdl.maximize(x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9)
 
 ## 6
 ### a
@@ -426,7 +556,7 @@ x^1 =
 \begin{pmatrix}
 1 \\
 1 \\
--1 \\
+0 \\
 0 \\
 0
 \end{pmatrix}
@@ -498,18 +628,111 @@ Omit, moved to HW3
 
 ## 2
 ### a
+We can reuse the same LP from the previous question but change the cost function to be the minimum of $x_1+x_2$ thus in standard form we have:
+
+$\min x_1+x_2$
+
+s.t.  $2(x_1)+(x_2) +s_3 = 3$
+
+> $x_1 + s_1 = 1$
+
+> $x_2 + s_2 = 1$
+
+> $x_1,s_1,x_2,s_2,s_3 \geq 0$
+
+So our extreme point is 
+
+$$
+w=
+\begin{pmatrix}
+1 \\
+1 \\
+0 \\
+0 \\
+0
+\end{pmatrix}
+$$
+
+Wth $B_1=x_1,x_2,s_1$ and $B_2=x_1,x_2,s_2$
 
 ### b
+Our program has $5$ variables so $q=5$
+
 #### i
+The only nonzero variables are $x_1,x_2$ so 
+
+$$
+A_1=A_2=
+\begin{pmatrix}
+2 & 1 \\
+1 & 0 \\
+0 & 1
+\end{pmatrix}
+$$
+
+This is 2 columns which is less than $q=5$
 
 #### ii
+The columns are linearly independent because the first column does not have an entry in the 3rd row so it cannot be multiplied by a scalar in order to reach the second column.
 
 #### iii
+We can use any of the basis $B_1,B_2,B_3$ from the previous question which adds a single new column to $A_1$ and correspond to the same extreme point $w$. Explicitly we can use $B_1$ by adding the third column of $A$ to $A_1$ to get
+
+$$
+A_1=A_2=
+\begin{pmatrix}
+2 & 1 & 0 \\
+1 & 0 & 1 \\
+0 & 1 & 0
+\end{pmatrix}
+$$
+
 
 ## 3
 ### a
+```{python}
+#| eval: false
+
+from docplex.mp.model import Model
+
+mdl = Model(name='basic_lp')
+
+x1 = mdl.continuous_var(name='x1', lb=0)
+x2 = mdl.continuous_var(name='x2', lb=0)
+x3 = mdl.continuous_var(name='x3', lb=0)
+x4 = mdl.continuous_var(name='x4', lb=0)
+gamma = mdl.continuous_var(name='gamma')
+
+mdl.minimize(gamma)
+
+mdl.add_constraint(3*x1 + 4*x2 + 2*x3 + 2*x4 <= 2*gamma)
+mdl.add_constraint(3*x1 + 4*x2 + 5*x3 + 3*x4 <= 3*gamma)
+mdl.add_constraint(3*x1 + 4*x2 + 5*x3 + 6*x4 <= 3*gamma)
+mdl.add_constraint(x1 + x2 + x3 + x4 == 1)
+
+solution = mdl.solve()
+print(solution)
+```
+
+This resulted in a $\gamma = 1.286$ as the objective and $x_1=0.571,x_3=0.429$
+
 
 ### b
+```{python}
+#| eval: false
+
+best_gamma = mdl.solution.objective_value
+
+mdl.add_constraint(gamma<=best_gamma+0.001)
+
+mdl.maximize(x4)
+
+solution = mdl.solve()
+print(mdl)
+print(solution)
+```
+
+Unfortunately due to rounding errors the python CPLEX API did not work for an exact $\gamma =1.286$ and instead returned the same solution of $x_1=0.571,x_3=0.429,x_4=0$. To cut some slack I added a $0.001$ error to our constraint and found that for solution $\gamma=0.1287, x_1=0.573,x_3=0.42,x_4=0.007$. However due to this small increase it appears more likely that there is not a nonzero $x_4$ that results in the optimal solution of $\gamma =0.1286$.
 
 ### c
 Omit, moved to HW3
