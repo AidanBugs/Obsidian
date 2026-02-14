@@ -58,7 +58,7 @@ print(solution)
 
 from docplex.mp.model import Model
 
-mdl = Model(name='basic_lp')
+mdl = Model()
 
 x1 = mdl.continuous_var(name='x1', lb=0)
 x2 = mdl.continuous_var(name='x2', lb=0)
@@ -78,7 +78,7 @@ print(solution)
 
 best_gamma = mdl.solution.objective_value
 
-mdl.add_constraint(gamma<=best_gamma+0.001)
+mdl.add_constraint(gamma<=best_gamma+0.003)
 
 mdl.maximize(x4)
 
@@ -86,3 +86,53 @@ solution = mdl.solve()
 print(mdl)
 print(solution)
 
+
+mdl = Model()
+
+x = [None] * 9
+
+cA = [(1,2),(1,3),(2,3),(2,4),(2,5),(2,6),(2,7),(2,8),(3,4),(3,5),(3,6),(3,7),(3,8),(3,9),(4,5),(4,6),(4,7),(4,8),(4,9),(5,6),(5,7),(5,8),(5,9),(6,7),(6,8),(6,9),(7,8),(7,9),(8,9)]
+
+for i in range(9):
+  x[i] = mdl.binary_var_list(9, name=f'x_{i}')
+
+y = mdl.binary_var_list(9, name='y')
+
+mdl.minimize(mdl.sum(y))
+
+for i in range(9):
+  for h in range(9):
+    mdl.add_constraint(x[i][h] <= y[h])
+  mdl.add_constraint(mdl.sum(x[i]) == 1)
+for i,j in cA:
+  for h in range(9):
+    mdl.add_constraint(x[i-1][h] + x[j-1][h] <= 1)
+
+solution = mdl.solve()
+print(solution)
+
+mdl = Model()
+
+x = [None] * 9
+
+cA = [(1,2),(1,8),(1,9),(2,3),(2,9),(3,4),(3,9),
+(4,5),(4,6),(5,6),(5,7),(6,7),(6,8),(7,8),(7,9),
+(8,9)]
+
+for i in range(9):
+  x[i] = mdl.binary_var_list(9, name=f'x_{i}')
+
+y = mdl.binary_var_list(9, name='y')
+
+mdl.minimize(mdl.sum(y))
+
+for i in range(9):
+  for h in range(9):
+    mdl.add_constraint(x[i][h] <= y[h])
+  mdl.add_constraint(mdl.sum(x[i]) == 1)
+for i,j in cA:
+  for h in range(9):
+    mdl.add_constraint(x[i-1][h] + x[j-1][h] <= 1)
+
+solution = mdl.solve()
+print(solution)
