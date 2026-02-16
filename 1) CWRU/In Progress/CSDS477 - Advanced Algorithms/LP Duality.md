@@ -121,3 +121,67 @@ This is the same form as the dual!! So $\pi$ is a feasible solution of the dual!
 In canonical form, 
 
 $\min (c^\pi_L)^T x_L (+\pi^Tb)\rightarrow \pi^T b$ at Optimality where the dual's objective valus is $b^T \pi$
+
+## Duality Shortcuts
+Originally: standard form -> symmetric form -> dual -> simplify (see complemnetary slackness)
+
+We can actually just use standard form -> substitution by taking the dual with a variable $z$ which is unrestricted 
+
+In short follow this table:
+
+| Primal | Dual |
+| ----- | ----- |
+| $i$th con $\leq$ | $i$th var $\geq$ |
+| $i$th con $\geq$ | $i$th var $\leq$ |
+| $i$th con $=$ | $i$th var unrestricted |
+| $j$th var $\geq$ | $j$th con $\leq$ |
+| $j$th var $\leq$ | $j$th con $\geq$ |
+| $j$th var unrestricted | $j$th con $=$ | 
+
+## Lagrangian Relaxation
+$\min c^T x$
+
+s.t. $Ax=b$
+
+> $f^T x=g$
+
+> $x\geq 0$
+
+With a dual of
+
+$\max b^T z + gy$
+
+s.t. $A^T z + fy \leq c$
+
+With complemnetary slackness of
+
+$x_j(c_j - \sum_{i=1}^p a_{ij}z_j - f_jy) =0, (j=1,2,...,q$
+
+1. What is the meaning of the dual variables?
+2. How constraining a given costraint is? Can a constraint be removed without changing the optimum?
+
+> Tight vs Not Tight constraints
+
+We introduce a penalty term such that we remove the $f^Tx=g$ constraint and add to the cost function such that:
+
+$\min c^T x - \lambda (f^T x -g)$ where $\lambda$ is the Lagrangian multiplier
+
+Dual of this one is
+
+$\max b^T z$
+
+s.t. $A^T z \leq c-\lambda f$
+
+we can rewrite as $(c-\lambda f)^T x (+\lambda g)$
+
+**Claim** $L(\lambda)\leq c^*$
+
+**Proof** Feasible regioon of $L(\lambda) \supseteq$ original feasible region (trivial)
+
+Our goal is to find a $\lambda^*$ such that $L(\lambda^*)=c^*$
+
+When we compare the two duals we find that the value of lambda that makes this true is any below the optimal $y^*$. $y^*$ is the break even point
+
+1. $z^*$ feasible for dual of $L(y^*)$
+
+If we relax a constraint and set $\lambda$ to $y^*$ then we can find the optimal solution without changing the optimal
