@@ -1,0 +1,54 @@
+---
+format: pdf
+---
+
+
+# Schemas
+Students (<u>name</u>, major, classYear, dorm)
+Clubs (<u>name</u>, category, meetingLocationName, presidentName)
+Locations (<u>name</u>, building, capacity)
+Events (<u>title, eventDate, startTime</u>, clubName, locationName, organizerName, cost)
+Attendance (<u>eventTitle, eventDate, startTime, studentName</u>)
+
+# 1
+```{sql}
+SELECT name, presidentName
+FROM Clubs
+INNER JOIN Events ON Events.clubName = Clubs.name
+INNER JOIN Attendance ON Events.title = Attendance.eventTitle
+WHERE studentName = 'Harry Potter'
+```
+
+# 2
+
+# 3
+```{sql}
+SELECT name
+FROM Students
+INNER JOIN Attendance ON name = Attendance.studentName
+INNER JOIN Events ON Events.title = Attendance.eventTitle
+INNER JOIN Clubs ON Events.clubName = Clubs.name
+WHERE Clubs.category != 'Herbology'
+```
+
+# 4
+```{sql}
+
+```
+
+# 5
+
+# 6
+
+# 7
+
+# 8
+
+# 9
+
+# 10
+
+# 11
+
+# 12
+Find the distinct names of all the clubs who hosted events where their event location was at 'Gryffindor Common Room', the event was hosted in 2026 and the costs of the events where greater than all of the costs of events hosted by clubs under the name 'Slug Club'

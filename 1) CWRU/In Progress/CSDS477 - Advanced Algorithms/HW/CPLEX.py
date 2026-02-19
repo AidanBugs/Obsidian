@@ -136,3 +136,5 @@ for i,j in cA:
 
 solution = mdl.solve()
 print(solution)
+
+print(mdl.export_as_lp_string())
