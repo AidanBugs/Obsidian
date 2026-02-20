@@ -5,9 +5,13 @@ format: pdf
 
 # Schemas
 Students (<u>name</u>, major, classYear, dorm)
+
 Clubs (<u>name</u>, category, meetingLocationName, presidentName)
+
 Locations (<u>name</u>, building, capacity)
+
 Events (<u>title, eventDate, startTime</u>, clubName, locationName, organizerName, cost)
+
 Attendance (<u>eventTitle, eventDate, startTime, studentName</u>)
 
 # 1
@@ -33,10 +37,23 @@ WHERE Clubs.category != 'Herbology'
 
 # 4
 ```{sql}
-
+SELECT title
+FROM Events
+GROUP BY title
+HAVING COUNT(*) >= 2
 ```
 
 # 5
+```{sql}
+SELECT COUNT(*) as numEvents
+FROM Attendance
+INNER JOIN Events ON Events.title = Attendance.eventTitle 
+  AND Events.eventDate = Attendance.eventDate
+  AND Events.startTime = Attendance.startTime
+WHERE studentName='Harry Potter'
+  AND locationName='Gryffindor Common Room'
+
+```
 
 # 6
 
@@ -45,10 +62,28 @@ WHERE Clubs.category != 'Herbology'
 # 8
 
 # 9
+```{sql}
+SELECT e.clubName
+FROM Events as e
+WHERE e.cost > ALL(
+  SELECT e2.cost
+  FROM Events as e2
+  WHERE e2.clubName='Slug Club'
+)
+```
 
 # 10
+```{sql}
+SELECT studentName
+FROM Attendance
+
+HAVING COUNT(*) >= 2
+
+```
+
 
 # 11
+Find the name of the location of events and the number of events where the event was hosted by the 'Slug Club' and the location was used at least 5 times. In other words, find the name of locations and the number of times an event was hosted by the 'Slug Club' and the location was used at least 5 times.
 
 # 12
 Find the distinct names of all the clubs who hosted events where their event location was at 'Gryffindor Common Room', the event was hosted in 2026 and the costs of the events where greater than all of the costs of events hosted by clubs under the name 'Slug Club'
