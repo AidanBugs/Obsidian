@@ -437,6 +437,15 @@ NEED TO FINISH
 
 
 ## 4
+Let $m=|E|,n=|V|$, so $A$ is a $(m+2n)\times n$ matrix. We get this from the first set of constraints in our LP is $x_i+x_j \leq 1, ((i,j)\in E)$ being of size $m$, then $x_i+\sum_{j:(j,i)\in E} x_j \geq 1, (i\in V)$ being of size $n$ and $x_i\leq 1$ being of size $n$.
+
+Thus our dual will have $m+2n$ variables and $n$ constraints. 
+
+For a variable $x_i$ in the dual, it appears in the first $m$ constraints when $i:(i,j)\in E\cup (j,i)\in E$. Similarly $x_i$ appears in the next $n$ constraints if there exists an edge from $i$ to $j$ or if $i=j$. For the last $n$ constraints, $x_i$ appears only once
+
+Thus our dual is formulated as:
+
+
 
 ## 5
 ### a

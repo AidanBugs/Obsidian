@@ -19,11 +19,26 @@ Attendance (<u>eventTitle, eventDate, startTime, studentName</u>)
 SELECT name, presidentName
 FROM Clubs
 INNER JOIN Events ON Events.clubName = Clubs.name
-INNER JOIN Attendance ON Events.title = Attendance.eventTitle
+INNER JOIN Attendance ON Events.title = Attendance.eventTitle 
+  AND Events.eventDate = Attendance.eventDate
+  AND Events.startTime = Attendance.startTime
 WHERE studentName = 'Harry Potter'
+AND Event.eventDate BETWEEN '2026-01-01' AND '2026-12-31'
 ```
 
 # 2
+```{sql}
+SELECT name
+FROM Students
+EXCEPT
+SELECT studentName
+FROM Attendance
+INNER JOIN Events ON Events.title = Attendance.eventTitle
+INNER JOIN Clubs ON Events.clubName = Clubs.name
+WHERE Clubs.category = 'Herbology'
+AND Event.eventDate BETWEEN '2026-01-01' AND '2026-12-31'
+```
+
 
 # 3
 ```{sql}
@@ -32,7 +47,9 @@ FROM Students
 INNER JOIN Attendance ON name = Attendance.studentName
 INNER JOIN Events ON Events.title = Attendance.eventTitle
 INNER JOIN Clubs ON Events.clubName = Clubs.name
-WHERE Clubs.category != 'Herbology'
+WHERE NOT Clubs.category = 'Herbology'
+AND Event.eventDate NOT BETWEEN '2026-01-01' AND '2026-12-31'
+
 ```
 
 # 4
@@ -56,14 +73,47 @@ WHERE studentName='Harry Potter'
 ```
 
 # 6
+```{sql}
+SELECT clubName, COUNT(*) as numAttendences
+FROM Events
+INNER JOIN Attendance ON Events.title = Attendance.eventTitle 
+  AND Events.eventDate = Attendance.eventDate
+  AND Events.startTime = Attendance.startTime
+WHERE Attendance.studentName = 'Harry Potter'
+GROUP BY Events.clubName
+```
+
 
 # 7
+```{sql}
+SELECT DISTINCT studentName
+FROM Attendance
+WHERE NOT EXISTS(
+  SELECT studentName
+  FROM Attendance
+  INNER JOIN Events ON Events.title = Attendance.eventTitle 
+    AND Events.eventDate = Attendance.eventDate
+    AND Events.startTime = Attendance.startTime
+  INNER JOIN Locations ON Events.locationName = Locations.name
+  WHERE NOT Locations.building = 'Gryffindor Tower'
+);
+```
 
 # 8
+```{sql}
+SELECT Events.locationName, Events.clubName
+FROM Events
+LEFT JOIN Attendance ON Events.title = Attendance.eventTitle 
+  AND Events.eventDate = Attendance.eventDate
+  AND Events.startTime = Attendance.startTime
+GROUP BY Events.locationName, Events.clubName
+HAVING COUNT(*) = COUNT(Attendance.studentName)
+```
+
 
 # 9
 ```{sql}
-SELECT e.clubName
+SELECT DISTINCT e.clubName
 FROM Events as e
 WHERE e.cost > ALL(
   SELECT e2.cost
@@ -74,11 +124,19 @@ WHERE e.cost > ALL(
 
 # 10
 ```{sql}
-SELECT studentName
+SELECT DISTINCT studentName
 FROM Attendance
-
-HAVING COUNT(*) >= 2
-
+INNER JOIN Events ON Events.title = Attendance.eventTitle 
+  AND Events.eventDate = Attendance.eventDate
+  AND Events.startTime = Attendance.startTime
+INNER JOIN Clubs ON Clubs.name = Events.clubName
+WHERE Clubs.category = 'Herbology'
+GROUP BY Attendance.studentName
+HAVING Count(DISTINCT Clubs.name) = (
+  SELECT COUNT(*)
+  FROM Clubs
+  WHERE Clubs.category = 'Herbology'
+)
 ```
 
 

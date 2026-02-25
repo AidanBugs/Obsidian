@@ -50,3 +50,44 @@ Thus, each row/constraint corresponds to a node and each column/variable represe
 4. Cost reversal
 
 > For any negative cost we can reverse the arc direction, take the negative of the cost and preserve the upperbound of the arc. The original left node's supply is subtracted by the upperbound and the right node's supply adds the upperbound. Essentially this is saying were assuming the maximum flow in the original direction and adding back the flow as needed
+
+5. Removing Upper Bounds ($u_{ij}=\infty$)
+
+> $x_{ij}\leq u_{ij} \rightarrow x_{ij} + s_{ij} = u_{ij}$, suppose we have an arc $i,j$ with upperbound $u_{ij}$. We can create a dummy node in between nodes $i,j$ with a supply of $u_{ij}$, subtract that supply from $b_{i}$, and the cost of going from node $ij$ to $j$ is $c_{ij}$
+
+# Path and Cycle Flow
+We can follow any arbitrary path until it stops to determine how much flow is sent along a single path
+
+Path+Cycle Flows -> $x_{ij}$ Arc Flows
+
+> Look at every arc and determine how many path is in an individual arc and add that to our flow for that arc.
+
+**Thm** An arc flow can be represented w/ at most flows on $n+m$ paths and cycles. Note that $|V|=n,|E|=m$.
+
+- Path connects a supply ($b_i>0$) vertex to demand vertex ($b_i<0$)
+
+- At most $m$ cycle flows
+
+**Proof** Sketch an Algorithm arc flows -> path/cycles
+
+0. $e_i\leftarrow b_i$ (excess at $i$) and $r_{ij}\leftarrow x_{ij}$ (residual flow)
+
+1. Attempt to find the path flows $P$
+
+> Start at $e_i>0$, follows arcs w/ $r_{ij}>0$ until either:
+
+>> a. Find $e_j <0$, flow =$\min \{e_i, -e_j, r_{ij}\in P\}$
+
+>> b. Repeated Vertex, means there is a cycle $C$, so flow $=\min\{r_{ij}\in C\}$
+
+> Update $e_i,e_j, r_{ij}\in P$, repeat until $\forall i, e_i=0$
+
+>> Note: $\exists$ outgoing arc w. $r_{ij}>0$ by feasibility of arc flow, $n$ finite -> if no $e_i<0$ find repeated node)
+
+2. Find cycle flows $C$:
+
+> Start from arc and follow $r_{ij}>0$ until find repeated vertex
+
+> Thus we have a cycle flow and assign flow =$\min\{r_{ij}\in C\}$
+
+Our path/cycle assigning formula ensure at least one of $e_i,r_{ij}\rightarrow 0$. Thus each path/cycle assigns one of these quantities to $0$. Thus there is at most $n+m$ paths/cycles because each path/cycle is associated with an arc/node supply going to $0$.
