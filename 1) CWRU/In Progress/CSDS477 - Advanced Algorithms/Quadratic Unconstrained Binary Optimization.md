@@ -20,8 +20,8 @@ $L(\lambda) = \min c^T x - \lambda(f^T x -g)$
 | $x\lor y \lor z$ | $x+y+z\geq 1$ | $1-x-y-z+xy+xz+yz-xyz=0$ |
 | $x\rightarrow y$ | $x\leq y$ | $x-xy=0$ |
 | $\lnot (x\land y)$ | $x+y \leq 1$ | $xy=0$ |
-| $x\land y$ | $x+y = 2$ |  $xy=1$ |
-| $x\oplus y$ | $x+y = 1$ | $x+y=1$ |
+| $x\land y$ | $x+y = 2$ |  $1-xy=0$ |
+| $x\oplus y$ | $x+y = 1$ | $(1-x-y)^2=$ |
 
 $\min x^T Q x$ s.t. $x\in \{0,1\}^q$
 

@@ -38,3 +38,33 @@ solution = mdl.solve()
 print(mdl.export_as_lp_string())
 
 print(solution)
+
+
+mdl = Model()
+
+x = [None] * 9
+
+cA = [(1,2),(1,4),(2,3),(3,4),(2,4)]
+
+for i in range(4):
+  x[i] = mdl.continuous_var_list(4, ub=1, name=f'x_{i+1}')
+
+x[0] = mdl.binary_var_list(4, name=f'x_{1}')
+x[2] = mdl.binary_var_list(4, name=f'x_{3}')
+
+
+y = mdl.continuous_var_list(4, ub=1, name='y')
+
+mdl.minimize(mdl.sum(y))
+
+for i in range(4):
+  for h in range(4):
+    mdl.add_constraint(x[i][h] <= y[h])
+  mdl.add_constraint(mdl.sum(x[i]) == 1)
+for i,j in cA:
+  for h in range(4):
+    mdl.add_constraint(x[i-1][h] + x[j-1][h] <= 1)
+
+solution = mdl.solve()
+print(solution)
+

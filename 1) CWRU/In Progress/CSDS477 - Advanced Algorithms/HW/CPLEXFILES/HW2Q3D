@@ -1,0 +1,12 @@
+Minimize
+ obj: y5
+Subject To
+ c1: 3 y1 + 3 y2 + 3 y3 + 3 y4 + y5 >= 0
+ c2: y1 + 4 y2 + 4 y3 + 4 y4 + y5 >= 0
+ c3: y1 + 2 y2 + 5 y3 + 5 y4 + y5 >= 0
+ c4: y1 + 2 y2 + 3 y3 + 6 y4 + y5 >= 0
+ c5: - y1 - 2 y2 - 3 y3 - 3 y4 = -1
+
+Bounds
+       y5 Free
+End

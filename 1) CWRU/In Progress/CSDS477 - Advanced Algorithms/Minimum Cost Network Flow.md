@@ -91,3 +91,83 @@ Path+Cycle Flows -> $x_{ij}$ Arc Flows
 > Thus we have a cycle flow and assign flow =$\min\{r_{ij}\in C\}$
 
 Our path/cycle assigning formula ensure at least one of $e_i,r_{ij}\rightarrow 0$. Thus each path/cycle assigns one of these quantities to $0$. Thus there is at most $n+m$ paths/cycles because each path/cycle is associated with an arc/node supply going to $0$.
+
+# Unimodular MCNF
+$A$ integer and $p\times q$, $rank(A)=p$
+
+**THM** $A$ is unimodular ($\forall B, det(B)=\pm 1$) iff $\forall$ integer $b$, bfs $Ax=b$ are integer
+
+MCNF
+
+$\min c^T x$
+
+s.t. $Nx=b$ and $x\geq 0$
+
+wlog no lower and upper bounds (demonstrated in last lecture)
+
+> Note that $c$ is arc cost, $x$ flows, $N$ node-arc incidence matrix, $b$ is the supply.
+
+This runs in to an immediate issue that $rank(N)<n$
+
+We can make a matrix $N'$ as the maximal set of linearly independent rows of $N$ and rewrite the problem as follows:
+
+> $\min c^T x$
+>
+> s.t. $Nx=b$ and $x\geq 0$
+
+**Def** $A$ is totally unimodular iff $\forall$ square submatrix $F$ of $A$, $det(F)\in \{\pm 1,0\}$
+
+**Claim** If $A$ is totally unimodular then $A$ is unimodular 
+
+**Proof** $B$ is square submatrix of $A$ and $det(B)\in\{\pm 1\}$ and cannot be $0$ because its a basis
+
+$N$ is totally unimodular $\rightarrow N'$ is totally unimodular
+
+$\rightarrow N'$ is unimodular so there is an integer optimum
+
+**Thm** $N$ is totally unimodular
+
+**Pf** By induction on size $F$
+
+**Base Case** $F$ is a $1\times 1$ matrix (trivial since all entries are $\in\{0,\pm1\}$)
+
+**Induction** Suppose $\forall F_k$ $k\times k$, $det(F_k)=\{0,\pm 1\}$
+
+$F_{k+1} (k+1)\times(k+1)$
+
+Cases:
+
+1. $F_{k+1}$ ends up with a column of all $0$ so $det(F_{k+1})=0$
+2. $F_{k+1}$ all columns have 2 non zero entries, means all columns add to $0$ (by definition of $N$) so $det(F_{k+1})=0$
+3. $\exists$ column of $F_{k+1}$ w/ single nonzero entry ($\pm 1$). 
+
+> $det(F_{k+1})= (\pm 1)\cdot (\pm 1) detF$. In a way, we could rewrite our constraints and variables to have the remaining matrix $F$ to be a continuous $k\times k$ matrix which we already know the determinant to be $=\{0,\pm 1\}$
+
+# Duality of MCNF
+
+$\min \sum c_{ij} x_{ij}$
+
+s.t. $\sum x_{ij} - \sum x_{ji} = b_i, (i\in V)$ 
+
+> $x_{ij} \leq u_{ij}, ((i,j)\in U)$
+
+> $x_{ij}\geq 0, ((i,j)\in E)$
+
+>>>> Note $U=\{(i,j)\in E: u_{ij}< \infty\}$
+
+Let $\pi_i$ denote the node potentials and $\alpha_{ij}$ denote the constraints for arcs with upper bounds
+
+Higher Level Observations:
+
+i. At least one mass balance constraint is redundant (bc $rank(N)< n$) means that at least one $\pi_i$ is redundant
+
+> from lagrangian constraint, $\pi_i$ is the break even cost to violate a constraint.
+
+ii. $\pi_i$ is penalty for violating $b_i$, which forces at least one $b_j$ to change as well
+
+iii. $\alpha_{ij}$ implied by $\pi_i$
+
+iv. complementary slackness: $x_{ij}$ times expression of $\pi_i, (\alpha_{ij})$
+
+
+
