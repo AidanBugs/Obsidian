@@ -118,7 +118,7 @@ Plot here :)
 
 **THM** If $x,y\in X,$ then any strict convex combination is feasible (note this means we can get a $z$ between $x$ and $y$)
 
-Proof: remember that $\min c^T x, $s.t.$ Ax=b, x\geq 0$
+Proof: remember that $\min c^T x,$ s.t. $Ax=b, x\geq 0$
 
 $x,y\in X\{Ax=Ay=b, x,y\geq 0, Az=A(\lambda x +(1-\lambda)y)$
 
@@ -226,13 +226,13 @@ $\rightarrow$ Assume $c^\pi_s < 0$. Let
 
 From $\bar x$ create $x'$ under the following conditions:
 
-$x_j' = 0$ if $j\in L-\{s\}$, $\delta$ if $j=s$, $\bar_j-a_{js}\delta$ if $j\in B$ [note $s$ is the variable we are trying to increase]
+$x_j' = 0$ if $j\in L-\{s\}$, $\delta$ if $j=s$, $\bar x_j-a_{js}\delta$ if $j\in B$ [note $s$ is the variable we are trying to increase]
 
 1) $x'$ feasible
 
 > $x_i +\bar a_{is}x_s + \sum \bar a_{ij}x_j =\bar b_i$ 
 
-> For $x_i': \bar b_i - \bar a_{is}\delta + a_{is}\delta + 0 = \bar b_{ij}$ annd we know $\delta>0$ because assuming non degenerate case
+> For $x_i': \bar b_i - \bar a_{is}\delta + a_{is}\delta + 0 = \bar b_{ij}$ and we know $\delta>0$ because assuming non degenerate case
 
 > Show $x_j' \geq 0$ demonstrated fairly straightforward because $\delta>0$ except the case $j\in B$
 
@@ -241,7 +241,7 @@ $x_j' = 0$ if $j\in L-\{s\}$, $\delta$ if $j=s$, $\bar_j-a_{js}\delta$ if $j\in 
 
 2) $x'$ has lower cost:
 
-> $z' = (c^\pi _L)^T x_L = c^\pi_s \times \delat< 0$ because assuming $c^\pi_s<0$
+> $z' = (c^\pi _L)^T x_L = c^\pi_s \times \delta< 0$ because assuming $c^\pi_s<0$
 
 **Proof** Degenerate case ($\delta=0$) ends up revisiting the same spot over and over while changing Basis which map to the same extreme point
 

@@ -94,7 +94,7 @@ $\bar x opt \leftrightarrow c^\pi \geq 0$
 
 $x^*$ opt for 
 
-$\mix c^T x$
+$\min c^T x$
 
 s.t. $Ax \geq b$
 
@@ -102,7 +102,7 @@ s.t. $Ax \geq b$
 
 Convert to standard form:
 
-$\mix c^T x$
+$\min c^T x$
 
 s.t. $Ax-Is\geq b$
 

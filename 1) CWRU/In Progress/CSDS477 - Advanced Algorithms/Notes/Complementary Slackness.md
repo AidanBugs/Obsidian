@@ -30,11 +30,7 @@ Slack in dual: $s= c-A^Ty\geq 0$ if $y$ is feasible ($s$ has $q$ variables)
 
 **Thm** Let $\bar x (\bar y)$ be a feasible solution of the primal (dual) then $\bar x, \bar y$ optimal iff:
 
-$$
-\forall i\in \{1,...,p\}: e_i \bar y_i = 0 
-
-,\forall j\in \{1,...,q\}: s_j \bar x_j = 0 
-$$
+$\forall i\in \{1,...,p\}: e_i \bar y_i = 0 ,\forall j\in \{1,...,q\}: s_j \bar x_j = 0$
 
 ## EX
 $\min x_1 + 2x_2$
