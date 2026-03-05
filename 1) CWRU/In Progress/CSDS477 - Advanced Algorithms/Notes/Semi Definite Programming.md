@@ -30,7 +30,22 @@ $\min C\cdot X$
 
 s.t. $A_i \cdot X= b_i (i=1,2,...,p)$
 
-> $x\geq 0$
+> $X\geq 0$
+
+Note that $X\geq 0$ suggests that $\forall x x^TX\geq 0$, eigenvalues of $X$ are $\geq 0$ and $\exists B: B^TB=X$
+
+WLOG $X$ is symmetric
+
+When trying to find $B$: 
+
+$$
+X= \begin{pmatrix}
+b_1^T b_1 & b_1^T b_2 & ... & b_1^T b_h \\
+b_2^T b_1 & b_2^T b_2 & ... & b_2^T b_h \\
+... & ... & ... & ... \\
+b_h^T b_1 & b_h^T b_2 & ... & b_h^T b_h \\
+\end{pmatrix}
+$$
 
 ## EX 
 

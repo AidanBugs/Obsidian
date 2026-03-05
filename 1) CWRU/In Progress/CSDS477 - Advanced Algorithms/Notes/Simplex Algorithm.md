@@ -25,4 +25,6 @@ For finding equivalent points, $(c^\pi)^T x = c^Tx - \pi^T Ax = c^T x -\pi ^T b$
 
 > $c^\pi_j<0 \rightarrow increase x_j, update x_B$ and repeat until optimal solution (no $c^\pi_j<0$)
 
+Additionally note that you aim to increase the $x_j$ with the largest increase to the objective (decrease in case of minimizing)
+
 Small issue is that a change of basis doesn't necessarily change extreme points

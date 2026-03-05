@@ -104,7 +104,7 @@ Convert to standard form:
 
 $\min c^T x$
 
-s.t. $Ax-Is\geq b$
+s.t. $Ax-Is= b$
 
 > $x,s\geq 0$
 
@@ -129,13 +129,13 @@ We can actually just use standard form -> substitution by taking the dual with a
 
 In short follow this table:
 
-| Primal | Dual |
+| Primal (Max) | Dual (min) |
 | ----- | ----- |
 | $i$th con $\leq$ | $i$th var $\geq$ |
 | $i$th con $\geq$ | $i$th var $\leq$ |
 | $i$th con $=$ | $i$th var unrestricted |
-| $j$th var $\geq$ | $j$th con $\leq$ |
-| $j$th var $\leq$ | $j$th con $\geq$ |
+| $j$th var $\geq$ | $j$th con $\geq$ |
+| $j$th var $\leq$ | $j$th con $\leq$ |
 | $j$th var unrestricted | $j$th con $=$ | 
 
 ## Lagrangian Relaxation
