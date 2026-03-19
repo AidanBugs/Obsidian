@@ -1,0 +1,462 @@
+---
+format: pdf
+---
+
+# 1
+Sequential backward selection starts with a full model and removes features until typically there are no more features to be removed (either reached threshold ie k or a null model) or there are no improvements with removing any more features. In the case of this question however, it appears we will always remove features until we reach our threshold $k$. 
+
+To find how many total models trained lets look at the backward selection step by step, the first of which is training a full model. Then the second step is training models on one less feature than our current model. In the case of the second step that would be $m$ different models of size $m-1$, but for the third it would be $m-1$. We repeat this retraining step until we reach models with $k$ features, in which we would have to train $k+1$ of them. 
+
+We can create a simple formula for determining the total number of models trained, with 2 different cases:
+
+> Case 1: $m-k$ is even 
+
+>> $1+\frac{m-k}2 (m+k+1)$
+
+> Case 2: $m-k$ is odd
+
+>> $1+m+\frac{m-1-k}2 (m+k)$
+
+
+We can verify this formula with the example $m=10,k=5$, which our formula says $1+10+30=41$ models will need to be trained:
+
+> $1$ full model 
+
+> $10$ models with $9$ features
+
+> $9$ models with $8$ features
+
+> $8$ models with $7$ features
+
+> $7$ models with $6$ features
+
+> $6$ models with $5$ features
+
+> Total: $41$
+
+Just to test both cases we can also test on $m=9,k=5$, which our formula says $1+30=31$ which lines up with the info found above (we simply remove the models with $9$ features from the work above to determine the total number of models trained with $m=9,k=5$).
+
+# 2
+Let $S(\lambda)$ represent the sorted list of eigenvalues that are highest to lowest. This question is asking us for $k$ eigenvalues such that $\sum_{i=1}^k \frac{S(\lambda)_i}{\sum_{j=1}^m \lambda_j}=0.7$
+
+> First it is important to determine $\sum_{j=1}^m \lambda_j$ which in this case is $0.22+ 0.9+ 0.1+ 0.07+ 0.08+ 0.03+ 0.8+ 0.003+ 0.19=2.393$
+
+> Then we simply sum eigenvalues in decreasing order until this total reaches $0.7$. Thus, the largest eigenvalue is $0.9$ which accounts for $0.376$ of the variance. Second is the eigenvector with an eigenvalue of $0.8$, which accounts for $0.334$ of variance bringing the total up to $0.710$ of variance accounted for.
+
+> Thus the eigenvectors selected to account for $70$% of the variance are the vectors whose eigenvalues are $0.9$ and $0.8$ respectively.
+
+# 3
+First we need to find $k$ PC's such that $90$% of the variance is accounted for. $k=1,\frac v2\rightarrow k=2, \frac{3v}4\rightarrow k=3, \frac{7v}8 \rightarrow k=4, \frac{15v}{16}$. Thus PCA produces a dimensionality of $4$ in order to have $90$% of variance accounted for. Since in LDA, the number of dimensions is equal to the number of class labels minus $1$ (ie $C-1$), thus the number of class labels is $5$ because $5$ class labels minus $1$ results in our desired $4$ dimensions.
+
+# 4
+$C=2$ from $|y|=2$ where $y\in\{0,1\}$
+
+$D_0=\{x^1,x^2,x^3,x^4\}$
+
+$D_1=\{x^5,x^6,x^7,x^8\}$
+
+$m_i$ represents the mean of all points in the class $i$
+
+> $m_0=[-2,0]$
+
+> $m_1=[2,0]$
+
+$S_i=\sum_{x\in D_i}(x-m_i)(x-m_i)^T$
+
+> $S_0=[-1,0][-1,0]^T + [1,0][1,0]^T + [0,1][0,1]^T+ [0,-1][0,-1]^T$
+
+$$
+S_0=\begin{pmatrix}
+2 & 0 \\
+0 & 2
+\end{pmatrix}
+$$
+
+> $S_1=[1,0][1,0]^T + [-1,0][-1,0]^T + [0,1][0,1]^T+ [0,-1][0,-1]^T$
+
+$$
+S_1=\begin{pmatrix}
+2 & 0 \\
+0 & 2
+\end{pmatrix}
+$$
+
+$S_W=\sum_{i=0}^1 \frac{S_i}{|D_i|}$
+
+$$
+S_W=\begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix}
+$$
+
+$m$ represents the mean of all points in our dataset
+
+> $m=0,0$
+
+$S_B=\sum_{i=0}^1 |D_i|(m_i-m)(m_i-m)^T$
+
+> $S_B=4 [-2,0][-2,0]^T + 4[2,0][2,0]^T$ 
+
+$$
+S_B=\begin{pmatrix}
+32 & 0 \\
+0 & 0
+\end{pmatrix}
+$$
+
+
+# 5
+The curve shows a model which performs well on training data but performs significantly worse on unseen data. This means the model might be subject to overfitting. As such we should increase the penalization term, ie increase $\lambda$ in order to potentially improve our model. Since the starting model had the L2 regularization term with $\lambda=1$, we should try it with $\lambda=2$ to see if this improves our model.
+
+# 6
+$|\gamma|=5, |C|=5$ so grid search results in $5\times 5=25$ models trained. Then it is given that there were $10$ models trained by the randomized search algorithm. Thus this results in a reduction of computation of $25/10=2.5$.
+
+# 7
+```{python}
+#| output: false
+#| echo: false
+
+import pandas as pd
+import numpy as np
+from sklearn import svm
+from sklearn.metrics import accuracy_score
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+
+df = pd.read_csv("data/wine_dataset.csv")
+
+X = df.drop("style", axis=1)
+y = df["style"]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=1
+)
+
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+c = [0.00001,0.01,1]
+
+model_none = LogisticRegression(max_iter=100, penalty=None)
+
+model_none.fit(X_train_scaled, y_train)
+
+model_l1=[]
+model_l2=[]
+
+for para in c:
+  model_l1.append(LogisticRegression(max_iter=100, penalty='l1', C=para, solver='saga'))
+  model_l2.append(LogisticRegression(max_iter=100, penalty='l2', C=para, solver='lbfgs'))
+
+accuracies = [0,0,0,0,0,0,0]
+
+accuracies[0]= round(accuracy_score(y_test,model_none.predict(X_test_scaled)),5)
+
+print(f"Accuracy for no penalty log reg: {accuracies[0]}")
+
+for i in range(3):
+  model_l1[i].fit(X_train_scaled, y_train)
+  model_l2[i].fit(X_train_scaled, y_train)
+  accuracies[i+1] = round(accuracy_score(y_test,model_l1[i].predict(X_test_scaled)),5)
+  accuracies[i+4] = round(accuracy_score(y_test,model_l2[i].predict(X_test_scaled)),5)
+  print(f"Accuracy for L1 penalty log reg with C={c[i]}: {accuracies[i+1]}")
+  print(f"Accuracy for L2 penalty log reg with C={c[i]}: {accuracies[i+4]}")
+```
+
+#
+
+## a
+The accuracies for the models are shown in the table below:
+
+
+| Model Type | Accuracy | 
+| ----- | --- |
+| No Penalty |`{python} f"{accuracies[0]*100}%"`|
+| L1, C=0.00001 |`{python} f"{accuracies[1]*100:.3f}%"`|
+| L2, C=0.00001 |`{python} f"{accuracies[4]*100:.3f}%"`|
+| L1, C=0.01 |`{python} f"{accuracies[2]*100:.3f}%"`|
+| L2, C=0.01 |`{python} f"{accuracies[5]*100:.3f}%"`|
+| L1, C=1 |`{python} f"{accuracies[3]*100}%"`|
+| L2, C=1 |`{python} f"{accuracies[6]*100}%"`|
+
+## b
+```{python}
+#| echo: false
+#| output: false
+
+weights_none = model_none.coef_[0]
+
+print(weights_none)
+
+l2 = 0
+
+for weight in weights_none:
+  l2 += weight*weight
+
+print(l2)
+```
+
+The logistic regression without any penalty term resulted in a L2 norm of `{python} f"{l2:.2f}"` which is found by finding the squared sum of all the weights, ie $\sum w^2$
+
+## c
+```{python}
+#| echo: false
+#| output: false
+weights_best_l1 = model_l1[2].coef_[0]
+
+print(weights_best_l1)
+
+l2 = 0
+
+for weight in weights_best_l1:
+  l2 += weight*weight
+
+print(l2)
+```
+
+The logistic regression with the L1 penalty term resulted in a L2 norm of `{python} f"{l2:.2f}"` which is found by finding the squared sum of all the weights, ie $\sum w^2$. This is significantly lower than the L2 norm associated with the no penalty term logistic regression.
+
+
+## d
+```{python}
+#| echo: false
+#| output: false
+weights_best_l2 = model_l2[2].coef_[0]
+
+print(weights_best_l2)
+
+l2 = 0
+
+for weight in weights_best_l2:
+  l2 += weight*weight
+
+print(l2)
+```
+
+The logistic regression with the L2 penalty term resulted in a L2 norm of `{python} f"{l2:.2f}"` which is found by finding the squared sum of all the weights, ie $\sum w^2$. This is significantly lower than the L2 norm associated with the no penalty term logistic regression.
+
+## e
+The weights of the no penalty model were: `{python} f"{np.round(weights_none, 3).tolist()}"`
+
+The weights of the best L1 penalty model were: `{python} f"{np.round(weights_best_l1, 3).tolist()}"`
+
+The weights of the best L2 penalty model were: `{python} f"{np.round(weights_best_l2, 3).tolist()}"`
+
+Thus according to these weights from the models, none of the models had any weights that were exactly $0$. It is important to note that these models were trained on standardized data which would contribute to the size of the weights.
+
+# 8
+## 1
+The number of dimensions in the dataset excluding the style column is $d=$ `{python} f"{len(X.columns)}"`
+
+```{python}
+#| echo: false
+#| output: false
+
+## 2
+
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+## 3
+
+cov_X=np.cov(X_scaled.transpose())
+
+
+## 4
+eigenvalues, eigenvectors =np.linalg.eig(cov_X)
+
+idx = np.argsort(eigenvalues)[::-1]
+eigenvalues = eigenvalues[idx]
+eigenvectors = eigenvectors[:, idx]
+
+eigenvalues = np.round(eigenvalues, 3).tolist()
+eigenvectors = np.round(eigenvectors, 3).tolist()
+
+print(eigenvalues)
+
+for i in range(len(eigenvalues)):
+  print(f"{eigenvectors[i]}")
+```
+
+
+## 4
+$$
+\lambda_1=3.042, \lambda_2=2.65, \lambda_3=1.642, \lambda_4=1.069, \lambda_5=0.841,\lambda_6=0.661
+$$
+
+$$
+\lambda_7=0.564, \lambda_8=0.516, \lambda_9=0.458, \lambda_10=0.299, \lambda_11=0.228,\lambda_12=0.033
+$$
+
+$$
+v_1 = \begin{pmatrix}0.257\\0.262\\-0.467\\-0.144\\0.165\\-0.03\\-0.393\\-0.001\\0.424\\-0.272\\0.277\\-0.335\end{pmatrix},\quad
+v_2 = \begin{pmatrix}0.395\\0.105\\0.28\\-0.08\\0.148\\0.383\\-0.445\\-0.31\\-0.123\\0.494\\-0.141\\-0.082\end{pmatrix},\quad
+v_3 = \begin{pmatrix}-0.146\\0.144\\-0.588\\0.056\\-0.235\\-0.362\\-0.048\\-0.445\\-0.246\\0.33\\-0.229\\0.001\end{pmatrix},\quad
+v_4 = \begin{pmatrix}-0.319\\0.343\\0.076\\0.112\\0.508\\0.063\\0.096\\-0.082\\-0.488\\-0.207\\-0.005\\-0.451\end{pmatrix},\quad
+$$
+
+$$
+v_5 = \begin{pmatrix}0.313\\0.27\\-0.047\\0.165\\-0.394\\0.425\\0.473\\-0.376\\-0.044\\-0.239\\0.193\\-0.043\end{pmatrix},\quad
+v_6 = \begin{pmatrix}-0.423\\0.111\\0.099\\0.303\\-0.248\\0.283\\-0.363\\-0.12\\0.301\\-0.303\\-0.486\\-0.001\end{pmatrix},
+v_7 = \begin{pmatrix}-0.474\\0.144\\0.101\\0.132\\-0.224\\0.107\\-0.235\\-0.011\\0.002\\0.295\\0.72\\0.064\end{pmatrix},\quad
+v_8 = \begin{pmatrix}0.092\\0.555\\0.052\\0.151\\0.33\\-0.155\\-0.013\\-0.043\\0.071\\-0.077\\0.003\\0.716\end{pmatrix},\quad
+$$
+
+$$
+v_9 = \begin{pmatrix}0.208\\-0.153\\0.407\\0.471\\-0.001\\-0.561\\-0.079\\-0.362\\0.137\\-0.112\\0.139\\-0.207\end{pmatrix},\quad
+v_{10} = \begin{pmatrix}0.3\\0.12\\-0.169\\0.588\\-0.193\\0.02\\-0.17\\0.592\\-0.297\\0.085\\-0.047\\-0.078\end{pmatrix},\quad
+v_{11} = \begin{pmatrix}0.059\\-0.493\\-0.213\\0.08\\0.116\\0.169\\-0.339\\-0.226\\-0.417\\-0.416\\0.191\\0.332\end{pmatrix},\quad
+v_{12} = \begin{pmatrix}-0.087\\-0.297\\-0.296\\0.472\\0.459\\0.278\\0.273\\-0.093\\0.357\\0.308\\0.018\\0.008\end{pmatrix}.
+$$
+
+## 5
+Thus the top $6$ eigenvectors and eigenvalues are $\lambda_1,\lambda_2,\lambda_3,\lambda_4,\lambda_5,\lambda_6$ for the eigenvalues and $v_1,v_2,v_3,v_4,v_5,v_6$ for the eigenvectors. Note that $v_i$ denotes the $i$th column of $v$.
+
+## 6
+Thus it follows that our projection matrix $W$ is defined as:
+
+$$
+W=(v_1,v_2,v_3,v_4,v_5,v_6)=\begin{pmatrix}
+0.257 & 0.395 & -0.146 & -0.319 & 0.313 & -0.423 \\
+0.262 & 0.105 & 0.144 & 0.343 & 0.27 & 0.111  \\
+-0.467 & 0.28 & -0.588 & 0.076 & -0.047 & 0.099 \\
+-0.144 & -0.08 & 0.056 & 0.112 & 0.165 & 0.303  \\
+0.165 & 0.148 & -0.235 & 0.508 & -0.394 & -0.248 \\
+-0.03 & 0.383 & -0.362 & 0.063 & 0.425 & 0.283  \\
+-0.393 & -0.445 & -0.048 & 0.096 & 0.473 & -0.363 \\
+-0.001 & -0.31 & -0.445 & -0.082 & -0.376 & -0.12 \\
+0.424 & -0.123 & -0.246 & -0.488 & -0.044 & 0.301 \\
+-0.272 & 0.494 & 0.33 & -0.207 & -0.239 & -0.303 \\
+0.277 & -0.141 & -0.229 & -0.005 & 0.193 & -0.486 \\
+-0.335 & -0.082 & 0.001 & -0.451 & -0.043 & -0.001
+\end{pmatrix}
+$$
+
+# 9
+```{python}
+#| echo: false
+#| output: false
+
+## 1
+
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+## 2
+labels = np.unique(y)
+
+mean_vectors = []
+for label in labels:
+    mean_vec = np.mean(X_scaled[y == label], axis=0)
+    mean_vectors.append(mean_vec)
+
+print(labels)
+print(mean_vectors)
+```
+
+## 2
+
+For classes $red$ and $white$:
+
+$$
+m_{red}=\begin{pmatrix}
+0.85188711\\
+ 1.14293625\\
+-0.32797945\\
+-0.61050298\\
+ 0.89728426 \\
+ -0.82546595\\
+-1.22575798\\
+ 0.68370347\\
+ 0.57603762\\
+ 0.85272394\\
+ -0.05770297\\
+-0.208838
+\end{pmatrix}
+, m_{white}=\begin{pmatrix}
+0.27810688\\
+-0.37312272\\
+ 0.1070721 \\
+ 0.19930467\\
+-0.29292722\\
+0.26948143\\
+ 0.40016068\\
+-0.22320168\\
+-0.18805311\\
+-0.27838007\\
+0.0188377 \\
+ 0.0681773
+\end{pmatrix}
+$$
+
+## 3
+
+
+```{python}
+#| echo: false
+d=12
+overall_mean = np.mean(X_scaled, axis=0)
+S_W = np.zeros((d, d))
+S_B = np.zeros((d, d))
+
+for i in range(len(labels)):
+    class_samples = X_scaled[y == labels[i]]
+    n_cls = class_samples.shape[0]
+    
+    class_scatter = np.cov(class_samples, rowvar=False, bias=True) * n_cls
+    S_W += class_scatter
+    
+    mean_diff = (mean_vectors[i] - overall_mean).reshape(d, 1)
+    S_B += n_cls * (mean_diff @ mean_diff.T)
+
+print("\n Between-class scatter matrix S_B:")
+print(S_B)
+print("\n   Within-class scatter matrix S_W:")
+print(S_W)
+```
+
+## 4
+
+```{python}
+#| echo: false
+S_W_inv = np.linalg.inv(S_W)
+matrix = S_W_inv @ S_B
+eigenvals, eigenvecs = np.linalg.eig(matrix)
+
+eigenvals = np.real(eigenvals)
+eigenvecs = np.real(eigenvecs)
+
+print("\n Eigenvalues of S_W^{-1} S_B:")
+for i, val in enumerate(eigenvals):
+    print(f"   λ{i+1} = {val}")
+
+print("\n   Corresponding eigenvectors (each column):")
+print(eigenvecs)
+```
+## 5
+
+```{python}
+#| echo: false
+k = 6
+idx = np.argsort(eigenvals)[::-1]  
+selected_idx = idx[:k]
+selected_eigenvals = eigenvals[selected_idx]
+selected_eigenvecs = eigenvecs[:, selected_idx]
+
+print(f"\n Sorted eigenvalues (descending): {eigenvals[idx]}")
+print(f"   Selected k = {k} largest eigenvalues: {selected_eigenvals}")
+print("   Corresponding eigenvectors (columns):")
+print(selected_eigenvecs)
+```
+
+## 6
+
+```{python}
+#| echo: false
+W = selected_eigenvecs
+print("\n Projection matrix W (each column is an eigenvector):")
+print(W)
+```

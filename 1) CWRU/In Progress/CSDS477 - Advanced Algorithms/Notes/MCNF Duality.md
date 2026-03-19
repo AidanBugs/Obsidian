@@ -96,3 +96,56 @@ $G(V,E) + x \rightarrow G(X)=(V,E(x))$ which is basically updated version of edg
 > So $c_{ij}^\pi + \alpha_{ij}>0$ sp $x_{ij=0}$ and follows first case / violates comp slack 2
 
 **Pf** $\leftarrow$ Assume $c_{ij}^\pi>0\rightarrow$ comp slack
+
+1. $x_{ij}=0$, so no back arrow between $i,j$
+
+> $U=\{(i,j)\in E: u_{ij}<\infty}$
+
+> $\alpha_{ij}(u_{ij}- x_{ij})=0, ((i,j)\in U)$ (1)
+
+> $(c^\pi_{ij} + \alpha_{ij})x_ij=0, ((i,j)\in U)$ (2)
+
+> $x_{ij}c^\pi_{ij}\geq 0, ((i,j)\notin U)$ (3)
+
+> So if $(i,j)\in U$ then:
+
+>> 1 is true bc $\alpha_{ij}=0$ and 2,3 are true bc $x_{ij}=0$
+
+2. $0<x_{ij}< u_{ij}$
+
+> $0\leq c_{ij}^\pi = -c_{ji}^\pi \leq 0$ so both of them are $0$
+
+>> so 1 comp slack is true because $\alpha_{ij}$ is then $0$, so similarly 2 and 3 are true.
+
+3. $x_ij=u_ij$
+
+>> 1 holds
+
+> $x_{ij}$ is finite then $(i,j)\in U$
+
+> So because we start with $c_{ji}^\pi \geq 0$ then $c_{ij}^\pi \leq 0$ so $\alpha_{ij}=-c_{ij}^\pi$ so 2 holds
+
+# Shortest Paths
+Find shortest paths from $s$ to $i \in V$, $G(V,E)$ and $l_{ij}, (i,j)\in E$ as the lengths between each node 
+
+# Shortest Paths reduced to MCNF
+Costs are the lengths, supplies for $s$ is $n-1$ and the supplies for other verticies are $-1$
+
+Thus:
+
+$b_s=n-1, b_i=-1, (i\in V-\{s\})$
+
+$c_{ij}=l_{ij}, u_{ij}=\infty$
+
+# Dual of shortest paths
+$\max (n-1)\pi_{s} - \sum_{i\in V-\{s\}} \pi_i$
+
+s.t. $l_{ij} -\pi_i + \pi_j \geq 0, ((i,j)\in E)$
+
+Suppose we create $d_i=\pi_s-\pi_i\rightarrow\pi_i=\pi_s -d_i$
+
+$\max \sum_{i\in V-\{s\}} d_i$
+
+s.t. $dj\leq d_i + l_{ij}, ((i,j)\in E)$
+
+higher level, we are creating these $d_j$ such that for each edge, the length plus the $d_i$ of the incoming node must be greater than $d_j$. In other words, these $d_j$ are the distances of $j$ from the source vertex.
