@@ -1,0 +1,61 @@
+---
+format: pdf
+---
+
+
+# Schemas
+Students (<u>name</u>, major, classYear, dorm)
+
+Clubs (<u>name</u>, category, meetingLocationName, presidentName)
+
+Locations (<u>name</u>, building, capacity)
+
+Events (<u>title, eventDate, startTime</u>, clubName, locationName, organizerName, cost)
+
+Attendance (<u>eventTitle, eventDate, startTime, studentName</u>)
+
+# 1
+Find the names of the clubs and the names of the presidents of these clubs, for clubs that hosted events that "Harry Potter" attended.
+
+> $\pi_{name, presidentName}(\rho_E(\sigma_{studentName="Harry Potter"}(Attendance)\bowtie Events)\bowtie_{E.clubName=Clubs.name}Clubs)$
+
+# 2
+Find the names of students who attended no events hosted by clubs in the category "Herbology" in 2026.
+
+> $\pi_{name}(Students - \pi_{A\in schema(Students)}(\pi_{studentName}(\sigma_{category="Herbology"}Clubs\bowtie_{Clubs.name=Events.clubName}\sigma_{ADD DATE FOR 2026!!!!!!!}(Events)\bowtie Attendance) \bowtie_{Attendance.studentName=Students.name}Students))$
+
+>> Note that $A\in schema(Students)$ is the set of attributes of students. Thus $\pi_{A\in schema{Students}}$ projects the data onto only attributes of students.
+
+# 3
+Find the titles of events that have been used as a title for two or more distinct events (i.e., event titles shared by at least two different event instances).
+
+> $\pi_{title} (\rho_{E1} Events \bowtie_{E1.title=E2.title \land (E1.eventDate \neq E2.eventDate \lor E1.startTime \neq E2.startTime)}\rho_{E2} Events)$
+
+>> Join only if their title's are the same and either their times are different or event dates are different
+
+# 4
+Find the number of events held at the location "Gryffindor Common Room" that "Harry Potter" attended (Hint: using the $\gamma$ operator).
+
+# 5
+Find the names of clubs whose events "Harry Potter" attended, and output for each such club the club name and the total number of "Harry Potter" attendances for that club (Hint: using the $\gamma$ operator).
+
+# 6
+Find the names of students who attended events only in locations that are in the building "Gryffindor Tower".
+
+# 7
+Find the location names and the club names, for each (location, club) pair, such that "Harry Potter" attended every event that club held at that location.
+
+# 8
+Find the club names of clubs that have at least one event whose cost is greater than all event costs of the club named "Slug Club".
+
+# 9
+Find the names of students who have attended at least one event from every club in the category "Herbology".
+
+# 10
+Find the names and dorms of students who attended events at every location in the building "Gryffindor Tower", but have never attended any event organized by a student who shares their dorm.
+
+
+# 11
+
+# 12
+Find the names of clubs that have hosted an event but have not hosted events with the same name as events hosted by "Slug Club" and the cost of the event was less than or equal to the cost of the event for "Slug Club"
