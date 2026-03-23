@@ -6,13 +6,14 @@ All supplies are $0$ at all nodes. Copy the arcs over with the same upper bounds
 
 Note that this creates a cycle which makes this an equivalent circulation problem.
 
-# Scheduling on Unifrom Parallel Machines
-given $n$ jobs each:
+# Dual of Max Flow
+$v^* = \max \sum_{i\in V} b_i \pi_i - \sum_{(i,j)\in U} u_{ij}[-c_{ij}^\pi]^+$
 
-> $p_i$: processing time
+s.t. $c_{ij}^\pi \geq 0, \quad ((i,j)\notin U)$
 
-> $r_i$: release time
+> $c_{ij}=0, \quad (i,j)\in E$
 
-> $d_i$: deadline ($d_i-r_i \geq p_i$)
+> $c_{ts}=-1$
 
-Schedule on parrallel machines $M$ with pre-emption (pausing and switching between machines) but jobs only can be  processed on one machine at a time and each machine can only work on one job.
+note since max flow is all supplies are $0$ the first term in the objective function is $0$
+
