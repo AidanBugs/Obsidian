@@ -4,12 +4,42 @@ format: pdf
 
 ```{python}
 import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.metrics import roc_curve, auc
 
+np.random.seed(1)
 
-np.random.seed(0)
-classes = np.random.rand(2,1000)
+# Number of samples
+n_samples = 10000
+n_pos = 5000
+n_neg = 5000
 
+# Create true labels: 0 = negative, 1 = positive
+y_true = np.array([1] * n_pos + [0] * n_neg)
 
-for i in range(0, 1, 0.01):
-  
+# Shuffle the labels to mix positives and negatives
+indices = np.random.permutation(n_samples)
+y_true = y_true[indices]
+
+# Generate random predictions (uniform between 0 and 1)
+y_pred = np.random.rand(n_samples)
+
+# Compute ROC curve and AUC
+fpr, tpr, thresholds = roc_curve(y_true, y_pred)
+roc_auc = auc(fpr, tpr)
+
+# Plot ROC curve
+plt.figure(figsize=(6, 6))
+plt.plot(fpr, tpr, color='orange', lw=2, label=f'Random classifier (AUC = {roc_auc:.3f})')
+plt.plot([0,1], [0,1], color='blue', lw=2, linestyle='--', label='Chance level (AUC = 0.5)')
+plt.xlim([0.0, 1.0])
+plt.ylim([0.0, 1.0])
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('ROC Curve for a Random Classifier')
+plt.legend(loc="lower right")
+plt.grid(alpha=0.3)
+plt.show()
+
+print(f"Area under ROC curve (AUC): {roc_auc:.4f}") 
 ```
