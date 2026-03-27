@@ -1,0 +1,30 @@
+--- 
+format: pdf
+---
+
+$L_i = -[y_i log (p_i) + (1-y_i)log(1-p_i)]$
+
+> Starting at:
+
+>> $L_i = log(1+e^{\hat y_i}) -y_i \hat y _i$
+
+> We can substitute $\hat y_i = log(\frac{p_i}{1-p_i})$
+
+>> $= log(1+\frac{p_i}{1-p_i}) - y_i log (\frac{p_i}{1-p_i})$
+
+> Apply log rule of $log(\frac ab) = log a - log b$ and $1+\frac{p_i}{1-p_i} = \frac{1}{1-p_i}$
+
+>> $= log(\frac{1}{1-p_i}) - y_i log (\frac{p_i}{1-p_i})= 0-log(1-p_i) - y_i (log(p_i)-log(1-p_i))$
+
+> Take out the negative
+
+>> $=-[log(1-p_i) + y_i (log(p_i)-log(1-p_i))]$
+
+> Distribute $y_i$ and rearrange
+
+>> $=-[y_i log(p_i) + log(1-p_i) -y_i log(1-p_i)]$
+
+> Factor out the $log(1-p_i)$ on the like terms
+
+>> $=-[y_i log(p_i) + (1-y_i) log(1-p_i) ]$
+

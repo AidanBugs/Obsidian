@@ -1,0 +1,79 @@
+---
+format: pdf
+---
+
+# HW 3
+# 5
+![](IMG/HW3Q5.png)
+
+## a
+For this problem I will use a series of $+=$ for each variable to show how an individual path/flow affects the flow on an individual arc. At the end I will sum everything up and ensure there are no violations of upper/lower bounds.
+
+From $(a,b,c,a)$:
+
+> $x_{ab}+=2,x_{bc}+=2, x_{ca}+=2$
+
+From $(a,d)$:
+
+> $x_{ad}+=2$
+
+From $(a,b,d)$:
+
+> $x_{ab}+=1,x_{bd}+=1$
+
+From $(c,a,d)$:
+
+> $x_{ca}+=1,x_{ad}+=1$
+
+Thus it follows that:
+
+- $0\leq x_{ab}=3 \leq 3$
+- $0\leq x_{ad}=3 \leq \infty$
+- $0\leq x'_{bc}=0 \leq 4$
+- $1\leq x_{bc}=2 \leq \infty$
+- $0\leq x_{bd}=1 \leq 6$
+- $1\leq x_{ca}=3 \leq 4$
+
+Therefore this flow is feasible
+
+
+## d
+For starters, fractional optimal flows do not violate the flow integrality theorem because the theorem only states the existence of an integer optimal flow and does not imply that all optimal flows are integer.
+
+From the previous homework, we know that the optimal objective is $10$ so we should keep this in mind when solving for our fractional optimal solution. 
+
+$x_{ab}=1.5,x_{bc}=1,x_{ca}=2,x_{ad}=3.5,x_{bd}=0.5$ results in an objective of $4.5+1+2+3.5-1=10$
+
+> Note that $x_{bc}$ will refer to the $b,c$ arc with cost $1$ and $x'_{bc}$ refers to the $b,c$ arc with cost $-2$ although the latter is not used
+
+## e
+
+## f
+
+## g
+
+## h
+
+## i
+
+## j
+
+# HW 4
+$\min \sum c_j x_j$
+
+s.t. $\sum x_j \geq b_i$
+
+# 1
+From the linear program, we see that there are $q$ $x_j$'s that are summed with eachother at different intervals ($s_i$ to $t_i$) and must be at least $b_i$. The objective function was defined as $\min \sum_{j=1}^q c_j x_j$.
+
+We can start by creating a node for each $x_j$ that are stringed together sequentially by arcs of all $0$ cost. We can also create $p$ nodes with an arc corresponding to the constraints in the LP with arcs from a constraint node $i$ to an $x_j$ node iff $x_j$ is in the $i$th constraint. These arcs have a cost of $1$. For any terminating $x$, $x_{ti}$, draw an arc to the $i$th constraint node with a lower bound of $b_i$. 
+
+
+
+$\max \sum_{i\in V} b_i \pi_i - \sum_{(i,j)\in U} u_ij\alpha_{ij}$
+
+s.t. $\pi_i -\pi_j \leq c_{ij}$   $((i,j)\notin U)$ this can be rewritten as $c_{ij}^\pi \geq 0$
+
+> $\pi_i -\pi_j +\alpha_{ij} \leq c_{ij} ((i,j)\in U)$ this can be rewritten as $c_{ij}^\pi +\alpha_{ij}\geq 0$
+
+> $\pi_i$ unrestricted and $\alpha_{ij}\geq 0$

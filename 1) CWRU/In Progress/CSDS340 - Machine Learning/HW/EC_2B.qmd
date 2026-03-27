@@ -1,0 +1,25 @@
+---
+format: pdf
+---
+
+Show that: 
+
+- $r_{i1}= - [\delta L_i / \delta \hat y_i] = - \frac{\delta (log (1+e^{\hat y_i})- y_i \hat y_i)}{\delta \hat y_i}$
+- Is equal to $-[p_i- y_i]$
+
+Recall that the derivative is (from the previous slides):
+
+- $r_{i1}=-[\frac{e^{\hat y_i}}{1+ e^{\hat y_i}} - y_i]$
+
+Recall that 
+
+- $\hat y_i = \log\frac {p_i}{1-p_i}$
+- So $\rightarrow e^{\hat y_i} = \frac{p_i}{1-p_i}$
+- $\rightarrow e^{\hat y_i} - e^{\hat y_i}p_i = p_i$
+- $\rightarrow e^{\hat y_i} = p_i + e^{\hat y_i}p_i$
+- $\rightarrow e^{\hat y_i} = (1 + e^{\hat y_i})p_i$
+- $\rightarrow \frac{e^{\hat y_i}}{1 + e^{\hat y_i}} =p_i$
+
+Thus:
+
+- $r_{i1}=-[\frac{e^{\hat y_i}}{1+ e^{\hat y_i}} - y_i]= -[p_i-y_i]$

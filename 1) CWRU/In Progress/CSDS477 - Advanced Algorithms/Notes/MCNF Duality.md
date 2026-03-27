@@ -37,7 +37,7 @@ s.t. $\sum x_{ij} - \sum x_{ji} = b_i, (i\in V)$
 ## Taking the dual
 $\max \sum_{i\in V} b_i \pi_i - \sum_{(i,j)\in U} u_ij\alpha_{ij}$
 
-s.t. $\pi_i -\pi_j \leq c_{ij}$   ((i,j)\notin U)$ this can be rewritten as $c_{ij}^\pi \geq 0$
+s.t. $\pi_i -\pi_j \leq c_{ij}$   $((i,j)\notin U)$ this can be rewritten as $c_{ij}^\pi \geq 0$
 
 > $\pi_i -\pi_j +\alpha_{ij} \leq c_{ij} ((i,j)\in U)$ this can be rewritten as $c_{ij}^\pi +\alpha_{ij}\geq 0$
 
