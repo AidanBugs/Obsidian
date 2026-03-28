@@ -58,7 +58,7 @@ s.t. $\pi_i -\pi_j \leq c_{ij}$   $((i,j)\notin U)$ this can be rewritten as $c_
 ## Complementary Slackness
 $x_{ij}c_{ij}^\pi =0, ((i,j)\notin U)$ 
 
-$x_{ij}(c_{ij}+\alpha_{ij})^\pi =0, ((i,j)\in U)$ 
+$x_{ij}(c_{ij}^\pi+\alpha_{ij}) =0, ((i,j)\in U)$ 
 
 $\alpha_{ij}(u_{ij}-x_{ij})=0, ((i,j)\in U)$ 
 

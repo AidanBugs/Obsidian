@@ -1,5 +1,5 @@
 ---
-format: pdf
+format: html
 ---
 
 # HW 3
@@ -47,33 +47,325 @@ $x_{ab}=1.5,x_{bc}=1,x_{ca}=2,x_{ad}=3.5,x_{bd}=0.5$ results in an objective of 
 > Note that $x_{bc}$ will refer to the $b,c$ arc with cost $1$ and $x'_{bc}$ refers to the $b,c$ arc with cost $-2$ although the latter is not used
 
 ## e
+First the main thing it wants to change is to remove the pair of parallel arcs on $bc$. We can do this by performing cost reversal on the arc $x'_{bc}$ because it has an upperbound. This leaves us with an equivalent network flow problem that has one pair of symmetric arcs, no parallel arcs, one non zero lower bound and one arc with a negative cost. Essentially, for our flipped arc we are sending max flow on $x'_{bc}$ and now $x_{cb}$ represents how much flow we send back.
+
+```{mermaid}
+flowchart LR
+  a["3<br>a"]
+  b["-4<br>b"]
+  c["5<br>c"]
+  d["-4<br>d"]
+
+  a-->|"3:(0,3)"|b
+  b-->|"1:(1,∞)"|c
+  c-->|"1:(1,4)"|a
+  b-->|"-2(0,6)"|d
+  c-->|"2:(0,4)"|b
+  a-->|"1:(0,∞)"|d
+```
+
+Now for the **5.a** conversion. Since $x'_{bc}=0$ we must send back all the flow thus $x_{cb}=4$. Since this was the only arc changed the rest of the arcs stay the same.
+
+Thus it follows that:
+
+- $0\leq x_{ab}=3 \leq 3$
+- $0\leq x_{ad}=3 \leq \infty$
+- $0\leq x'_{bc}=0 \leq 4\rightarrow 0\leq x_{cb}=4 \leq 4$
+- $1\leq x_{bc}=2 \leq \infty$
+- $0\leq x_{bd}=1 \leq 6$
+- $1\leq x_{ca}=3 \leq 4$
+
+Thus as paths / cycles:
+
+- $(a,b,c,a)=2$
+- $(a,d)=1$
+- $(c,a,d)=1$
+- $(a,b,d)=1$
 
 ## f
+The given original problem meets all of the proposed requirements (at least pair of parallel arcs, at least one non zero lower bound, at least one negative cost, and no symmetric arcs). As such we can simply recreate the original network with a new arc from $d$ to $c$ with a cost of $0$. We know that doing this works for this network because $d$ is the only sink node so sending flow away from $d$ will only increase the objective (leading to a non optimal flow).
+
+```{mermaid}
+flowchart LR
+  a["3<br>a"]
+  b["0<br>b"]
+  c["1<br>c"]
+  d["-4<br>d"]
+
+  a-->|"3:(0,3)"|b
+  b-->|"1:(1,∞)"|c
+  c-->|"1:(1,4)"|a
+  b-->|"-2(0,6)"|d
+  b-->|"-2:(0,4)"|c
+  a-->|"1:(0,∞)"|d
+  d-->|"0:(0,∞)"|c
+```
+
+Now for the **5.a** conversion. Since only added an arc, that arc has $0$ flow and the rest of the arcs stay the same.
+
+Thus it follows that:
+
+- $0\leq x_{ab}=3 \leq 3$
+- $0\leq x_{ad}=3 \leq \infty$
+- $0\leq x'_{bc}=0 \leq 4$
+- $1\leq x_{bc}=2 \leq \infty$
+- $0\leq x_{bd}=1 \leq 6$
+- $1\leq x_{ca}=3 \leq 4$
+- $0\leq x_{dc}=0 \leq \infty$
+
+Thus as paths / cycles:
+
+- $(a,b,c,a)=2$
+- $(a,d)=1$
+- $(c,a,d)=1$
+- $(a,b,d)=1$
 
 ## g
+We can build off of what was done in **5.e** because we already removed one negative arc. We also need to flip the cost of $bd$ by the same methods as before but we also need to remove the symmetric arcs on $bc$ but also we need to add parallel arcs. We can add a temp node to remove the symmetric arcs and we can add two different arcs from $c$ to $b$ in order to satisfy the parallel arc constraint.
+
+```{mermaid}
+flowchart LR
+  a["3<br>a"]
+  b["-10<br>b"]
+  c["5<br>c"]
+  d["2<br>d"]
+  t["0<br>temp"]
+
+  a-->|"3:(0,3)"|b
+  b-->|"1:(1,∞)"|c
+  c-->|"1:(1,4)"|a
+  d-->|"2(0,6)"|b
+  c-->|"1:(0,4)"|t
+  c-->|"0:(0,∞)"|t
+  t-->|"2:(0,4)"|b
+  a-->|"1:(0,∞)"|d
+```
+
+Now for the **5.a** conversion. Since $x'_{bc}=0$ we must send back all the flow thus $x_{cb}=4$. Since this was the only arc changed the rest of the arcs stay the same.
+
+Thus it follows that:
+
+- $0\leq x_{ab}=3 \leq 3$
+- $0\leq x_{ad}=3 \leq \infty$
+- $0\leq x'_{bc}=0 \leq 4$ (this constraint no longer exists just here to show work)
+  - $\rightarrow 0\leq x_{ct}=4 \leq \infty$
+  - $\rightarrow 0\leq x_{tb}=4 \leq 4$
+- $0\leq x'_{ct}=0 \leq 4$
+- $1\leq x_{bc}=2 \leq \infty$
+- $0\leq x_{bd}=1 \leq 6\rightarrow 0\leq x_{db}=5 \leq 6$
+- $1\leq x_{ca}=3 \leq 4$
+
+
+
 
 ## h
+Here we are going to remove any lower bounds. We do this by adding a middle node with a sink of the lower bound and increase the right node's supply by the lower bound. The arc from left to middle is $c_{ij}:(0,u_{ij})$ and the arc from middle to right is $0:(0,\infty)$
+
+```{mermaid}
+flowchart LR
+  a["4<br>a"]
+  b["0<br>b"]
+  c["2<br>c"]
+  d["-4<br>d"]
+  m["-1<br>m(bc)"]
+  n["-1<br>m(ca)"]
+
+  a-->|"3:(0,3)"|b
+  b-->|"1:(0,∞)"|m
+  m-->|"0:(0,∞)"|c
+  c-->|"1:(0,4)"|n
+  n-->|"0:(0,∞)"|a
+  b-->|"-2(0,6)"|d
+  b-->|"-2:(0,4)"|c
+  a-->|"1:(0,∞)"|d
+  d-->|"0:(0,∞)"|c
+```
+
+Thus it follows that:
+
+- $0\leq x_{ab}=3 \leq 3$
+- $0\leq x_{ad}=3 \leq \infty$
+- $0\leq x'_{bc}=0 \leq 4$
+- $0\leq x_{bm(bc)}=2 \leq \infty$
+- $0\leq x_{m(bc)c}=2 \leq \infty$
+- $0\leq x_{bd}=1 \leq 6$
+- $0\leq x_{cm(ca)}=3 \leq 4$
+- $0\leq x_{m(ca)c}=3 \leq \infty$
+- $0\leq x_{dc}=0 \leq \infty$
+
+
+
 
 ## i
+### 1
+The only change here from **h** is flipping negative costs. So we simply build off from there and get the resulting network
+
+```{mermaid}
+flowchart LR
+  a["4<br>a"]
+  b["-10<br>b"]
+  c["6<br>c"]
+  d["2<br>d"]
+  m["-1<br>m(bc)"]
+  n["-1<br>m(ca)"]
+
+  a-->|"3:(0,3)"|b
+  b-->|"1:(0,∞)"|m
+  m-->|"0:(0,∞)"|c
+  c-->|"1:(0,3)"|n
+  n-->|"0:(0,∞)"|a
+  d-->|"2(0,6)"|b
+  c-->|"2:(0,4)"|b
+  a-->|"1:(0,∞)"|d
+  d-->|"0:(0,∞)"|c
+```
+
+Thus it follows that:
+
+- $0\leq x_{ab}=3 \leq 3$
+- $0\leq x_{ad}=3 \leq \infty$
+- $0\leq x_{cb}=4 \leq 4$
+- $0\leq x_{bm(bc)}=2 \leq \infty$
+- $0\leq x_{m(bc)c}=2 \leq \infty$
+- $0\leq x_{db}=5 \leq 6$
+- $0\leq x_{cm(ca)}=3 \leq 4$
+- $0\leq x_{m(ca)a}=3 \leq \infty$
+- $0\leq x_{dc}=0 \leq \infty$
+
+### 2
+```{mermaid}
+flowchart LR
+  a["4<br>a"]
+  b["-10<br>b"]
+  c["6<br>c"]
+  d["2<br>d"]
+  m["-1<br>m(bc)"]
+  n["-1<br>m(ca)"]
+
+  b-->|"-3:(0,3)"|a
+  b-->|"1:(0,∞)"|m
+  m-->|"-1:(0,2)"|b
+  m-->|"0:(0,∞)"|c
+  c-->|"0:(0,2)"|m
+  c-->|"1:(0,1)"|n
+  n-->|"-1:(0,3)"|c
+  n-->|"0:(0,∞)"|a
+  a-->|"0:(0,3)"|n
+  d-->|"2(0,1)"|b
+  b-->|"-2(0,5)"|d
+  b-->|"-2:(0,4)"|c
+  a-->|"1:(0,∞)"|d
+  d-->|"-1:(0,3)"|a
+  d-->|"0:(0,∞)"|c
+```
+
+### 3
+A bit confusing because this mentions using an optimal $x^*$ but the flow in **a** is certainly not optimal. As such I will proceed with my response to **5.b** from the previous hw: 
+
+> $x_{ab}=1,x_{bc}=1,x_{ca}=2,x_{ad}=4$ results in an objective of $10$
+
+On this network translates to:
+
+> $x_{ab}=1$
+> $x_{bm(bc)}=1$
+> $x_{cm(ca)}=2$
+> $x_{m(ca)a}=2$
+> $x_{ad}=4$
+> $x_{db}=6$
+> $x_{cb}=3$
+
+The comp slack conditions are:
+
+> $x_{ij}c_{ij}^\pi =0, ((i,j)\notin U)\rightarrow x_{ij}(c_{ij}-\pi_i + \pi_j)=0$ 
+>
+> $x_{ij}(c_{ij}+\alpha_{ij})^\pi =0, ((i,j)\in U)\rightarrow x_{ij}(c_{ij}-\pi_i + \pi_j+[-c_{ij}^\pi]^+)=0$  
+>
+> $\alpha_{ij}(u_{ij}-x_{ij})=0, ((i,j)\in U) \rightarrow [-c_{ij}+\pi_j - \pi_i]^+(u_{ij}-x_{ij})=0$ 
+
+$c_{ij}^\pi=0$ for non zero flows (no upperbound) and $c_{ij}\geq 0$ for flows who have an upperbound and are not at it. Specifically if $x_{ij}\neq 0$ and no upperbound then $\pi_i-\pi_j = c_{ij}$. Starting off with that we get an example node potentials of:
+
+> $\pi_a-\pi_d=1$
+> $\pi_a=1$
+> $\pi_d=0$
+> $\pi_{m(ca)}=\pi_a=1$
+> $\pi_{m(bc)}=\pi_b$
+
+For arcs with an upperbound and nonzero flows, if the arc is not at max flow then $\pi_j-\pi_i \leq c_{ij}$ 
+
+> $\pi_b - \pi_a \leq 1 \rightarrow \pi_b \leq 2$ so we can just assign it as $2$ along with $\pi_{m(bc)}$
+> $\pi_c - \pi_b \leq 2 \rightarrow \pi_c \leq 4$ so we can just assign it as $4$
+
+Thus: 
+
+> $\pi_a=1$
+> $\pi_d=0$
+> $\pi_{m(ca)}=1$
+> $\pi_{m(bc)}=2$
+> $\pi_b=2$
+> $\pi_c=4$
+
+And: 
+
+> $c_{ad}^\pi = 0$
+> $c_{ab}^\pi = 4$
+> $c_{bm(cb)}^\pi = 1$
+> $c_{m(bc)c}^\pi = 2$
+> $c_{cm(ca)}^\pi = -2$
+> $c_{m(ca)a}^\pi = 0$
+> $c_{db}^\pi = 4$
+> $c_{dc}^\pi = 4$
+> $c_{cb}^\pi = 0$
 
 ## j
+The only change here from **i** is removing upperbounds. So we simply build off from there and get the resulting network
+
+```{mermaid}
+flowchart LR
+  a["1<br>a"]
+  b["-10<br>b"]
+  c["-2<br>c"]
+  d["-4<br>d"]
+  m["-1<br>m(bc)"]
+  n["-1<br>m(ca)"]
+  e["3<br>e"]
+  f["4<br>f"]
+  g["6<br>g"]
+  h["4<br>h"]
+
+  e-->|"0:(0,∞)"|a
+  e-->|"3:(0,∞)"|c
+  b-->|"1:(0,∞)"|m
+  m-->|"0:(0,∞)"|c
+  f-->|"1:(0,∞)"|n
+  f-->|"0:(0,∞)"|c
+  n-->|"0:(0,∞)"|a
+  g-->|"2:(0,∞)"|b
+  g-->|"0:(0,∞)"|d
+  h-->|"2:(0,∞)"|b
+  h-->|"0:(0,∞)"|d
+  a-->|"1:(0,∞)"|d
+  d-->|"0:(0,∞)"|c
+```
 
 # HW 4
-$\min \sum c_j x_j$
-
-s.t. $\sum x_j \geq b_i$
-
 # 1
-From the linear program, we see that there are $q$ $x_j$'s that are summed with eachother at different intervals ($s_i$ to $t_i$) and must be at least $b_i$. The objective function was defined as $\min \sum_{j=1}^q c_j x_j$.
+From the linear program, we see that there are $q$ $x_j$'s that are summed with eachother at different intervals ($s_i$ to $t_i$) and must be at least $b_i$. The objective function was defined as $\min \sum_{j=1}^q c_j x_j$. 
 
-We can start by creating a node for each $x_j$ that are stringed together sequentially by arcs of all $0$ cost. We can also create $p$ nodes with an arc corresponding to the constraints in the LP with arcs from a constraint node $i$ to an $x_j$ node iff $x_j$ is in the $i$th constraint. These arcs have a cost of $1$. For any terminating $x$, $x_{ti}$, draw an arc to the $i$th constraint node with a lower bound of $b_i$. 
+Assume we have a basic setup of $q$ nodes that are strung together sequentially (since all sums are on sequential $x$), for now all containing $0$ costs infinite upper bounds and $0$ lower bound. $x_q$ has an arc to a new node $s$, again no costs or upper bound, and $s$ has arcs to each $x$ with costs $c_j$. However, I am not able to think about a way in which to assess a sum of flows across the nodes while preserving sums of other different flows. On the other hand, we know a constraint $i$ is satisfied if the amount of flow leaving $x_{ti}\geq b_i + x_{si}$. Since this is looking at constraints and the difference in node potentials, maybe we can try taking the dual: 
 
+$\max \sum_{i=1}^p b_i y_i$
 
+s.t. $\sum_{\forall i: si \leq j \leq ti} y_i \leq c_j, \quad (j=1,...,q)$
 
-$\max \sum_{i\in V} b_i \pi_i - \sum_{(i,j)\in U} u_ij\alpha_{ij}$
+> $y\geq 0$
 
-s.t. $\pi_i -\pi_j \leq c_{ij}$   $((i,j)\notin U)$ this can be rewritten as $c_{ij}^\pi \geq 0$
+We can view this visually as $a_{ji}= 0 \leftrightarrow j< s_i \lor j > t_i$ and $a_{ji}= 1 \leftrightarrow s_i \leq j \leq t_i$. In other words, if we look at a single column $i$, it is a column of $1$'s in the interval when $[s_i,t_i]$ and $0$ outside this interval. Suppose this matrix is $A$, thus we have $Ay\leq c$. To convert this to equalities, we can add slack variables $s$ thus $Ay + Is = c$. 
 
-> $\pi_i -\pi_j +\alpha_{ij} \leq c_{ij} ((i,j)\in U)$ this can be rewritten as $c_{ij}^\pi +\alpha_{ij}\geq 0$
+While this looks much better than the original problem, we still need to create the node incidence arc matrix where each variable $y$ and $s$ have a single $-1$ entry and a single $1$ entry with the rest at $0$. We can actually get this through gaussian transformations since the columns have $1$'s only in a single interval. Starting by adding a new row at the top of $0^T ys= 0$, and from here row $j=$ the original row $j$ - original row $j+1$ for $j\in \{0,q-1\}$. 
 
-> $\pi_i$ unrestricted and $\alpha_{ij}\geq 0$
+Thus our resulting matrix will cancel out any intermediate $1$'s in a column and we will be left with a $-1$ at row $s_i-1$ and a $1$ at row $t_i$. Additionally, the slack variables now are easily viewed as arcs that sequentially string along the $q+1$ nodes (note that these are $0$ indexed) and have a cost of $0$. Now the $y$ arcs are from $s_i-1$ to $t_i$ with a cost of $-b_i$ (to make it a minimization problem). Now the supplies / demands at the $q+1$ nodes are calculated as $c_j-c_{j+1}$ for $j\in \{0,...,q-1}$ where $c_0=0$. 
+
+For a sanity check we can check to make sure these supplies sum to $0$. Since each supply is formulated as $c_j-c_{j+1}$, it is clear that all the $c_j$'s cancel out except for $c_0$ which is $0$. Thus the sum of all the supplies are $0$.
+
+Now since I have explained on how to generate the MCNF, how we use this to solve for our original LP is simply following solving the MCNF for our $y^*$, then using complementary slackness to find $x^*$ by solving that system of linear equations. 
+
