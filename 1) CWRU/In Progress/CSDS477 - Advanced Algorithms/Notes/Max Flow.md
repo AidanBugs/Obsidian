@@ -70,7 +70,7 @@ Note that the smallest matching is just an empty set. More meaningfully however 
 **Proof** in bipartite graphs, $\min |V'|=\max |M|$ 
 
 **Pf** 
-Convert the bipartite graph into a directed graph with the same edges from $V_1$ to $V_2$. Add a target node $S$ to $V_1$ with upperbounds of $1$ and similarly from $V_2$ to $t$ with upper bounds of $1$. All original edges have infinite bounds. 
+Convert the bipartite graph into a directed graph with the same edges from $V_1$ to $V_2$. Add a source node $S$ to $V_1$ with upperbounds of $1$ and similarly from $V_2$ to target node $t$ with upper bounds of $1$. All original edges have infinite bounds. 
 
 1. $f^*= \max |M|$
 
@@ -80,4 +80,21 @@ Convert the bipartite graph into a directed graph with the same edges from $V_1$
 
 >> flow of paths (from $s$ to $t$) + cycles ($\phi$ because directed acyclic graph). Any path must pass through the original arcs and these selected arcs are a matching (otherwise upperbound constraints will be violated). Thus given $f^*$ gives a matching so $f^*\leq |M^*|$
 
-2. $c^*(S,V-S)= \min |V'|$
+2. $\min c^*(S,V-S)= \min |V'|$
+
+2a. given a Vertex Cover $V'$ then $\exists$ s-t cut $(S,V-S)$ s.t. $|V'|=c(S,V-S)$
+
+> A cut will be on the $S$ side include the source and any vertices not in $V'$ but in $V_1$ and the vertices in $V'$ and in $V_2$. All others are then consequently in $V-S$.
+
+> The capacity of this cut is $|V'|$ (because the arcs from $s$ to $V_1\cap V'$ and $V'\cap V_2$) plus the arcs that go from $V_1$ to $V_2$ but are not in $V'$ (which is actually $0$).
+
+> By contradiction, $\exists$ original arc $(i,j)\in X(S,V-S)$ thus $i\in V_1, j\in V_2$. Since it is an original arc and we constructed our cut in a specific way, then this is saying that $i\notin V' \land j\notin V'$ which is a contradiction from the definition of $V'$. Thus the capcity of the cut is $=|V'|$
+
+
+2b. given s-t cut $(S,V-S)$ of finite capacity then $\exiists$ vertex coer $|V'|$ s.t. $|V'|=c(S,V-S)$
+
+> From our cut we perform the same methods for choosing our VC nodes (not in cut on $V_1$ side and in cut on $V_2$ side).$V'=(V_1-S)\cup(V_2\cap S)$
+
+> Since cut is finite capacity then there is no original arcs that cross over our cut because we assigned the original arcs to have no upper bound.
+
+Thus by max flow min cut, that $|f^*|=\min c(S,V-S)$ so $\max |M'| = \min |V'|$
