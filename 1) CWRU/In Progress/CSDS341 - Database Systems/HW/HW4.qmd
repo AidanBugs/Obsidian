@@ -1,0 +1,135 @@
+---
+format: pdf
+---
+
+# 1
+## a
+{ensemble $\rightarrow$ director}
+
+> If you know the ensemble then you know / can figure out the director
+
+> In other words each ensemble has only one director
+
+{piece, director $\rightarrow$ ensemble}
+
+> If you know the director and the piece then you know / can figure out the ensemble
+
+> In other words, each director and piece pair is only performed by one ensemble
+
+## b
+Find all keys
+
+> $(p,e,d)$
+
+> $(p,e)$
+
+> $(p,d)$
+
+## c
+Is Performances in BCNF?
+
+> Performances is not in BCNF because the FD $e\rightarrow d$ violates BCNF, ($e$ is not a super key and $d$ is not a subset of $e$)
+
+Perform a loseless join BCNF decomposition
+
+> $R_1(e,d),F_1=(e\rightarrow d), R_2(p,e), F_2=\phi$
+
+## d
+Is the decomposition in **c** dependency preserving?
+
+> No it is not dependency preserving because the FD $(p,d\rightarrow e)\notin (F_1\cup F_2)^+$. This is because $(F_1\cup F_2)^+=\{(e\rightarrow d)\}$. In other words, we lost the functional dependency of {piece, director $\rightarrow$ ensemble} and can only see that FD when we merge our decomposition.
+
+# 2
+$Cafeteria(M,C,D,S,T,R)$
+
+## a
+$D,S\rightarrow M$
+
+> Day of the week and Station pair have exactly one Menu item, meaning if you know the Day of the week and the Station then you can figure out the Menu item
+
+> At any given day, each station has one menu item
+
+$D,C\rightarrow S$
+
+> Day of the week and Cook pair have exactly one Station, meaning if you know the Day of the week and the Cook then you can figure out the Station.
+
+> At any given day, a cook only works at one station
+
+$D,T\rightarrow S$
+
+> Day of the week and Time slot pair have exactly one Station, meaning if you know the Day of the week and the Time slot then you can figure out the Station.
+
+> At any given Day and Time slot, there is only one active station
+
+$M,S\rightarrow R$
+
+> Menu item and Station pair have exactly one customer Rating, meaning if you know the Menu item and the Station then you can figure out its customer Rating
+
+> Given a Station and Menu item, it has only one overall customer Rating
+
+## b
+Find all keys
+
+> $(M,C,D,S,T,R)$
+
+> $(M,D,S,T,R)$
+
+> $(C,D,S,T,R)$
+
+> $(M,C,D,T,R)$
+
+> $(M,C,D,S,T)$
+
+> $(D,T,R,M)$
+
+> $(D,T,R,C)$
+
+> $(D,T,R,S)$
+
+> $(D,T,M,S)$
+
+> $(D,T,C,S)$
+
+> $(D,T,C,M)$
+
+> $(D,T,R)$
+
+> $(D,T,S)$
+
+> $(D,T,C)$
+
+> $(D,T,M)$
+
+> $(D,T)$
+
+> We can fact check this by seeing the $D,T$ are a super key and are not in any $Y$ of the functional dependencies. Thus we must always have $D,T$ in the keys. As a result, the number of keys should be $C_0^4+C_1^4+C_2^4+C_3^4+C_4^4=16$
+
+> Thus the only candidate key is $(D,T)$ since it is the smallest
+
+
+## c
+Show that Cafeteria is not BCNF
+
+> Simply the first FD $M\rightarrow C$ does not satisfy BCNF because $M$ is not a super key and $C$ is not a subset of $M$.
+
+## d
+Is Cafeteria in 3CNF?
+
+> Not in 3CNF because for starters it is not in BCNF and for the first FD $M\rightarrow C$, $C$ is not in the candidate keys.
+
+## e
+Lossless-join BCNF decomposition:
+
+> $R_1(M,C), F_1=(M\rightarrowC)$
+
+> $TEMP_R(M,D,S,T,R),TEMP_F=(F-F_1)$
+
+> $R_2(D,S,M),F_2=(D,S\rightarrow M)$
+
+> $TEMP_R(D,S,T,R),TEMP_F=((F-F_1)-F_2)$
+
+
+## f
+
+## g
+
