@@ -8,6 +8,8 @@
 
 > $i,j$ both point to an exchange vertex $X$ which points back to $i$ and $j$ (through a temp vertex to prevent symmetric arcs) all with infinite capacity. Suppose all arcs have a cost of $BC+1$ see below 
 
+> This makes it so that each node always has a path to every other node but note that some paths might require the use of the exchange vertex resulting in an infeasible solution in the original problem.
+
 **Question** Max cost of a MCNF? $\exists$ feasible solution
 
 - wlog no cycles bc they just increase the cost
@@ -74,3 +76,65 @@ We have an original $G(x)$ and we create a $G(x')$ with the only changes along t
 Since we are only increasing flow along this path, the entire rest of the residual network stays the same. Along the path however, we could add new arcs in reverse and potential remove forward arcs (if we reach capacity).
 
 Since $c_{ij}^\pi = -c_{ji}^\pi$ the reversed arcs are still $0$ and we know the forward reduced costs stay the same since we haven't changed the $\pi$'s.
+
+## Successive Shortest Paths Algorithm
+for MCNF
+
+Transform instace so that assumptions above hold
+
+- $e\leftarrow b$ //Initial Excess to supply
+- $x\leftarrow 0$ //Initial flow $=0$
+- $\pi\leftarrow 0$ //Initial potentials $=0$
+- $X\leftarrow \{i\in V: e_i> 0\}$ // Initial excess nodes
+- $D\leftarrow \{i\in V: e_i< 0\}$ // Initial deficit nodes
+
+
+```
+while X is not empty:
+    choose s in X, t in D
+    compute shortest path from s to i in V
+        in G(x) with length c_{ij}^\pi
+        and d_i # shortest distance s to i
+
+    pi -= d
+    delta = min(e_s, -e_t, u_{ij}: (i,j) in shortest path from s to t)
+    x += delta # (flow along shortest path s to t)
+    update G(x),e,X,D
+```
+
+hint as we run the algorithm postponse creation of interchange vertex until needed
+
+hint $c_{ij}^\pi = 0$ along shortest paths
+
+hint $c_{ij}^\pi = -c_{ji}^\pi$
+
+### Runtime
+Suppose $S$ is the time for the shortest paths
+
+Thus runtime is $O(#iter \times O(S))$
+
+We can work on calculating num iterations as $B=\sum_{bi>0} b_i$ because we now at each iteration we send at least one unit of flow.
+
+Thus the run time is $O(BS)$
+
+> This is not polynomial because if we increase the number of bits by $1$ we double the run time.
+
+### Optimality Proof idea
+We end up with reduced costs that are always greater than $0$ and we know that this is feasible
+
+### Runtimee improvements
+Idea 1: Choose s,t so that $\max \delta$
+- Tractability is 
+- Tradeoff, $\max \delta$ but now we need to compute the $\max$
+
+some success but nothing crazy
+
+Idea 2: find $\delta$ that is sufficiently large: $\delta \geq \Delta$
+- Capacity Scaling: $U=\max b_i$
+- $\delta \geq \Delta = U, U/2, U/4,...,1$
+
+rough outline: 
+```
+for Delta = U, U/2, U/4,..., do:
+    SSP for delta >= Delta
+```
