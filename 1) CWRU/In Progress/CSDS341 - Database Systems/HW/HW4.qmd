@@ -37,7 +37,7 @@ Perform a loseless join BCNF decomposition
 ## d
 Is the decomposition in **c** dependency preserving?
 
-> No it is not dependency preserving because the FD $(p,d\rightarrow e)\notin (F_1\cup F_2)^+$. This is because $(F_1\cup F_2)^+=\{(e\rightarrow d)\}$. In other words, we lost the functional dependency of {piece, director $\rightarrow$ ensemble} and can only see that FD when we merge our decomposition.
+> No it is not dependency preserving because the FD $(p,d\rightarrow e)\notin (F_1\cup F_2)^+$. This is because our only FD from the $F_1,F_2$ is $e\rightarrow d$ thus the only way to have a set of attributes $X$ to create an FD that determines $e$ is if $e\in X$. In other words, we lost the functional dependency of {piece, director $\rightarrow$ ensemble} and can only see that FD when we merge our decomposition.
 
 # 2
 $Cafeteria(M,C,D,S,T,R)$
@@ -120,16 +120,55 @@ Is Cafeteria in 3CNF?
 ## e
 Lossless-join BCNF decomposition:
 
-> $R_1(M,C), F_1=(M\rightarrowC)$
+> $R_1(M,C), F_1=(M\rightarrow C)$
 
-> $TEMP_R(M,D,S,T,R),TEMP_F=(F-F_1)$
+> $TEMP_R(M,D,S,T,R),TEMP_F=\{(D,S\rightarrow M), (D,T\rightarrow S), (M,S\rightarrow R)\}$
 
 > $R_2(D,S,M),F_2=(D,S\rightarrow M)$
 
-> $TEMP_R(D,S,T,R),TEMP_F=((F-F_1)-F_2)$
+> $TEMP_R(D,S,T,R),TEMP_F=\{(D,T\rightarrow S)\}$
 
+> $R_3(D,T,S),F_3=(D,T\rightarrow S)$
+
+> $R_4(D,T,R),F_4=\phi$
 
 ## f
+Use 3NF synthesis algorithm to do a dependency preserving decomposition of $F$
+
+> Start by finding $T$
+
+>> $T=\{(M\rightarrow C),(D,S\rightarrow M), (D,C\rightarrow S),(D,T\rightarrow S), (M,S\rightarrow R)\}$
+
+> So we should find $M^+,D^+,S^+,C^+,T^+$
+
+>> $M^+: M,C$
+
+>> $D^+: D$
+
+>> $S^+: S$
+
+>> $C^+: C$
+
+>> $T^+: T$
+
+> Thus we find that $U=T$
+
+> So our $U$ decomposition is as follows:
+
+>> $R_1(M,S), F_1=(M\rightarrow S), \\ R_2(D,S,M), F_2=(D,S\rightarrow M), \\ R_3(D,C,S), F_3=(D,C\rightarrow S), \\ R_4(D,T,S), F_4=(D,T\rightarrow S),\\  R_5(M,S,R), F_5=(M,S\rightarrow R)$
+
+> Since $(D,T,S)$ is a key of Cafeteria we do not need to add an $R_0$
 
 ## g
+Is the decomposition in **e** dependency preserving?
 
+> First lets see which dependencies are removed from our decomposition:
+
+> - $M,S\rightarrow R$
+> - $D,C\rightarrow S$
+
+> Lets look at $F_1 \cup F_2 \cup F_3 \cup F_4$:
+
+> - $\{(M\rightarrow C),(D,S\rightarrow M), (D,T\rightarrow S)\}$
+
+> This cannot possibly be dependency preserving because $(F_1 \cup F_2 \cup F_3 \cup F_4)^+$ cannot have a set of attributes that determine $R$ unless the set includes $R$. Thus the dependency $M,S\rightarrow R$ cannot be preserved because $R$ is present in $M,S$.

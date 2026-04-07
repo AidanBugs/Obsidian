@@ -122,7 +122,7 @@ Thus the run time is $O(BS)$
 ### Optimality Proof idea
 We end up with reduced costs that are always greater than $0$ and we know that this is feasible
 
-### Runtimee improvements
+### Runtime improvements
 Idea 1: Choose s,t so that $\max \delta$
 - Tractability is 
 - Tradeoff, $\max \delta$ but now we need to compute the $\max$
@@ -138,3 +138,45 @@ rough outline:
 for Delta = U, U/2, U/4,..., do:
     SSP for delta >= Delta
 ```
+
+## Capacity Scaling
+Reminder of MCNF: SSP
+
+Augments a flow $\delta\geq 1$ from a supply node to a demand node. 
+
+Remember the optimization of $\delta \geq \Delta = B, B/2, B/4,...$
+
+$\Delta$ - residual network:
+
+> $G(x,\Delta)$: only edges w/ capacity $\geq \Delta$
+
+> $X(\Delta)=\{i\in V, e_i \geq \Delta\}$
+
+> $D(\Delta)=\{i\in V, e_i \leq -\Delta\}$
+
+Idea is generate the residual network graph and send $\Delta$ units of flow from $s,t$. Note that this will initially potentially make an unfeasible flow using an exchange vertex.
+
+Induce the flow and calculate the reduced costs. Once we have the reversed costs, we can reverse the arcs of all negative arcs. The main problem in reversing the negative costs is for Arcs that we created by inducing the flow the upperbounds for these arcs are strictly less than $\Delta$ which is non infinite so we know we can do cost reversal. 
+
+Note that this now creates new supply and demand nodes thus needing the algorithm to run again.
+
+```
+for Delta = B down to 1 do:
+    SSP on G(x,Delta) with delta=Delta
+    Delta = Delta/2
+    G(x,2)
+
+```
+
+### Runtime
+Time per augmentation $\times$ num of augmentations per scaling phase $\times$ num scaling phase
+
+Time per augmentation is $O(S)$ because same shortest paths algorithm
+
+Number of scaling phases is $\log (B)$
+
+Let $\beta$ denote the $\max b_i$, note that $U=\max u_{ij}< \Delta$
+
+This means that num augmentations per scaling phase is $=\frac{total supply}{\Delta}= \frac{n \beta + m \Delta}{\Delta}\leq n+m$
+
+Thus the total runtime is $O((n+m)S\log B)$. This is polynomial time!
