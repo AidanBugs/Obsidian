@@ -4,25 +4,24 @@ format:
     output-file: "bugayong_aidan_module4.pdf"
 ---
 
-# Differential Privacy: A Survey of Results
+# A Practical Attack to De-Anonymize Social Network Users
 ## Summary
-This paper looks at Differential Privacy, what it is and how it can be achieved, then flows through a variety of different use cases and applications of differential privacy. Overall, I believe the article does a very good job of laying out mathematically formal definitions of differential privacy and its component parts as well as articulating a variety of use cases.
+The paper introduces a novel de-anonymization attack that exploits group membership information on social networks. Using history stealing techniques, a malicious website can probe a visitor's browser history for URLs that indicate membership in specific groups. By combining this partial group fingerprint with pre‑collected membership data from the social network, the attacker can uniquely identify the visitor or significantly reduce the candidate set. The authors demonstrate the attack on Xing, Facebook, and LinkedIn, showing that about 42% of Xing users who use groups can be uniquely identified. They also discuss mitigation strategies and note that Xing fixed the vulnerability within four days after responsible disclosure.
 
 ::: {layout-ncol="2"}
 ::: {}
 ## Strengths
-- Formal definition of Differential Privacy 
-- Formal definition of Sensitivity of a Query
-- Lower Noise for String Queries
-
+- Social Network, Browser History, and Attacker Models Mathematical Definitions
+- Novel combination of history stealing and group membership data
+- Empirical validation on real social networks with large user bases
 :::
 ::: {}
 ## Weaknesses
-- Untrustworthy Curator
-- Nonuniform Distribution of Risk
-
+- Relies on users not clearing browser history
+- Group membership data degrades over time
+- Server‑side mitigation (randomized URLs)
 :::
 :::
 
 ## Comments On Strengths & Weaknesses
-According to the authors, their definition is around the idea that $Pr[\mathcal{K}(D_1)\in S] \leq \exp(\epsilon)Pr[\mathcal{K}(D_2)\in S]$, where $\mathcal{K}$ is a randomized function, $D_1,D_2$ are databases that differ by at most one entry, $S=Range(\mathcal{K})$ and $\epsilon$ is the $\epsilon$-differential privacy. In other words, the presence or absence of an individual row from a data base does not significantly affect queries done on the data base. The authors then defined the sensitivity of a query as $f:D\rightarrow R^k, sens(f) =\max_{D1,D2} ||f(D_1)-f(D_2)||_1$. The authors generalize stating the adding noise that follows a laplace distribution is a very strong contender for an ideal $\mathcal{K}$ as it preserves $E(f(D))$ and meets $\epsilon$-differential privacy. Of course, there are scenarios in which adding noise to the query could potentially remove all utility of the data, take for example a string output. Shifting letters around in a string will usually make the string almost entirely useless. As such, the author reference another paper which described an exponential function $e^{-\epsilon u(X,y)/2}$, where $u(X,y)$ is the assigned valuation based on $y$. In other words, there is a high chance that the function still outputs $y$ however there are select cases where there is a slight variation in $y$ and an individual's $u(X,y)$ does not strongly affect others $u(X,y)$. While all of this is nice on the surface, there is still an important part to address that being assuming a trustworthy curator who has access to the raw non-noisey data. If the curator chooses so he could sell the raw data for personal gain, or the curator could be subject to phishing attacks in which the hacker would have access to the raw data. Additionally, there is a nonuniform distribution of risk in the differential privacy model as the outliers aren't as protected by noise than points in the inner quartiles. Additionally, the removal of a given max outlier decreases the $epsilon$ value resulting in a more private dataset and a decrease in sensitivity of the dataset.
+For starters the paper starts by giving mathematical definition of both social networks and browser history. Their definition of social networks is a series of sets and a graph $\mathbf{G}(V,E)$ where $V$ are the users and two users share an edge $e\in E$ iff these users are friends. Additionally, social networks tend to have groups or pages which was defined as $G$ and a group $g\in G$ has a set of users $v\in V \land v\in g$ (unless the group is empty in which case $\forall v\in V, v\notin g$). Then the paper defined membership in a group for a user $v\in V$ as $\Gamma (v):=(\Gamma_g(v))_{g\in G}$ and that $\Gamma_g(v)=1$ when $v\in g$ and otherwise equal to $0$. As for browser history, the set $\beta_v$ is the set of urls ($\phi_p$ which is the url used to load page $p$) that were used by a usuer $v$. Some histories expire after a certain time $\tau$ which vary by the browser. Now for their definition of an attacker model, the attacker has some computation function $\sigma_v$ for a victim $v$ where $\sigma_v(\phi_p)=1$ iff $\phi_p\in \beta_v$ otherise $0$. By using these definitions, the paper cleverly combines two well‑known techniques, history stealing and group membership enumeration, into a powerful de-anonymization attack. History stealing alone only reveals which generic sites a user visited, not who the user is. By mapping visited group URLs to pre‑crawled membership lists, the attacker learns the victim's identity. This is a novel insight and the empirical results are convincing. The authors crawled more than 1.8 million Xing users and 43 million Facebook group members with modest resources, showing the attack is practical and low‑cost. However, the attack has clear weaknesses. It depends on users not clearing their browser history. Many people do clear history or use private browsing modes, especially as awareness of tracking increases. The paper acknowledges this but does not quantify how many users are protected by such habits. Another weakness is data degradation. Group memberships change over time as people join and leave. The authors measured that after 18 days, group sizes changed by up to 50% for some groups. An attacker must crawl frequently to maintain accuracy, which increases cost and risk of detection. Finally, the server‑side mitigation of adding random tokens to URLs, while effective, breaks legitimate functionality like bookmarking specific group pages. This tradeoff between security and usability is not fully explored. Overall, the attack is elegant and practical, but its real‑world impact depends on user behavior and the willingness of social networks to accept usability costs.
