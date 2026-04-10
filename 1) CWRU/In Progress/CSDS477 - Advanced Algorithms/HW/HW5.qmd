@@ -12,6 +12,15 @@ We know arcs are non conflicting in the shortest paths algorithm because in orde
 
 Additionally given the extra constraint of $\forall$ arcs, $i\leq j$, then we know that taking any path allows increases our node number essentially moving "forward" so we know that we never have a cycle allowing for a negative infinite path. To finish the reduction, the optimal objective would be equal to the most amount of non conflicting arcs in a set (times $-1$). The actual arcs choosen would be the arcs $i,j+1$ that are part of the shortest path.
 
+### Proof of correctness:
+Suppose $\exists O\subset A$ as the maximum non-conflicting arc subset:
+
+> This means in our graph construction, all the edges $e\in O$ would be takeable in the same path from node $1$ to $n+1$. This is because in our graph construction, by taking an edge along a path we prevent taking any conflicting arcs during the same paths. Thus, our shortest path would be the one which takes all edges in $O$ resulting in an optimal path corrersponding to the same arcs in $O$. Suppose $\exists S$ a path which is shorter than this path (|legnth of $S$| > $|O|$), then this path takes more of the side paths indicating a larger amount of non conflicting arcs than the arcs in $O$. This suggests a more optimal solution than $O$ which is not possible creating a contradiction.
+
+Suppose $\exists P$ as the shortest path in our graph:
+
+> This means that our path took the most amount of negative costing edges. Suppose the negative length edges in this path is a set $N$. Thus the each edge $(i,j+1)\in N$ corresponds to the arc $(i,j)\in A$ thus creating an optimal subset $O\subset A$. We know this is optimal by proof by contradiction. Suppose $\exists O'$ which is a set of nonconflicting arcs in $A$ that is larger than $O$. Then it corresponds to a negative edges in our graph and these edges would be non conflicting. This means they could all be taken in the same path. If they are taken in the same path then we end up with a path which is shorter than our optimal path $P$ which creates a contradiction.
+
 ## b
 The problem from HW1 states that the input is "given a set $A$ of $n$-arcs", thus as long as the algorithm runs in polynomial time with respect to $|A|$ then the algorithm would run in polynomial time. Thus in our case $n$ is a constant and not actually the size of the input.  
 
@@ -39,12 +48,28 @@ Thus $x$ has a feasible solution in those system of equations iff $y$ has a solu
 
 
 ## b
-We can construct the graph as a bipartite one where $V_1$ consist of $p$ nodes and $V_2$ consists of $q$ nodes. The nodes in $V_1$ correspond to the rows of $Bx$ and the nodes in $V_2$ correspond to the columns of $Bx$. We assign arcs from each node in $V_1$ to each node in $V_2$. These arcs then represent $x_{ij}$ where $i$ is the row and $j$ is the column. By our feasibility shown in **2.a**, we know that these flows $x_{ij}$ can correspond to a feasible solution $y_{ij}$. These arcs have o lower or upper bound, since this is a circulation feasibility problem we can assume all $0$ costs. 
+We can construct the graph as a bipartite one where $V_1$ consist of $p$ nodes and $V_2$ consists of $q$ nodes. The nodes in $V_1$ correspond to the rows of $Bx$ and the nodes in $V_2$ correspond to the columns of $Bx$. We assign arcs from each node in $V_1$ to each node in $V_2$. These arcs then represent $x_{ij}$ where $i$ is the row and $j$ is the column.We remove any edge $(i,j), i\in V_1 \land j\in V_2$ where $b_{ij}=0$ (ensures that these edges aren't making an infeasible problem feasible). By our feasibility shown in **2.a**, we know that these flows $x_{ij}$ can correspond to a feasible solution $y_{ij}$. These arcs have no lower or upper bound, since this is a circulation feasibility problem we can assume all $0$ costs. 
 
 To induce a flow, we can create a new source node which has outgoing arcs to all the nodes in $V_1$ and all the nodes in $V_2$ point to the source node. Each of the outgoing arcs from the source to a node $i\in V_1$ has a lower bound of $u_i$, and similarly an arc from node $j\in V_2$ to the source node has a lower bound of $v_j$. Since we are given that $\sum_{i=1}^p u_i = \sum_{j=1}^q v_j$ we know that these ingoing and outgoing arcs will lead to a $0$ circulation. 
 
 Since the circulation problem ends with all nodes having a $0$ supply excess, we know that since each node $i\in V_1$ have an excess of $u_i$ so $u_i - \sum_{j=1}^q x_{ij} =0$. Similarly, since each node $j\in V_2$ have a deficit of $v_j$ so $-v_j +\sum_{i=1}^p x_{ij} =0$. Thus if there is a feasible solution then the values of $x_{ij}$ directly correspond to a feasible solution of $x_{ij}$ in **2.a** which was discussed to prove a feasible solution in the original problem.
 
+### Proof of correctness:
+Suppose you have feasible matrix $x$ that satisfies the constraints:
+
+> This means that the sum of rows of $x$ (excluding $x_{ij}$ where $b_{ij}=0$) result in the vector $u$ and that sum of the columns of $x$ result in the vector $v$. In our graph, we are inducing excess of $u_i$ to the $i$th node of $V_1$ which is equivalent to the $i$th row of $x$. Additionally, our graph has an induced deficit of $v_j$ to the $j$th node of $V_2$ which is equivalent to the $j$th column of $x$. Since its given that there is a feasible $x$ that satisfies $\forall i: \sum_j b_{ij}x_{ij}= u_i, \land \forall j: \sum_i b_{ij}x_{ij}= v_j$. Since our circulation is looking for all $0$ excess: $\forall i: u_i - \sum_{j: b_{ij}\neq 0} x_{ij} = 0, \land \forall j: - v_j + \sum_{i: b_{ij}\neq 0} x_{ij}=0$ which is easily derived from the feasibility of $x$. Thus if $\exists x$ that is feasible then $\exists$ feasible circulation. 
+
+Suppose you have a feasible circulation $x$:
+
+> Then $x$ satisfies the constraints $\forall i: u_i - \sum_{j: b_{ij}\neq 0} x_{ij} = 0, \land \forall j: - v_j + \sum_{i: b_{ij}\neq 0} x_{ij}=0$. This is easily translated to $\forall i: \sum_j b_{ij}x_{ij}= u_i, \land \forall j: \sum_i b_{ij}x_{ij}= v_j$ meaning that we use the flows on $x$ in our graph to determine a feaible $x$ for the constraints (which are then used to find $y$).
+
+Suppose there is no feasible matrix $x$ that satisfy the given contraints. Then we can do proof by contradiction and assume there $\exists$ a feasible circulation flow.
+
+> If there exists a feasible flow in our network graph, we can see from above that there should also be an $x$ to satisfy the constraints in **2.a**. This creates a contradiction because our initial premise is that there is not a feasible solution. Therefore this creates a contradiction.
+
+Suppose there is no feasible circulation flow that satisfy the given contraints. Then we can do proof by contradiction and assume there $\exists$ a feasible $x$ that satisfies the constraints in **2.a**.
+
+> If there exists an $x$ that satisfies **2.a**, we can see from above that this can be used to derive a feasible circulation flow from $x$. This creates a contradiction because our initial premise is that there is not a feasible circulation flow. Therefore this creates a contradiction.
 
 
 # 3
