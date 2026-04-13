@@ -158,10 +158,64 @@ Thus, in the case of revealing mixed strategies, the max player revealing their 
 
 This is the von Neuman theorem
 
-**Corollary** (Yao's principlle)
+**Corollary** (Yao's principle)
 
 > $\max_x \min_{j\in S^-} h(x,j)=\min_y \max_{i\in S^+} h(i,y)$
 
 Thus by weak duality:
 
 > $\max_x \min_{j\in S^-} h(x,j)\leq \forall y, \max_{i\in S^+} h(i,y)$
+
+# vonNeuman Theorem
+The theorem is simply:
+
+> $\max_x \min_{j\in S^-} h(x,j) = \min_y \max_{i\in S^+}h(i,y)$
+
+In other words, the max player revealing their mixed strategy is the same as the min player revealing their min strategy at optimal.
+
+Corollary of Yao's principle:
+
+> $\max_x \min_{j\in S^-} h(x,j)\leq \forall y, \max_{i\in S^+} h(i,y)$
+
+> $\min_y\max_{i\in S^+} h(i,y)\geq \forall x, \min_{j\in S^-} h(x,j)$
+
+# Ski rental
+Rent per day a pair of skis or you buy skis for $b$.
+
+Suppose renting is 1 dollar per day:
+
+> $\min cost = \min\{b,D\}$ where $D$ is renting for $D$ days.
+
+The skier's strategy is an integer $t$ which is the day when buy the skis $(1\leq t < \infty)$
+
+cost $s_b(D,t)=\{t\leq D \rightarrow t-1 + b, t > D \rightarrow D\}$
+
+Game min player for skier: $t$
+
+Max player weather: $D$
+
+$h(D,t)= \frac{s_b(D,t)}{\min\{b,D\}}$
+
+> In otherwords this is how much the skier payed vs paying optimally / minimum amount
+
+Pure strategy for the skier is to fix $t$ so max player would set $D=t$
+
+$h(t,t)= \frac{t-1+b}{\min\{b,t\}}\geq 1+1-\frac{1}{\min\{b,d\}}$
+
+Miixed strategy $y$ ditribution over $t$
+
+Q: What is the power of randomness in this game?
+
+By yao's corollary:
+
+$\min_y \max_D h(D,y) \geq \forall x,\min_{t}h(x,t)$ 
+
+> Note that $x$ is a distribution over $D$
+
+Suppose $x=Pr[D=d]:1/2$ for $d=1$ and $d=3b$, $0$ else.
+
+> Intuitively this is $t=2$ because for 1/2 i spend $1$ and for 1/2 I spend $1+b$
+
+Thus our $h(x,t)= 1/2 + 1/2 \frac{1+b}{b}=1+\frac{1}{2b}$
+
+Supposedly if we actually find the optimal, $h(x,y)=\frac{e}{e-1}$
