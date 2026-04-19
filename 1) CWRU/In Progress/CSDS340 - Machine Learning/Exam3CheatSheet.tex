@@ -1,0 +1,382 @@
+\documentclass[8pt,letterpaper]{extarticle}
+\usepackage[margin=0.45in]{geometry}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{microtype}
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage{fancyhdr}
+
+% Compact list settings
+\setlist[itemize]{noitemsep, topsep=1pt, parsep=0pt, leftmargin=10pt}
+\setlist[enumerate]{noitemsep, topsep=1pt, parsep=0pt, leftmargin=12pt}
+
+% Section formatting
+\titleformat{\section}{\bfseries\small\uppercase}{}{0pt}{}[\titlerule]
+\titlespacing{\section}{0pt}{4pt}{2pt}
+\titleformat{\subsection}{\bfseries\footnotesize}{}{0pt}{}
+\titlespacing{\subsection}{0pt}{3pt}{1pt}
+
+% Code/formula box
+\newmdenv[
+  backgroundcolor=gray!10,
+  linecolor=gray!40,
+  linewidth=0.5pt,
+  innerleftmargin=4pt,
+  innerrightmargin=4pt,
+  innertopmargin=2pt,
+  innerbottommargin=2pt,
+  skipabove=2pt,
+  skipbelow=2pt
+]{formulabox}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyhead[L]{\textbf{CSDS 340 -- Exam 3 Cheat Sheet} \quad {\small Lec 14--21}}
+\fancyhead[R]{\small Exam: 4/20 $\cdot$ 60 min $\cdot$ Calculator OK}
+\fancyfoot[C]{\thepage}
+
+\setlength{\columnsep}{8pt}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+\begin{multicols}{3}
+
+%=============================================
+\section{Ensemble Methods (Lec 14)}
+%=============================================
+
+\subsection{Core Idea}
+Combine multiple classifiers to reduce generalization error. Can use same/different models, data, or hyperparameters.
+
+\textbf{Majority Voting:}
+\begin{formulabox}
+$\hat{y} = \text{mode}(C_1(x), C_2(x), \ldots, C_m(x))$
+\end{formulabox}
+
+\textbf{Weighted Voting (prob outputs):}
+\begin{formulabox}
+$\text{Score}_\text{class} = \sum_k w_k \cdot p_{k,\text{class}}$\\
+$\hat{y} = \arg\max(\text{Score}_\text{class})$
+\end{formulabox}
+
+\subsection{Bagging}
+\begin{itemize}
+  \item Train each classifier on a \textbf{randomly sampled subset with replacement}
+  \item All classifiers trained independently (\textbf{parallel})
+  \item Reduces variance; different views of same data
+\end{itemize}
+
+\subsection{AdaBoost}
+Weak learner = \textbf{decision stump} (1-node tree). Labels: $-1$ and $+1$. Sequentially learns from mistakes.
+
+\begin{formulabox}
+\texttt{Init: } $w_i = 1/n$ \quad (uniform, $\sum w_i = 1$)\\
+\texttt{For } $j = 1\ldots m$:\\
+\quad $C_j = \text{train}(X, y, w)$\\
+\quad $\hat{y} = \text{predict}(C_j, X)$\\
+\quad $\varepsilon = w \cdot (\hat{y} \neq y)$ \quad [weighted error]\\
+\quad $\alpha_j = 0.5 \cdot \ln\!\left(\frac{1-\varepsilon}{\varepsilon}\right)$\\
+\quad $w_i \leftarrow w_i \cdot e^{-\alpha_j \hat{y}_i y_i}\ \forall i$\\
+\quad Normalize $w$ to sum to 1\\
+\texttt{Final: } $\hat{y} = \text{sign}\!\left(\sum_j \alpha_j \cdot \text{predict}(C_j, X)\right)$
+\end{formulabox}
+
+\textbf{Weight update logic:}
+\begin{itemize}
+  \item Correct: $\hat{y} \cdot y = +1 \Rightarrow e^{-\alpha} \Rightarrow$ weight \textbf{decreases}
+  \item Wrong: $\hat{y} \cdot y = -1 \Rightarrow e^{+\alpha} \Rightarrow$ weight \textbf{increases}
+  \item Large $\alpha_j$ $\Rightarrow$ classifier trusted more in final vote
+\end{itemize}
+
+%=============================================
+\section{Gradient Boosting (Lec 15)}
+%=============================================
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+ & \textbf{AdaBoost} & \textbf{Grad. Boost} \\
+\midrule
+Weak learner & Stump & DT (3--4 lvls) \\
+Learns from  & Weighted err & Gradient of loss \\
+Loss         & Exp. loss & Logistic loss \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{formulabox}
+$L_i = -[y_i\log p_i + (1-y_i)\log(1-p_i)]$\\
+$p = \text{sigmoid of predicted log-odds}$\\[2pt]
+\textbf{Step 0:} $\hat{y}_0 = \log(\#\text{pos}/\#\text{neg})$,\; $p_0 = \#\text{pos}/n$\\[2pt]
+\textbf{Each round } $m$:\\
+\quad a) Residuals: $r_{im} = y_i - p_i$\\
+\quad b) Fit new tree to $(X, \text{residuals})$\\
+\quad c) Each leaf $R_{jm}$: $\gamma_{jm} = \frac{\sum(y_i-p_i)}{\sum p_i(1-p_i)}$\\
+\quad d) Update: $F_m(x) = F_{m-1}(x) + \eta\cdot\gamma_{jm}$\\[2pt]
+\textbf{Inference:} $\hat{y}_\text{new} = \hat{y}_0 + \eta(\gamma_{j_1}+\gamma_{j_2}+\cdots+\gamma_{j_m})$
+\end{formulabox}
+
+\textbf{Worked Example} (2 pos, 1 neg):
+\begin{formulabox}
+$\hat{y}_0 = \ln(2/1) = 0.69,\quad p_0 = 0.67$\\
+$r(y=1) = 1-0.67 = 0.33$;\quad $r(y=0) = -0.67$\\
+$\gamma_{\text{leaf}(y=1)} = \frac{0.33+0.33}{0.67{\times}0.33{\times}2} = 1.49$\\
+$\gamma_{\text{leaf}(y=0)} = \frac{-0.67}{0.67{\times}0.33} = -3.12$
+\end{formulabox}
+Trees are \textbf{sequential}; stop when residuals $<$ threshold or $M$ trees reached.
+
+%=============================================
+\section{Linear Regression -- OLS (Lec 16)}
+%=============================================
+
+\subsection{Definition}
+Below is the definition of linear regression, the learning rules and model decision parameters
+
+\begin{formulabox}
+$\hat{y} = w^\top x + b$ \quad ($y$ is continuous)\\[2pt]
+\textbf{Loss (MSE):} $L(w,b) = \frac{1}{n}\sum_i (y_i - \hat{y}^{(i)})^2$\\[2pt]
+$\frac{\partial L}{\partial w_j} = -\frac{2}{n}\sum_i(y_i-\hat{y}^{(i)})x_j^{(i)}$\\
+$\frac{\partial L}{\partial b} = -\frac{2}{n}\sum_i(y_i-\hat{y}^{(i)})$
+\end{formulabox}
+
+\textbf{Regularization}
+\begin{formulabox}
+Ridge (L2): $\text{MSE} + \lambda\|w\|_2^2$ \quad (small, distributed $w$)\\
+LASSO (L1): $\text{MSE} + \lambda\|w\|_1$ \quad (sparse, some $w=0$)\\
+Elastic Net: $\text{MSE} + \lambda_1\|w\|_1 + \lambda_2\|w\|_2^2$
+\end{formulabox}
+
+\textbf{Residual Plots:} plot $\varepsilon = y - \hat{y}$. Good: symmetric around 0. Bad: skewed/patterned.
+
+\textbf{Pearson Correlation (Feature Selection)}
+\begin{formulabox}
+$r = \frac{\sigma_{w_j y}}{\sigma_{w_j}\cdot\sigma_y}$\\
+$\sigma_{w_j y} = \sum_i(x_j^{(i)}-\mu_j)(y^{(i)}-\mu_y)$\\
+$\sigma_{w_j} = \sqrt{\sum_i(x_j^{(i)}-\mu_j)^2}$\\
+Range: $-1$ to $+1$;\; $|r|\approx 1$ = strong linear relationship
+\end{formulabox}
+\textbf{Multi-collinearity:} features are linearly dependent ($r \approx \pm 1$ between features). Fix: drop one.
+
+\textbf{Evaluation Metrics}
+\begin{formulabox}
+$\text{MSE} = \frac{1}{n}\sum(y_i-\hat{y}_i)^2$\\
+$\text{MAE} = \frac{1}{n}\sum|y_i-\hat{y}_i|$\\
+$R^2 = 1 - \frac{\text{SSE}}{\text{SST}} = 1 - \frac{\text{MSE}}{\text{Var}(y)}$\\
+Train: $0 \leq R^2 \leq 1$;\quad Test: $R^2$ can be \textbf{negative}
+\end{formulabox}
+
+%=============================================
+\section{Polynomial \& Random Forest Reg (Lec 17)}
+%=============================================
+
+\subsection{Polynomial Regression}
+Add polynomial features, then train OLS. Degree $d$: add all products up to degree $d$.
+\begin{formulabox}
+4 features, degree 2 $\Rightarrow$ 15 total features:\\
+$1, x_1,x_2,x_3,x_4, x_1^2,x_2^2,x_3^2,x_4^2,$\\
+$x_1x_2, x_1x_3, x_1x_4, x_2x_3, x_2x_4, x_3x_4$
+\end{formulabox}
+
+\subsection{Decision Tree Regression}
+Same greedy split but use \textbf{MSE}; node prediction = \textbf{mean} of samples.
+\begin{formulabox}
+$I(D) = \frac{1}{N_D}\sum_{i\in D}(y_i - \bar{y}_D)^2$\\
+$\text{Gain}(x_i) = I(D) - \frac{N_l}{N}I(D_l) - \frac{N_r}{N}I(D_r)$
+\end{formulabox}
+
+\subsection{Random Forest Regression}
+Ensemble of DT Regressors using \textbf{bagging}; final prediction = \textbf{average} of all trees.
+
+\begin{center}\footnotesize
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Model} & \textbf{Linear?} & \textbf{Loss}\\
+\midrule
+OLS & Yes & MSE\\
+Ridge & Yes & MSE$+\lambda\|w\|_2^2$\\
+LASSO & Yes & MSE$+\lambda\|w\|_1$\\
+Polynomial & No & MSE on poly feats\\
+Rand. Forest & No & MSE per node\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}\footnotesize
+\begin{tabular}{@{}lll@{}}
+\toprule
+ & \textbf{Bagging} & \textbf{Boosting}\\
+\midrule
+Training & Parallel & Sequential\\
+Sampling & Random w/ replace. & Weighted\\
+Learners & Independent & Each fixes prev.\\
+Reduces & Variance & Bias\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+%=============================================
+\section{K-Means Clustering (Lec 17--18)}
+%=============================================
+
+Unsupervised; no labels $y$. Find $K$ natural clusters minimizing within-cluster SSE.
+\begin{formulabox}
+$D = \sum_i\sum_k r_{ik}\|x^{(i)}-\mu_k\|^2$\\
+$r_{ik} = 1$ if sample $i$ in cluster $k$, else $0$\\
+$\mu_k = \frac{\sum_i r_{ik}\, x^{(i)}}{\sum_i r_{ik}}$ \quad [cluster mean]
+\end{formulabox}
+
+\textbf{Algorithm:}
+\begin{enumerate}
+  \item Pick $K$ random points as initial $\mu_k$
+  \item Assign each sample to nearest centroid
+  \item Update $\mu_k$ = mean of assigned samples
+  \item Repeat until convergence
+\end{enumerate}
+
+\textbf{Elbow Method (choosing $K$):} Run K-means for $k=1\ldots K'$; plot $D$ vs $k$; choose $k$ at the ``elbow.'' $D=0$ is trivial (K=N).
+
+\textbf{Silhouette Value}
+\begin{formulabox}
+$a^{(i)} = $ avg dist to points in \emph{same} cluster\\
+$b^{(i)} = $ avg dist to points in \emph{nearest other} cluster\\
+$s^{(i)} = \frac{b-a}{\max(b,a)}$\\[2pt]
+$s \approx +1$: well-matched; \quad $s \approx 0$: boundary; \quad $s \approx -1$: wrong cluster
+\end{formulabox}
+
+%=============================================
+\section{Hierarchical Clustering (Lec 19)}
+%=============================================
+
+No need to choose $K$ upfront; builds a \textbf{dendrogram}.
+
+\textbf{Agglomerative (bottom-up):}
+\begin{enumerate}
+  \item Start: $N$ clusters (one per sample)
+  \item Compute pairwise distances
+  \item Merge closest pair
+  \item Repeat until 1 cluster
+\end{enumerate}
+\begin{formulabox}
+Single linkage: $\min\, d(u,v)$\\
+Complete linkage: $\max\, d(u,v)$
+\end{formulabox}
+Cut dendrogram at desired level to extract $K$ clusters. Application: phylogenetic trees.
+
+%=============================================
+\section{Neural Networks (Lec 19--21)}
+%=============================================
+
+\subsection{Architecture}
+Input Layer $\to$ Hidden Layers $\to$ Output Layer. Each neuron: $a = \sigma(w^\top x + b)$.
+
+\textbf{Counting Parameters:}
+\begin{formulabox}
+Weights $= \sum(\text{dim}_\text{prev} \times \text{dim}_\text{next})$\\
+\textit{E.g.} input=2, hidden=[3,3], output=1:\\
+Weights $= 2{\times}3 + 3{\times}3 + 3{\times}1 = 18$;\quad Neurons $= 9$\\
+Weight label: $w_{ij}$ = from neuron $i$ to neuron $j$
+\end{formulabox}
+
+\textbf{Activation Functions}
+\begin{formulabox}
+Sigmoid: $\sigma(z) = \frac{1}{1+e^{-z}}$;\quad $\frac{d\sigma}{dz} = \sigma(z)(1-\sigma(z))$\\
+ReLU: $\max(0,z)$ \quad [preferred in deep nets]\\
+Step function: $\mathbf{1}[z>0]$ \quad [Perceptron]
+\end{formulabox}
+
+\subsection{Forward Propagation}
+Layer by layer, left $\to$ right: $a_n = \sigma\!\left(\sum w_{\text{prev},n}\cdot a_\text{prev} + b_n\right)$
+
+\textbf{Example} (2$\to$[3]$\to$1, all $w=1$, $b=0$):
+\begin{formulabox}
+$x=(0,0)$: $a_3{=}\sigma(0){=}0.5$,\; $a_5{=}\sigma(1.0){=}0.73$\\
+$x=(0,1)$: $a_3{=}0.73$,\; $a_5{=}\sigma(1.46){=}0.81$\\
+$x=(1,1)$: $a_3{=}0.73$,\; $a_5{=}\sigma(1.46){=}0.85$
+\end{formulabox}
+
+\textbf{Loss (MSE):} $L = \frac{1}{n}\sum(y_i - \hat{y}_i)^2$;\quad $\frac{dL}{da_5} = -2(y - a_5)$
+
+\subsection{Backpropagation (Chain Rule)}
+Compute \textbf{right-to-left}; reuse intermediate gradients.
+\begin{formulabox}
+$\frac{dL}{dw_{35}} = \frac{dL}{da_5}\cdot\frac{da_5}{dw_{35}}$\\
+$\frac{da_5}{dw_{35}} = a_5(1-a_5)\cdot a_3$\\[3pt]
+$\frac{dL}{dw_{13}} = \frac{dL}{da_5}\cdot\frac{da_5}{da_3}\cdot\frac{da_3}{dw_{13}}$\\
+$\frac{da_5}{da_3} = a_5(1-a_5)\cdot w_{35}$;\quad $\frac{da_3}{dw_{13}} = a_3(1-a_3)\cdot x_1$\\[3pt]
+Multi-path (neuron 3 $\to$ 6,7,8): sum gradients over all paths
+\end{formulabox}
+
+\textbf{Training Loop:}
+\begin{enumerate}
+  \item Init weights (small random)
+  \item Forward prop $\to$ compute $\hat{y}$
+  \item Compute loss $L(\hat{y}, y)$
+  \item Backward prop $\to$ gradients
+  \item Update: $w \leftarrow w - \eta\cdot\frac{dL}{dw}$
+  \item Repeat until convergence
+\end{enumerate}
+
+%=============================================
+\section{Deep Learning (Lec 21)}
+%=============================================
+
+ANN with $>3$ layers = Deep Learning. Sigmoid in hidden layers $\to$ \textbf{vanishing gradients}; fix with \textbf{ReLU} in hidden layers.
+\begin{itemize}
+  \item More layers = more abstract feature representations
+  \item Deeper nets require careful weight initialization to train stably
+  \item Use \textbf{cross-entropy loss} for multi-class classification
+  \item Optimization via \textbf{SGD} (stochastic gradient descent) or variants (Adam, etc.)
+  \item Training mode: gradients enabled; Eval mode: gradients disabled
+\end{itemize}
+
+%=============================================
+\section{Quick Facts \& Exam Traps}
+%=============================================
+
+\subsection{Ensemble}
+\begin{itemize}
+  \item AdaBoost labels are $-1$ and $+1$, \textbf{NOT} 0 and 1
+  \item Sample weights $\neq$ model weights (as in Adaline)
+  \item $\varepsilon$ = weighted error; $\alpha_j$ larger when $\varepsilon$ small (better classifier)
+  \item Correct pred: weight $\downarrow$;\quad Wrong pred: weight $\uparrow$
+  \item Bagging = parallel;\quad Boosting = sequential
+  \item Gradient boosting residual $r_i = y_i - p_i$ (not $\hat{y}$)
+  \item $\gamma_{jm} = \sum r / \sum p(1-p)$ for each leaf
+  \item Inference: sum all $\gamma$ contributions $\times \eta$
+\end{itemize}
+
+\subsection{Regression}
+\begin{itemize}
+  \item OLS = Adaline but $y$ continuous (no threshold)
+  \item Pearson $r$ measures \textbf{linear} correlation only
+  \item $R^2$ on test can be \textbf{negative} (worse than mean predictor)
+  \item $R^2{=}1$ = perfect fit; $R^2{=}0$ = always predicts $\mu_y$
+  \item LASSO $\to$ sparse weights (feature selection)
+  \item Ridge $\to$ small distributed weights
+  \item DT Regression: node prediction = \textbf{mean}; split by MSE gain
+  \item Random Forest Regression: bagging + MSE splits
+\end{itemize}
+
+\subsection{Clustering \& Neural Networks}
+\begin{itemize}
+  \item K-means: $D=0$ requires $K=N$ (trivial/useless)
+  \item Silhouette: $+1{=}$good, $0{=}$boundary, $-1{=}$wrong cluster
+  \item Hierarchical: no need to pick $K$ first; cut dendrogram
+  \item Single linkage = min dist;\quad Complete = max dist
+  \item NN weights per layer pair $= d_\text{prev} \times d_\text{next}$
+  \item Backprop: \textbf{right-to-left}; reuse intermediate gradients
+  \item Multiple paths $\to$ \textbf{sum} gradients from all paths
+  \item $\frac{d\sigma}{dz} = \sigma(z)(1-\sigma(z))$ \quad $\leftarrow$ memorize!
+  \item ReLU fixes vanishing gradient in deep nets
+\end{itemize}
+
+\end{multicols}
+\end{document}
