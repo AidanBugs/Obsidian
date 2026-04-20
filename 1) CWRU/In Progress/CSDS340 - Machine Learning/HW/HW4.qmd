@@ -1,3 +1,117 @@
 ---
 format: pdf
 ---
+
+# 1
+This functions quite similar to a logistic regression
+
+So assumptions are:
+
+- $0 \leq C_i(x) \leq 1$ and is fixed
+- $n$ samples with $\forall y^{(i)}\in y, y^{(i)}\in \{0,1\}$
+- bias fixed at $0.5$
+- We will use a loss function of logistic loss
+- $C(x^{(i)})$ returns a list of probabilities corresponding such that the $j$th probability is $C_j(x^{(i)})$ or the probability that the $j$th model predicts for our input $x^{(i)}$
+- $\sigma(z)$ same as logistic regression so $\sigma(z)=1$ iff $z\geq 0$ else $0$
+- $\eta$ and epoch numbers are given to us
+
+Algorithm pseudocode:
+
+```
+m = # Models
+n = # Data Points
+
+w = [None] * m
+
+for w_j in w:
+  w_j = 1/m
+
+p = [None] * n
+
+for p_i in p:
+  p_i = C(x^{(i)})
+
+for i in range(NUM_EPOCHS):
+  z = w^T p - 0.5
+  y_pred = sigma(z)
+  dw = dotproduct(x, y_pred-y)
+  w -= dw * eta
+
+return w
+```
+
+# 2
+We find that for correct classifications, we multiply by $1/\sqrt 3$ and for incorrect classigications we multiply by $\sqrt 3$. Thus $e^{-\alpha}=1/\sqrt 3$
+
+This means that $\alpha=\ln \sqrt 3$
+
+We know by the definition of $\alpha$ that:
+
+> $\alpha = 0.5 \ln (\frac{1-\epsilon}{\epsilon})$
+
+So we get the following:
+
+> $\ln \sqrt 3 = \alpha = 0.5 \ln (\frac{1-\epsilon}{\epsilon})$
+
+> $\rightarrow \ln \sqrt 3 = 0.5 \ln (\frac{1-\epsilon}{\epsilon})$
+
+> $\rightarrow 0.5 \ln 3 = 0.5 \ln (\frac{1-\epsilon}{\epsilon})$
+
+> $\rightarrow 3 = \frac{1-\epsilon}{\epsilon}$
+
+> $\rightarrow 3\epsilon = 1-\epsilon$
+
+> $\rightarrow \epsilon = \frac 14$
+
+
+# 3
+We are given the initial following features: 
+
+- $x_1^{(k)}=k\times 10^{-1}$
+- $x_2^{(k)}=k$
+- $x_3^{(k)}=k\times 10$
+
+Thus our degree $2$ polynomial transformation will result in the following features:
+
+- $x_0^{(k)}=1$
+- $x_1^{(k)}=k\times 10^{-1}$
+- $x_2^{(k)}=k$
+- $x_3^{(k)}=k\times 10$
+- $x_4^{(k)}=(x_1^{(k)})^2=k^2\times 10^{-2}$
+- $x_5^{(k)}=(x_2^{(k)})^2=k^2$
+- $x_6^{(k)}=(x_3^{(k)})^2=k^2\times 10^{2}$
+- $x_7^{(k)}=x_1^{(k)}x_2^{(k)}=k^2\times 10^{-1}$
+- $x_8^{(k)}=x_1^{(k)}x_3^{(k)}=k^2\times 10^{1}$
+- $x_9^{(k)}=x_2^{(k)}x_3^{(k)}=k^2$
+
+
+# 4
+Given our initial centroids are $c_1=(2,0)$ and $c_2=(-2,0)$ with the below initial points:
+
+- $x^{(1)} = (-1,0)$
+- $x^{(2)} = (1.5,0)$
+- $x^{(3)} = (-1,-1)$
+- $x^{(4)} = (1,1)$
+- $x^{(5)} = (2,1)$
+
+After this iteration we find that $x^{(1)},x^{(3)}$ are closest to $c_2$ and that $x^{(2)},x^{(4)},x^{(5)}$ are closest to $c_1$
+
+And membership is for cluster 1: 
+
+- $x^{(2)},x^{(4)},x^{(5)}$
+
+Thus membership is for cluster 2: 
+
+- $x^{(1)},x^{(3)}$
+
+Thus we find our new centroids are:
+
+- $c_1=([1.5+1+2]/3,[0+1+1]/3)=(1.5,\frac23)$
+- $c_2=([-1-1]/2,[0-1]/2)=(-1,0.5)$
+
+# 5
+# 6
+# 7
+# 8
+# 9
+# 10
