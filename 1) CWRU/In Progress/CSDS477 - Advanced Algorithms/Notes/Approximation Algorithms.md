@@ -156,7 +156,7 @@ We can take the derative of this with respect to $\bar x_n$ to determine the max
 
 Thus the final cost is $c^* = (1- \frac \beta 1)^n \leq e^{-\beta}$ which is equality as $n$ approaches $\infty$ due to this being the definition of $e$
 
-## Algorithm HSRnd1
+## Algorithm HSRand1
 $\min \sum_{e\in S} c_e x_e$
 
 s.t. $\sum_{e\in T_j} x_e \geq 1, (j=1,...,p)$
@@ -170,3 +170,50 @@ for each e in S do:
 ```
 
 $E(c(H)) = \sum_{e\in S} c_e Pr[e\in H]= \sum_{e\in S} c_e x_e^* \leq c^*$ better than optimal but may not give a cover
+
+Thus we find the probability that a set is not hit is:
+
+> $Pr[e\cap H=\phi]=Pr[a\notin H]*Pr[b\notin H]= (1-x_a^*)*(1-x_b^*)=1/4$ -> vertex cover case
+
+For number of edges not covered:
+
+> $E[\# edges \ not \ covered]= E[\sum_{j=1}^p x_j ] \sum_{j=1}^p E[x_j] = \sum_{j=1}^p Pr[x_j\cap H=\phi]$
+
+>> Where $x_i=1$ iff $T_i\cap H=\phi$ else $0$.
+
+Thus in the case of $m=3$ edges we have the expected umber of edges covered as $\frac 34$
+
+$Pr[T_j \cap H = \phi]=\Pi_{e\in T_j} Pr[e\notin H] = \Pi_{e\in T_j} (1-x_e^*) \leq 1$ from before we have a better bound as this probability being less than $\frac{1}{e}$
+
+Thus $E[# T_j\not\ covered]= \frac{p}{e}$
+
+## Algorithm HSRand2
+```
+Solve LR -> x_e^*
+for h=1 to t do:
+    H <- H\cup {e} w/ prob x_e^*
+```
+
+$Pr[T_j not hit] <= \frac{1}{e^t}$ 
+
+$E[# sets not hit] <= \frac{p}{e^t}$
+
+Thus $E[c(H)] \leq t\times c(H^*)$
+
+# HSR vs PD
+| Type | Apx Ratio | Failute |
+| - | -- | -- |
+| PD | $\max |T_j|$ | NA |
+| HSR | $\ln p$ | $E[not hit] \leq 1$ |
+
+# MAX SAT
+Clauses are similar to SAT, conjuctive normal form, so variables joined by OR's
+
+goal is to maximize the number of true clauses.
+
+## 2-apx for MAX SAT
+Randomly select true or false for each $x$ with probability 1/2
+
+So probability a clause is satisfied is $1-\frac{1}{2^k}\geq \frac 12$ where $k$ is number of literals in MAX SAT
+
+So expected # of satisfied clauses is $\geq \frac p2$
