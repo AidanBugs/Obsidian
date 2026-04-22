@@ -217,3 +217,63 @@ Randomly select true or false for each $x$ with probability 1/2
 So probability a clause is satisfied is $1-\frac{1}{2^k}\geq \frac 12$ where $k$ is number of literals in MAX SAT
 
 So expected # of satisfied clauses is $\geq \frac p2$
+
+Alternatively set all to True and all to False and pick the larger of the two.
+
+## Algorithm MAXSAT Rand
+```
+for each variable x do:
+    set x to true w/ prob 0.5
+```
+
+If a clause $C_j$ contains $k$ literals:
+
+> $Pr[C_j sat] = 1- \frac{1}{2^k}\geq \frac 12$
+
+So expected number of satisfied clauses is $\fracp2\geq \frac{opt}{2}$
+
+Thus MAXSAT Rand is a $2$-apx algorithm for MAX SAT
+
+## Max SAT as ILP
+
+Therea re $p$ clauses. Let set of positive literals be $C_j^+$ and negatives for a clause is $C_j^-$
+
+$\max \sum z_j$
+
+s.t. $\sum_{x_i\in C_j^+} x_i + \sum_{x_i\in C_j^-} (1-x_i) \geq z_j, j=1,...,p$
+
+> $x \in \{0,1\}$
+
+> $z \in \{0,1\}$
+
+## MAX SAT Lin Relax
+**Thm** this a $(1-\frac 1e)$-appx
+
+$Pr[C_j !SAT]=\Pi_{i\in C_j^+} (1-y_i^*)$
+
+> for simplicity $C_j^- =\phi$
+
+s.t. $\sum y_i^* \geq z_j^*$
+
+worst case:
+
+$\leq \max \Pi (1-y_i^*) \rightarrow \leq (1-\frac{z_j^*}{k})^k$
+
+>> note $k=$ num literals in $C_j$
+
+$Pr[C_j SAT]\geq 1-(1-\frac{z_j^*}{k})^k\geq (1-\frac 1e)z_j^*$
+
+$E[\# SAT C]\geq (1-\frac 1e)OPT$
+
+NOTE DERIVATIVE OF $(1-\frac ab)^b=(1-\frac1b)^b a\geq (1-\frac 1e)a$
+
+## MAX SAT Mix
+Find assignments from MAXSAT RND, MAXSAT Lin Relax and pick the best one (satisfies most clauses)
+
+$n_1$ expected satisfied from MAXSAT RND and $n_2$ is the other
+
+**Thm** This is $\frac34$- Appx
+
+So $E[MAXSAT Mix]=\max n_1, n_2\geq E[\frac{n_1+n_2}{2}]=\frac12 n_1 + \frac 12 n_2$
+
+$C^k=\{Clauses C_j: |C_j|=k\}$
