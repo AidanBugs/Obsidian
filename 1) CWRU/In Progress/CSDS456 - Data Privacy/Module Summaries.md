@@ -69,6 +69,20 @@
     3.  The "Evaluator" uses OT to get keys for their input and evaluates the circuit gate-by-gate.
     4.  **Result:** The Evaluator learns the output of the function but *nothing* about the intermediate values or the Garbler's input.
 
+#### Yao's Garbled Circuit Example
+Alice has input $x$ and Bob has input $y$ for an or gate $z$
+
+Thus:
+
+| x | y | z |
+| - | - | - |
+| 0 | 0 | 0 |
+| 0 | 1 | 1 |
+| 1 | 0 | 1 |
+| 1 | 1 | 1 |
+
+Essentially do a form of onion routing with the keys and that allows Bob to figure out the last decryption and what not
+
 ### 4. Other Crypto Tools
 - **Zero-Knowledge Proofs:** Proving you know a secret (e.g., a password) without revealing the secret itself.
 - **Private Information Retrieval (PIR):** Querying a public database without revealing *which* record you retrieved.
@@ -93,6 +107,15 @@
 - **Limitation:** Fails against **Skewness Attacks**.
     - *Scenario:* Overall population has 99% negative HIV rate. A group with 50% positive and 50% negative is "diverse," but it still leaks a massive amount of information because it deviates wildly from the expected baseline.
 
+#### Distinct l-diversity
+Each equivalence class has at least $l$ different sensitive attribute values
+
+#### Entropy l-diversity
+The entropy of the distribution of sensitive attributes is at least $\log (l)$
+
+#### Recursive l-diversity
+The frequencies of the sensitive values are pretty similar in each equivalence class
+
 ### 4. t-Closeness
 - **Definition:** The distribution of sensitive attributes within any anonymized group must be within a threshold **`t`** of the distribution in the **entire overall dataset**.
 - **Metric:** Often uses **Earth Mover's Distance** to measure the difference between distributions.
@@ -100,7 +123,7 @@
 
 ### 5. Privacy in Social Networks
 - **Structural De-Anonymization:**
-    1. **Seed Identification:** Attacker finds a few nodes (users) present in both the *anonymous target graph* and an *auxiliary graph* (e.g., public Twitter follows).
+    1. **Seed Identification:** Attacker finds / de-anonymizes a few nodes (users) present in both the *anonymous target graph* and an *auxiliary graph* (e.g., public Twitter follows).
     2. **Propagation:** The algorithm identifies the target's unique network topology (who they follow/who follows them) and matches it across networks.
 - **Countermeasure Limitation:** Even removing names is insufficient; the **graph structure itself is a fingerprint**.
 
@@ -184,7 +207,7 @@ When network structure is private or sparse, attackers use public profile attrib
 | Feature | Information Theoretic PIR (IT-PIR) | Computational PIR (cPIR) |
 | :--- | :--- | :--- |
 | **Servers** | Multiple (≥2) **non-colluding** servers with copies of the DB. | Single server. |
-| **Method** | User sends secret shares (e.g., Shamir's scheme) to each server; servers compute response on shares. | User sends encrypted query; server uses homomorphic properties to compute response. |
+| **Method** | User sends secret shares (e.g., Shamir's scheme [polynomial vector]) to each server; servers compute response on shares. | User sends encrypted query; server uses homomorphic properties to compute response. |
 | **Drawback** | Requires trust that servers don't collude. | Computationally heavy (requires crypto operations on entire DB). |
 
 - **Symmetric PIR (SPIR):** Adds protection for the server; the user learns **only** the requested record and nothing else.
@@ -212,7 +235,7 @@ When network structure is private or sparse, attackers use public profile attrib
 
 ## Module 8: Anonymous Communications (Tor)
 
-### 1. Traffic Analysis Threat
+### 1. Traffic Analysis Threat (Website Finger Printing)
 - **Problem:** Even with encrypted content (HTTPS), metadata (Source IP, Destination IP, Packet Timing, Size) reveals who is talking to whom.
 - **Goal of Anonymity Systems:** Hide the link between the sender and receiver (Unlinkability).
 
