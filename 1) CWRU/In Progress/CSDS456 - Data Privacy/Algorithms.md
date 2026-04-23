@@ -211,6 +211,16 @@ Differential privacy has become a mature field, with implementations in governme
 
 ---
 
+## Module 6: Local Differential Privacy
+$Pr[M(x)=y]\leq e^\epsilon Pr[M(x')=y]$
+
+In other words, given some kind of randomizing algorithm $M$, $M$ satisfies local $\epsilon$-dp iff for any input the probability they have the same output is within $e^\epsilon$
+
+An example is given a survey, iff everyone answers honestly with probability $p$ and lies with probability $1-p$ then this results in a $\log(\frac{p}{1-p})$-LDP
+
+### Unary Encoding
+Start with a vector where each bit is $0$ except for $v$th bit. These bits are pertubed with a binary response mechanism with $p=\frac{e^{\epsilon/2}}{1-e^{\epsilon/2}}$ results in $\epsilon$-LDP
+
 ## Module 7: Hiding Access Patterns (PIR & ORAM)
 
 ### 1. Information Theoretic PIR (Goldberg’s Scheme)
@@ -335,6 +345,8 @@ Differential privacy has become a mature field, with implementations in governme
 
 ### 2. Okamoto’s Receipt‑Free Scheme
 **Enhancement:** Uses trap‑door bit commitments that allow the voter to open the commitment in two different ways (one real, one fake). The voter sends the fake opening to a coercer and the real one to a timeliness member via an untappable channel.
+
+> In other words, it allows a voter to show they voted for either party to an attacker as a form of commitment but they actual only vote in a single way.
 
 **Result:** Receipt‑free but not coercion‑resistant.
 
