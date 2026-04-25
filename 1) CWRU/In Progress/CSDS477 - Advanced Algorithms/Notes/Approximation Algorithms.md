@@ -60,6 +60,7 @@ $\max \sum_{j=1}^p y_j$
 s.t. $\sum_{j: e\in Tj} y_j \leq c_{e}, (\forall e \in S)$
 
 > $y_j \geq 0$
+
 Continue until $x^*$ and $y^*$ are both feasible and satisfy comp slack.
 
 Thus optimal $c^*: \sum_{j=1}^p y_j \leq c^* \leq \sum_{e\in S} c_e x_e$
@@ -277,3 +278,64 @@ $n_1$ expected satisfied from MAXSAT RND and $n_2$ is the other
 So $E[MAXSAT Mix]=\max n_1, n_2\geq E[\frac{n_1+n_2}{2}]=\frac12 n_1 + \frac 12 n_2$
 
 $C^k=\{Clauses C_j: |C_j|=k\}$
+
+Let $\alpha_k = 1-\frac{1}{2^k}$
+
+And $\beta_k=(1-(1-\frac 1k)^k)$
+
+**PF**
+
+$E[|C| SAT by MAXSATMix]=E[\max\{n_1,n_2\}]\geq E[\frac{n_1+n_2}{2}]$
+
+> $=\frac 12 (E[n_1]+E[n_2])$
+
+>> $E[n_1]=\sum_{k=1}^\infty\sum_{C_j\in C^k} \alpha_k$
+
+>> $E[n_2]=\sum_{k=1}^\infty\sum_{C_j\in C^k} \beta_k z_j^*$
+
+> $\frac 12 (E[n_1]+E[n_2])\geq \sum_{k=1}^n\sum_{C_j\sum C^k} \frac{\alpha_k+\beta_k}{2}z_j^*\geq \frac34 \sum z_j^*\geq \frac 34 OPT$
+
+# MAX CUT
+Given complete undirected graph $G=(V,E)$
+
+$a_{ij}=$ distance between $i,j\in V \land i\neq j$
+
+Find cut $(S,V-S)$ that max $c(S,V-S)=\sum_{(i,j)\in \times (S,V-S)}\alpha_{ij}$
+
+Essentially find a set of verticies $S$ that maximizes the sum of all edges that intersect the cut line.
+
+$\delta_e = 1$ iff $e\in \times (S,V-S)$ and $0$ otherwise.
+
+$c(S,V-S)=\sum_{e\in E} a_e \delta_e$
+
+## MAXCUT Rand
+For each $v\in V$, add $v$ to $S$ with probability $\frac12$
+
+Claim This algo is a $2$-apx
+
+**Proof** $E[c(S,V-S)]=\sum_{e\in E}a_e E[\delta_e]=\frac12 \sum_{e\in E}a_e\geq \frac12 OPT$
+
+Decision Vars:
+
+$x_i = 1$ iff $i\in S$ and $-1$ otherwise, $(\forall i \in V)$.
+
+$x_ix_j=1$ iff same side and $-1$ iff opposite sides
+
+Thus $\frac{1-x_ix_j}{2}=\delta_{ij}$
+
+Integer Quadratic program
+
+$max c(S,V-S)=max \sum_{e\in E} \alpha_e \frac{1-x_ix_j}{2}$
+
+s.t. $x_i\in \{-1,1\}$
+
+Instead of our usual relaxation, we instead relax $x_i$ to a $n$d unit vector $v_i$
+
+### Relaxtion
+$\max c(S,V-S)\leq \max \sum_{e\in E}\alpha_e \frac{1-v_i^Tv_j}{2}$
+
+s.t. $v_i \in S_n (i\in V)$
+
+$B=$ matrix of the $v$
+
+$X=B^TB$ is a semi definite program that we are trying to maximize.
