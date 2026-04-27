@@ -296,7 +296,7 @@ $E[|C| SAT by MAXSATMix]=E[\max\{n_1,n_2\}]\geq E[\frac{n_1+n_2}{2}]$
 > $\frac 12 (E[n_1]+E[n_2])\geq \sum_{k=1}^n\sum_{C_j\sum C^k} \frac{\alpha_k+\beta_k}{2}z_j^*\geq \frac34 \sum z_j^*\geq \frac 34 OPT$
 
 # MAX CUT
-Given complete undirected graph $G=(V,E)$
+Given complete undirected graph $G=(V,E)$ and weights $w_e=w_{ij}, \forall e =(i,j)\in E$
 
 $a_{ij}=$ distance between $i,j\in V \land i\neq j$
 
@@ -339,3 +339,34 @@ s.t. $v_i \in S_n (i\in V)$
 $B=$ matrix of the $v$
 
 $X=B^TB$ is a semi definite program that we are trying to maximize.
+
+Thus $X$ is the matrix of dot products of these vectors
+
+Diagonal entries are $1$ because all $v$ are part of unit hypersphere
+
+If $v_i^Tv_j=-1$ then wed want $\delta_e$ be $1$ and conversly, $v_i^Tv_j=1$ then wed want $\delta_e=0$
+
+Now we need to generate a cut from the relaxation. So here are a few ideas (that don't really work):
+
+1. Random Rounding
+2. Vectors alr express clustering so more clustering may not be helpful
+3. Project onto $x$ axis (rotations are identical so projection would mess with results)
+4. Almost anything to round would work
+
+Random hyperplane through origin and that is used for random rounding. 
+
+$E[c(S,V-S)]=E[\sum_{e\in E}a_e \delta_e] = \sum_e a_e Pr[\delta_e=1]$
+
+$Pr[\delta_e=1]=\frac \alpha\pi$ where $\alpha$ is the angle between the two vectors. 
+
+> $Pr[\delta_e=1]=\frac{\arccos(v_i^v_j)}{\pi}$
+
+$E[c(S,V-S)]=E[\sum_{e\in E}a_e \delta_e] = \sum_e a_e Pr[\delta_e=1]=\sum_e a_e \frac{\arccos(v_i^v_j)}{\pi}$
+
+$f(z)=\frac{\arccos(z)}{\pi}\frac{z}{1-z}$
+
+> Applying derivative to find that $\hat z = \sqrt{\frac{1-\hat z}{1+\hat z}}$
+
+$f(z)=\frac{\arccos(z)}{\pi}\frac{z}{1-z}\rightarrow f(z)\geq f(\hat z) = 0.879$
+
+$=\sum_e a_e \frac{\arccos(v_i^v_j)}{\pi}\geq 0.879 \sum_e a_e \frac{1-v_i^Tv_j}{2}\geq 0.879 c^*$
