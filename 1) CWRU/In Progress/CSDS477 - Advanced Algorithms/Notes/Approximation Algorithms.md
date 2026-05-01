@@ -33,7 +33,7 @@ $\min \sum_{e\in S} c_e x_e$
 
 s.t. $\sum_{e\in T_j} x_e \geq 1, (j=1,...,p)$
 
-$x_e\in \{0,1}$ and $1$ iff $e\in H$
+$x_e\in \{0,1\}$ and $1$ iff $e\in H$
 
 ### Linear Relaxation
 $\min \sum_{e\in S} c_e x_e$
@@ -47,7 +47,7 @@ Note that the $x_e\leq 1$ constraint is redundant because there is no optimal so
 ### Primal Dual Algorithm Idea
 Primal $x^{(0)}$ (not necessarily feasible) and $y^{(0)}$ as a solution in dual that is feasible (note these are linked by comp slack)
 
-We iterate forward to create $x^{(1)}, y^{(1)}$ where $x$ is not necessarily feasible but we are going to reduce the infeasibility region from $x^{(0)}$ to $x&{(1)}$
+We iterate forward to create $x^{(1)}, y^{(1)}$ where $x$ is not necessarily feasible but we are going to reduce the infeasibility region from $x^{(0)}$ to $x^{(1)}$
 
 
 ### Dual of Lin Relax
@@ -186,7 +186,7 @@ Thus in the case of $m=3$ edges we have the expected umber of edges covered as $
 
 $Pr[T_j \cap H = \phi]=\Pi_{e\in T_j} Pr[e\notin H] = \Pi_{e\in T_j} (1-x_e^*) \leq 1$ from before we have a better bound as this probability being less than $\frac{1}{e}$
 
-Thus $E[# T_j\not\ covered]= \frac{p}{e}$
+Thus $E[\# T_j\ !covered]= \frac{p}{e}$
 
 ## Algorithm HSRand2
 ```
@@ -197,7 +197,7 @@ for h=1 to t do:
 
 $Pr[T_j not hit] <= \frac{1}{e^t}$ 
 
-$E[# sets not hit] <= \frac{p}{e^t}$
+$E[\# sets not hit] <= \frac{p}{e^t}$
 
 Thus $E[c(H)] \leq t\times c(H^*)$
 
@@ -217,7 +217,7 @@ Randomly select true or false for each $x$ with probability 1/2
 
 So probability a clause is satisfied is $1-\frac{1}{2^k}\geq \frac 12$ where $k$ is number of literals in MAX SAT
 
-So expected # of satisfied clauses is $\geq \frac p2$
+So expected \# of satisfied clauses is $\geq \frac p2$
 
 Alternatively set all to True and all to False and pick the larger of the two.
 
@@ -231,7 +231,7 @@ If a clause $C_j$ contains $k$ literals:
 
 > $Pr[C_j sat] = 1- \frac{1}{2^k}\geq \frac 12$
 
-So expected number of satisfied clauses is $\fracp2\geq \frac{opt}{2}$
+So expected number of satisfied clauses is $\frac p2\geq \frac{opt}{2}$
 
 Thus MAXSAT Rand is a $2$-apx algorithm for MAX SAT
 
@@ -359,9 +359,9 @@ $E[c(S,V-S)]=E[\sum_{e\in E}a_e \delta_e] = \sum_e a_e Pr[\delta_e=1]$
 
 $Pr[\delta_e=1]=\frac \alpha\pi$ where $\alpha$ is the angle between the two vectors. 
 
-> $Pr[\delta_e=1]=\frac{\arccos(v_i^v_j)}{\pi}$
+> $Pr[\delta_e=1]=\frac{\arccos(v_i^Tv_j)}{\pi}$
 
-$E[c(S,V-S)]=E[\sum_{e\in E}a_e \delta_e] = \sum_e a_e Pr[\delta_e=1]=\sum_e a_e \frac{\arccos(v_i^v_j)}{\pi}$
+$E[c(S,V-S)]=E[\sum_{e\in E}a_e \delta_e] = \sum_e a_e Pr[\delta_e=1]=\sum_e a_e \frac{\arccos(v_i^Tv_j)}{\pi}$
 
 $f(z)=\frac{\arccos(z)}{\pi}\frac{z}{1-z}$
 
@@ -369,4 +369,4 @@ $f(z)=\frac{\arccos(z)}{\pi}\frac{z}{1-z}$
 
 $f(z)=\frac{\arccos(z)}{\pi}\frac{z}{1-z}\rightarrow f(z)\geq f(\hat z) = 0.879$
 
-$=\sum_e a_e \frac{\arccos(v_i^v_j)}{\pi}\geq 0.879 \sum_e a_e \frac{1-v_i^Tv_j}{2}\geq 0.879 c^*$
+$=\sum_e a_e \frac{\arccos(v_i^Tv_j)}{\pi}\geq 0.879 \sum_e a_e \frac{1-v_i^Tv_j}{2}\geq 0.879 c^*$

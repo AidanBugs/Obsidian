@@ -99,7 +99,7 @@ $G(V,E) + x \rightarrow G(X)=(V,E(x))$ which is basically updated version of edg
 
 1. $x_{ij}=0$, so no back arrow between $i,j$
 
-> $U=\{(i,j)\in E: u_{ij}<\infty}$
+> $U=\{(i,j)\in E: u_{ij}<\infty\}$
 
 > $\alpha_{ij}(u_{ij}- x_{ij})=0, ((i,j)\in U)$ (1)
 

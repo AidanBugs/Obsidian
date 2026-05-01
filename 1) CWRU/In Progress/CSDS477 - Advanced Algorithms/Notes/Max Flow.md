@@ -37,7 +37,7 @@ Note these are "cuts" $S$ which is a subset of the nodes $V$
 
 > Since this is totally unimodular then there exists integer optimal
 
-**Lemma** $f^* \geq c(S,V-S) \quad \existsl (S,V-S)$ 
+**Lemma** $f^* \geq c(S,V-S) \quad \exists (S,V-S)$ 
 
 **Proof** If flow is infinite then obvious. If $f^*$ is finite, then $y^*$ (opt sol of dual) and wlog $y^*$ is integer.  
 
@@ -62,11 +62,11 @@ In other words every edge has at least one vertex in $V'$
 
 Matching set $M\subset E$ s.t.
 
-> $e,f \in M \quad e\intersect f= \phi$ which means that a subset of edges where they have no vertices in common
+> $e,f \in M \quad e\cap f= \phi$ which means that a subset of edges where they have no vertices in common
 
 Note that the smallest matching is just an empty set. More meaningfully however is to find $\max |M|$
 
-**Def Bipartite Graph** $G=(V_1\cup V_2, E) \land (V_1\cap V_2 =\phi) \land \forall e (e\cap V_1, e\cap V_2 \noteq \phi)$ 
+**Def Bipartite Graph** $G=(V_1\cup V_2, E) \land (V_1\cap V_2 =\phi) \land \forall e (e\cap V_1, e\cap V_2 \neq \phi)$ 
 **Proof** in bipartite graphs, $\min |V'|=\max |M|$ 
 
 **Pf** 
@@ -91,7 +91,7 @@ Convert the bipartite graph into a directed graph with the same edges from $V_1$
 > By contradiction, $\exists$ original arc $(i,j)\in X(S,V-S)$ thus $i\in V_1, j\in V_2$. Since it is an original arc and we constructed our cut in a specific way, then this is saying that $i\notin V' \land j\notin V'$ which is a contradiction from the definition of $V'$. Thus the capcity of the cut is $=|V'|$
 
 
-2b. given s-t cut $(S,V-S)$ of finite capacity then $\exiists$ vertex coer $|V'|$ s.t. $|V'|=c(S,V-S)$
+2b. given s-t cut $(S,V-S)$ of finite capacity then $\exists$ vertex coer $|V'|$ s.t. $|V'|=c(S,V-S)$
 
 > From our cut we perform the same methods for choosing our VC nodes (not in cut on $V_1$ side and in cut on $V_2$ side).$V'=(V_1-S)\cup(V_2\cap S)$
 

@@ -111,7 +111,7 @@ hint $c_{ij}^\pi = -c_{ji}^\pi$
 ### Runtime
 Suppose $S$ is the time for the shortest paths
 
-Thus runtime is $O(#iter \times O(S))$
+Thus runtime is $O(\#iter \times O(S))$
 
 We can work on calculating num iterations as $B=\sum_{bi>0} b_i$ because we now at each iteration we send at least one unit of flow.
 
