@@ -82,29 +82,63 @@ Mostly just think in terms of SQL and translate into RA. Below are the general t
 - $\pi_{Attributes}$ which is projection onto the attributes in the subscript
 - $\sigma_{Conditions}$ which is like the WHERE clause in SQL
 - $\bowtie_{Join Conditions}$ which is the join operator.
-- $=\bowtie_{Join Conditions}$ which is left joi$ which is left join (right join is other side and outer is both)
+- $=\bowtie_{Join Conditions}$ which is left join which is left join (right join is other side and outer is both)
 - $\cup$ Union (attributes should be same thing)
 - $\cap$ Union (attributes need to be same thing)
 - $-$ Set subtraction (useful for exists / not exists)
 - $\times$ cross product
-- ${A,B}/B$ This returns the values of $A$ that have an entry for every value in $B$ 
+- $\{A,B\}/B$ This returns the values of $A$ that have an entry for every value in $B$ 
 - $_{group attributes}\gamma_{F(Attributes)}$ group/aggregate functions where $F$ are aggregate functions
 - $\rho (New, Old)$ rename operation
 
 
 # Normalization
-## Normal Forms
-
-## Decompositions
-
-## Minimal Cover
-
-## Lossless Joins 
-
 ## Identifying (Candidate) Keys
 Super keys $SK$ are defined for a relation $R$ as $SK\subseteq R$ such that $SK\rightarrow R$. In other words, they are a set of attributes of $R$ such that knowing these attributes for any tuple you are able to determine the rest of the attributes of the tuple. 
 
 A key $K\in SK$ is defined as $\forall sk\in SK, |K| \leq |sk|$
+
+## Normal Forms
+For FD's $X\rightarrow Y$
+
+BCNF:
+
+1. $Y\subseteq X$
+2. $X\in SK$ 
+
+3NF:
+
+1. BCNF
+2. $\forall A \in Y, A\in K$
+
+## Lossless
+A decomp into $R_1,R_2$ is lossless iff:
+
+> $(R_1\cap R_2)\rightarrow R_1) \lor (R_1\cap R_2)\rightarrow R_2)$
+
+In other words lossless if there exists a key in their intersection for at least one of the relations.
+
+## Decompositions
+```
+while S in DECOMP and S not in BCNF: 
+    find X -> Y in FD as F, where X not a SK of S
+    
+    DECOMP.pop(S)
+    
+    DECOMP.append(S_1=(XY, F))
+
+    DECOMP.append(S_1=(S-(Y-X), FD-F))
+```
+
+In english, just remove the attributes for FK's that violate BCNF into a separate relation until ur bing chilling
+
+## Minimal Cover
+Common sense test
+
+1. Convert all FD's to have only one attributes on right
+2. Eliminate Redundant Attributes From left
+3. Transitive property this thing up !!!
+
 
 # Storage
 We can think of storing entities down to their bytes, a singular entity most likely has multiple attributes of different sizes.
