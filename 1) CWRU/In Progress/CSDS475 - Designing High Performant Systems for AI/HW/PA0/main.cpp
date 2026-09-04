@@ -61,18 +61,16 @@ int main()
       istream_iterator<double>(),
       back_inserter(vec2));
 
-  cout << "\n\nProblem 3) \n\tVec1 first 10: ";
+  cout << "\n\nProblem 3) \n\tVec1 first 10: \n\t\t";
 
   for (int i = 0; i < 10; i++){
-    cout << vec1[i];
-    cout << ", ";
+    cout << vec1[i] << "\n\t\t";
   }
 
-  cout << "\n\tVec2 first 10: ";
+  cout << "\n\tVec2 first 10: \n\t\t";
 
   for (int i = 0; i < 10; i++){
-    cout << vec2[i];
-    cout << ", ";
+    cout << vec2[i] << "\n\t\t";
   }
 
   vector<double> hadamard;

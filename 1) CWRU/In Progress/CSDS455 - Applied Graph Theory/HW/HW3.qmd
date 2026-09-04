@@ -1,0 +1,27 @@
+---
+format: pdf
+---
+
+# 1
+Since $S\subseteq A, |S| \leq |N(S)|$ this means that every node in $A$ has at least one edge to a node in $B$ and that $|A| \leq |B|$. Augmenting path being an alternating path that starts at an unmatched vertex and ends at one. Since we know that $|A| \leq |B|$ and that there exists a match $M$ then we know there must be at least one unmatched vertex in $B$, because we know the amount of unmatched vertices in $A$ is at least $1$ and $|A| \geq |M| +1$ so $|B| \geq |M| +1$
+
+We can do proof by contradiction, suppose no such augmenting path exists from starting at $a$. We know that all $N(a)$ must only contain matched vertices in $B$ because otherwise we'd have an augmenting path. So $a$ must  point only to matched vertices. So we take this alternating path from $a$ to this new node $b$ and then that node's match so we end back at some matched node in $m\in A$. Suppose $m$ only points to other matched nodes in $B$ that also only points to other matched nodes so on and so forth (because remember the moment we find an unmatched edge then we have created an augmenting path and thus a contradiction). We know that there must exist some alternative path from $a$ because otherwise we can choose this matched subset of $A$ (denote as $A'$) plus $a$ as $S$ and this would results $|S|=|A'| + 1$ and $|N(S)| = N(a) -1 + |A'|$ so $N(a)$ would need to be greater than $1$.
+
+If all paths from $A$ create that above violation then we again have a contradiction because we started with $|S| \leq N(S)$ but we can define $S$ as all alternating path reachable nodes in $A$ from $a$ so $S$ would be $a\cup M'$ where $M' \subseteq M$. If we suppose that $a$ cannot reach another unmatched node in $B$ then $N(S) = |M'|$ which would create a contradiction because $|S| = 1 + |M'| \leq |N(S)| = |M'|$. Thus we know that there must exist an augmenting path from $a$ because otherwise we create this contradiction. 
+
+
+# 2
+So prove from maximal matching $|M|=|A|-Def(A)= |A|-\max(|S|-|N(S)|)$
+
+We can start by showing that $|M| \leq |A|-Def(A)$. Going back to my above rewrite of maximum deficiency, we can think any given subset $S$ of $A$ having at most $|N(S)|$ matched nodes. Thus the amount of unmatched nodes in $S$ is at most $|S| -|N(S)|$. Thus we know that $A$ has at most $|A|-|N(A)|$ unmatched nodes. But by definition of the maximum deficiency, $|A|-|N(A)|\leq Def(A)$ meaning the $Def(A)$ is the most amount of unmatched nodes any subset of $A$ can have. Therefore $|A|-Def(A)$ is the most amount of matched nodes $A$ can have creating our upper bound for $|M|$
+
+As for the lower bound, we know that given a maximal match $|M|$ there are no augmenting paths in $G$. Suppose we pick a subset $R$ of all reachable nodes in $A$ from unmatched nodes in $A$ (including the unmatched nodes). We know that $N(R)$ must only be matched nodes, because otherwise we would have an augmenting path. Since $N(R)$ are all matched nodes, that means we have $N(R)$ matched nodes in $R$. Thus the cardinality of $R$ is equal to $|N(R)|+$ unmatched nodes in $A$. The number of unmatched nodes are $|A|-|M|$ so we have $|R|=|N(R)|+|A|-|M|$. If we rearrange, $|A|-|M|=|R|-|N(R)|\leq Def(A)$ with that last part being because $Def(A)$ is the max difference between the size of a subset of $A$ and its neighbour set. Thus after rearranging we get the lowerbound of $|M|$ to be $|M|\geq |A|-Def(A)$ 
+
+So combining the upper and lower bounds we get that $|A|-Def(A)\geq |M|\geq |A|- Def(A)\rightarrow |M|= |A|-Def(A)$
+
+# 3
+We can start by proof by contradiction, assume $\forall S\subseteq V(G), q(G-S)\leq |S|$ then $G$ does not have a one factor. This also means that it does not haave a perfect match, thus for a maximum match $M$ there exists a set $U$ of unmatched vertices. Again since we assume $M$ is maximal then there are no augmenting paths. We can do a similar trick as in problem 2, where we look at all the vertices reachable from unmatched vertices in $U$. If we define set $F$ as the set of nodes that we first visit in a matched edge (ex matched edge $i,j$ we either visit $i$ or $j$ or neither first). We know that we only ever reach one of the nodes in a matched edge first (and not the other one first ever) because otherwise we would create an augmenting path. 
+
+Thus the total amount of vertices we can reach is $|U|+2|F|$. If we take the subset $F$ from $G$ then we know the number of odd components is at least $|F|$. This is because after removing $F$ from $G$, their corresponding matched nodes must be isolated so they are odd components. The reason they arae isolated is because like stated before if we reach the other node in a match first then we create an augmenting path so all the remaining matched nodes can only point towards the nodes in $F$ and if they connect to some other node that would be a contradiction or create an augmenting path. But remember we also have the unmatched nodes as well which must also be isolated because they cannot connect to another unmatched node and we said that they only connect to nodes in $F$.
+
+Thus the number of isolated components in our induced subgraph is $q(G-F)=|U|+|F|>|F|$ which creates a contradiction.
