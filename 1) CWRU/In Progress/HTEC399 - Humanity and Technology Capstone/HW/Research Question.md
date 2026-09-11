@@ -6,3 +6,6 @@ Most people only look at the "best" performing models but I intervene by questio
 This matters because if we can find non-neutrality in performance, we should call into question if benchmark performance applies a conformity to a way of thinking.
 
 It is a pure research problem because it gives us a better understanding of what factors are currently shaping our LLM models nad how the aritificial "intelligence" landscape might look like in the future.
+
+# Iteration:
+
