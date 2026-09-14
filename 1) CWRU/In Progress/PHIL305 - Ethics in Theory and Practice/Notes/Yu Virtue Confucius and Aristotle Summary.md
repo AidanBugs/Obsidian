@@ -66,4 +66,4 @@ Should one draw a distinction between good man and citizen? Do you believe in th
 
 Do you believe that your relationships with your family or that your relationship to yourself most strongly shapes your relations with other? (or secret third option) 
 
-Can virtue be taught and/or learned? Is virtue something one has or something one is?
+Can virtue be taught and/or learned? Are virtue and ethics the same to you? What does living a virtuous life mean for you? (09/09 we covered notions of purpose and roles in society)
