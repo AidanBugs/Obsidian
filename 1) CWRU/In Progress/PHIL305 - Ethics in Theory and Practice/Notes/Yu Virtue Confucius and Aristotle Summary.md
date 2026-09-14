@@ -49,9 +49,15 @@ For Aristotle, love/friendship is "intrinsic to a happy life" (Pg 334). Unlike C
 | Category | Arete | Ren |
 | -- | ---| --- |
 | Term of Success | *hexis* "having" | *de* "to get"|
-| Process | Habit | *jiaoyu* (education) = *jiao* (teaching) + *yu* (nurturing) |
+| Process | Habit, developing *phronesis*, golden mean. A state of being [^6] | *jiaoyu* (education) = *jiao* (teaching) + *yu* (nurturing)[^4][^5]. Learned |
 
 Yu ends with a few remarks that Aristotelian virtue would benefit from the insights of filial love and that a Confucian revival needs a developed notion of rationality and assessment of tradition.
+
+[^4]: Centered around notions of role models as educators, fathers and rulers. Model-Copy -> Teacher-Pupil -> Father-Son.
+
+[^5]: Single thread of "Zhong and Shu", with *Zhong* being doing one's best and *Shu* like reciprocity.
+
+[^6]: "virtue is a state (hexis) concerned that decides, consisting in a mean, the mean relative to us, which is defined by reference to reason i.e., to the reason by reference to which the person of practical wisdom would define it" (Pg 340)
 
 **Discussion Questions**
 
