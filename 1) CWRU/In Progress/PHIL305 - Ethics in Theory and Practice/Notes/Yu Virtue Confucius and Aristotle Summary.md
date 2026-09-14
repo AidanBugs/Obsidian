@@ -40,6 +40,7 @@ According to Yu, "Confucius' notion of yi [righteousness] seems to open the door
 
 
 **Filial Love and Self-love**
+
 "Filial piety and brotherly love are the roots of ren" (Pg 332) is centered around this idea that "a good father makes a good ruler, a good son makes a good subject" (Pg 332).
 
 For Aristotle, love/friendship is "intrinsic to a happy life" (Pg 334). Unlike Confucius, Aristotle believes these relationships are all "an extension of one's love of oneself rather than an extension of filial love" (Pg 335)
@@ -49,7 +50,7 @@ For Aristotle, love/friendship is "intrinsic to a happy life" (Pg 334). Unlike C
 | Category | Arete | Ren |
 | -- | ---| --- |
 | Term of Success | *hexis* "having" | *de* "to get"|
-| Process | Habit, developing *phronesis*, golden mean. A state of being [^6] | *jiaoyu* (education) = *jiao* (teaching) + *yu* (nurturing)[^4][^5]. Learned |
+| Process | Habit, developing *phronesis*, golden mean. A state of being [^6] | *jiaoyu* (education) = *jiao* (teaching) + *yu* (nurturing)[^4][^5]  |
 
 Yu ends with a few remarks that Aristotelian virtue would benefit from the insights of filial love and that a Confucian revival needs a developed notion of rationality and assessment of tradition.
 
@@ -64,3 +65,5 @@ Yu ends with a few remarks that Aristotelian virtue would benefit from the insig
 Should one draw a distinction between good man and citizen? Do you believe in the existence of a universally ideal society?
 
 Do you believe that your relationships with your family or that your relationship to yourself most strongly shapes your relations with other? (or secret third option) 
+
+Can virtue be taught and/or learned? Is virtue something one has or something one is?
