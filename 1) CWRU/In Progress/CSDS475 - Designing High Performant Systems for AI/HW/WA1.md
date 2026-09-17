@@ -37,7 +37,7 @@ $Computations = 2N$
 
 $Transfers = N+2$
 
-$Reuse = \frac{Computations}{Transfers}= \frac{2N}{N+2}$
+$Reuse = \frac{Computations}{Transfers}= \frac{2N}{N+2}\approx 2$
 
 
 ## B
@@ -71,7 +71,7 @@ $Computations = 2N$
 
 $Transfers = 3N+1$ (from $X$, and $N$ both reads and writes for $y$)
 
-$Reuse = \frac{Computations}{Transfers}= \frac{2N}{3N+1}$
+$Reuse = \frac{Computations}{Transfers}= \frac{2N}{3N+1}\approx \frac 23$
 
 ## C
 ### Psuedo
@@ -150,9 +150,23 @@ Thus we get the following fetches:
 
 For a total of $6$ fetches
 
+## C
+Since we only store the nonnzero elements, the values array would just be $7$ values without any $0$'s separating them. 
+
+Thus we get the following fetches:
+
+1. $C[0:1]=1,2$
+1. $C[2:3]=3,4$
+1. $C[4:5]=5,6$
+1. $C[6]=7$
+
+For a total of $4$ fetches
+
+
 
 # 4
-## K psuedo code
+## Original
+### K psuedo code
 
 ```
 for (i = 0 to N/K-1) {
@@ -196,30 +210,85 @@ for (i = 0 to N/K-1) {
 }
 ```
 
-## Data Reuse for this Algorithm (N and K)
+### Data Reuse for this Algorithm (N and K)
 $Computations = 2*N/K*N/K*K*K*K*N/K=2*N^3$
 
 $Transfers = N^2/K^2*K*N + N^2/K^2*K*N + 2*N^2/K^2*K^2 = 2N^3/K + 2N^2$
 
 $Reuse = \frac{Computations}{Transfers}= \frac{2N^3}{2N^3/K + 2N^2}= \frac{2N}{2N/K+2}$
 
-## For K=2 Same as in Class?
-For $K=2$ then we get data reuse factor as $\frac{2N}{N+2}$ which we got on slde 37 of lecture 4.
+### For K=2 Same as in Class?
+For $K=2$ then we get data reuse factor as $\frac{2N}{N+2}\approx 2$ which we got on slde 37 of lecture 4.
 
-## K=$\sqrt N$ Have same Data Reuse as Block Matrix Multiplication?
-For $K=\sqrt N$ then we get a data resue factor as $\frac{2N}{2N/\sqrt N+2}=\frac{2N}{2\sqrt N+2}$. This is really close to block matrix multiplication which had a data resue faactor of $O(\sqrt N)$, the only difference being the $+2$ in the denominattor from the read and write to $C$ in our algorithm.
+### K=$\sqrt N$ Have same Data Reuse as Block Matrix Multiplication?
+For $K=\sqrt N$ then we get a data resue factor as $\frac{2N}{2N/\sqrt N+2}=\frac{2N}{2\sqrt N+2}\approx \sqrt N$. This is really close to block matrix multiplication which had a data resue faactor of $O(\sqrt N)$, the only difference being the $+2$ in the denominattor from the read and write to $C$ in our algorithm.
 
 
-## K=1 Data Reuse Factor and What is this Algorithm?
+### K=1 Data Reuse Factor and What is this Algorithm?
 Standard Naive matrix multiplication, row column and their dot product.
 
-Data reuse being $\frac{2N}{2N+2}=\frac{N}{N+2}$
+Data reuse being $\frac{2N}{2N+2}=\frac{N}{N+1}\approx 1$
+
+## Altered
+### Psuedo Code
+Move the $A$ fetch to outside the $j$ loop and move the $p$ loop in between $i$ and $j$. Leave $B$ where it is
+
+We also can initialize $C$ before all loops making it $N^2$ data transfer for init
+
+### Data Reuse for this Algorithm (N and K)
+$Computations = 2*N/K*N/K*K*K*K*N/K=2*N^3$
+
+$Transfers = N/K*K*N + N^2/K^2*K*N + N^2 + N/K*K*N/K*K*K = N^2 + N^3/K + N^2 + N^2K = N^3/K + N^2(2+K)$
+
+$Reuse = \frac{Computations}{Transfers}= \frac{2N^3}{N^3/K + N^2(2+K)}= \frac{2N}{N/K + K + 2}$
+
+### K=2
+
+$Reuse = \frac{2N}{N/K + K + 2} = \frac{2N}{N/2+4}\approx 4$
+
+### K=$\sqrt N$
+
+$Reuse = \frac{2N}{N/K + K + 2} = \frac{2N}{N/\sqrt N+2 +\sqrt N}=\frac{2N}{2\sqrt N + 2}\approx \sqrt N$
 
 # 5
 We can model a similar algorithm where instead of each thread being incharge of a single summation between two elements and writing the sum to the latter index. Copy the same recursive doubling algorithm but instead of each thread computing a summation, we do a comparison between the numbers, and make it so the left indexed element is the smaller one and the right is the bigger one (if this isnt the case we do a nice swap using a temp variable). This effictively performs a parallel bubble sort that moves the smallest element to index $0$ and the largest element to the last index
 
 
+```
+RMA: Read A[tid] into cache
+Syncthreads()
 
+RA: Read A[tid] into processor
+Syncthreads()
+
+for (k = 1 to log_2(N)) {
+    if ((tid+1)  % 2^k == 0) {
+        if (A[tid] < A[tid - 2^(k-1)]) {
+            Temp = A[tid - 2^(k-1)]
+            A[tid - 2^(k-1)] = A[tid]
+            A[tid] = Temp
+        }
+    }
+    Syncthreads()
+}
+
+```
+
+## Speedup
+Serial time would be $O(N)$
+
+This parallel algorithm is $O(\log N)$
+
+So speedup is $O(\frac{N}{\log N})$
+
+## Scalability
+This parallel algorithm doesn't get faster with more processors since only at most $N/2$ processors are active. So this is not scalable because adding more processors does not make the algorithm more efficient.
+
+## Cost
+$Cost=\# Processors \times T_p= \frac{N}{2} \times \log N\rightarrow O(N\log N)$
+
+## Cost Optimal?
+Not cost optimal because parallel algorithm work done exceeds the serial complexity of the problem: $O(N\log N)>O(N)$ so not cost optimal
 
 # 6
 
