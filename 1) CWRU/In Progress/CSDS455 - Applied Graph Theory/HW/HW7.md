@@ -18,9 +18,11 @@ Since our pathes are a set of vertex disjoint edges, if CSDR $X$ exists then the
 
 
 # 3
+Since Hall's theorem states that for all subsets $A$ of $V_1$, we have a $V_1$-perfect match iff $|A|\leq N(A)$. Given the edge condition from problem 1, we get the following:
+
 For any subset $B$ of the collections $A$ of $S$ ($B\subseteq A$), the size of the subset should be less than or equal to the number of distinct elements of $S$ in the collections ($|B| \leq | \cup_i B_i |$).
 
 # 4
-Same as part 3 basically, let $I$ be a set of any indices where $i\in I, 1\leq i \leq m$, then $|I| \leq |\cup_{i\in I} (A_i \cap B_i)|$
+Same as part 3 basically but now with the edge condition from problem 2, let $I$ be a set of any indices where $i\in I, 1\leq i \leq m$, then $|I| \leq |\cup_{i\in I} (A_i \cap B_i)|$
 
 
