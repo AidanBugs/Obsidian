@@ -1,0 +1,206 @@
+
+---
+format: pdf
+execute: 
+  echo: false
+---
+
+# 1
+## a
+### i
+Since all $\forall i, 0\leq p_i\leq 1$. This means for some $k: 1 \leq k < n$ then $\Pi_{i=1}^k p_i \leq \Pi_{i=1}^{k+1} p_i$
+
+Thus in a machine system, we run into a problem if we have all $p_i$ be nonzero but we have multiple $p_i$ near $0$ or at the points where representing the smallest possible nonzero number on our machine. Then we end up with a truncation error and likely rounding down to $0$. 
+
+> It is important to note that since multiplication is a benign operation there is no issue in errors exploding out but instead the issues arise for truncation errors.
+
+### ii
+Let $P= \sum_{i=1}^n \ln p_i$, then $e^P=\Pi_{i=1}^n p_i$
+
+This is better because since each $p_i$ is bound between $0$ and $1$, then $\ln p_i$ must be less than or equal to $0$. Thus even though we are using addition operators the addition is benign since all $\ln p_i$ are the same sign (negative). It is important to note that we have issues for $p_i=0$ since $\ln 0$ is undefined and approaches $-\infty$
+
+### iii
+
+### iv
+
+
+## b
+### i
+Since $x_i$ is not bound, then $e^{x_i}$ can be beyond what we can represent on our machine is if $|x_i|$ is really large resulting in $e^{x_i}$ being so large we cannot represent it our alternatively too small we can't represent it (depending on the sign of $x_i$). Note that if $e^{x_i}$ is really small, then usually we do not care unless ALL $x_i$ are small because then the denominator and numerator are really small. Instead the more danngerous case for this (and more likely) is a few $x_i$ that are really large such that $e^{x_i}$ is beyond what we are able to represent on the machine. 
+
+### ii
+We could instead change our exponents to prevent the top and bottom from exploding with the following:
+
+> $\frac{e^{x_i}}{\sum_j e^{x_j}}$
+
+> $\frac{e^{-m}e^{x_i}}{e^{-m}\sum_j e^{x_j}}$
+
+>> Where $m=\max_i x_i$
+
+> $\frac{e^{x_i-m}}{\sum_j e^{x_j-m}}$
+
+>> Since $m=\max_i x_i$ and we are finding the softmax, then
+
+> $\frac{1}{\sum_j e^{x_j-m}}$
+
+### iii
+
+### iv
+
+# 2
+## a
+$x=2x-yx^2$
+
+$\rightarrow yx^2 + x=2x$
+
+$\rightarrow yx^2 =x$
+
+$\rightarrow yx =1$
+
+$\rightarrow x =\frac 1y$
+
+Or alternatively, $f(\frac 1y)= \frac 2y - \frac y y^2 = \frac 2y - \frac 1y = \frac 1y$
+
+## b
+Relative error $e_n = |\frac{\frac 1y - x_n}{\frac 1y}|=|1-yx_n|$
+
+And $e_{n+1}$ will be $|1-yx_{n+1}|$ so
+
+> $\rightarrow e_{n+1}= |1-y(2x_n -yx_n^2)|$
+
+> $\rightarrow e_{n+1}= |1-2yx_n -y^2x_n^2|$
+
+> $\rightarrow e_{n+1}= |(1-yx_n)^2|$
+
+> $\rightarrow e_{n+1}= (e_n)^2$
+
+Therefore we only converge when our relative error $e_n$ is less than $1$ because squaring decreases for decimal points, stays same at $1$ and goes to infinity at greater than $1$. 
+
+>> Note that this is for both positive and negative values 
+
+Therefore if $|1-yx|<1$ then we will converge. Thus the range of starting $x$ is $0< x_0 < \frac 2y$
+
+
+## c
+We have the exact case of quadratic convergencve here because the relativ error at each step is approximately the square of the relative error of the previous steps. So by the notes, the number of correct decimal digits doubles with each iteration.
+
+## d
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+
+def reciprocal(y, x0, tol=1e-15, max_iter=100):
+    """Division-free iteration x_{n+1} = 2 x_n - y x_n^2 for 1/y."""
+    xs = [float(x0)]
+    for _ in range(max_iter):
+        x_new = 2 * xs[-1] - y * xs[-1] * xs[-1]
+        xs.append(x_new)
+        if not np.isfinite(x_new) or abs(x_new) > 1e100:
+            break                                    # diverged
+        if abs(xs[-1] - xs[-2]) < tol * max(1.0, abs(x_new)):
+            break
+    return np.array(xs)
+
+# ---- Figures ----
+fig, axs = plt.subplots(2, 2, figsize=(12, 9))
+ax = axs.ravel()
+
+# Overlapping curves are drawn with different markers, line styles and
+# decreasing marker sizes, plus some transparency, so every curve stays visible.
+markers    = ["o", "s", "^", "D", "v", "x", "+"]
+linestyles = ["-", "--", "-.", ":", (0, (5, 1)), (0, (3, 1, 1, 1)), (0, (1, 1))]
+def style(i, n):
+    return dict(marker=markers[i % 7], ls=linestyles[i % 7], ms=10 - 6 * i / max(n - 1, 1),
+                mfc="none", mew=1.5, lw=2, alpha=0.8)
+
+# (1) value of x_n vs n, several x0 for y = 3
+y = 3.0
+x0s = [0.01, 0.2, 0.5, 0.65, 0.66, 0.7]
+for i, x0 in enumerate(x0s):
+    xs = reciprocal(y, x0, max_iter=25)
+    ax[0].plot(np.clip(xs, -1, 1), label=f"x0 = {x0}", **style(i, len(x0s)))
+ax[0].axhline(1 / y, color="k", ls=":", label="1/y")
+ax[0].set_ylim(-1.05, 1); ax[0].set_xlabel("iteration n"); ax[0].set_ylabel("x_n (clipped to [-1,1])")
+ax[0].set_title("y = 3: converges iff 0 < x0 < 2/3"); ax[0].legend(fontsize=8)
+
+# (2) |x_{n+1} - x_n| vs n (log scale), different y with x0 = 0.1/y
+ys = [0.5, 3, 50, 1000]
+for i, y in enumerate(ys):
+    xs = reciprocal(y, 0.1 / y)
+    ax[1].semilogy(np.abs(np.diff(xs)) * y + 1e-300, label=f"y = {y}", **style(i, len(ys)))
+ax[1].set_xlabel("iteration n"); ax[1].set_ylabel("y·|x_{n+1} - x_n|  (scaled step)")
+ax[1].set_ylim(1e-17, 2); ax[1].set_title("x0·y = 0.1: all 4 curves coincide (depend only on x0·y)")
+ax[1].legend(fontsize=8)
+
+# (3) relative error vs n; pairs symmetric about x0*y = 1 have the same |e_0|
+y = 3.0
+pairs = [(0.001, 1.999), (0.1, 1.9), (0.5, 1.5)]
+colors = ["tab:blue", "tab:orange", "tab:green"]
+for c, (r1, r2) in zip(colors, pairs):
+    for j, r in enumerate((r1, r2)):
+        xs = reciprocal(y, r / y)
+        ax[2].semilogy(np.abs(1 - y * xs) + 1e-300, color=c,
+                       marker="o" if j == 0 else "x", ls="-" if j == 0 else "--",
+                       ms=10 if j == 0 else 6, mfc="none", mew=1.5, lw=2, alpha=0.8,
+                       label=f"x0·y = {r}  (|e0| = {abs(1 - r):.3g})")
+ax[2].set_ylim(1e-17, 2); ax[2].set_xlabel("iteration n"); ax[2].set_ylabel("|1 - y x_n| (relative error)")
+ax[2].set_title("same |1 - x0 y| ⇒ same curve; slow start when |e0| ≈ 1")
+ax[2].legend(fontsize=8, title="x0·y = 1 is exact after 0 steps", title_fontsize=8)
+
+# (4) iterations to converge as a function of x0*y
+r_grid = np.linspace(0.001, 1.999, 400)
+iters = [len(reciprocal(1.0, r)) - 1 for r in r_grid]
+ax[3].plot(r_grid, iters)
+ax[3].set_xlabel("x0 · y"); ax[3].set_ylabel("iterations to converge")
+ax[3].set_title("Iterations needed vs. starting value (any y)")
+plt.tight_layout()
+
+# ---- Table: does it converge for various (y, x0)? ----
+print(f"{'y':>6} {'x0':>8} {'x0*y':>6} {'iters':>6} {'final x':>14} {'1/y':>14} {'result':>10}")
+cases = [(3, 0.01), (3, 0.3), (3, 0.6), (3, 0.66), (3, 0.6667), (3, 0.7), (3, -0.1),
+         (0.25, 0.1), (0.25, 7.9), (0.25, 8.1), (100, 0.0001), (100, 0.019), (100, 0.021)]
+for y, x0 in cases:
+    xs = reciprocal(y, x0)
+    final = xs[-1]
+    ok = np.isfinite(final) and abs(final - 1 / y) < 1e-12 * (1 / y)
+    print(f"{y:>6g} {x0:>8g} {x0*y:>6.3g} {len(xs)-1:>6} {final:>14.6e} {1/y:>14.6e} {'converged' if ok else 'DIVERGED':>10}")
+
+# ---- Quadratic convergence check: e_{n+1} / e_n^2 should equal y ----
+y, x0 = 3.0, 0.05
+xs = reciprocal(y, x0)
+err = np.abs(xs - 1 / y)
+print(f"\ny = {y}, x0 = {x0}")
+print(f"{'n':>3} {'x_n':>20} {'|x_n - 1/y|':>14} {'|x_n+1 - x_n|':>14} {'e_n+1 / e_n^2':>14}")
+for n in range(len(xs)):
+    step = abs(xs[n + 1] - xs[n]) if n + 1 < len(xs) else np.nan
+    ratio = err[n + 1] / err[n] ** 2 if n + 1 < len(xs) and err[n] > 0 and err[n + 1] > 0 else np.nan
+    print(f"{n:>3} {xs[n]:>20.16f} {err[n]:>14.3e} {step:>14.3e} {ratio:>14.4f}")
+
+```
+
+kachow
+
+# 3
+## a
+$x = x \frac{y}{2^x}$
+
+$\rightarrow 1 =  \frac{y}{2^x}$
+
+$\rightarrow 2^x =  y$
+
+$\rightarrow x =  \log_2y$
+
+## b
+$e_n = \frac{x_n - \log_2y}{\log_2y}=\frac{x_n}{\log_2y}-1$
+
+We can look at proof of convergence by looking at $g(x)=x\frac{y}{2^x}$
+
+
+## c
+
+## d
+
+## e
+
+## f
+
