@@ -20,8 +20,102 @@ Let $P= \sum_{i=1}^n \ln p_i$, then $e^P=\Pi_{i=1}^n p_i$
 This is better because since each $p_i$ is bound between $0$ and $1$, then $\ln p_i$ must be less than or equal to $0$. Thus even though we are using addition operators the addition is benign since all $\ln p_i$ are the same sign (negative). It is important to note that we have issues for $p_i=0$ since $\ln 0$ is undefined and approaches $-\infty$
 
 ### iii
+So i did uniform random number generation for $p_i \in [0.00001,1]$. The reason why I removed $0$ from the interval is because then my solution would simply return negative infinity and the naive solution would be $0$ and would essentially ruin the truncation issue I was talking about. 
+
+The random number generations were of sets size $\{100, 500, 750, 800, 1000\}$, corresponding to an expected values of $\approx 2^{-100},2^{-500},2^{-750},2^{-800},2^{-1000}$. Note that the latter $2$ are actually beyond floating point representation in python thus should only be feasibly representable in log scale or some other means. 
+
+| $|p| = n$ | naive multiplication | $\log(naive)$ | log sum | exact (as log) | naive $\hat e$ | log sum $\hat e$ |
+| -- | --- | --- | --- | --- | --- | --- |
+| 100 | $6.1223 e^{-46}$ | $-45.2131$ | $-45.2131$ | $-45.2131$ | $3.191e^{-15}$ | $0$ |
+| 500 | $7.2193 e^{-219}$ | $-218.1415$ |$-218.1415$ |$-218.1415$ | $7.795e^{-15}$ | $1.303e^{-16}$ |
+| 750 | $4.2310 e^{-310}$ | $-309.3736$ | $-309.3736$ | $-309.3736$ | $1.878e^{-14}$ | $1.837e^{-16}$ |
+| 800 | $0$ | $-\infty$ | $-332.0385$ | $-332.0385$ | $1$ | $1.712e^{-16}$ |
+| 1000 |$0$ | $-\infty$ | $-432.2933$ | $-432.2933$ | $1$ | $1.265e^{-16}$ | 
 
 ### iv
+
+```{python}
+import math
+import numpy as np
+import matplotlib.pyplot as plt
+from decimal import Decimal, getcontext
+
+getcontext().prec = 50          # 50 significant digits for the reference answer
+rng = np.random.default_rng(423)
+
+# ---------------- Problem 1(a): ensemble product ----------------
+def score_naive(p):
+    """Straightforward product of probabilities."""
+    s = 1.0
+    for pi in p:
+        s *= pi
+    return s
+
+def log10_score_stable(p):
+    """Stable version: sum of logs. Returns log10(score); -inf if any p_i == 0."""
+    p = np.asarray(p, dtype=float)
+    if np.any(p == 0.0):
+        return -math.inf
+    return float(np.sum(np.log(p))) / math.log(10)
+
+def score_stable(p):
+    """Return the score as (mantissa, exponent) with score = m * 10**e."""
+    l = log10_score_stable(p)
+    if l == -math.inf:
+        return 0.0, 0
+    e = math.floor(l)
+    return 10 ** (l - e), e
+
+def log10_score_exact(p):
+    """High-precision reference using Python's Decimal."""
+    return float(sum(Decimal(float(x)).ln() for x in p) / Decimal(10).ln())
+
+ns = [100, 500, 750, 800, 1000]
+rows_a = []
+for n in ns:
+    p = rng.uniform(0.00001, 1.0, n)
+    naive = score_naive(p)
+    exact = log10_score_exact(p)
+    stable = log10_score_stable(p)
+    naive_log = math.log10(naive) if naive > 0 else -math.inf
+    rows_a.append((n, naive, naive_log, stable, exact))
+
+# print("Problem 1(a)")
+# print(f"{'n':>6} {'naive score':>12} {'log10 naive':>12} {'log10 stable':>14} {'log10 exact':>14} {'rel err naive':>14} {'rel err stable':>14}")
+for n, naive, nl, st, ex in rows_a:
+    exact_val = Decimal(10) ** Decimal(ex)
+    rel_naive = abs((Decimal(naive) - exact_val) / exact_val)
+    rel_stable = abs(st - ex) / abs(ex)       # relative error in the log
+    # print(f"{n:>6} {naive:>12.4e} {nl:>12.4f} {st:>14.4f} {ex:>14.4f} {float(rel_naive):>14.3e} {rel_stable:>14.3e}")
+
+# Ranking two ensembles that both underflow
+pA = rng.uniform(0.05, 1.0, 2000)
+pB = pA.copy(); pB[0] = min(1.0, pB[0] * 2)       # B is strictly better than A
+# print("\nRanking test: naive A, B =", score_naive(pA), score_naive(pB), "| stable log10 A, B =", round(log10_score_stable(pA), 4), round(log10_score_stable(pB), 4))
+
+# Figure 1: log10(score) vs n
+n_grid = np.arange(10, 1001, 10)
+p_all = rng.uniform(0.00001, 1.0, n_grid[-1])
+naive_curve, stable_curve = [], []
+exact = []
+for n in n_grid:
+    s = score_naive(p_all[:n])
+    naive_curve.append(math.log10(s) if s > 0 else np.nan)
+    stable_curve.append(log10_score_stable(p_all[:n]))
+    exact.append(log10_score_exact(p_all[:n]))
+
+plt.figure(figsize=(7, 4))
+plt.plot(n_grid, stable_curve, label="log sum", lw=2)
+plt.plot(n_grid, naive_curve, "--", label="naive product", lw=2)
+plt.plot(n_grid, exact, ":", color="red", label="exact", lw=2)
+plt.axhline(math.log10(np.finfo(float).tiny), color="gray", ls=":", label="smallest normal double (1e-308)")
+plt.axhline(math.log10(5e-324), color="black", ls=":", label="smallest subnormal (5e-324)")
+plt.xlabel("number of models n"); plt.ylabel("log10(score)")
+plt.title("1(a): naive product truncates, log-sum does not")
+plt.legend(); plt.tight_layout();
+```
+
+Above we see the exact points I was mentioning with running into the problem of eventually we get too small that the machine is not able to properly represent the numbers anymore. Thus the naive product will just truncate to $0$ while the log sum is better able to represent these very very very small numbers. To reiterate the reason why the naive method fails is for the case when $\Pi_i p_i$ becomes too small to be represented bby our machine. Instead we resort to an equivalent log sum which avoids this issue by summing negative numbers together. The log sum is able to represent many orders of maggnitude more precision than our naive method simply by the limit of negative numbers is much larger than the smallest number we can represent.
 
 
 ## b
@@ -43,9 +137,92 @@ We could instead change our exponents to prevent the top and bottom from explodi
 
 > $\frac{1}{\sum_j e^{x_j-m}}$
 
+Thus with this shift, in the case of one really large $x_i$ we shift everything down to avoid the few elements exploding. In the case of ALL really small elements then our shift actually bumps everything up and again we avoid the case of having too small numbers and getting a divide by $0$ error.
+
 ### iii
+Since we only care about the maximum values. I did random normal sampling for $10$ elements in $N(0,1)$ and then applied various shifts $s$ up and down with progressively increasing $|s|$ but changing the direction of the shift.
+
+| Shift $s$ | Naive softmax $e$ | Shifted softmax $e$ |
+| -- | ---- | ---- |
+| -1000 | $nan$         | $1.388e^{-17}$ |
+| - 750 | $nan$         | $1.388e^{-17}$ |
+| - 700 | $6.939e^{-18}$| $1.388e^{-17}$ |
+| - 500 | $5.551e^{-17}$| $6.939e^{-18}$ |
+| - 100 | $5.551e^{-17}$| $5.551e^{-17}$ |
+| 0     | $6.939e^{-18}$| $5.551e^{-17}$ |
+|   100 | $5.551e^{-17}$| $5.551e^{-17}$ |
+|   500 | $5.551e^{-17}$| $6.939e^{-18}$ |
+|   700 | $5.551e^{-17}$| $1.388e^{-17}$ |
+|   750 | $nan$         | $1.388e^{-17}$ |
+|  1000 | $nan$         | $1.388e^{-17}$ | 
 
 ### iv
+```{python}
+# ---------------- Problem 1(b): softmax ----------------
+def softmax_naive(x):
+    e = np.exp(x)
+    return e / np.sum(e)
+
+def softmax_stable(x):
+    z = x - np.max(x)               # shift so the largest exponent is e^0 = 1
+    e = np.exp(z)
+    return e / np.sum(e)
+
+def log_softmax_stable(x):
+    m = np.max(x)
+    return x - (m + np.log(np.sum(np.exp(x - m))))   # log-sum-exp trick
+
+def softmax_exact(x):
+    xs = [Decimal(float(v)) for v in x]
+    m = max(xs)
+    e = [(v - m).exp() for v in xs]
+    s = sum(e)
+    return np.array([float(v / s) for v in e])
+
+base = rng.normal(0, 1, 10)
+shifts = [0, 100, 500, 700, 750, 1000]
+# print("\nProblem 1(b): x = base + s (overflow test)  and  x = base - s (underflow test)")
+# print(f"{'s':>6} | {'naive err (+s)':>14} {'stable err (+s)':>15} | {'naive err (-s)':>14} {'stable err (-s)':>15}")
+with np.errstate(over="ignore", invalid="ignore", under="ignore"):
+    for s_ in shifts:
+        out = []
+        for x in (base + s_, base - s_):
+            ex = softmax_exact(x)
+            out += [np.max(np.abs(softmax_naive(x) - ex)), np.max(np.abs(softmax_stable(x) - ex))]
+        # print(f"{s_:>6} | {out[0]:>14.3e} {out[1]:>15.3e} | {out[2]:>14.3e} {out[3]:>15.3e}")
+
+    # Figure 2: max relative error of the output vs. shift s, x = base + s
+    # (s < 0 pushes every input toward underflow, s > 0 toward overflow)
+    ss = np.linspace(-1000, 1000, 801)
+    err_naive, err_stable = [], []
+    for s_ in ss:
+        x = base + s_
+        ex = softmax_exact(x)
+        rn = np.max(np.abs(softmax_naive(x) - ex) / ex)
+        rs = np.max(np.abs(softmax_stable(x) - ex) / ex)
+        err_naive.append(1.0 if not np.isfinite(rn) else max(rn, 1e-17))
+        err_stable.append(max(rs, 1e-17))
+
+plt.figure(figsize=(10, 4.5))
+plt.semilogy(ss, err_naive, label="naive (NaN shown as 1)", lw=2)
+plt.semilogy(ss, err_stable, label="stable (max-shift)", lw=2)
+m = np.max(base)
+plt.axvline(709.78 - m, color="gray", ls="--", lw=1)
+plt.axvline(-708.4 - m, color="gray", ls=":", lw=1)
+plt.axvline(-745.1 - m, color="gray", ls="--", lw=1)
+plt.text(709.78 - m + 15, 1e-6, "exp overflows\n(max x > 709.8)", fontsize=9)
+plt.text(-708.4 - m + 15, 1e-9, "exp becomes\nsubnormal\n(max x < -708)", fontsize=9)
+plt.text(-990, 1e-5, "exp underflows\nto 0\n(max x < -745)", fontsize=9)
+plt.xlabel("shift s   (x = base + s)"); plt.ylabel("max relative error of softmax output")
+plt.title("softmax error vs input shift")
+plt.ylim(1e-17, 10); plt.xlim(-1000, 1000); plt.legend(loc="center")
+plt.tight_layout(); 
+
+```
+
+Here we see that error grows to $1$ for naive softmax when $x$ starts to get too big or too small. On the other hand, my proposed alternative method of shifting the elements resulted in consistnetly low errors. To reiterate, the reason why the naive method is prone to errors is because as $|x_i|$ becomes sufficiently large then we are unable to represent $e^{x_i}$ with high precision and end up truncating $e^{x_i}$ as $0$ or $\infty$ depending on the sign of $x_i$. My proposed method avoids this by ensuring we find a numerically equivalent solution that does not rely on computing $e^{x_i}$ for large $x_i$ and avoids summing infinitely small numbers when al $x_i$ are $0$ by shifting the elements of $x$ such that its max element is $0$. 
+
+
 
 # 2
 ## a
@@ -115,7 +292,7 @@ def style(i, n):
 
 # (1) value of x_n vs n, several x0 for y = 3
 y = 3.0
-x0s = [0.01, 0.2, 0.5, 0.65, 0.66, 0.7]
+x0s = [-0.01, 0, 0.01, 0.3, 0.66, 0.7]
 for i, x0 in enumerate(x0s):
     xs = reciprocal(y, x0, max_iter=25)
     ax[0].plot(np.clip(xs, -1, 1), label=f"x0 = {x0}", **style(i, len(x0s)))
@@ -150,35 +327,27 @@ ax[2].legend(fontsize=8, title="x0·y = 1 is exact after 0 steps", title_fontsiz
 # (4) iterations to converge as a function of x0*y
 r_grid = np.linspace(0.001, 1.999, 400)
 iters = [len(reciprocal(1.0, r)) - 1 for r in r_grid]
-ax[3].plot(r_grid, iters)
+ax[3].plot(r_grid, iters, lw=2, label="measured")
+# Quadratic-convergence prediction: e_n = e_0^(2^n), so |e_n| < eps once
+# 2^n > ln(eps)/ln|e_0|, i.e. n = log2(ln eps / ln|1 - x0 y|); +1 for the final step
+# that detects |x_{n+1} - x_n| < tol.
+eps = 1e-16
+with np.errstate(divide="ignore"):
+    n_pred = np.log2(np.log(eps) / np.log(np.abs(1 - r_grid))) + 1
+ax[3].plot(r_grid, n_pred, "k:", lw=2, label="predicted: log2(ln ε / ln|1 - x0·y|) + 1")
 ax[3].set_xlabel("x0 · y"); ax[3].set_ylabel("iterations to converge")
 ax[3].set_title("Iterations needed vs. starting value (any y)")
+ax[3].legend(fontsize=8, loc="upper center")
 plt.tight_layout()
-
-# ---- Table: does it converge for various (y, x0)? ----
-print(f"{'y':>6} {'x0':>8} {'x0*y':>6} {'iters':>6} {'final x':>14} {'1/y':>14} {'result':>10}")
-cases = [(3, 0.01), (3, 0.3), (3, 0.6), (3, 0.66), (3, 0.6667), (3, 0.7), (3, -0.1),
-         (0.25, 0.1), (0.25, 7.9), (0.25, 8.1), (100, 0.0001), (100, 0.019), (100, 0.021)]
-for y, x0 in cases:
-    xs = reciprocal(y, x0)
-    final = xs[-1]
-    ok = np.isfinite(final) and abs(final - 1 / y) < 1e-12 * (1 / y)
-    print(f"{y:>6g} {x0:>8g} {x0*y:>6.3g} {len(xs)-1:>6} {final:>14.6e} {1/y:>14.6e} {'converged' if ok else 'DIVERGED':>10}")
-
-# ---- Quadratic convergence check: e_{n+1} / e_n^2 should equal y ----
-y, x0 = 3.0, 0.05
-xs = reciprocal(y, x0)
-err = np.abs(xs - 1 / y)
-print(f"\ny = {y}, x0 = {x0}")
-print(f"{'n':>3} {'x_n':>20} {'|x_n - 1/y|':>14} {'|x_n+1 - x_n|':>14} {'e_n+1 / e_n^2':>14}")
-for n in range(len(xs)):
-    step = abs(xs[n + 1] - xs[n]) if n + 1 < len(xs) else np.nan
-    ratio = err[n + 1] / err[n] ** 2 if n + 1 < len(xs) and err[n] > 0 and err[n + 1] > 0 else np.nan
-    print(f"{n:>3} {xs[n]:>20.16f} {err[n]:>14.3e} {step:>14.3e} {ratio:>14.4f}")
-
 ```
 
-kachow
+First figure $1$ demonstrates that we converge to $x_n=\frac 1y$ when $x_0\in (0, \frac 2y)$ because $x_0$ outside this range diverged (or converged to $0$).
+
+From the second figure, we notice that the change in relative error / the scaled steps between $x_i$ and $x_{i+1}$ depend solely on $x_0 * y$. This is because the figure shows $4$ different starting $y,x_0$ pairs such that their products are identical and the resulting curves are also identical. 
+
+Figure $3$ shows the symmetry of convergence demonstrating that the two starting values $a,b$ that satisfy $|1-x_0y| = |\hat e_0$ follow identical lines when $|\hat e_0| <1$. This is because we show when error is $\pm 0.5$ we follow the same path to convergence. Additionally figure $3$ also demonstrates that convergence is slower when initial error is higher. 
+
+Additionally since figures $2$ and $3$ are relative errors, we can also see clearly that convergence is non linear and is in fact quadratic. To further emphasize this point figure $4$ demonstrates that our theoretical quadratic convergence from **2.c** perfectly coincides with out observed convergence iterations.
 
 # 3
 ## a
@@ -277,3 +446,144 @@ Thus $x_{n+1} = x_n - \frac{f(x)}{f'(x)} = x_n - \frac{2^x -y}{2^x \ln 2}$
 
 ## f
 
+```{python}
+import math
+import numpy as np
+import matplotlib.pyplot as plt
+
+LN2 = 0.6931471805599453
+
+def fixed_point_log2(y, x0, tol=1e-14, max_iter=100000):
+    """x_{n+1} = x_n * y / 2**x_n   (requires 1 < y < 2 for guaranteed convergence)."""
+    xs = [x0]
+    for _ in range(max_iter):
+        xs.append(xs[-1] * y / 2 ** xs[-1])
+        if abs(xs[-1] - xs[-2]) < tol:
+            break
+    return np.array(xs)
+
+def newton_log2(y, x0, tol=1e-14, max_iter=100):
+    """Newton on f(x) = 2**x - y:  x_{n+1} = x_n - (1 - y / 2**x_n) / ln 2."""
+    xs = [x0]
+    for _ in range(max_iter):
+        xs.append(xs[-1] - (1 - y / 2 ** xs[-1]) / LN2)
+        if abs(xs[-1] - xs[-2]) < tol:
+            break
+    return np.array(xs)
+
+def reduce_range(y):
+    """Write y = 2**k * m with 1 <= m < 2, using only multiplication/division by 2."""
+    k, m = 0, y
+    while m >= 2:
+        m /= 2; k += 1
+    while m < 1:
+        m *= 2; k -= 1
+    return k, m
+
+def log2_full(y, method="fixed", x0=0.99):
+    k, m = reduce_range(y)
+    if m == 1.0:
+        return float(k), 0
+    xs = fixed_point_log2(m, x0) if method == "fixed" else newton_log2(m, x0)
+    return k + xs[-1], len(xs) - 1
+
+'''
+
+# ---- Table 1: fixed-point vs Newton for y in (1, 2) ----
+print(f"{'y':>8} {'log2(y)':>18} {'rho=1-x*ln2':>12} {'FP iters':>9} {'FP error':>10} {'Newton iters':>13} {'Newton error':>13}")
+for y in [1.001, 1.01, 1.1, 1.3, 1.5, 1.7, 1.9, 1.999]:
+    t = math.log2(y)
+    fp = fixed_point_log2(y, 0.99)
+    nt = newton_log2(y, 0.99)
+    print(f"{y:>8} {t:>18.15f} {1 - t*LN2:>12.4f} {len(fp)-1:>9} {abs(fp[-1]-t):>10.1e} {len(nt)-1:>13} {abs(nt[-1]-t):>13.1e}")
+
+
+
+# ---- Table 2: error ratios for y = 1.5 ----
+y = 1.5; t = math.log2(y)
+fp = fixed_point_log2(y, 0.99); nt = newton_log2(y, 0.99)
+print(f"\ny = 1.5: predicted fixed-point ratio g'(x*) = 1 - x* ln2 = {1 - t*LN2:.6f}")
+print(f"{'n':>3} {'FP e_n':>11} {'FP e_n+1/e_n':>13} {'Newton e_n':>11} {'N e_n+1/e_n^2':>14}")
+for n in range(12):
+    efp = fp[n] - t
+    rfp = (fp[n+1] - t) / efp if n + 1 < len(fp) else np.nan
+    if n < len(nt):
+        ent = nt[n] - t
+        rnt = (nt[n+1] - t) / ent**2 if n + 1 < len(nt) and abs(ent) > 1e-12 else np.nan
+        print(f"{n:>3} {efp:>11.3e} {rfp:>13.6f} {ent:>11.3e} {rnt:>14.6f}")
+    else:
+        print(f"{n:>3} {efp:>11.3e} {rfp:>13.6f} {'':>11} {'':>14}")
+# Newton's asymptotic constant |f''/(2f')| at x* is ln2 / 2
+print(f"predicted Newton constant ln2/2 = {LN2/2:.6f}")
+
+# ---- Table 3: full range with range reduction ----
+print(f"\n{'y':>10} {'k':>5} {'m':>10} {'fixed-point':>20} {'Newton':>20} {'math.log2':>20}")
+for y in [0.001, 0.37, 1.0, 3.0, 10.0, 1000.0, 123456.789, 2.0**40]:
+    k, m = reduce_range(y)
+    a, _ = log2_full(y, "fixed"); b, _ = log2_full(y, "newton")
+    print(f"{y:>10.6g} {k:>5} {m:>10.6f} {a:>20.15f} {b:>20.15f} {math.log2(y):>20.15f}")
+
+# ---- What happens without range reduction ----
+print("\nWithout range reduction (fixed-point, x0 = 0.99):")
+for y in [3.0, 6.0, 10.0, 0.5]:
+    xs = fixed_point_log2(y, 0.99, max_iter=60)
+    print(f"  y = {y:>4}: last iterates {np.round(xs[-4:], 4)}  (true {math.log2(y):.4f})")
+
+'''
+
+# ---- Figures (2x2) ----
+fig, axs = plt.subplots(2, 2, figsize=(12, 9))
+ax = axs.ravel()
+y = 1.5; t = math.log2(y)
+fp = fixed_point_log2(y, 0.99); nt = newton_log2(y, 0.99)
+
+# (1) iterates: fixed point vs Newton
+ax[0].plot(fp[:30], "o-", ms=3, label="fixed point")
+ax[0].plot(nt, "s-", ms=4, label="Newton")
+ax[0].axhline(t, color="k", ls=":", label="log2(1.5)")
+ax[0].set_xlabel("iteration n"); ax[0].set_ylabel("x_n"); ax[0].set_title("y = 1.5, x0 = 0.99"); ax[0].legend()
+
+# (2) error on a log scale
+ax[1].semilogy(np.abs(fp - t) + 1e-17, "o-", ms=3, label="fixed point")
+ax[1].semilogy(np.abs(nt - t) + 1e-17, "s-", ms=4, label="Newton")
+ax[1].set_xlabel("iteration n"); ax[1].set_ylabel("|x_n - log2(y)|")
+ax[1].set_title("error: linear (fixed point) vs quadratic (Newton)"); ax[1].legend()
+
+# (3) iterations needed vs y
+ys = np.linspace(1.001, 1.999, 300)
+it_fp = [len(fixed_point_log2(v, 0.99)) - 1 for v in ys]
+it_nt = [len(newton_log2(v, 0.99)) - 1 for v in ys]
+ax[2].semilogy(ys, it_fp, label="fixed point")
+ax[2].semilogy(ys, it_nt, label="Newton")
+ax[2].set_xlabel("y"); ax[2].set_ylabel("iterations to |step| < 1e-14")
+ax[2].set_title("iterations needed vs y (x0 = 0.99)"); ax[2].legend()
+
+# (4) x_n trajectories from several x0, y = 1.5
+#     fixed point: circles, solid;  Newton: triangles, dashed, same color per x0
+for x0 in [0.05, 0.3, 0.59, 0.8, 0.99]:
+    line, = ax[3].plot(fixed_point_log2(1.5, x0)[:21], "o-", ms=3, label=f"x0 = {x0}")
+    ax[3].plot(newton_log2(1.5, x0), "^--", ms=6, color=line.get_color(), mfc="none")
+ax[3].axhline(math.log2(1.5), color="k", ls=":", label="log2(1.5)")
+ax[3].plot([], [], "ko-", ms=3, label="fixed point")
+ax[3].plot([], [], "k^--", ms=6, mfc="none", label="Newton")
+ax[3].set_xlabel("iteration n"); ax[3].set_ylabel("x_n"); ax[3].set_xlim(-0.5, 20)
+ax[3].set_title("Fixed point (monotone) vs Newton, y = 1.5"); ax[3].legend(fontsize=8, ncol=2)
+
+plt.tight_layout()
+
+```
+Fixed point vs. Newton for $y \in (1,2)$, $x_0 = 0.99$, stop when $|x_{n+1} - x_n| < 10^{-14}$:
+
+The fixed-point iteration count follows the predicted $\rho$: about $\ln(10^{-14})/\ln\rho$ iterations, which is 25 for $\rho \approx 0.31$ but 18,783 for $y = 1.001$ ($\rho = 0.999$). Its final error is also worse when $\rho\approx1$, because a small step does not mean a small error: $|e_n| \approx |x_{n+1}-x_n|/(1-\rho)$, which is $10^{-14}/0.001 = 10^{-11}$. Newton needs only 4–6 iterations for every $y$ and reaches full double precision.
+
+Error ratios for $y = 1.5$ (predicted: fixed-point ratio $\to 1 - x^*\ln 2 = 0.5945$; Newton $|e_{n+1}|/e_n^2 \to \ln 2/2 = 0.3466$):
+
+Both ratios converge to the values derived in (c) and (e): the fixed-point method is linear, and Newton is quadratic.
+
+Full range with range reduction (the final column is Python's math.log2 for reference):
+
+Both methods give correct results across many orders of magnitude, including $y < 1$. Newton agrees with math.log2 to all printed digits. The fixed-point method is off by up to ~$4\times10^{-13}$ in cases with small $\log_2 m$ (e.g. $m = 1.024$), again because of its slow rate there.
+
+Figure 4. Top left: iterates for $y = 1.5$. Both approach $\log_2 1.5 \approx 0.585$ from above, monotonically, as proved in (c). Top right: error on a log scale. The fixed-point error is a straight line (linear convergence, slope $\log_{10} 0.5945$ per step); Newton's curve bends downward (quadratic), reaching $10^{-16}$ in 5 steps vs. ~60. Bottom left: iterations needed vs. $y$. The fixed-point count blows up as $y \to 1$ ($\rho\to1$), while Newton stays at 4–6. Bottom right: iterates for $y = 1.5$ from several starting values; each color is one $x_0$, with the fixed-point iteration as circles/solid and Newton as triangles/dashed. Fixed-point iterates starting above $x^*$ decrease monotonically and those below increase monotonically. Newton reaches $\log_2 1.5$ in a handful of steps from every start, far sooner than the fixed-point iteration (from below the root, its first step overshoots above $x^*$, since $2^x - y$ is convex, and it then decreases to the root).
+
+Summary. The given iteration is simple and guaranteed to converge on $1<y<2$ (after range reduction), but only linearly, with rate $1 - x^*\ln 2$, which is very slow for $y$ close to 1. Newton's method costs about the same per step (one $2^x$ evaluation) and converges quadratically, so it needs far fewer iterations (4–6 vs. 25–18,000+) and gives a more accurate result at the same tolerance.
