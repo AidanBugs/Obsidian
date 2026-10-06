@@ -62,17 +62,17 @@ $\rightarrow x =\frac 1y$
 Or alternatively, $f(\frac 1y)= \frac 2y - \frac y y^2 = \frac 2y - \frac 1y = \frac 1y$
 
 ## b
-Relative error $e_n = |\frac{\frac 1y - x_n}{\frac 1y}|=|1-yx_n|$
+Relative error $\hat e_n = |\frac{\frac 1y - x_n}{\frac 1y}|=|1-yx_n|$
 
 And $e_{n+1}$ will be $|1-yx_{n+1}|$ so
 
-> $\rightarrow e_{n+1}= |1-y(2x_n -yx_n^2)|$
+> $\rightarrow \hat e_{n+1}= |1-y(2x_n -yx_n^2)|$
 
-> $\rightarrow e_{n+1}= |1-2yx_n -y^2x_n^2|$
+> $\rightarrow \hat e_{n+1}= |1-2yx_n -y^2x_n^2|$
 
-> $\rightarrow e_{n+1}= |(1-yx_n)^2|$
+> $\rightarrow \hat e_{n+1}= |(1-yx_n)^2|$
 
-> $\rightarrow e_{n+1}= (e_n)^2$
+> $\rightarrow \hat e_{n+1}= (e_n)^2$
 
 Therefore we only converge when our relative error $e_n$ is less than $1$ because squaring decreases for decimal points, stays same at $1$ and goes to infinity at greater than $1$. 
 
@@ -186,21 +186,94 @@ $x = x \frac{y}{2^x}$
 
 $\rightarrow 1 =  \frac{y}{2^x}$
 
-$\rightarrow 2^x =  y$
+$\rightarrow 2^x =  y$ *note i'll use this later in 3b*
 
 $\rightarrow x =  \log_2y$
 
 ## b
-$e_n = \frac{x_n - \log_2y}{\log_2y}=\frac{x_n}{\log_2y}-1$
+Suppose $x^* = \log_2y$
 
-We can look at proof of convergence by looking at $g(x)=x\frac{y}{2^x}$
+$e_n = x_n - \log_2y=x_n-x^*$ for absolute error and $\hat e_n = \frac{x_n}{x^*} -1$ for relative error
 
+$e_{n+1} = x_{n+1}-x^*$ for absolute error 
+
+$\rightarrow e_{n+1} = \frac{x_n y}{2^{x_n}}-x^*$
+
+> From 3a we know that $\frac{y}{2^{x^*}}=1$
+
+$\rightarrow e_{n+1} = \frac{x_n y}{2^{x_n}}-\frac{x^* y}{2^{x^*}}$
+
+$\rightarrow e_{n+1} = y(\frac{x_n }{2^{x_n}}-\frac{x^* }{2^{x^*}})$
+
+$\rightarrow e_{n+1} = y(\frac{2^{x^*}x_n }{2^{x^*}2^{x_n}}-\frac{2^{x^n}x^* }{2^{x^*}2^{x_n}})$
+
+$\rightarrow e_{n+1} = y(\frac{2^{x^*}x_n-2^{x^n}x^* }{2^{x^*}2^{x_n}})$
+
+> From 3a we know that $y=2^{x^*}$
+
+$\rightarrow e_{n+1} = \frac{2^{x^*}x_n-2^{x^n}x^* }{2^{x_n}}$
+
+$\rightarrow e_{n+1} = \frac{2^{x^*}x_n}{2^{x_n}} - x^*$
+
+$\rightarrow e_{n+1} = 2^{x^*-x_n}x_n - x^*$
+
+$\rightarrow e_{n+1} = 2^{-e_n}x_n - x^*$
+
+Thus relative error is now: $\hat e_{n+1} = \frac{2^{-e_n}x_n - x^*}{x^*}$
+
+$\rightarrow \hat e_{n+1} = \frac{2^{-e_n}x_n}{x^*}-1$
+
+$\rightarrow \hat e_{n+1} = \frac{x_n}{x^*}2^{-\hat e_n x^*}-1$
+
+> $x_n = x^* + e_n$
+
+$\rightarrow \hat e_{n+1} = \frac{x^*+e_n}{x^*}2^{-\hat e_n x^*}-1$
+
+$\rightarrow \hat e_{n+1} = (1+\frac{e_n}){x^*}2^{-\hat e_n x^*}-1$
+
+$\rightarrow \hat e_{n+1} = (1+\hat e_n)2^{-\hat e_n x^*}-1$
+
+$\rightarrow \hat e_{n+1} = (1+\hat e_n)y^{-\hat e_n}-1$
+
+$\rightarrow \hat e_{n+1} = (1+\hat e_n)e^{-\hat e_n\ln y}-1$
+
+$\rightarrow \hat e_{n+1} \approx (1+\hat e_n)(1-\hat e_n \ln y)-1$
+
+$\rightarrow = 1-\hat e_n^2 \ln y +\hat e_n -\hat e_n \ln y-1$
+
+$\rightarrow = -\hat e_n^2 \ln y +\hat e_n(1-\ln y)$
+
+$\rightarrow \approx \hat e_n(1-\ln y)$
+
+Thus linear convergence for $|1-\ln y| < 1$ because then $|e_n| > |e_{n+1}|$ when $|e_n| > 0$
+
+> If we solve this then actually convergence for $1 < y < e^2$
 
 ## c
+From 3.b, we have that we converge for values of $y$ between $1$ and $e^2$ so converges for values of $x^*$ between $0$ and $2\log_2 e> 1$
+
+This is from the lipschitz convergance for $|e_{n+1}|=\rho |e_n|$ converging for $|\rho|< 1$ 
+
+Given $g(x)= x\frac y {2^x}$, then $g'(x)= \frac{y}{2^x} (1-x\ln 2)$
+
+Since $x\in (x^*, 1)$, $0 < \frac{y}{2^x} \leq \frac{y}{2^{x^*}} = 1$ and $0 < 1-x\ln 2 < 1-x^* \ln 2 < 1$
+
+Thus $g'(x)$ is between $0$ and $1$ for the whole interval of $[x^*, 1]$ therefore we converge
+
 
 ## d
+$0 < x^* < 1 \rightarrow 0 < \log_2y < 1 \rightarrow 1 < y < 2$
+
+For decomposing $y$ not in this range, since we are solving for $\log_2y$ and this works for $y$ between $1$ and $2$, we can generalize this into $k+\log_2 m$ where $m$ is now bound between $1$ and $2$.
+
+What this means for $y$ is $\log_2y = k + \log_2 m \rightarrow y = m 2^k$ which can represent all real numbers greater than $0$. Essentially multiplying or dividing $y$ until the result is an $m$ between $1$ and $2$ and some integer $k$
+
+We know this algorithm converges because we know it converges for values of $y$ between $1$ and $2$ and we can easily add /subtract back until we get our original desired number
 
 ## e
+$f(x)= 2^x -y, f'(x)=2^x \ln 2$
+
+Thus $x_{n+1} = x_n - \frac{f(x)}{f'(x)} = x_n - \frac{2^x -y}{2^x \ln 2}$
 
 ## f
 
