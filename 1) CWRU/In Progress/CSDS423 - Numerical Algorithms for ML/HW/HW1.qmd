@@ -572,18 +572,13 @@ ax[3].set_title("Fixed point (monotone) vs Newton, y = 1.5"); ax[3].legend(fonts
 plt.tight_layout()
 
 ```
-Fixed point vs. Newton for $y \in (1,2)$, $x_0 = 0.99$, stop when $|x_{n+1} - x_n| < 10^{-14}$:
 
-The fixed-point iteration count follows the predicted $\rho$: about $\ln(10^{-14})/\ln\rho$ iterations, which is 25 for $\rho \approx 0.31$ but 18,783 for $y = 1.001$ ($\rho = 0.999$). Its final error is also worse when $\rho\approx1$, because a small step does not mean a small error: $|e_n| \approx |x_{n+1}-x_n|/(1-\rho)$, which is $10^{-14}/0.001 = 10^{-11}$. Newton needs only 4–6 iterations for every $y$ and reaches full double precision.
+First figure $1$ shows both methods for $y = 1.5$ starting at $x_0 = 0.99$ converge to $\log_2 1.5 \approx 0.585$ from above which matches the monotone convergence from 3.c. Newton gets to the root in about $2$ steps while the fixed point takes about $10$.
 
-Error ratios for $y = 1.5$ (predicted: fixed-point ratio $\to 1 - x^*\ln 2 = 0.5945$; Newton $|e_{n+1}|/e_n^2 \to \ln 2/2 = 0.3466$):
+From the second figure, we notice that the fixed point error is a straight line on the log scale which means the error is multiplied by the same constant every step, so the convergence is linear. This constant is the $\rho = 1 - \ln y \approx 0.59$ from 3.b. On the other hand Newton's error curves downward because the number of correct digits roughly doubles each step, so Newton is quadratic. This is why Newton reaches machine precision in $5$ steps while the fixed point takes about $60$.
 
-Both ratios converge to the values derived in (c) and (e): the fixed-point method is linear, and Newton is quadratic.
+Figure $3$ shows the number of iterations needed for different $y$ between $1$ and $2$. Newton stays at around $4$ to $6$ iterations for all $y$ but the fixed point blows up as $y$ gets closer to $1$ (about $18{,}000$ iterations at $y = 1.001$). This makes sense from 3.b because as $y \rightarrow 1$ then $\rho = 1 - \ln y \rightarrow 1$ so each step barely decreases the error.
 
-Full range with range reduction (the final column is Python's math.log2 for reference):
+Figure $4$ compares both methods from different starting values $x_0$ where each color is one $x_0$, the circles are fixed point and the triangles are Newton. The fixed point iterates that start above the root decrease monotonically and the ones that start below increase monotonically. Newton converges much faster for every starting value. Note that when Newton starts below the root it overshoots above the root on its first step and then decreases down to it, this is because $2^x - y$ is convex.
 
-Both methods give correct results across many orders of magnitude, including $y < 1$. Newton agrees with math.log2 to all printed digits. The fixed-point method is off by up to ~$4\times10^{-13}$ in cases with small $\log_2 m$ (e.g. $m = 1.024$), again because of its slow rate there.
-
-Figure 4. Top left: iterates for $y = 1.5$. Both approach $\log_2 1.5 \approx 0.585$ from above, monotonically, as proved in (c). Top right: error on a log scale. The fixed-point error is a straight line (linear convergence, slope $\log_{10} 0.5945$ per step); Newton's curve bends downward (quadratic), reaching $10^{-16}$ in 5 steps vs. ~60. Bottom left: iterations needed vs. $y$. The fixed-point count blows up as $y \to 1$ ($\rho\to1$), while Newton stays at 4–6. Bottom right: iterates for $y = 1.5$ from several starting values; each color is one $x_0$, with the fixed-point iteration as circles/solid and Newton as triangles/dashed. Fixed-point iterates starting above $x^*$ decrease monotonically and those below increase monotonically. Newton reaches $\log_2 1.5$ in a handful of steps from every start, far sooner than the fixed-point iteration (from below the root, its first step overshoots above $x^*$, since $2^x - y$ is convex, and it then decreases to the root).
-
-Summary. The given iteration is simple and guaranteed to converge on $1<y<2$ (after range reduction), but only linearly, with rate $1 - x^*\ln 2$, which is very slow for $y$ close to 1. Newton's method costs about the same per step (one $2^x$ evaluation) and converges quadratically, so it needs far fewer iterations (4–6 vs. 25–18,000+) and gives a more accurate result at the same tolerance.
+To reiterate, both methods converge for $1 < y < 2$ (and any $y > 0$ after the decomposition in 3.d) but the fixed point iteration only converges linearly with rate $\rho = 1 - \ln y$ which is really slow when $y$ is close to $1$. Newton's method converges quadratically so it needs far fewer iterations for about the same amount of work per step.
