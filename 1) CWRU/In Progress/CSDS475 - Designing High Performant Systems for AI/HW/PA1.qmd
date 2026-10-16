@@ -1,0 +1,387 @@
+---
+format: pdf
+execute:
+  echo: false
+  warning: false
+---
+ 
+```{python}
+#| echo: false
+#| include: false
+# Setup: data, palette, helpers. Expects the three CSVs in a PA1/ folder next to this file.
+import os
+import matplotlib.pyplot as plt
+import pandas as pd
+ 
+P1, P2T, P2R = "PA1/results_part1.csv", "PA1/results_part2_timing.csv", "PA1/results_part2_requests.csv"
+ 
+COLORS = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4"]
+IMPL_COLOR = {"naive1": COLORS[0], "naive2": COLORS[1], "blockmm": COLORS[2],
+              "wmma": COLORS[3], "cublas": COLORS[4]}
+IMPL_NAME = {"naive1": "Naive-1", "naive2": "Naive-2", "blockmm": "Block MM",
+             "wmma": "Tensor cores (WMMA)", "cublas": "cuBLAS Hgemm"}
+INK, MUTED, GRID = "#0b0b0b", "#52514e", "#e4e3df"
+ 
+plt.rcParams.update({
+    "figure.facecolor": "#ffffff", "axes.facecolor": "#ffffff",
+    "axes.edgecolor": MUTED, "axes.labelcolor": INK, "text.color": INK,
+    "xtick.color": MUTED, "ytick.color": MUTED, "axes.grid": True,
+    "grid.color": GRID, "grid.linewidth": 0.8, "axes.spines.top": False,
+    "axes.spines.right": False, "font.size": 11, "lines.linewidth": 2,
+    "legend.frameon": False, "figure.dpi": 110,
+})
+ 
+df = pd.read_csv(P1)
+Ns = sorted(df.N.unique())
+Ps = sorted(p for p in df.p.unique() if p > 0)
+cuda_core = ["naive1", "naive2", "blockmm"]
+bar_impls = ["naive1", "naive2", "blockmm", "wmma"]
+N_COLOR = {n: COLORS[i] for i, n in enumerate(Ns)}
+ 
+best = df.loc[df.groupby(["impl", "N", "p"]).time_ms.idxmin()]
+bestN = df.loc[df.groupby(["impl", "N"]).time_ms.idxmin()].set_index(["impl", "N"])
+ 
+def t_best(impl, n, p=None):
+    """Best time for (impl, N[, p]), or None if every configuration was skipped."""
+    q = best[(best.impl == impl) & (best.N == n)] if p is not None else None
+    if p is not None:
+        q = q[q.p == p]
+        return q.time_ms.iloc[0] if len(q) else None
+    return bestN.loc[(impl, n)].time_ms if (impl, n) in bestN.index else None
+
+def fmt(x, f="{:.3f}"):
+    return f.format(x) if x is not None else "–"
+
+SKIPPED = (pd.read_csv("PA1/results_part1_skipped.csv")
+           if os.path.exists("PA1/results_part1_skipped.csv") else pd.DataFrame())
+
+def md_table(header, rows):
+    """Print a markdown table (chunks using this set output: asis)."""
+    print("| " + " | ".join(header) + " |")
+    print("|" + "---|" * len(header))
+    for r in rows:
+        print("| " + " | ".join(str(c) for c in r) + " |")
+ 
+def scatter_panel(ax, impl):
+    d = df[df.impl == impl].sort_values(["N", "p", "threadNum", "blockNum"]).reset_index(drop=True)
+    ax.scatter(d.index, d.time_ms, s=16, color=IMPL_COLOR[impl], edgecolor="white", linewidth=0.6)
+    ax.set_yscale("log")
+    ax.set_ylabel("Time (ms, log)")
+    ax.set_title(IMPL_NAME[impl], loc="left", fontweight="bold", pad=28)
+    groups = d.groupby(["N", "p"], sort=False).apply(lambda g: (g.index.min(), g.index.max()))
+    for (n, p), (lo, hi) in groups.items():
+        ax.axvline(lo - 0.5, color=GRID, linewidth=1)
+        lab = f"N={n}" + (f"\np={p}" if impl != "wmma" else "")
+        ax.text((lo + hi) / 2, 1.02, lab, transform=ax.get_xaxis_transform(),
+                ha="center", va="bottom", fontsize=8, color=MUTED)
+    ax.set_xticks([])
+    ax.set_xlabel("Configurations sorted by (N, p, threadNum, blockNum)")
+```
+
+$\>$
+
+# 0
+## Implementation notes
+
+Naive-2 loads all $N/p$ rows of A and $N/p$ columns of B (full length $N$) into shared memory before the multiplication. A block of $BR \times BC$ threads needs $(BR + BC) \cdot (N/p) \cdot N \cdot 2$ bytes, which exceeds the GPU's per-block limit for most configurations at $N \ge 512$ (e.g. 512 KB at $N = 1024$, $p = 8$); those configurations are skipped and listed below.
+
+Block MM launches $p^2$ threads in total, with each thread owning the same $T \times T$ block of C ($T = N/p$), worked through in $4 \times 4$ register sub-tiles ($2 \times 2$ when $T = 2$). For each sub-tile, threads march across $k$ in chunks of 32, cooperatively staging the needed A rows and B columns into shared memory (coalesced, padded by one column), synchronizing, then accumulating from shared memory only. C is written once at the end; global traffic per output drops from $2N$ (Naive-1) to $(BR + BC)\,N / (BR \cdot BC \cdot 4)$ for a $BR \times BC$ thread block.
+
+The sweep is reduced to $p \le 32$ and $N \le 1024$, as discussed in class on Oct 15.
+
+```{python}
+#| echo: false
+#| output: asis
+if len(SKIPPED):
+    print("Naive-2 configurations skipped (shared memory needed vs. limit per block):\n")
+    rows = []
+    for (n, p), g in SKIPPED.groupby(["N", "p"]):
+        lim = g.smem_limit_bytes.iloc[0] // 1024
+        rows.append([n, p, ", ".join(str(t) for t in sorted(g.threadNum)),
+                     f"{g.smem_needed_bytes.min() // 1024}–{g.smem_needed_bytes.max() // 1024} KB",
+                     f"{lim} KB"])
+    md_table(["N", "p", "threadNum skipped", "needed", "limit"], rows)
+```
+ 
+ 
+## Setup
+
+$A$ and $B$ are $N \times N$ row-major `half` matrices, $C$ is `float`, with entries drawn uniformly from $[-1, 1]$. The sweep covers $N \in \{64, 128, 512, 1024\}$ and $p \in \{8, 16, 32\}$, with every power-of-two split of $p^2$ threads into blockNum $\times$ threadNum for Naive-1, Naive-2, and Block MM. Timing uses CUDA events on the kernel only (no host$\leftrightarrow$device copies), with one warm-up and the mean of five runs (one run if the kernel exceeds 200 ms). Every configuration is verified against a CPU float reference; all CUDA-core and tensor-core runs pass with max relative error $< 10^{-3}$.
+
+Implementations
+ 
+| Kernel | Work per thread | Memory |
+|---|---|---|
+| Naive-1 | $T \times T$ outputs, $T = N/p$ | global only |
+| Naive-2 | same as Naive-1 | all $N/p$ rows of A / columns of B loaded into shared memory first |
+| Block MM | same as Naive-1, computed in $4 \times 4$ register sub-tiles | A rows / B columns staged in shared memory in $k$-chunks of 32, reused across the block |
+| WMMA | $16 \times 16$ output tile per warp | tensor-core fragments |
+| cuBLAS | `cublasHgemm` | library-chosen |
+
+# 1
+## 1.1
+ 
+```{python}
+#| echo: false
+#| fig-width: 12
+#| fig-height: 6.4
+fig, axes = plt.subplots(2, 1, figsize=(12, 6.4))
+for ax, impl in zip(axes, ["naive1", "naive2"]):
+    scatter_panel(ax, impl)
+fig.tight_layout()
+plt.show()
+```
+ 
+ 
+```{python}
+#| echo: false
+#| fig-width: 12
+#| fig-height: 6.4
+fig, axes = plt.subplots(2, 1, figsize=(12, 6.4))
+for ax, impl in zip(axes, ["blockmm", "wmma"]):
+    scatter_panel(ax, impl)
+fig.tight_layout()
+plt.show()
+```
+ 
+Within each group, points run from fewest to most threads per block. So 1 thread per block then 2 then 4 then ... $p^2$ threads per block. WMMA does not use $p$, so it is grouped by $N$ only.
+ 
+## 1.2
+ 
+```{python}
+#| echo: false
+#| output: asis
+rows = []
+for impl in cuda_core:
+    for n in Ns:
+        t = [t_best(impl, n, p) for p in Ps]
+        sp = f"{t[0] / t[-1]:.1f}×" if t[0] is not None and t[-1] is not None else "–"
+        rows.append([IMPL_NAME[impl], n] + [fmt(x) for x in t] + [sp])
+md_table(["Implementation", "N"] + [f"p={p} (ms)" for p in Ps] + [f"speedup p={Ps[0]}→{Ps[-1]}"], rows)
+```
+ 
+All three kernels improve with $p$: every doubling gives 4× the threads, so we expect $\approx 16\times$ speedup overall, though not all implementations fully reach it.
+
+For Naive-1, each doubling of $p$ cuts time by about 3.6–4× (about 14–15× from $p = 8$ to $32$ at $N \ge 128$), close to the thread-count ratio since nothing else changes. Naive-2 scales similarly at $N \le 128$ (about 6–10×), but at $N = 512$ only 1–2-thread blocks fit in shared memory, so $p = 16 \to 32$ gains only 1.7×, and $N = 1024$ cannot run at all. Block MM gains more than 4× from $p = 8$ to $16$ (about 5× at $N \ge 512$) and about 3.3× from $16$ to $32$, for about 17× overall at $N \ge 512$ versus about 14.5× for Naive-1. Larger $p$ widens the tile, so the best block grows from 64 to 256 threads and more threads share each staged tile. Thus adding both parallelism and data reuse. From $p = 16$ to $32$ the best block size stays at 256 threads, so the extra gain is mainly from the additional threads.
+
+## 1.3
+ 
+Shown for the largest N and p; the other (N, p) pairs follow the same pattern.
+ 
+```{python}
+#| echo: false
+#| fig-width: 12
+#| fig-height: 4.2
+nmax, pmax = max(Ns), max(Ps)
+fig, axes = plt.subplots(1, 3, sharey=False, figsize=(12, 4.2))
+for ax, impl in zip(axes, cuda_core):
+    s = df[(df.impl == impl) & (df.N == nmax) & (df.p == pmax)]
+    s = s.sort_values("threadNum")
+    if s.empty:
+        ax.text(0.5, 0.5, "all configurations exceed\nshared memory", ha="center",
+                va="center", transform=ax.transAxes, color=MUTED)
+    else:
+        ax.plot(s.threadNum, s.time_ms, marker="o", markersize=6, color=IMPL_COLOR[impl])
+        ax.set_xscale("log", base=2)
+        ax.set_yscale("log")
+    ax.set_xlabel("threadNum")
+    ax.set_title(IMPL_NAME[impl], loc="left", fontweight="bold")
+axes[0].set_ylabel("Time (ms, log)")
+fig.tight_layout()
+plt.show()
+```
+ 
+For the naive kernels ($blockNum \times threadNum = p^2$), many small blocks win. A block is confined to one SM, so 1 block $\times$ 1024 threads uses only one SM while 128 $\times$ 8 spreads across the device. Large blocks are also uncoalesced (see Part 2), which steepens the right end of the curve. Block MM is best with one block per tile and 64–256 threads; fewer blocks than tiles roughly doubles time per halving, and 1024 threads per block is slightly slower due to the register cap of 64 per thread (`__launch_bounds__(1024)`) limiting occupancy. WMMA time falls until there is one warp per $16 \times 16$ tile, then plateaus.
+ 
+## 1.4
+```{python}
+#| echo: false
+#| output: asis
+rows = []
+for _, r in best[best.impl.isin(cuda_core)].sort_values(["impl", "N", "p"]).iterrows():
+    rows.append([IMPL_NAME[r.impl], r.N, r.p, int(r.blockNum), int(r.threadNum),
+                 f"{r.time_ms:.4f}", f"{r.gflops:.1f}"])
+md_table(["Implementation", "N", "p", "blockNum", "threadNum", "Time (ms)", "GFLOP/s"], rows)
+```
+ 
+```{python}
+#| echo: false
+#| fig-width: 12
+#| fig-height: 4.4
+fig, axes = plt.subplots(1, 3, sharey=True, figsize=(12, 4.4))
+for ax, impl in zip(axes, cuda_core):
+    b = best[best.impl == impl]
+    for n in Ns:
+        s = b[b.N == n].sort_values("p")
+        if s.empty:
+            continue
+        ax.plot(s.p, s.time_ms, marker="o", markersize=7, color=N_COLOR[n], label=f"N={n}")
+        last = s.iloc[-1]
+        ax.annotate(f"N={n}", (last.p, last.time_ms), xytext=(6, 0),
+                    textcoords="offset points", va="center", fontsize=9, color=MUTED)
+    ax.set_xscale("log", base=2)
+    ax.set_xticks(Ps)
+    ax.set_xticklabels([str(p) for p in Ps])
+    ax.set_yscale("log")
+    ax.set_xlabel("p")
+    ax.set_title(IMPL_NAME[impl], loc="left", fontweight="bold")
+axes[0].set_ylabel("Best time (ms, log)")
+h, l = max((a.get_legend_handles_labels() for a in axes), key=lambda hl: len(hl[1]))
+fig.legend(h, l, loc="upper right", ncol=len(Ns))
+fig.tight_layout(rect=(0, 0, 1, 0.92))
+plt.show()
+```
+ 
+Every line slopes down meaning more threads (naive) or more tile reuse (Block MM) always helps in this range. Lines for successive $N$ are separated by roughly $(N_2/N_1)^3$, as expected for $O(N^3)$ work; the 512→1024 gap is about 8×. Block MM lines sit 1–2 orders of magnitude below the naive kernels at large $N$ and are flatter, because shared-memory tiling rather than thread count is the limiting factor.
+
+ 
+## Tensor cores: best configuration per N
+ 
+```{python}
+#| echo: false
+#| output: asis
+rows = []
+for n in Ns:
+    r = bestN.loc[("wmma", n)]
+    rows.append([n, int(r.blockNum), int(r.threadNum), int(r.blockNum * r.threadNum // 32),
+                 (n // 16) ** 2, f"{r.time_ms:.4f}", f"{r.gflops:.0f}"])
+md_table(["N", "blockNum", "threadNum", "Warps", "16×16 tiles", "Time (ms)", "GFLOP/s"], rows)
+```
+ 
+The kernel uses `nvcuda::wmma` with $16 \times 16 \times 16$ half fragments and a float accumulator, with each warp grid-striding over output tiles. The best configurations launch about one warp per output tile; beyond that, extra warps have no work and time stays flat.
+
+## Tensor cores vs CUDA-core implementations
+ 
+```{python}
+#| echo: false
+#| fig-width: 11
+#| fig-height: 4.8
+fig, ax = plt.subplots(figsize=(11, 4.8))
+w = 0.2
+for i, impl in enumerate(bar_impls):
+    xs = [j + (i - 1.5) * w for j in range(len(Ns))]
+    ys = [t_best(impl, n) if t_best(impl, n) is not None else float("nan") for n in Ns]
+    ax.bar(xs, ys, width=w - 0.03, color=IMPL_COLOR[impl], label=IMPL_NAME[impl])
+ax.set_xticks(range(len(Ns)))
+ax.set_xticklabels([f"N={n}" for n in Ns])
+ax.set_yscale("log")
+ax.set_ylabel("Best time (ms, log)")
+ax.grid(axis="x", visible=False)
+ax.legend(loc="upper left", ncol=2)
+fig.tight_layout()
+plt.show()
+```
+ 
+Tensor cores are fastest at every $N$; the gap over the best CUDA-core kernel (Block MM) grows with $N$ as more of the time becomes compute.
+ 
+## cuBLAS comparison
+ 
+```{python}
+#| echo: false
+#| output: asis
+rows = []
+for n in Ns:
+    own = df[(df.N == n) & (df.impl != "cublas")]
+    r = own.loc[own.time_ms.idxmin()]
+    cb = bestN.loc[("cublas", n)]
+    rows.append([n, IMPL_NAME[r.impl], f"{r.time_ms:.4f}", f"{cb.time_ms:.4f}",
+                 f"{cb.time_ms / r.time_ms:.3f}", f"{cb.gflops:,.0f}"])
+md_table(["N", "Best own implementation", "Own time (ms)", "cuBLAS time (ms)",
+          "Performance ratio (own / cuBLAS)", "cuBLAS GFLOP/s"], rows)
+```
+ 
+Performance ratio = own GFLOP/s ÷ cuBLAS GFLOP/s (= cuBLAS time ÷ own time); values above 1 mean our kernel is faster.
+ 
+```{python}
+#| echo: false
+#| output: asis
+rows = []
+for n in Ns:
+    cb = bestN.loc[("cublas", n)].time_ms
+    rows.append([n] + [fmt(cb / t_best(i, n) if t_best(i, n) is not None else None, "{:.4f}")
+                       for i in bar_impls])
+md_table(["N"] + [f"{IMPL_NAME[i]} / cuBLAS" for i in bar_impls], rows)
+```
+ 
+## cuBLAS: interpretation
+
+`cublasHgemm` is column-major, so row-major $C = AB$ is computed as column-major $C^T = B^T A^T$ by passing $B$ before $A$ so no explicit transposes needed. At $N \le 128$ our WMMA kernel beats cuBLAS, since cuBLAS's fixed launch and heuristic overhead ($\approx 9\,\mu$s) dominates at small sizes. At large $N$ cuBLAS pulls far ahead: it stages tiles in shared memory, pipelines loads with compute, and uses wider warp tiles, whereas our WMMA kernel loads fragments directly from global memory.
+
+`cublasHgemm` accumulates and stores in FP16, so it differs from the FP32 reference by up to about 2% ($N = 512$) and 9% ($N = 1024$). Our kernels accumulate in FP32, which is more accurate but does more work per FLOP. A `cublasGemmEx` call with FP32 compute would be the like-for-like baseline.
+
+## Memory coalescing: request counts
+ 
+From class (L10): requests $= \lceil R / 32 \rceil$, where $R$ is the range of data elements fetched across all threads of the warp, first to last. This is applied to every warp load and store of each kernel and summed. The table uses threadNum $= \min(p^2, 256)$ for the naive kernels and $p^2$ for Block MM.
+ 
+```{python}
+#| echo: false
+#| output: asis
+r = pd.read_csv(P2R)
+rows = []
+for (nn, p), g in r.groupby(["N", "p"]):
+    def v(k, tnum):
+        s = g[(g.kernel == k) & (g.threadNum == tnum)]
+        return f"{s.load_requests.iloc[0]:,} ({s.load_req_per_instr.iloc[0]:.2f})" if len(s) else "–"
+    tn = min(p * p, 256)
+    rows.append([nn, p, v("naive1", tn), v("naive2", tn), v("blockmm", min(p * p, 1024)),
+                 v("naive1_coalesced", tn)])
+md_table(["N", "p", "Naive-1", "Naive-2", "Block MM", "Naive-1 coalesced"], rows)
+```
+ 
+Load requests (requests per warp load instruction in brackets). The full table for every threadNum, including stores, is in `PA1/results_part2_requests.csv`; its `*_seg` columns give the hardware count (distinct 32-byte segments) for comparison.
+
+# 2 
+## Memory coalescing: why the counts differ
+ 
+For Naive-1, neighbouring threads (consecutive $t_x$) read `B[k][tx*T + j]`, $T$ elements apart. At $p = 32$ a warp is one row of 32 $t_x$ values, so $R = 31T + 1$ and B needs about $T$ requests (32 at $N = 1024$), while all lanes share $t_y$ and read one A element (1 request): 16.5 per load on average. When $p < 32$ a warp covers $32/p$ values of $t_y$ whose A rows are $T \cdot N$ elements apart, so $R$ spans whole rows and the equation gives thousands of requests (6,159 at $N = 1024$, $p = 8$). Hardware only fetches the segments actually touched (6 per load there, `*_seg` columns); the equation counts the gaps too.
+
+For Naive-2, staging loads are coalesced since consecutive threads read consecutive elements (1 request per load at $N \le 128$). When rows do not fit in shared memory the kernel skips those configurations, so the counts for skipped cases reflect the chunked model used for counting only.
+
+For Block MM, at $p = 32$ a warp reads one 32-element tile row (1 request). At $p < 32$ a warp covers $32/p$ tile rows that are $N$ elements apart, so the equation gives $\lceil ((32/p - 1)N + p)/32 \rceil$: 97 at $N = 1024$, $p = 8$ and 33 at $p = 16$.
+
+For Coalesced Naive-1, the data layout is changed, not the work assignment:
+  - `Bp[(k·T + j)·p + tx] = B[k][tx·T + j]`
+  - `Ap[(i·N + k)·p + ty] = A[ty·T + i][k]`
+
+For fixed $(i, j, k)$: consecutive threads (consecutive $t_x$) read consecutive halves of $B'$, giving 1 request per load. For $A'$, threads sharing the same $t_y$ broadcast the same element; threads with consecutive $t_y$ read consecutive halves and a warp reads only $\lceil 32/p \rceil$ distinct $A'$ elements, also 1 request per load. Coalesced Naive-1 therefore needs exactly 1 request per load at every $N$ and $p$.
+
+## Memory coalescing: timing
+ 
+```{python}
+#| echo: false
+#| fig-width: 12
+#| fig-height: 4.2
+t = pd.read_csv(P2T)
+n = max(t.N)
+fig, axes = plt.subplots(1, len(Ps), sharey=True, figsize=(12, 4.2))
+for ax, p in zip(axes, Ps):
+    for impl, col, name in [("naive1", COLORS[0], "Naive-1"),
+                            ("naive1_coalesced", COLORS[1], "Naive-1 coalesced")]:
+        s = t[(t.impl == impl) & (t.N == n) & (t.p == p)].sort_values("threadNum")
+        ax.plot(s.threadNum, s.time_ms, marker="o", markersize=6, color=col, label=name)
+    ax.set_xscale("log", base=2)
+    ax.set_yscale("log")
+    ax.set_xlabel("threadNum")
+    ax.set_title(f"N={n}, p={p}", loc="left", fontweight="bold")
+axes[0].set_ylabel("Time (ms, log)")
+axes[0].legend(loc="upper left")
+fig.tight_layout()
+plt.show()
+```
+ 
+```{python}
+#| echo: false
+#| output: asis
+rows = []
+for (nn, p), g in t.groupby(["N", "p"]):
+    if nn < 512:
+        continue
+    a = g[g.impl == "naive1"].set_index("threadNum").time_ms
+    b = g[g.impl == "naive1_coalesced"].set_index("threadNum").time_ms
+    ratio = a / b
+    rows.append([nn, p, f"{ratio.max():.2f}× (threadNum={ratio.idxmax()})",
+                 f"{a.min():.2f}", f"{b.min():.2f}"])
+md_table(["N", "p", "Max speedup at same config", "Naive-1 best (ms)", "Coalesced best (ms)"], rows)
+```
+ 
+Coalescing pays off once warps are full (threadNum ≥ 32): up to about 6.6× at $N = 1024$, $p = 32$. With fewer than 32 threads per block a warp is partly empty, so there is nothing to coalesce and the extra index arithmetic costs about 10%.
