@@ -1,3 +1,9 @@
 [submodule "2nd-Brain"]
 	path = 2nd-Brain
 	url = git@github.com:Extr1n/2nd-Brain.git
+[submodule "3/)/ Local/ Rag"]
+	path = 3/)/ Local/ Rag
+	url = https://github.com/AidanBugs/Local-RAG.git
+[submodule "3) Local Rag"]
+	path = 3) Local Rag
+	url = https://github.com/AidanBugs/Local-RAG.git
