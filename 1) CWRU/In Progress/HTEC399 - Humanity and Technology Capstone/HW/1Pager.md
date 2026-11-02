@@ -1,7 +1,7 @@
 ---
 format: 
     pdf:
-        fontsize: 9pt
+        fontsize: 10pt
 ---
 
 ## Mapping the Cultural Fingerprints of LLM's
@@ -12,6 +12,10 @@ AI, specifically LLM's, are a very big topic all over the world right now. Peopl
 **What is the Project**
 
 My project studies AI benchmark performance in aggregate, rather than focusing only on top-performing models. I intervene by asking: what underlying factors shape what we call “performance”? While many people assume LLM benchmarks are assumed to be neutral leaderboards, I question this assumption by studying patterns that emerge from mapping LLM models onto a coordinate space, based on their benchmark performance, where models that perform similarly across benchmarks cluster together. I hope to find whether regional origin predicts performance patterns and whether domain strengths form distinct cognitive styles. If so, this changes the landscape: benchmarks become cultural artifacts rather than neutral yardsticks; AI evaluation becomes a site of cultural negotiation; and “intelligence” must be understood as plural, situated, and political.
+
+**Separation From Other Humanities Works**
+
+In HTEC301, we read [this quantamagazine article](https://www.quantamagazine.org/distinct-ai-models-seem-to-converge-on-how-they-encode-reality-20260107/) on how AI models converge on how they encode reality. The TLDR of the article is that the way AI models seem to understand words are phrases seem to be converging to some similar shared representation. Now while this is a similar study and inspiration to my work, I see my work and theirs as quite different. Imagine a study that analyzes how students of different grade levels define different words and find synonyms, this study would likely find that as kids are older and their understanding of words increase the students would likely have similar synonyms/definitions of words and their vocabulary would be broader. This study is very similar to what the quantamagazine cited study is about. My work is more akin to having these same students write essays on various topics and analyze what emergent properties come into play on which topics do students perform similarly in, are we able to form clusters of students based on essay strengths, etc. Now the way I approach this is through representing AI models as a vector formed through their benchmark scores and performing qualitative analysis of how the models cluster. To do this qualitative analysis I employ various dimensionality reduction techniques like PCA and UMAP which we can think of for now as a way to view high dimensional vectors in a more digestable 2 or 3 dimensional way (more explanation in class).
 
 **Significance**
 
