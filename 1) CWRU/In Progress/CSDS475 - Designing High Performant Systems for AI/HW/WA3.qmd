@@ -1,0 +1,420 @@
+---
+format: pdf
+---
+
+# 1
+We can think of $\frac{\delta E(W)}{\delta O_l}$ as how much the output of layer $l$ has on the final error.
+
+$$
+\frac{\delta E(W)}{\delta O_l}= \frac{\delta E(W)}{\delta O_L} \times \frac{\delta O_L}{\delta O_{L-1}}\times\dots \times \frac{\delta O_{l+2}}{\delta O_{l+1}} \times \frac{\delta O_{l+1}}{\delta O_{l}}=\frac{\delta E(W)}{\delta O_{l+1}}\times \frac{\delta O_{l+1}}{\delta O_l}
+$$
+
+# 2
+## a
+This we can almost take verbatim from the slides (except $C_{out}=C_{in}$):
+
+| Matrix | Dimensions |
+| -- | --- |
+| $I^{im}$ | $(k\cdot k \cdot C_{in}) \times (H \cdot W)$ |
+| $K^{im}$ | $(C_{in}) \times (k\cdot k \cdot C_{in})$ |
+| $I^{kn}$ | $(C_{in}) \times (H \cdot W)$ |
+| $K^{kn}$ | $(k\cdot k \cdot C_{in}) \times (C_{in})$ |
+
+## b
+$I^{im}[i][j]=I[c_{in}][h][w]$
+
+> $c_{in} = \lfloor i / k^2 \rfloor$
+
+> $k_{index} = i \% k^2$ this tells us what part of the kernel we are in.
+
+> $k_{col} = k_{index} \% k$ this tells us the column of the kernel
+
+> $k_{row} = \lfloor k_{index} / k \rfloor$ this tells us the row of the kernel
+
+> $r = \lfloor j / W \rfloor$ this tells us the row of top left
+
+> $c = \lfloor j / H \rfloor$ this tells us the column of top left
+
+> $h = r + k_{row}$
+
+> $w = c+ k_{col}$
+
+$I^{im}[i][j]=I[c_{in}][h][w]$
+
+$\rightarrow I^{im}[i][j] = I[\lfloor i / k^2\rfloor][\lfloor j / W\rfloor + \lfloor (i\%k^2) / k \rfloor][\lfloor j / H \rfloor + (i \% k)]$
+
+## c
+$K^{im}[i][j]=K[c_o][c_i][r][c]$
+
+> $c_o=i$
+
+> $c_i = \lfloor j / k^2 \rfloor$
+
+> $r=\lfloor (j\% k^2) / k \rfloor$
+
+> $c = j\% k$
+
+$K^{im}[i][j]=K[c_o][c_i][r][c]$
+
+$\rightarrow K^{im}[i][j]=K[i][\lfloor j / k^2 \rfloor ][\lfloor (j\%k^2)/ k \rfloor][j\%k]$
+
+## d
+$I^{kn}[i][j]=I[c_{in}][r][c]$
+
+> $c_{in} = i$
+
+> $r = \lfloor j / W \rfloor$
+
+> $c = j \% W$
+
+$I^{kn}[i][j]=I[c_{in}][r][c]$
+
+$\rightarrow I^{kn}[i][j] = I[i][\lfloor j / W\rfloor][j \% W]$
+
+## e
+$K^{kn}[i][j]=K[c_o][c_i][r][c]$
+
+> $c_o=\lfloor i / k^2 \rfloor$
+
+> $c_i=j$
+
+> $r=\lfloor (i\% k^2) / k \rfloor$
+
+> $c = i\% k$
+
+$K^{im}[i][j]=K[c_o][c_i][r][c]$
+
+$\rightarrow K^{im}[i][j]=K[\lfloor i\rfloor][j][\lfloor (i\%k^2)/ k \rfloor][i\%k]$
+
+# 3
+## a
+$j=0$ only since it is the only column that can keep the full input matrix
+
+## b
+Keeps the full input so $H\times W$
+
+## c
+$j=k-1$ since we shift right each column and shift down each row
+
+## d
+$H\times (W-k+1)$ is the column slice but the smallest piece of the input used is $(H-k+1)\times (W-k+1)$
+
+## e
+Total computations is: $C=\sum_{i=0}^{k-1}\sum_{j=0}^{k-1} (H-i)(W-j)=k^2(H-\frac{k-1}2)(W-\frac{k-1}2)$
+
+Thus the kernel reuse data factor is $\frac{C}{k^2}=(H-\frac{k-1}2)(W-\frac{k-1}2)$
+
+Then the total input image loads are $H\sum_{i=0}^{k-1}(W-i)=Hk(W-\frac{k-1}2)$ resulting in a data reuse factor of $k(1-\frac{k-1}{2h})$
+
+## f
+```\
+For each column j of kernel
+    For each row i of the kernel with weight w = K[i][j]          
+        // Split new slice into chunks
+        For each chunk c (S/2 elements) of T_j[i:]               
+            Load chunk c of the input slice into cache: T_j[i:]^c     
+            Load the matching chunk of the output slice into cache: O_j^c 
+            O_j^c ← O_j^c + T_j[i:]^c * w
+            Store O_j^c back                                  
+```
+
+## g
+Data reuse for kernel stays the same because it gets loaded once in the register and never needs to be reloaded.
+
+Data reuse for input now decreases because we need to chunk up the slices this means we load each element in the slice per weight in the column as opposed to loading all of the slice in one go for the whole column. Thus we end up loading each element $k$ more times so reuse drops from $k(1-\frac{k-1}{2H})$ to $1-\frac{k-1}{2H}$
+
+
+# 4
+## a
+From slides we are given as memory on chip$B_r \times B_c + d_kB_r + d_kB_c + d_vB_c + d_vB_r$
+
+Using $B_r=B_c=B$ and $d_k=d_v=d$:
+
+$$ 
+B^2+4dB=M\rightarrow B^2+4dB-M=0
+$$
+
+Using quadratic formula to solve for $B$:
+
+$$ 
+B=-4d\pm \frac{\sqrt{16d^2+4M}}2
+$$
+
+Since $B$ is positive, $B=-4d+ \frac{\sqrt{16d^2+4M}}2=-2d+ \sqrt{4d^2+M}$
+
+## b
+$M=64KB=64*1024=65,536$
+
+Since each element is $2$ bytes we can divide this by $2$ to see that num elements in memeory is $32,768$
+
+| $d$ | $B=-2d+ \sqrt{4d^2+32768}$ | Round Up |
+| - | --- | - |
+| 64 | $-128 + \sqrt{49152} \approx 93.7$ | 94 |
+| 512 | $-1024 + \sqrt{1081344}\approx 15.88$ | 16 |
+| 1024 | $-2048 + \sqrt{4227072}=7.98$ | 8 |
+
+This makes sense because as $d$ grows the $B^2$ term in memory needs to shrink to compensate for the increasing $4dB$ term
+
+## c
+Phase one is matrix multiplication of $2$ $B_1\times B_1$ matrices so total is $3B_1\times B_1$ in memeory
+
+Phase 2 is softmax with $B_2\times L$
+
+Phase 3 again is matrix multiplication this time having total of $3B_3^2$ in memory
+
+Thus since phases are independent from eachother the maximum meory used is $M=\max(3B_1^2,B_2L,3B^2_3)$
+
+## d
+$L_{max}$ is independent from $d$ and is solely dependent on phase 2 with minimum $B_2$ can be is $1$ so $L_{max}=M$
+
+## e
+$L_{max}=32,768$ max tokens because each token is 2 bytes.
+
+# 5
+## a
+$Y=QK^T$ and $Z=softmax(Y)$ so the dimensions of $Y$ and $Z$ are the same. 
+
+Since $Q$ is $L\times d_k$ and $K^T$ is $d_k\times L$, $Y$ and $Z$ are both $L\times L$ matrices.
+
+From the class definition of attention mask, $M$ is also $L\times L$ as to which dot products of $QK^T$ are computed. Since there are $L^2$ dot products the matrix $M$ is also $L \times L$
+
+$O=ZV$ since $V$ is $L\times d_k$ then $O$ is of dimensions $L\times d_k$
+
+## b
+$Y_{ij}=M_{ij}(Q_i\cdot K_j)$. 
+
+Since $M_{ij}\in \{0,1\}$ this product is $0$ when under the mask. Additionally since matrix multiplication between $QK^T$ is the dot product of rows of $Q$ with columns of $K^T$ this is equivalent to the dot product between the rows of $Q$ and the rows of $K$, denoted as $Q_i,K_j$ respectively.
+
+## c
+If $M_{ij}=0$ then $Y_{ij}=0$. Since we are considering $0$ to be for "invalid" entries, it is impossible for a valid entry to be at some $Y_{ij}$ when $M_{ij}=0$ because then we would multiply by $0$. Note that it is possible for an invalid entry to appear when $M_{ij}=1$ if $Q_i\cdot K_j=0$ but $M_{ij}=1$ is a necessary condition for $Y_{ij}$ to be a valid entry. 
+
+## d
+The softmax makes $Z$ the soft-lookup table. In class we discussed the idea of a lookup table simply being looking at the top kep but the soft-lookup table gives us a probability distribution over relevant keys given a query. What this means is in order for each row of $Z$ to be a valid probability distribution it must sum to $1$ and all entries be between $0$ and $1$. If we want an entry to be invalid from our mask $M_{ij}$, then we should mark that entry as $0$ in $Z_{ij}$ that way the $i$th key has no affect on the $j$th query.
+
+## e
+We need to set the $0$ entries in $Y$ to be $-\infty$. This is important for taking the row wise softmax shown below:
+
+$$Z_{ij}= \frac{e^{Y_{ij}}}{\sum_k e^{Y_{ik}}}$$
+
+If $Y_{ij}=0$ on invalid entries, then they would contribute to the sum in the denominator for its row and the resulting matrix $Z$ would have nonzero entries for masked values. Thus by setting $Y_{ij}=-\infty$, $Z_{ij}=\frac{e^{-\infty}}{\sum_k e^{Y_{ik}}}=0$ instead of $\frac{1}{\sum_k e^{Y_{ik}}}$
+
+## f
+Assume the following entries for $Q,K,V$:
+
+$$
+Q = \begin{bmatrix}
+1 & 0 \\
+0 & 1 \\
+1 & 0 \\
+0 & 1
+\end{bmatrix}, 
+K = \begin{bmatrix}
+1 & 0 \\
+1 & 0 \\
+1 & 0 \\
+1 & 0
+\end{bmatrix}, 
+V = \begin{bmatrix}
+0 & 1 \\
+0 & 1 \\
+0 & 1 \\
+0 & 1
+\end{bmatrix}
+$$
+
+Thus our computation for $Y$ is as follows:
+
+$$
+Y=QK^T= \begin{bmatrix}
+1 & 0 \\
+0 & 1 \\
+1 & 0 \\
+0 & 1
+\end{bmatrix}\times \begin{bmatrix}
+1 & 1 & 1 & 1 \\
+0 & 0 & 0 & 0
+\end{bmatrix}
+= \begin{bmatrix}
+1 & 1 & 1 & 1 \\
+0 & 0 & 0 & 0 \\
+1 & 1 & 1 & 1 \\
+0 & 1 & 0 & 1 
+\end{bmatrix}
+$$
+
+Setting invalid entries to $-\infty$:
+
+$$
+Y = 
+\begin{bmatrix}
+1 & 1 & 1 & 1 \\
+-\infty & -\infty & -\infty & -\infty \\ 
+1 & 1 & 1 & 1 \\
+-\infty & -\infty & -\infty & -\infty \\ 
+\end{bmatrix}
+$$
+
+Computing row wise softmax for $Z$:
+
+$$
+Z = \begin{bmatrix}
+0.25 & 0.25 & 0.25 & 0.25 \\
+0 & 0 & 0 & 0 \\
+0.25 & 0.25 & 0.25 & 0.25 \\
+0 & 0 & 0 & 0 
+\end{bmatrix}
+$$
+
+Finally to comput $O$:
+
+$$
+O=ZV= \begin{bmatrix}
+0.25 & 0.25 & 0.25 & 0.25 \\
+0 & 0 & 0 & 0 \\
+0.25 & 0.25 & 0.25 & 0.25 \\
+0 & 0 & 0 & 0 
+\end{bmatrix} \times 
+\begin{bmatrix}
+0 & 1 \\
+0 & 1 \\
+0 & 1 \\
+0 & 1
+\end{bmatrix}
+= \begin{bmatrix}
+0 & 1 \\
+0 & 0 \\
+0 & 1 \\
+0 & 0
+\end{bmatrix}
+$$
+
+## g
+$QK^T$ for dense MM is $O(L\times L \times d_k)$ which we can think of as $L^2$ dot products where each dot product is $O(d_k)$
+
+If we are using a mask here with $1/L$ non zero entries, then we only need to compute $L^2/L=L$ dot products. Thus our runtime when $s=1/L$ is $O(L\times d_k)$ for $QK^T$ which is a $1/L$ reduction in computation complexity
+
+For $ZV$, we know that $Z$ is sparse so we can store in CSR format. Matrix vector multiplication in CSR format is $O(R+nnz)$ where $R$ is the number of rows. So in our case multiplying a vector by $Z$ is $O(L)$ because $nnz=L$ as shown above. Since $ZV$ is essentially $d_k$ matrix vector multiplications, the computational complexity is $O(Ld_k)$. For dense matrices, since $Z$ is of dimensions $L\times L$ and $V$ is $L\times d_k$ the computational complexity is $O(L\times L \times d_k)$ so this again is approximately $1/L$ reduction in computational complexity.
+
+## h
+
+```
+Input:  Q (L×d_k), K (L×d_k), V (L×d_v), mask M (L×L, 0/1)
+Output: O (L×d_v)
+
+for i = 0 to L−1:
+    // Y initialized as all 0
+    m = −∞                  
+    for j = 0 to L−1:
+        if M[i][j] == 1:
+            for k = 0 to d_k-1:
+              Y[i][j] += Q[i][k] · K[j][k]
+            m = max(m, Y[i][j])
+        else:
+            Y[i][j] = −∞      
+
+    if m == −∞:        // fully masked row
+        Z[i][·] = 0 ;  O[i][·] = 0 ;  continue
+    den = 0
+    for j = 0 to L−1:
+        if M[i][j] == 1:
+            Z[i][j] = exp(Y[i][j] − m)  
+            // subtract max, this was a HW problem in 323/423 :) allows for computational speedup
+            den = den + Z[i][j]
+        else:
+            Z[i][j] = 0          // exp(−∞) = 0
+    for j with M[i][j] = 1:
+        Z[i][j] = Z[i][j] / den
+
+    // output only valid entries contribute 
+    O[i][·] = 0
+    for j with M[i][j] = 1:
+        for k = 0 to d_v−1:
+            O[i][k] = O[i][k] + Z[i][j] · V[j][k]
+return O
+```
+
+
+# 6
+## a
+### i
+With $L=15$ our sequence is $\{a,b,b,c,c,c,c,d,d,d,d,d,d,d,d\}$. Given our hash functiion defined in the question we get the following table:
+
+| Bucket ID | $x$ | Hash | Indices | Size |
+| -- | - | - | --- | - |
+| $0$ | $a$ | $h(a)$ | $\{0\}$ | 1 |
+| $1$ | $b$ | $h(b)$ | $\{1,2\}$ | 2 |
+| $2$ | $c$ | $h(c)$ | $\{3,4,5,6\}$ | 4 |
+| $3$ | $d$ | $h(d)$ | $\{7,8,9,10,11,12,13,14\}$ | 8 |
+
+So these are our $4$ buckets. 
+
+### ii
+Since we are only computing attention within each bucket, the number of pairs in the buckets is equal to the size of the bucket squared.
+
+
+## b
+$a$ is connected to all token so that row and column is $1$. All other tokens are connected to itself and left and right. Every other entry is $0$. Given that our sequnce is defined as above so it would be $\{a,b,b,c,c,c,c,d,d,d\}$. Thus we get the big bird attention mask as shown:
+
+$$
+\begin{bmatrix}
+1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
+1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+1 & 0 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 \\
+1 & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 0 & 0 \\
+1 & 0 & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 0 \\
+1 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 0 & 0 \\
+1 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 0 \\
+1 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 1 \\
+1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 
+\end{bmatrix}
+$$
+
+The number of connections (nonzeros) is essentially $19$ from $a$, then $9$ from the inner diagonal and $2*8$ for the slightly outer diagonals. Totalling to $19+9+16=44$ nonzeros
+
+# 7
+## a
+### i
+$O(L^2)$ since we store all values
+
+Thus on our bigbird mask this comes out to $100$ storage
+
+### ii
+Coordinate format is $O(3nnz)$
+
+Thus this is $3*44=132$ storage
+
+### iii
+CSR is $O(2nnz + L+1)$
+
+Thus this is $2*44+10+1=99$ storage
+
+### iv
+Therefore the best format is CSR in this case because it has the smallest storage requirements.
+
+
+## b
+Assuming we still have our $a$ global token (which there can only be one of by problem **6**). This would result in $2L-1$ connections. 
+
+Now accounting for window size, we can essentially look at the $(L-1)\times (L-1)$ submatrix ignoring the global starting token. Now for any window size, we need to look at how many connections get pruned at the end (look at the last row in **6.b**). Notice that if the window is symmetric (right connections = left connections) then we miss out on the first $l$ rows and the last $r$ rows. But we can assume this section is full windows and then calculate how many connections we miss. This assume this is $(L-1)w$ connections or now
+
+For the truncated window parts, let $l$ be the size of the left connections and $r$ be the size of the right connections. Thus $w=l+r+1$ (1 for self connected). For the left we miss up to $l$ connections and same idea for the right. 
+
+Thus our total connections is $2L-1 + (L-1)w - \sum_{i=1}^l i - \sum_{i=1}^r i$
+
+We can check this on our previous for $L=10,w=3,l=r=1$
+
+$$
+nnz=2L-1 + (L-1)w - \sum_{i=1}^l i - \sum_{i=1}^r i= 20-1+27-1-1=44
+$$
+
+Which is the correct amount of $nnz$ we found in **7.a**
+
+Using this formula we get the same general storage amounts as follows:
+
+| Storage Type | Storage Requirements | 
+| --- | --- |
+| Dense | $L^2$ |
+| COO | $3nnz$ | 
+| CSR | $L +1 + 2nnz$ | 
+
